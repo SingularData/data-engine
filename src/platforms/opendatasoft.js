@@ -2,7 +2,11 @@ import _ from 'lodash';
 import rp from 'request-promise';
 import config from 'config';
 
-export function crawlAll() {
+/**
+ * Get a list harvesting Jobs.
+ * @return {Promise<[]>}    An array of harvesting jobs.
+ */
+export function harvestAll() {
 
   let rows = config.get('harvester.opendatasoft.rows');
 
@@ -15,7 +19,7 @@ export function crawlAll() {
     let tasks = [];
 
     for (let i = 0; i <= result.total_count; i += rows) {
-      let request = crawl(`https://data.opendatasoft.com/api/v2/catalog/datasets?rows=${rows}&start=${i}`);
+      let request = harvest(`https://data.opendatasoft.com/api/v2/catalog/datasets?rows=${rows}&start=${i}`);
       tasks.push(request);
     }
 
@@ -23,7 +27,12 @@ export function crawlAll() {
   });
 }
 
-export function crawl(url) {
+/**
+ * Harvest the open data network of OpenDataSoft with a given url.
+ * @param  {String}             url   OpenDataSoft data network API url
+ * @return {Promise<Object[]>}        an array of dataset metadata
+ */
+export function harvest(url) {
   return rp({
     uri: url,
     method: 'GET',
@@ -36,9 +45,10 @@ export function crawl(url) {
       return {
         name: metas.title,
         portalDatasetID: item.dataset.dataset_id,
-        updatedTime: metas.modified,
+        createdTime: null,
+        updatedTime: new Date(metas.modified),
         description: metas.description,
-        webpageLink: createLink(metas.source_domain_address, metas.source_dataset),
+        portalLink: createLink(metas.source_domain_address, metas.source_dataset),
         dataLink: null,
         license: metas.license,
         publisher: metas.publisher,
@@ -52,6 +62,12 @@ export function crawl(url) {
   });
 }
 
+/**
+ * Get the site of the dataset
+ * @param  {String} domain  portal domain
+ * @param  {String} dataset dataset id
+ * @return {String}         site url
+ */
 function createLink(domain, dataset) {
   return `https://${domain}/explore/dataset/${dataset}`;
 }
