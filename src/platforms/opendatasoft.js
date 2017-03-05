@@ -1,9 +1,10 @@
 import _ from 'lodash';
 import rp from 'request-promise';
+import config from 'config';
 
 export function crawlAll() {
 
-  let rows = 1000;
+  let rows = config.get('harvester.opendatasoft.rows');
 
   return rp({
     uri: 'https://data.opendatasoft.com/api/v2/catalog/datasets?rows=0&start=0',

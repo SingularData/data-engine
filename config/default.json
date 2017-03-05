@@ -1,0 +1,7 @@
+{
+  "harvester": {
+    "opendatasoft": {
+      "rows": 1000
+    }
+  }
+}
