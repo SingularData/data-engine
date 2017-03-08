@@ -1,7 +1,6 @@
 import pgp from 'pg-promise';
 import Promise from 'bluebird';
 import config from 'config';
-import _ from 'lodash';
 
 let pg = pgp({ promiseLib: Promise });
 let db = null;
@@ -16,7 +15,7 @@ export function getDB() {
 
 /**
  * Initialize database connection.
- * @return {Undefined}
+ * @return {Object} pgp database connection.
  */
 export function initialize() {
   if (db) {
@@ -24,17 +23,6 @@ export function initialize() {
   }
 
   db = pg(config.get('database.connStr'));
+
   return db;
-}
-
-export function save(metadatas) {
-  if (!db) {
-    initialize;
-  }
-
-  if (!_.isArray(metadatas)) {
-    metadatas = [metadatas];
-  }
-
-
 }

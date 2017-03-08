@@ -5,6 +5,7 @@ chai.use(require('chai-as-promised'));
 const expect = chai.expect;
 
 export function validateMetadata(metadata) {
+  expect(metadata).to.have.property('portalID');
   expect(metadata).to.have.property('name');
   expect(metadata).to.have.property('portalDatasetID');
   expect(metadata).to.have.property('createdTime');
@@ -18,6 +19,7 @@ export function validateMetadata(metadata) {
   expect(metadata).to.have.property('categories');
   expect(metadata).to.have.property('raw');
 
+  expect(metadata.portalID).to.be.a('number');
   expect(metadata.name).to.be.a('string');
   expect(metadata.updatedTime).to.be.a('date');
   expect(metadata.portalDatasetID).to.be.a('string');
