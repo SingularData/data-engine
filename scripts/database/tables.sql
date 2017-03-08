@@ -13,8 +13,8 @@ CREATE TABLE portal (
   description text
 );
 
-CREATE TABLE junar_instance_info (
-  id integer PRIMARY KEY,
+CREATE TABLE junar_portal_info (
+  id serial PRIMARY KEY,
   portal_id integer REFERENCES portal (id),
   api_url text NOT NULL,
   api_key text NOT NULL

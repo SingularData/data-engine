@@ -16,9 +16,7 @@ CREATE OR REPLACE FUNCTION insert_new_dataset() RETURNS TRIGGER AS $$
 
         IF NOT FOUND THEN
           INSERT INTO dataset_publisher (name) VALUES (NEW.publisher)
-          RETURNING id INTO NEW.publisher_id;
-        ELSE
-          SELECT publisher_id INTO NEW.publisher_id;
+          RETURNING id INTO publisher_id;
         END IF;
 
         INSERT INTO dataset (
@@ -26,7 +24,7 @@ CREATE OR REPLACE FUNCTION insert_new_dataset() RETURNS TRIGGER AS $$
           portal_link, data_link, publisher_id, portal_id, raw
         ) VALUES (
           NEW.name, NEW.portal_dataset_id, NEW.created_time, NEW.updated_time, NEW.description,
-          NEW.portal_link, NEW.data_link, NEW.publisher_id, NEW.portal_id, NEW.raw
+          NEW.portal_link, NEW.data_link, publisher_id, NEW.portal_id, NEW.raw
         ) RETURNING id INTO NEW.id;
 
         WITH existing_tags AS (
