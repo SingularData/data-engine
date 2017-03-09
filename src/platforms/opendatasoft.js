@@ -73,7 +73,7 @@ export function harvest(url, portalIDs) {
           publisher: metas.publisher,
           tags: metas.keyword,
           categories: metas.theme,
-          raw: data.datasets[i]
+          raw: item
         };
 
         datasets.push(dataset);

@@ -7,7 +7,7 @@ chai.use(require('chai-as-promised'));
 
 const expect = chai.expect;
 
-describe('OpenDataSoft metadata crawler', function() {
+describe('platforms/opendatasoft.js', function() {
 
   this.timeout(30000);
 

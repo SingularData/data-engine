@@ -1,6 +1,5 @@
+import { save, __RewireAPI__ as ToDosRewireAPI } from '../src/database.js';
 import chai from 'chai';
-
-chai.use(require('chai-as-promised'));
 
 const expect = chai.expect;
 
@@ -28,3 +27,35 @@ export function validateMetadata(metadata) {
   expect(metadata.categories).to.be.an('array');
   expect(metadata.raw).to.be.an('object');
 }
+
+describe('database.js', () => {
+
+  it('should succefully construct the query', () => {
+    ToDosRewireAPI.__Rewire__('getDB', () => {
+      return {
+        none: (sql) => {
+          expect(sql).to.be.a('string');
+          return Promise.resolve();
+        }
+      };
+    });
+
+    let metadatas = [{
+      portal_id: 1,
+      portal_dataset_id: 1,
+      name: 'test',
+      description: null,
+      created_time: null,
+      updated_time: new Date(2017, 1, 1),
+      portal_link: 'http://localhost',
+      data_link: null,
+      publisher: 'my portal',
+      tags: ['of no use'],
+      categories: ['ToDelete'],
+      raw: {}
+    }];
+
+    save(metadatas);
+  });
+
+});
