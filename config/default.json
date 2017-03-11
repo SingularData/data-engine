@@ -1,10 +1,13 @@
 {
-  "harvester": {
+  "platforms": {
     "opendatasoft": {
       "rows": 1000
     }
   },
   "database": {
     "connStr": "pg://postgres:1sdf234@localhost:6543/datarea"
+  },
+  "harvester": {
+    "concurrent": 3
   }
 }

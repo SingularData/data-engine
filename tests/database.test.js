@@ -1,6 +1,8 @@
 import { save, __RewireAPI__ as ToDosRewireAPI } from '../src/database.js';
 import chai from 'chai';
 
+chai.use(require('chai-as-promised'));
+
 const expect = chai.expect;
 
 export function validateMetadata(metadata) {
@@ -30,7 +32,7 @@ export function validateMetadata(metadata) {
 
 describe('database.js', () => {
 
-  it('should succefully construct the query', () => {
+  it('save() should succefully construct the query.', () => {
     ToDosRewireAPI.__Rewire__('getDB', () => {
       return {
         none: (sql) => {
@@ -55,7 +57,7 @@ describe('database.js', () => {
       raw: {}
     }];
 
-    save(metadatas);
+    return save(metadatas);
   });
 
 });

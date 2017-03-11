@@ -4,13 +4,14 @@ import config from 'config';
 import Promise from 'bluebird';
 import { getDB } from '../database';
 
+const rows = config.get('platforms.opendatasoft.rows');
+
 /**
  * Get a list harvesting Jobs.
  * @return {Promise<[]>}    An array of harvesting jobs.
  */
-export function harvestAll() {
+export function downloadAll() {
 
-  let rows = config.get('harvester.opendatasoft.rows');
   let getDatasetCount = rp({
     uri: 'https://data.opendatasoft.com/api/v2/catalog/datasets?rows=0&start=0',
     method: 'GET',
@@ -25,7 +26,7 @@ export function harvestAll() {
       let tasks = [];
 
       for (let i = 0; i <= datasetCount; i += rows) {
-        let request = harvest(`https://data.opendatasoft.com/api/v2/catalog/datasets?rows=${rows}&start=${i}`, portalIDs);
+        let request = download(`https://data.opendatasoft.com/api/v2/catalog/datasets?rows=${rows}&start=${i}`, portalIDs);
         tasks.push(request);
       }
 
@@ -39,7 +40,7 @@ export function harvestAll() {
  * @param  {Object}             portalIDs   portal IDs indexed by portal name
  * @return {Promise<Object[]>}              an array of dataset metadata
  */
-export function harvest(url, portalIDs) {
+export function download(url, portalIDs) {
 
   let promise = portalIDs ? Promise.resolve(portalIDs) : getPortalIDs();
 

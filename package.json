@@ -4,7 +4,7 @@
   "description": "data collector for datarea.io",
   "main": "index.js",
   "scripts": {
-    "test": "mocha tests/**/*.js --require babel-register"
+    "test": "mocha tests/**/*.test.js --require babel-register"
   },
   "repository": {
     "type": "git",
