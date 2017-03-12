@@ -4,7 +4,7 @@ import config from 'config';
 import Promise from 'bluebird';
 import { getDB } from '../database';
 
-const rows = config.get('platforms.opendatasoft.rows');
+const rows = config.get('platforms.OpenDataSoft.rows');
 const userAgents = config.get('harvester.user_agents');
 
 /**

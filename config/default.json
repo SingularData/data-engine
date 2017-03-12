@@ -1,7 +1,10 @@
 {
   "platforms": {
-    "opendatasoft": {
+    "OpenDataSoft": {
       "rows": 300
+    },
+    "ArcGISOpenData": {
+      "per_page": 100
     }
   },
   "database": {

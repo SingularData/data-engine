@@ -42,8 +42,8 @@ describe('platforms/opendatasoft.js', () => {
       });
   });
 
-  it('downloadAll() should return an array of Promise tasks', () => {
-    ToDosRewireAPI.__Rewire__('harvest', () => Promise.resolve([]));
+  it('downloadAll() should return an array of Promise tasks.', () => {
+    ToDosRewireAPI.__Rewire__('donwload', () => Promise.resolve([]));
     ToDosRewireAPI.__Rewire__('getDB', () => {
       return {
         any: () => Promise.resolve([])
