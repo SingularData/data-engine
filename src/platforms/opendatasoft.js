@@ -19,10 +19,10 @@ export function downloadAll() {
   })
   .then(result => result.total_count);
 
-  return Promise.all([getDatasetCount, getPortalIDs])
+  return Promise.all([getDatasetCount, getPortalIDs()])
     .then(results => {
-      let portalIDs = results[0];
-      let datasetCount = results[1];
+      let datasetCount = results[0];
+      let portalIDs = results[1];
       let tasks = [];
 
       for (let i = 0; i <= datasetCount; i += rows) {
@@ -66,14 +66,14 @@ export function download(url, portalIDs) {
           name: metas.title,
           portalDatasetID: item.dataset.dataset_id,
           createdTime: null,
-          updatedTime: new Date(metas.modified),
+          updatedTime: metas.modified ? new Date(metas.modified) : new Date(),
           description: metas.description,
           portalLink: createLink(metas.source_domain_address, metas.source_dataset),
           dataLink: null,
           license: metas.license,
           publisher: metas.publisher,
-          tags: metas.keyword,
-          categories: metas.theme,
+          tags: getValidArray(metas.keyword),
+          categories: getValidArray(metas.theme),
           raw: item
         };
 
@@ -101,17 +101,26 @@ function createLink(domain, dataset) {
  */
 function getPortalIDs() {
   let sql = `
-    SELECT id, name FROM portal po
+    SELECT po.id, po.name FROM portal po
     LEFT JOIN platform pl ON pl.id = po.platform_id
-    WHERE name = $1
+    WHERE pl.name = $1
   `;
 
-  return getDB()
-    .any(sql, 'OpenDataSoft')
+  return getDB().any(sql, 'OpenDataSoft')
     .then(results => {
       return _.reduce(results, (collection, portal) => {
         collection[portal.name] = portal.id;
         return collection;
       }, {});
     });
+}
+
+function getValidArray(array) {
+  if (_.isArray(array)) {
+    return array;
+  } else if (array && _.isString(array)) {
+    return [array];
+  }
+
+  return [];
 }

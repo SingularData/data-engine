@@ -1,11 +1,11 @@
 {
   "platforms": {
     "opendatasoft": {
-      "rows": 1000
+      "rows": 300
     }
   },
   "database": {
-    "connStr": "pg://postgres:1sdf234@localhost:6543/datarea"
+    "connStr": "pg://postgres:87t467@localhost:5432/datarea"
   },
   "harvester": {
     "concurrent": 3

@@ -28,10 +28,10 @@ CREATE OR REPLACE FUNCTION insert_new_dataset() RETURNS TRIGGER AS $$
         ) RETURNING id INTO NEW.id;
 
         WITH existing_tags AS (
-          SELECT id, name FROM dataset_tag WHERE name = any(NEW.tags)
+          SELECT id, name FROM dataset_tag WHERE name = any(NEW.tags::text[])
         ), new_tags AS (
           INSERT INTO dataset_tag (name) (
-            SELECT tag FROM unnest(NEW.tags) AS tag
+            SELECT tag FROM unnest(NEW.tags::text[]) AS tag
             WHERE tag NOT IN (SELECT name FROM existing_tags)
           ) RETURNING id, name
         )
@@ -42,10 +42,10 @@ CREATE OR REPLACE FUNCTION insert_new_dataset() RETURNS TRIGGER AS $$
         );
 
         WITH existing_categories AS (
-          SELECT id, name FROM dataset_category WHERE name = any(NEW.categories)
+          SELECT id, name FROM dataset_category WHERE name = any(NEW.categories::text[])
         ), new_categories AS (
           INSERT INTO dataset_category (name) (
-            SELECT category FROM unnest(NEW.categories) AS category
+            SELECT category FROM unnest(NEW.categories::text[]) AS category
             WHERE category NOT IN (SELECT name FROM existing_categories)
           ) RETURNING id, name
         )
@@ -55,6 +55,8 @@ CREATE OR REPLACE FUNCTION insert_new_dataset() RETURNS TRIGGER AS $$
           SELECT NEW.id, id FROM new_categories
         );
 
+      ELSE
+        raise notice 'Dataset isn''t updated: %', NEW.portal_dataset_id;
       END IF;
 
       RETURN NEW;

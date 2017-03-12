@@ -1,4 +1,4 @@
-import { save, __RewireAPI__ as ToDosRewireAPI } from '../src/database.js';
+import { save, helpers, __RewireAPI__ as ToDosRewireAPI } from '../src/database.js';
 import chai from 'chai';
 
 chai.use(require('chai-as-promised'));
@@ -58,6 +58,25 @@ describe('database.js', () => {
     }];
 
     return save(metadatas);
+  });
+
+  it('helpers.dateToString() should return a string in the ISO-8601 format.', () => {
+    let date = new Date(2017, 1, 1);
+    let converted = helpers.dateToString(date);
+
+    expect(converted).to.equal(date.toISOString());
+  });
+
+  it('helpers.dateToString() should return null if the input date is null/undefined.', () => {
+    expect(helpers.dateToString()).to.be.null;
+    expect(helpers.dateToString(null)).to.be.null;
+  });
+
+  it('helpers.arrayToString() should return a PostgreSQL array string.', () => {
+    let dataArray = ['tag1', 'tag2', 'tag3'];
+    let pgArray = helpers.arrayToString(dataArray);
+
+    expect(pgArray).to.equal('{tag1,tag2,tag3}');
   });
 
 });

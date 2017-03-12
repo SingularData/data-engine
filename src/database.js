@@ -48,23 +48,24 @@ export function save(metadatas) {
     'publisher',
     'tags',
     'categories',
-    'raw'], {
-      table: 'dataset'
-    });
+    'raw'
+  ], {
+    table: 'view_latest_dataset'
+  });
 
   let values = _.map(metadatas, metadata => {
     return {
       portal_id: metadata.portalID,
       portal_dataset_id: metadata.portalDatasetID,
-      name: metadata.name,
+      name: metadata.name || 'Untitled Dataset',
       description: metadata.description,
-      created_time: metadata.createdTime,
-      updated_time: metadata.updatedTime,
+      created_time: dateToString(metadata.createdTime),
+      updated_time: dateToString(metadata.updatedTime),
       portal_link: metadata.portalLink,
       data_link: metadata.dataLink,
-      publisher: metadata.publisher,
-      tags: metadata.tags,
-      categories: metadata.categories,
+      publisher: metadata.publisher || 'Unkown',
+      tags: arrayToString(_.omit(metadata.tags, '')),
+      categories: arrayToString(_.omit(metadata.categories, '')),
       raw: metadata.raw
     };
   });
@@ -72,4 +73,35 @@ export function save(metadatas) {
   var query = pg.helpers.insert(values, columnSet);
 
   return db.none(query);
+}
+
+/**
+ * Database helper functions
+ * @type {Object}
+ */
+export const helpers = {
+  dateToString: dateToString,
+  arrayToString: arrayToString
+};
+
+/**
+ * Convert a Date object to a string in the ISO-8601 format.
+ * @param  {Date}   date  Date object
+ * @return {String}       Date string. If the date is null, return null.
+ */
+function dateToString(date) {
+  return date ? date.toISOString() : null;
+}
+
+/**
+ * Convert an array of values into a PostgreSQL array string.
+ * @param  {Array}  array JavaScript array
+ * @return {String}       PostgreSQL array string
+ */
+function arrayToString(array) {
+  let values = _.map(array, value => {
+    return value.replace('\'', '\'\'');
+  });
+
+  return '{' + values.join(',') + '}';
 }
