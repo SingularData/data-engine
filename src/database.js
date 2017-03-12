@@ -99,9 +99,13 @@ function dateToString(date) {
  * @return {String}       PostgreSQL array string
  */
 function arrayToString(array) {
-  let values = _.map(array, value => {
-    return value.replace('\'', '\'\'');
-  });
+  let values = _.chain(array)
+                .filter(value => value)
+                .map(value => {
+                  return value.replace('\'', '\'\'').replace(',', ' ');
+                })
+                .join(',')
+                .value();
 
-  return '{' + values.join(',') + '}';
+  return '{' + values + '}';
 }

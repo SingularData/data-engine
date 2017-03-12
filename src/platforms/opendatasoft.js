@@ -5,6 +5,7 @@ import Promise from 'bluebird';
 import { getDB } from '../database';
 
 const rows = config.get('platforms.opendatasoft.rows');
+const userAgents = config.get('harvester.user_agents');
 
 /**
  * Get a list harvesting Jobs.
@@ -15,7 +16,10 @@ export function downloadAll() {
   let getDatasetCount = rp({
     uri: 'https://data.opendatasoft.com/api/v2/catalog/datasets?rows=0&start=0',
     method: 'GET',
-    json: true
+    json: true,
+    headers: {
+      'User-Agent': _.sample(userAgents)
+    }
   })
   .then(result => result.total_count);
 
@@ -48,7 +52,10 @@ export function download(url, portalIDs) {
     return rp({
       uri: url,
       method: 'GET',
-      json: true
+      json: true,
+      headers: {
+        'User-Agent': _.sample(userAgents)
+      }
     })
     .then(data => {
       let datasets = [];
