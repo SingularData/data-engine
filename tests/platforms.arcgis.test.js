@@ -15,8 +15,10 @@ describe('platfoms/arcgis.js', () => {
     ToDosRewireAPI.__Rewire__('rp', request => {
       if(request.uri.endsWith('per_page=0')) {
         return Promise.resolve({
-          stats: {
-            total_count: 200
+          metadata: {
+            stats: {
+              total_count: 200
+            }
           }
         });
       } else {

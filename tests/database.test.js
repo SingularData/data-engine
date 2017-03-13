@@ -76,7 +76,7 @@ describe('database.js', () => {
     let dataArray = ['tag1', 'tag2', 'tag3'];
     let pgArray = helpers.arrayToString(dataArray);
 
-    expect(pgArray).to.equal('{tag1,tag2,tag3}');
+    expect(pgArray).to.equal('{"tag1","tag2","tag3"}');
   });
 
 });

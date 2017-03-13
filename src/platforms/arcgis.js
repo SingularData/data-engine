@@ -14,7 +14,7 @@ const userAgents = config.get('harvester.user_agents');
 export function downloadAll() {
 
   let sql = `
-    SELECT id, url FROM portal
+    SELECT portal.id, portal.url FROM portal
     LEFT JOIN platform ON platform.id = portal.platform_id
     WHERE platform.name = $1
   `;
@@ -47,7 +47,11 @@ export function download(portalID, portalUrl) {
     }
   })
   .then(result => {
-    let totalCount = result.stats.total_count;
+    if (_.isString(result)) {
+      return Promise.reject(new Error(`The target portal doesn't provide APIs: ${portalUrl}`));
+    }
+
+    let totalCount = result.metadata.stats.total_count;
     let tasks = [];
 
     for (let i = 0, j = 1; i < totalCount; i += perPage, j++) {

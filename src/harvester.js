@@ -3,6 +3,7 @@ import Promise from 'bluebird';
 import _ from 'lodash';
 import config from 'config';
 import * as opendatasoft from './platforms/opendatasoft';
+import * as arcgis from './platforms/arcgis';
 import { getDB, save } from './database';
 
 Queue.configure(Promise);
@@ -10,7 +11,8 @@ Queue.configure(Promise);
 const maxConcurrent = config.get('harvester.concurrent');
 
 let downlaodAllFn = {
-  'OpenDataSoft': opendatasoft.downloadAll
+  'OpenDataSoft': opendatasoft.downloadAll,
+  'ArcGIS Open Data': arcgis.downloadAll
 };
 
 /**
@@ -48,7 +50,7 @@ export function harvest(platform, onEach, onError, onComplete) {
               onError(platform, error);
             }
 
-            console.error(`Have problem harvesting ${platform}`, error);
+            console.error(`Have problem harvesting\n${platform}`, error);
           });
         });
       });
@@ -96,7 +98,7 @@ export function harvestAll(onEach, onError, onComplete) {
                     onError(platform, error);
                   }
 
-                  console.error(`Have problem harvesting ${platform}`, error);
+                  console.error(`Have problem harvesting\n${platform}`, error);
                 });
               });
             });

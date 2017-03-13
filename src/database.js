@@ -34,6 +34,10 @@ export function initialize() {
  * @return {Promise<null>}            no return
  */
 export function save(metadatas) {
+  if (metadatas.length === 0) {
+    return Promise.resolve();
+  }
+
   let db = getDB();
 
   let columnSet = new pg.helpers.ColumnSet([
@@ -102,7 +106,7 @@ function arrayToString(array) {
   let values = _.chain(array)
                 .filter(value => value)
                 .map(value => {
-                  return value.replace('\'', '\'\'').replace(',', ' ');
+                  return '"' + value.replace('\'', '\'\'').trim() + '"';
                 })
                 .join(',')
                 .value();
