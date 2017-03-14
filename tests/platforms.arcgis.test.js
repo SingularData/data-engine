@@ -42,7 +42,9 @@ describe('platfoms/arcgis.js', () => {
       }
     });
 
-    return download(1, 'testUrl')
+    let task = download(1, 'testUrl');
+
+    return task()
       .then(results => {
         expect(requestCount).to.equal(2);
         expect(results).to.have.lengthOf(2);

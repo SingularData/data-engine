@@ -14,11 +14,12 @@ describe('platforms/opendatasoft.js', () => {
       'OPEN DATA RTE': 1
     };
 
-    return download('https://data.opendatasoft.com/api/v2/catalog/datasets?rows=1&start=0', portalIDs)
-      .then(results => {
-        expect(results).to.have.lengthOf(1);
-        validateMetadata(results[0]);
-      });
+    let task = download('https://data.opendatasoft.com/api/v2/catalog/datasets?rows=1&start=0', portalIDs);
+
+    return task().then(results => {
+      expect(results).to.have.lengthOf(1);
+      validateMetadata(results[0]);
+    });
   });
 
   it('download() should return a list of valid dataset metadata, without provided portal IDs.', () => {
@@ -28,18 +29,20 @@ describe('platforms/opendatasoft.js', () => {
       };
     });
 
-    return download('https://data.opendatasoft.com/api/v2/catalog/datasets?rows=1&start=0')
-      .then(results => {
-        expect(results).to.have.lengthOf(1);
-        validateMetadata(results[0]);
-      });
+    let task = download('https://data.opendatasoft.com/api/v2/catalog/datasets?rows=1&start=0');
+
+    return task().then(results => {
+      expect(results).to.have.lengthOf(1);
+      validateMetadata(results[0]);
+    });
   });
 
   it('download() should skip the result if the portal is unrecognized.', () => {
-    return download('https://data.opendatasoft.com/api/v2/catalog/datasets?rows=1&start=0', {})
-      .then(results => {
-        expect(results).to.have.lengthOf(0);
-      });
+    let task = download('https://data.opendatasoft.com/api/v2/catalog/datasets?rows=1&start=0', {});
+
+    return task().then(results => {
+      expect(results).to.have.lengthOf(0);
+    });
   });
 
   it('downloadAll() should return an array of Promise tasks.', () => {

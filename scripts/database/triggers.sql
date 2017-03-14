@@ -28,11 +28,12 @@ CREATE OR REPLACE FUNCTION insert_new_dataset() RETURNS TRIGGER AS $$
         ) RETURNING id INTO NEW.id;
 
         WITH existing_tags AS (
-          SELECT id, name FROM dataset_tag WHERE name = any(NEW.tags::text[])
+          SELECT id, name FROM dataset_tag WHERE name = any(NEW.tags)
         ), new_tags AS (
           INSERT INTO dataset_tag (name) (
-            SELECT tag FROM unnest(NEW.tags::text[]) AS tag
+            SELECT tag FROM unnest(NEW.tags) AS tag
             WHERE tag NOT IN (SELECT name FROM existing_tags)
+            AND tag <> ''
           ) RETURNING id, name
         )
         INSERT INTO dataset_tag_xref (dataset_id, dataset_tag_id) (
@@ -42,11 +43,12 @@ CREATE OR REPLACE FUNCTION insert_new_dataset() RETURNS TRIGGER AS $$
         );
 
         WITH existing_categories AS (
-          SELECT id, name FROM dataset_category WHERE name = any(NEW.categories::text[])
+          SELECT id, name FROM dataset_category WHERE name = any(NEW.categories)
         ), new_categories AS (
           INSERT INTO dataset_category (name) (
-            SELECT category FROM unnest(NEW.categories::text[]) AS category
+            SELECT category FROM unnest(NEW.categories) AS category
             WHERE category NOT IN (SELECT name FROM existing_categories)
+            AND category <> ''
           ) RETURNING id, name
         )
         INSERT INTO dataset_category_xref (dataset_id, dataset_category_id) (

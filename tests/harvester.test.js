@@ -18,7 +18,7 @@ describe('harvester.js', () => {
     let finished = 0;
 
     ToDosRewireAPI.__Rewire__('downlaodAllFn', {
-      OpenDataSoft: () => Promise.resolve([Promise.resolve([null])])
+      OpenDataSoft: () => Promise.resolve([() => Promise.resolve([null])])
     });
 
     ToDosRewireAPI.__Rewire__('save', () => {
@@ -42,7 +42,7 @@ describe('harvester.js', () => {
     });
 
     ToDosRewireAPI.__Rewire__('downlaodAllFn', {
-      OpenDataSoft: () => Promise.resolve([Promise.resolve([null])])
+      OpenDataSoft: () => Promise.resolve([() => Promise.resolve([null])])
     });
 
     ToDosRewireAPI.__Rewire__('save', () => {

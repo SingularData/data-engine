@@ -9,7 +9,7 @@ const userAgents = config.get('harvester.user_agents');
 
 /**
  * Get a list harvesting Jobs.
- * @return {Promise<[]>}    An array of harvesting jobs.
+ * @return {Function[]}    An array of harvesting jobs.
  */
 export function downloadAll() {
 
@@ -42,54 +42,56 @@ export function downloadAll() {
  * Harvest the open data network of OpenDataSoft with a given url.
  * @param  {String}             url         OpenDataSoft data network API url
  * @param  {Object}             portalIDs   portal IDs indexed by portal name
- * @return {Promise<Object[]>}              an array of dataset metadata
+ * @return {Function}                       harvest job
  */
 export function download(url, portalIDs) {
 
-  let promise = portalIDs ? Promise.resolve(portalIDs) : getPortalIDs();
+  return function() {
+    let promise = portalIDs ? Promise.resolve(portalIDs) : getPortalIDs();
 
-  return promise.then(portals => {
-    return rp({
-      uri: url,
-      method: 'GET',
-      json: true,
-      headers: {
-        'User-Agent': _.sample(userAgents)
-      }
-    })
-    .then(data => {
-      let datasets = [];
+    return promise.then(portals => {
+      return rp({
+        uri: url,
+        method: 'GET',
+        json: true,
+        headers: {
+          'User-Agent': _.sample(userAgents)
+        }
+      })
+      .then(data => {
+        let datasets = [];
 
-      for (let i = 0, n = data.datasets.length; i < n; i++) {
-        let item = data.datasets[i];
-        let metas = item.dataset.metas.default;
+        for (let i = 0, n = data.datasets.length; i < n; i++) {
+          let item = data.datasets[i];
+          let metas = item.dataset.metas.default;
 
-        if (!portals[metas.source_domain_title]) {
-          continue;
+          if (!portals[metas.source_domain_title]) {
+            continue;
+          }
+
+          let dataset = {
+            portalID: portals[metas.source_domain_title],
+            name: metas.title,
+            portalDatasetID: item.dataset.dataset_id,
+            createdTime: null,
+            updatedTime: metas.modified ? new Date(metas.modified) : new Date(),
+            description: metas.description,
+            portalLink: createLink(metas.source_domain_address, metas.source_dataset),
+            dataLink: null,
+            license: metas.license,
+            publisher: metas.publisher,
+            tags: getValidArray(metas.keyword),
+            categories: getValidArray(metas.theme),
+            raw: item
+          };
+
+          datasets.push(dataset);
         }
 
-        let dataset = {
-          portalID: portals[metas.source_domain_title],
-          name: metas.title,
-          portalDatasetID: item.dataset.dataset_id,
-          createdTime: null,
-          updatedTime: metas.modified ? new Date(metas.modified) : new Date(),
-          description: metas.description,
-          portalLink: createLink(metas.source_domain_address, metas.source_dataset),
-          dataLink: null,
-          license: metas.license,
-          publisher: metas.publisher,
-          tags: getValidArray(metas.keyword),
-          categories: getValidArray(metas.theme),
-          raw: item
-        };
-
-        datasets.push(dataset);
-      }
-
-      return datasets;
+        return datasets;
+      });
     });
-  });
+  };
 }
 
 /**

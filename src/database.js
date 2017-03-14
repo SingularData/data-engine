@@ -39,6 +39,10 @@ export function save(metadatas) {
   }
 
   let db = getDB();
+  // let sql = `
+  //   INSERT INTO view_latest_dataset (portal_id, portal_dataset_id, name, description,
+  //   created_time, updated_time, portal_link, data_link, publisher, tags, categories, ras)
+  // `;
 
   let columnSet = new pg.helpers.ColumnSet([
     'portal_id',
@@ -62,14 +66,19 @@ export function save(metadatas) {
       portal_id: metadata.portalID,
       portal_dataset_id: metadata.portalDatasetID,
       name: metadata.name || 'Untitled Dataset',
-      description: metadata.description,
+      description: metadata.description || null,
       created_time: dateToString(metadata.createdTime),
       updated_time: dateToString(metadata.updatedTime),
-      portal_link: metadata.portalLink,
-      data_link: metadata.dataLink,
+      portal_link: metadata.portalLink || null,
+      data_link: metadata.dataLink || null,
       publisher: metadata.publisher || 'Unkown',
-      tags: arrayToString(_.omit(metadata.tags, '')),
-      categories: arrayToString(_.omit(metadata.categories, '')),
+      /**
+       * Because the PostgreSQL cannot guess the type of empty array, we need to
+       * use an array with a empty string to help it. The trigger have been set
+       * up to filter out the empty string so it won't be added into the database.
+       */
+      tags: metadata.tags.length > 0 ? _.uniq(metadata.tags) : [''],
+      categories: metadata.categories.length > 0 ? _.uniq(metadata.categories) : [''],
       raw: metadata.raw
     };
   });

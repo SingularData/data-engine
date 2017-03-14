@@ -42,7 +42,7 @@ export function harvest(platform, onEach, onError, onComplete) {
             onEach(platform);
           }
 
-          return task.then(metadatas => {
+          return task().then(metadatas => {
             return save(metadatas);
           })
           .catch(error => {
@@ -90,7 +90,7 @@ export function harvestAll(onEach, onError, onComplete) {
                   onEach(platform);
                 }
 
-                return task.then(metadatas => {
+                return task().then(metadatas => {
                   return save(metadatas);
                 })
                 .catch(error => {
