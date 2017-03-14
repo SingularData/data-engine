@@ -2,9 +2,12 @@ import Queue from 'promise-queue';
 import Promise from 'bluebird';
 import _ from 'lodash';
 import config from 'config';
+import { getDB, save } from './database';
+
 import * as opendatasoft from './platforms/opendatasoft';
 import * as arcgis from './platforms/arcgis';
-import { getDB, save } from './database';
+import * as socrata from './platforms/socrata';
+
 
 Queue.configure(Promise);
 
@@ -12,7 +15,8 @@ const maxConcurrent = config.get('harvester.concurrent');
 
 let downlaodAllFn = {
   'OpenDataSoft': opendatasoft.downloadAll,
-  'ArcGIS Open Data': arcgis.downloadAll
+  'ArcGIS Open Data': arcgis.downloadAll,
+  'Socrata': socrata.downloadAll
 };
 
 /**

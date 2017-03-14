@@ -5,6 +5,9 @@
     },
     "ArcGISOpenData": {
       "per_page": 100
+    },
+    "Socrata": {
+      "limit": 100
     }
   },
   "database": {

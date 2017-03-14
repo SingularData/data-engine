@@ -7,7 +7,9 @@ chai.use(require('chai-as-promised'));
 
 const expect = chai.expect;
 
-describe('platforms/opendatasoft.js', () => {
+describe('platforms/opendatasoft.js', function() {
+
+  this.timeout(30000);
 
   it('download() should return a list of valid dataset metadata, with provided portal IDs.', () => {
     let portalIDs = {
