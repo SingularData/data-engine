@@ -8,6 +8,9 @@
     },
     "Socrata": {
       "limit": 100
+    },
+    "CKAN": {
+      "rows": 1000
     }
   },
   "database": {

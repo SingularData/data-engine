@@ -7,7 +7,7 @@ import { getDB, save } from './database';
 import * as opendatasoft from './platforms/opendatasoft';
 import * as arcgis from './platforms/arcgis';
 import * as socrata from './platforms/socrata';
-
+import * as ckan from './platforms/ckan';
 
 Queue.configure(Promise);
 
@@ -16,7 +16,8 @@ const maxConcurrent = config.get('harvester.concurrent');
 let downlaodAllFn = {
   'OpenDataSoft': opendatasoft.downloadAll,
   'ArcGIS Open Data': arcgis.downloadAll,
-  'Socrata': socrata.downloadAll
+  'Socrata': socrata.downloadAll,
+  'CKAN': ckan.downloadAll
 };
 
 /**

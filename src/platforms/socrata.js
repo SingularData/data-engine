@@ -45,7 +45,7 @@ export function download(portalID, portalUrl, region) {
 
   return function() {
     return rp({
-      uri: `http://api.${region}.socrata.com/api/catalog/v1?domains=${portalUrl}&limit=0&offset=0`,
+      uri: `http://api.${region}.socrata.com/api/catalog/v1?domains=${portalUrl}&offset=0&limit=0`,
       method: 'GET',
       json: true,
       headers: {
