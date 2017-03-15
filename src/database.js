@@ -39,11 +39,6 @@ export function save(metadatas) {
   }
 
   let db = getDB();
-  // let sql = `
-  //   INSERT INTO view_latest_dataset (portal_id, portal_dataset_id, name, description,
-  //   created_time, updated_time, portal_link, data_link, publisher, tags, categories, ras)
-  // `;
-
   let columnSet = new pg.helpers.ColumnSet([
     'portal_id',
     'portal_dataset_id',
@@ -83,7 +78,7 @@ export function save(metadatas) {
     };
   });
 
-  var query = pg.helpers.insert(values, columnSet);
+  let query = pg.helpers.insert(values, columnSet);
 
   return db.none(query);
 }

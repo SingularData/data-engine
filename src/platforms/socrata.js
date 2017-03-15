@@ -56,9 +56,9 @@ export function download(portalID, portalUrl, region) {
       let totalCount = result.resultSetSize;
       let tasks = [];
 
-      for (let i = 0, j = 1; i < totalCount; i += limit, j++) {
+      for (let i = 0; i < totalCount; i += limit) {
         let request = rp({
-          uri: `http://api.${region}.socrata.com/api/catalog/v1?domains=${portalUrl}&limit=${limit}&offset=${j}`,
+          uri: `http://api.${region}.socrata.com/api/catalog/v1?domains=${portalUrl}&limit=${limit}&offset=${i}`,
           method: 'GET',
           json: true,
           headers: {
@@ -88,7 +88,7 @@ export function download(portalID, portalUrl, region) {
             updatedTime: new Date(dataset.updatedAt),
             description: dataset.description,
             dataLink: null,
-            portalLink: dataset.permalink || `{portalUrl}/d/${dataset.id}`,
+            portalLink: dataset.permalink || `${portalUrl}/d/${dataset.id}`,
             license: _.get(dataset.metadata, 'license'),
             publisher: portalUrl,
             tags: _.concat(_.get(dataset.classification, 'tags'), _.get(dataset.classificatio, 'domain_tags')),

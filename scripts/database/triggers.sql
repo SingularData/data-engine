@@ -5,12 +5,12 @@ CREATE OR REPLACE FUNCTION insert_new_dataset() RETURNS TRIGGER AS $$
   BEGIN
     IF (TG_OP = 'INSERT') THEN
       SELECT
-        updated_time INTO last_updated_time
-      FROM dataset WHERE dataset.portal_dataset_id = NEW.portal_dataset_id
-      ORDER BY updated_time DESC
-      LIMIT 1;
+        min(updated_time) INTO last_updated_time
+      FROM dataset
+      WHERE dataset.portal_dataset_id = NEW.portal_dataset_id
+      GROUP BY dataset.portal_dataset_id;
 
-      IF NOT FOUND OR last_updated_time < NEW.updated_time THEN
+      IF (NOT FOUND) OR (last_updated_time < NEW.updated_time) THEN
 
         SELECT id INTO publisher_id FROM dataset_publisher WHERE name = NEW.publisher LIMIT 1;
 
