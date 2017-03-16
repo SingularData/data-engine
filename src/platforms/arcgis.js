@@ -8,7 +8,7 @@ const perPage = config.get('platforms.ArcGISOpenData.per_page');
 const userAgents = config.get('harvester.user_agents');
 
 /**
- * Get a list harvesting Jobs.
+ * Get a list of harvesting Jobs.
  * @return {Function[]}    An array of harvesting jobs.
  */
 export function downloadAll() {

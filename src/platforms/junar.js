@@ -4,7 +4,7 @@ import config from 'config';
 import Promise from 'bluebird';
 import { getDB } from '../database';
 
-const limit = config.get('platforms.Socrata.limit');
+const limit = config.get('platforms.Junar.limit');
 const userAgents = config.get('harvester.user_agents');
 
 /**
@@ -14,20 +14,17 @@ const userAgents = config.get('harvester.user_agents');
 export function downloadAll() {
 
   let sql = `
-    SELECT
-      portal.id,
-      portal.url,
-      CASE WHEN platform.name = 'Socrata' THEN 'us' ELSE 'eu' END as region
-    FROM portal
+    SELECT portal.id, portal.name, jpi.api_url AS url, jpi.api_key AS key FROM portal
     LEFT JOIN platform ON platform.id = portal.platform_id
-    WHERE platform.name = $1 OR platform.name = $2
+    LEFT JOIN junar_portal_info AS jpi ON jpi.portal_id = portal.id
+    WHERE platform.name = $1
   `;
 
   return getDB()
-    .any(sql, ['Socrata', 'Socrata-EU'])
+    .any(sql, 'Junar')
     .then(results => {
       let tasks = _.map(results, portal => {
-        return download(portal.id, portal.url, portal.region);
+        return download(portal.id, portal.name, portal.url, portal.key);
       });
 
       return tasks;
@@ -37,15 +34,15 @@ export function downloadAll() {
 /**
  * Harvest the given ArcGIS Open Data portal.
  * @param  {Number}             portalID    portal ID
- * @param  {String}             portalUrl   portal Url
- * @param  {String}             region      portal region (us or eu)
+ * @param  {String}             portalName  portal Name
+ * @param  {String}             apiUrl      portal API url
+ * @param  {String}             apiKey      portal API key
  * @return {Function}                       harvest job
  */
-export function download(portalID, portalUrl, region) {
-
+export function download(portalID, portalName, apiUrl, apiKey) {
   return function() {
     return rp({
-      uri: `http://api.${region}.socrata.com/api/catalog/v1?domains=${portalUrl}&offset=0&limit=0`,
+      uri: `${apiUrl}/api/v2/datasets/?auth_key=${apiKey}&offset=0&limit=1`,
       method: 'GET',
       json: true,
       headers: {
@@ -53,12 +50,12 @@ export function download(portalID, portalUrl, region) {
       }
     })
     .then(result => {
-      let totalCount = result.resultSetSize;
+      let totalCount = result.count;
       let tasks = [];
 
       for (let i = 0; i < totalCount; i += limit) {
         let request = rp({
-          uri: `http://api.${region}.socrata.com/api/catalog/v1?domains=${portalUrl}&limit=${limit}&offset=${i}`,
+          uri: `${apiUrl}/api/v2/datasets/?auth_key=${apiKey}&offset=${i}&limit=${limit}`,
           method: 'GET',
           json: true,
           headers: {
@@ -78,21 +75,26 @@ export function download(portalID, portalUrl, region) {
         let data = results[i].results;
 
         for (let j = 0, m = data.length; j < m; j++) {
-          let dataset = data[j].resource;
+          let dataset = data[j];
+          let createdTime = new Date();
+          let updatedTime = new Date();
+
+          createdTime.setTime(dataset.created_at);
+          updatedTime.setTime(dataset.modified_at);
 
           datasets.push({
             portalID: portalID,
-            name: dataset.name,
-            portalDatasetID: dataset.id,
-            createdTime: new Date(dataset.createdAt),
-            updatedTime: new Date(dataset.updatedAt),
+            name: dataset.title,
+            portalDatasetID: dataset.guid,
+            createdTime: createdTime,
+            updatedTime: updatedTime,
             description: dataset.description,
             dataLink: null,
-            portalLink: dataset.permalink || `${portalUrl}/d/${dataset.id}`,
-            license: _.get(dataset.metadata, 'license'),
-            publisher: portalUrl,
-            tags: _.concat(_.get(dataset.classification, 'tags'), _.get(dataset.classificatio, 'domain_tags')),
-            categories: _.concat(_.get(dataset.classification, 'categories'), _.get(dataset.classification, 'domain_category')),
+            license: 'Unknown',
+            portalLink: dataset.link,
+            publisher: portalName,
+            tags: dataset.tags,
+            categories: [dataset.category_name],
             raw: dataset
           });
         }

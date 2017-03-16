@@ -8,7 +8,7 @@ const rows = config.get('platforms.CKAN.rows');
 const userAgents = config.get('harvester.user_agents');
 
 /**
- * Get a list harvesting Jobs.
+ * Get a list of harvesting Jobs.
  * @param  {Boolean}     chuckDonwload  A boolean value indicates whether to download in chuck.
  * @return {Function[]}                 An array of harvesting jobs.
  */

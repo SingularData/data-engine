@@ -11,6 +11,9 @@
     },
     "CKAN": {
       "rows": 1000
+    },
+    "Junar": {
+      "limit": 100
     }
   },
   "database": {

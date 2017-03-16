@@ -8,6 +8,7 @@ import * as opendatasoft from './platforms/opendatasoft';
 import * as arcgis from './platforms/arcgis';
 import * as socrata from './platforms/socrata';
 import * as ckan from './platforms/ckan';
+import * as junar from './platforms/junar';
 
 Queue.configure(Promise);
 
@@ -17,7 +18,8 @@ let downlaodAllFn = {
   'OpenDataSoft': opendatasoft.downloadAll,
   'ArcGIS Open Data': arcgis.downloadAll,
   'Socrata': socrata.downloadAll,
-  'CKAN': ckan.downloadAll
+  'CKAN': ckan.downloadAll,
+  'Junar': junar.downloadAll
 };
 
 /**
