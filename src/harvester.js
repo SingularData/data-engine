@@ -35,7 +35,7 @@ export function harvest(platform, onEach, onError, onComplete) {
     return Promise.reject(new Error(`Platform ${platform} is unknown.`));
   }
 
-  return downloadAll()
+  return downloadAll(true)
     .then(tasks => {
       let queue = new Queue(maxConcurrent, Infinity, {
         onEmpty: onComplete

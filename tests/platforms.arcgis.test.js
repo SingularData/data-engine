@@ -9,7 +9,7 @@ const expect = chai.expect;
 
 describe('platfoms/arcgis.js', () => {
 
-  it('download() should return a list of valid dataset metadata, with provided portal ID and URL.', () => {
+  it('download() should return a function for harvesting, with provided portal ID and URL.', () => {
     let requestCount = 0;
 
     ToDosRewireAPI.__Rewire__('rp', request => {

@@ -11,7 +11,7 @@ describe('platforms/opendatasoft.js', function() {
 
   this.timeout(30000);
 
-  it('download() should return a list of valid dataset metadata, with provided portal IDs.', () => {
+  it('download() should return a function for harvesting, with provided portal IDs.', () => {
     let portalIDs = {
       'OPEN DATA RTE': 1
     };
@@ -24,7 +24,7 @@ describe('platforms/opendatasoft.js', function() {
     });
   });
 
-  it('download() should return a list of valid dataset metadata, without provided portal IDs.', () => {
+  it('download() should return a function for harvesting, without provided portal IDs.', () => {
     ToDosRewireAPI.__Rewire__('getDB', () => {
       return {
         any: () => Promise.resolve([{ id: 1, name: 'OPEN DATA RTE' }])
