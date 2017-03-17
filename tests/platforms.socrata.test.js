@@ -46,7 +46,7 @@ describe('platfoms/socrata.js', () => {
       }
     });
 
-    let task = download(1, 'testUrl', 'us');
+    let task = download(1, 'portal', 'testUrl', 'us');
 
     return task()
       .then(results => {
@@ -60,7 +60,7 @@ describe('platfoms/socrata.js', () => {
     ToDosRewireAPI.__Rewire__('donwload', () => Promise.resolve([]));
     ToDosRewireAPI.__Rewire__('getDB', () => {
       return {
-        any: () => Promise.resolve([{ id: 1, url: 'test', region: 'eu' }])
+        any: () => Promise.resolve([{ id: 1, name: 'portal', url: 'test', region: 'eu' }])
       };
     });
 

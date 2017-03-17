@@ -10,7 +10,7 @@ import * as socrata from './platforms/socrata';
 import * as ckan from './platforms/ckan';
 import * as junar from './platforms/junar';
 import * as geonode from './platforms/geonode';
-
+import * as dkan from './platforms/dkan';
 
 Queue.configure(Promise);
 
@@ -22,7 +22,8 @@ let downlaodAllFn = {
   'Socrata': socrata.downloadAll,
   'CKAN': ckan.downloadAll,
   'Junar': junar.downloadAll,
-  'GeoNode': geonode.downloadAll
+  'GeoNode': geonode.downloadAll,
+  'DKAN': dkan.downloadAll
 };
 
 /**

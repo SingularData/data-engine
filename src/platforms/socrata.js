@@ -16,6 +16,7 @@ export function downloadAll() {
   let sql = `
     SELECT
       portal.id,
+      portal.name,
       portal.url,
       CASE WHEN platform.name = 'Socrata' THEN 'us' ELSE 'eu' END as region
     FROM portal
@@ -27,7 +28,7 @@ export function downloadAll() {
     .any(sql, ['Socrata', 'Socrata-EU'])
     .then(results => {
       let tasks = _.map(results, portal => {
-        return download(portal.id, portal.url, portal.region);
+        return download(portal.id, portal.name, portal.url, portal.region);
       });
 
       return tasks;
@@ -37,11 +38,12 @@ export function downloadAll() {
 /**
  * Harvest the given ArcGIS Open Data portal.
  * @param  {Number}             portalID    portal ID
- * @param  {String}             portalUrl   portal Url
+ * @param  {String}             portalName  portal name
+ * @param  {String}             portalUrl   portal url
  * @param  {String}             region      portal region (us or eu)
  * @return {Function}                       harvest job
  */
-export function download(portalID, portalUrl, region) {
+export function download(portalID, portalName, portalUrl, region) {
 
   return function() {
     return rp({
@@ -90,7 +92,7 @@ export function download(portalID, portalUrl, region) {
             dataLink: null,
             portalLink: dataset.permalink || `${portalUrl}/d/${dataset.id}`,
             license: _.get(dataset.metadata, 'license'),
-            publisher: portalUrl,
+            publisher: portalName,
             tags: _.concat(_.get(dataset.classification, 'tags'), _.get(dataset.classificatio, 'domain_tags')),
             categories: _.concat(_.get(dataset.classification, 'categories'), _.get(dataset.classification, 'domain_category')),
             raw: dataset
