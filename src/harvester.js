@@ -9,6 +9,8 @@ import * as arcgis from './platforms/arcgis';
 import * as socrata from './platforms/socrata';
 import * as ckan from './platforms/ckan';
 import * as junar from './platforms/junar';
+import * as geonode from './platforms/geonode';
+
 
 Queue.configure(Promise);
 
@@ -19,7 +21,8 @@ let downlaodAllFn = {
   'ArcGIS Open Data': arcgis.downloadAll,
   'Socrata': socrata.downloadAll,
   'CKAN': ckan.downloadAll,
-  'Junar': junar.downloadAll
+  'Junar': junar.downloadAll,
+  'GeoNode': geonode.downloadAll
 };
 
 /**
