@@ -4,7 +4,7 @@
   "description": "data collector for datarea.io",
   "main": "index.js",
   "scripts": {
-    "test": "mocha tests/**/*.test.js --require babel-register"
+    "test": "mocha test/**/*.test.js --require babel-register"
   },
   "repository": {
     "type": "git",
@@ -26,16 +26,13 @@
     "chai-as-promised": "^6.0.0",
     "eslint": "^3.16.1",
     "eslint-plugin-json": "^1.2.0",
-    "gulp": "^3.9.1",
     "mocha": "^3.2.0"
   },
   "dependencies": {
-    "bluebird": "^3.4.7",
+    "@akanass/rx-http-request": "^2.1.0",
     "config": "^1.25.1",
     "lodash": "^4.17.4",
-    "pg-promise": "^5.6.2",
-    "promise-queue": "https://github.com/haoliangyu/promise-queue.git",
-    "request": "^2.79.0",
-    "request-promise": "^4.1.1"
+    "pg-reactive": "https://github.com/haoliangyu/pg-reactive.git#prepublish",
+    "rxjs": "^5.2.0"
   }
 }

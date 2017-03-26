@@ -1,9 +1,9 @@
-import pgp from 'pg-promise';
-import Promise from 'bluebird';
+import pgrx from 'pg-reactive';
 import config from 'config';
 import _ from 'lodash';
+import Rx from 'rxjs';
+import { valueToString } from './utils/pg-util';
 
-let pg = pgp({ promiseLib: Promise });
 let db = null;
 
 /**
@@ -20,10 +20,10 @@ export function getDB() {
  */
 export function initialize() {
   if (db) {
-    pg.end();
+    db.end();
   }
 
-  db = pg(config.get('database.connStr'));
+  db = new pgrx(config.get('database.url'));
 
   return db;
 }
@@ -34,86 +34,45 @@ export function initialize() {
  * @return {Promise<null>}            no return
  */
 export function save(metadatas) {
+
   if (metadatas.length === 0) {
-    return Promise.resolve();
+    return Rx.Observable.empty();
   }
 
   let db = getDB();
-  let columnSet = new pg.helpers.ColumnSet([
-    'portal_id',
-    'portal_dataset_id',
-    'name',
-    'description',
-    'created_time',
-    'updated_time',
-    'portal_link',
-    'data_link',
-    'publisher',
-    'tags',
-    'categories',
-    'raw'
-  ], {
-    table: 'view_latest_dataset'
+  let query = `
+    INSERT INTO view_latest_dataset (
+      portal_id,
+      portal_dataset_id,
+      name,
+      description,
+      created_time,
+      updated_time,
+      portal_link,
+      data_link,
+      publisher,
+      tags,
+      categories,
+      raw
+    ) VALUES
+  `;
+
+  let values = _.map(metadatas, (metadata) => {
+    return `(
+      ${valueToString(metadata.portalID)},
+      ${valueToString(metadata.portalDatasetID)},
+      ${valueToString(metadata.name || 'Untitled Dataset')},
+      ${valueToString(metadata.description)},
+      ${valueToString(metadata.createdTime)},
+      ${valueToString(metadata.updatedTime)},
+      ${valueToString(metadata.portalLink)},
+      ${valueToString(metadata.dataLink)},
+      ${valueToString(metadata.publisher || 'Unknown')},
+      ${valueToString(_.uniq(metadata.tags))}::text[],
+      ${valueToString(_.uniq(metadata.categories))}::text[],
+      ${valueToString(metadata.raw)}
+    )`;
   });
 
-  let values = _.map(metadatas, metadata => {
-    return {
-      portal_id: metadata.portalID,
-      portal_dataset_id: metadata.portalDatasetID,
-      name: metadata.name || 'Untitled Dataset',
-      description: metadata.description || null,
-      created_time: dateToString(metadata.createdTime),
-      updated_time: dateToString(metadata.updatedTime),
-      portal_link: metadata.portalLink || null,
-      data_link: metadata.dataLink || null,
-      publisher: metadata.publisher || 'Unkown',
-      /**
-       * Because the PostgreSQL cannot guess the type of empty array, we need to
-       * use an array with a empty string to help it. The trigger have been set
-       * up to filter out the empty string so it won't be added into the database.
-       */
-      tags: metadata.tags.length > 0 ? _.uniq(metadata.tags) : [''],
-      categories: metadata.categories.length > 0 ? _.uniq(metadata.categories) : [''],
-      raw: metadata.raw
-    };
-  });
-
-  let query = pg.helpers.insert(values, columnSet);
-
-  return db.none(query);
-}
-
-/**
- * Database helper functions
- * @type {Object}
- */
-export const helpers = {
-  dateToString: dateToString,
-  arrayToString: arrayToString
-};
-
-/**
- * Convert a Date object to a string in the ISO-8601 format.
- * @param  {Date}   date  Date object
- * @return {String}       Date string. If the date is null, return null.
- */
-function dateToString(date) {
-  return date ? date.toISOString() : null;
-}
-
-/**
- * Convert an array of values into a PostgreSQL array string.
- * @param  {Array}  array JavaScript array
- * @return {String}       PostgreSQL array string
- */
-function arrayToString(array) {
-  let values = _.chain(array)
-                .filter(value => value)
-                .map(value => {
-                  return '"' + value.replace('\'', '\'\'').trim() + '"';
-                })
-                .join(',')
-                .value();
-
-  return '{' + values + '}';
+  return db.query(query + values.join(','));
 }

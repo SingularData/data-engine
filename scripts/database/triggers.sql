@@ -5,7 +5,7 @@ CREATE OR REPLACE FUNCTION insert_new_dataset() RETURNS TRIGGER AS $$
   BEGIN
     IF (TG_OP = 'INSERT') THEN
       SELECT
-        min(updated_time) INTO last_updated_time
+        max(updated_time) INTO last_updated_time
       FROM dataset
       WHERE dataset.portal_dataset_id = NEW.portal_dataset_id
         AND dataset.portal_id = NEW.portal_id

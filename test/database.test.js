@@ -1,7 +1,6 @@
-import { save, helpers, __RewireAPI__ as ToDosRewireAPI } from '../src/database.js';
 import chai from 'chai';
-
-chai.use(require('chai-as-promised'));
+import Rx from 'rxjs';
+import { save, __RewireAPI__ as ToDosRewireAPI } from '../src/database.js';
 
 const expect = chai.expect;
 
@@ -32,51 +31,65 @@ export function validateMetadata(metadata) {
 
 describe('database.js', () => {
 
-  it('save() should succefully construct the query.', () => {
+  it('save() should succefully construct the query to save metadata.', (done) => {
     ToDosRewireAPI.__Rewire__('getDB', () => {
       return {
-        none: (sql) => {
-          expect(sql).to.be.a('string');
-          return Promise.resolve();
-        }
+        query: (sql) => Rx.Observable.of(sql)
       };
     });
 
     let metadatas = [{
-      portal_id: 1,
-      portal_dataset_id: 1,
+      portalID: 1,
+      portalDatasetID: 1,
       name: 'test',
       description: null,
-      created_time: null,
-      updated_time: new Date(2017, 1, 1),
-      portal_link: 'http://localhost',
-      data_link: null,
+      createdTime: null,
+      updatedTime: new Date(2017, 1, 1),
+      portalLink: 'http://localhost',
+      dataLink: null,
       publisher: 'my portal',
       tags: ['of no use'],
       categories: ['ToDelete'],
       raw: {}
     }];
 
-    return save(metadatas);
+    let expectedSQL = `
+    INSERT INTO view_latest_dataset (
+      portal_id,
+      portal_dataset_id,
+      name,
+      description,
+      created_time,
+      updated_time,
+      portal_link,
+      data_link,
+      publisher,
+      tags,
+      categories,
+      raw
+    ) VALUES
+  (
+      1,
+      1,
+      'test',
+      NULL,
+      NULL,
+      '2017-02-01T05:00:00.000Z',
+      'http://localhost',
+      NULL,
+      'my portal',
+      ARRAY['of no use']::text[],
+      ARRAY['ToDelete']::text[],
+      '{}'
+    )`;
+
+    save(metadatas)
+      .subscribe(
+        (query) => {
+          expect(query).to.equal(expectedSQL);
+        },
+        null,
+        () => done()
+      );
   });
-
-  it('helpers.dateToString() should return a string in the ISO-8601 format.', () => {
-    let date = new Date(2017, 1, 1);
-    let converted = helpers.dateToString(date);
-
-    expect(converted).to.equal(date.toISOString());
-  });
-
-  it('helpers.dateToString() should return null if the input date is null/undefined.', () => {
-    expect(helpers.dateToString()).to.be.null;
-    expect(helpers.dateToString(null)).to.be.null;
-  });
-
-  it('helpers.arrayToString() should return a PostgreSQL array string.', () => {
-    let dataArray = ['tag1', 'tag2', 'tag3'];
-    let pgArray = helpers.arrayToString(dataArray);
-
-    expect(pgArray).to.equal('{"tag1","tag2","tag3"}');
-  });
-
 });
