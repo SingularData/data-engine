@@ -20,9 +20,7 @@ export function downloadAll() {
 
   return getDB()
     .query(sql, ['GeoNode'])
-    .mergeMap((portal) => {
-      return download(portal.id, portal.name, portal.url);
-    });
+    .mergeMap((portal) => download(portal.id, portal.name, portal.url));
 }
 
 /**

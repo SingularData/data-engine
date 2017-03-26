@@ -27,12 +27,8 @@ describe('platfoms/dkan.js', () => {
     let requestCount = 0;
 
     downloadAll()
-      .map((x) => {
+      .subscribe(() => {
         requestCount += 1;
-        return x;
-      })
-      .subscribe((results) => {
-        expect(results).to.deep.equal(results);
       },
       null,
       () => {

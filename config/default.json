@@ -3,7 +3,7 @@
     "OpenDataSoft": {
       "rows": 300
     },
-    "ArcGISOpenData": {
+    "ArcGIS": {
       "per_page": 100
     },
     "Socrata": {
