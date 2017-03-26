@@ -8,7 +8,7 @@ const userAgents = config.get('harvester.user_agents');
 
 /**
  * Get a list of harvesting jobs.
- * @return {Function[]}    An array of harvesting jobs.
+ * @return {Rx.Observable}        harvest job
  */
 export function downloadAll() {
 
@@ -30,7 +30,7 @@ export function downloadAll() {
  * @param  {Number}             portalID    portal ID
  * @param  {String}             portalName  portal name
  * @param  {String}             portalUrl   portal URL
- * @return {Function}                       harvest job
+ * @return {Rx.Observable}                  harvest job
  */
 export function download(portalID, portalName, portalUrl) {
   return RxHR.get(`${portalUrl}/data.json`, {
@@ -42,7 +42,7 @@ export function download(portalID, portalName, portalUrl) {
   .map((result) => {
 
     if (_.isString(result.body)) {
-      throw new Error(`Invalid API response: ${portalUrl}`);
+      return Rx.Observable.throw(new Error(`Invalid API response: ${portalUrl}/data.json`));
     }
 
     let data = _.isArray(result.body) ? result.body : result.body.dataset;
@@ -74,7 +74,10 @@ export function download(portalID, portalName, portalUrl) {
 
     return datasets;
   })
-  .catch(() => Rx.Observable.of([]));
+  .catch((error) => {
+    console.error(error);
+    return Rx.Observable.of([]);
+  });
 }
 
 function getDateString(raw) {
