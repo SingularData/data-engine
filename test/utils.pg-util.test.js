@@ -14,7 +14,7 @@ describe('utils/pg-util.js', () => {
   });
 
   it('valueToString() should convert date.', () => {
-    expect(pgUtil.valueToString(new Date(2017, 1, 1))).to.equal("'2017-02-01T05:00:00.000Z'");
+    expect(pgUtil.valueToString(new Date(Date.UTC(2017, 1, 1)))).to.equal("'2017-02-01T00:00:00.000Z'");
   });
 
   it('valueToString() should convert array.', () => {
