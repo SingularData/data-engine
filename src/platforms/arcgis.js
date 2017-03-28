@@ -51,8 +51,8 @@ export function download(portalID, portalUrl) {
           'User-Agent': _.sample(userAgents)
         }
       }))
-      .mergeAll();
-  })
+      .mergeAll(1);
+  }, 1)
   .map((result) => {
     let datasets = [];
     let data = result.body.data;
