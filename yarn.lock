@@ -1874,9 +1874,9 @@ pg-pool@1.*:
     generic-pool "2.4.2"
     object-assign "4.1.0"
 
-"pg-reactive@https://github.com/haoliangyu/pg-reactive.git#prepublish":
-  version "0.1.0"
-  resolved "https://github.com/haoliangyu/pg-reactive.git#b44adecaf4dfefb457acad863a65dda2e7032b07"
+pg-reactive@^0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/pg-reactive/-/pg-reactive-0.1.1.tgz#0934b3f22873775d19f0e49fa7170c14dbb64a4d"
   dependencies:
     pg "^6.1.5"
     rxjs "^5.2.0"
