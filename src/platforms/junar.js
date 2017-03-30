@@ -43,14 +43,13 @@ export function download(portalID, portalName, apiUrl, apiKey) {
   .mergeMap(result => {
     let totalCount = Math.ceil(result.body.count / limit);
 
-    return Rx.Observable.range(1, totalCount)
-      .map((i) => RxHR.get(`${apiUrl}/api/v2/datasets/?auth_key=${apiKey}&offset=${i}&limit=${limit}`, {
+    return Rx.Observable.range(0, totalCount)
+      .mergeMap((i) => RxHR.get(`${apiUrl}/api/v2/datasets/?auth_key=${apiKey}&offset=${i * limit}&limit=${limit}`, {
         json: true,
         headers: {
           'User-Agent': _.sample(userAgents)
         }
-      }))
-      .mergeAll(1);
+      }), 1);
   })
   .map(result => {
     let datasets = [];

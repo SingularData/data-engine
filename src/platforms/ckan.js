@@ -38,17 +38,15 @@ export function download(portalID, portalUrl) {
     }
   })
   .mergeMap(result => {
-
     let totalCount = Math.ceil(result.body.result.count / rows);
 
     return Rx.Observable.range(0, totalCount)
-      .map((i) => RxHR.get(`${portalUrl}/api/3/action/package_search?rows=${rows}&start=${i}`, {
+      .mergeMap((i) => RxHR.get(`${portalUrl}/api/3/action/package_search?rows=${rows}&start=${i * rows}`, {
         json: true,
         headers: {
           'User-Agent': _.sample(userAgents)
         }
-      }))
-      .mergeAll(1);
+      }), 1);
   }, 1)
   .map((result) => {
     let data = result.body.result.results;
