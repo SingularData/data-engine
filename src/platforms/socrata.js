@@ -1,7 +1,7 @@
 import _ from 'lodash';
-import rp from 'request-promise';
 import config from 'config';
-import Promise from 'bluebird';
+import Rx from 'rxjs';
+import { RxHR } from "@akanass/rx-http-request";
 import { getDB } from '../database';
 
 const limit = config.get('platforms.Socrata.limit');
@@ -9,7 +9,7 @@ const userAgents = config.get('harvester.user_agents');
 
 /**
  * Get a list of harvesting Jobs.
- * @return {Function[]}    An array of harvesting jobs.
+ * @return {Rx.Observable}        harvest job
  */
 export function downloadAll() {
 
@@ -21,18 +21,12 @@ export function downloadAll() {
       CASE WHEN platform.name = 'Socrata' THEN 'us' ELSE 'eu' END as region
     FROM portal
     LEFT JOIN platform ON platform.id = portal.platform_id
-    WHERE platform.name = $1 OR platform.name = $2
+    WHERE platform.name = $1::text OR platform.name = $2::text
   `;
 
   return getDB()
-    .any(sql, ['Socrata', 'Socrata-EU'])
-    .then(results => {
-      let tasks = _.map(results, portal => {
-        return download(portal.id, portal.name, portal.url, portal.region);
-      });
-
-      return tasks;
-    });
+    .query(sql, ['Socrata', 'Socrata-EU'])
+    .mergeMap((portal) => download(portal.id, portal.name, portal.url, portal.region));
 }
 
 /**
@@ -41,66 +35,50 @@ export function downloadAll() {
  * @param  {String}             portalName  portal name
  * @param  {String}             portalUrl   portal url
  * @param  {String}             region      portal region (us or eu)
- * @return {Function}                       harvest job
+ * @return {Rx.Observable}                  harvest job
  */
 export function download(portalID, portalName, portalUrl, region) {
+  return RxHR.get(`http://api.${region}.socrata.com/api/catalog/v1?domains=${portalUrl}&offset=0&limit=0`, {
+    json: true,
+    headers: {
+      'User-Agent': _.sample(userAgents)
+    }
+  })
+  .mergeMap(result => {
+    let totalCount = Math.ceil(result.body.resultSetSize / limit);
 
-  return function() {
-    return rp({
-      uri: `http://api.${region}.socrata.com/api/catalog/v1?domains=${portalUrl}&offset=0&limit=0`,
-      method: 'GET',
-      json: true,
-      headers: {
-        'User-Agent': _.sample(userAgents)
-      }
-    })
-    .then(result => {
-      let totalCount = result.resultSetSize;
-      let tasks = [];
-
-      for (let i = 0; i < totalCount; i += limit) {
-        let request = rp({
-          uri: `http://api.${region}.socrata.com/api/catalog/v1?domains=${portalUrl}&limit=${limit}&offset=${i}`,
-          method: 'GET',
-          json: true,
-          headers: {
-            'User-Agent': _.sample(userAgents)
-          }
-        });
-
-        tasks.push(request);
-      }
-
-      return Promise.all(tasks);
-    })
-    .then(results => {
-      let datasets = [];
-
-      for (let i = 0, n = results.length; i < n; i++) {
-        let data = results[i].results;
-
-        for (let j = 0, m = data.length; j < m; j++) {
-          let dataset = data[j].resource;
-
-          datasets.push({
-            portalID: portalID,
-            name: dataset.name,
-            portalDatasetID: dataset.id,
-            createdTime: new Date(dataset.createdAt),
-            updatedTime: new Date(dataset.updatedAt),
-            description: dataset.description,
-            dataLink: null,
-            portalLink: dataset.permalink || `${portalUrl}/d/${dataset.id}`,
-            license: _.get(dataset.metadata, 'license'),
-            publisher: portalName,
-            tags: _.concat(_.get(dataset.classification, 'tags'), _.get(dataset.classificatio, 'domain_tags')),
-            categories: _.concat(_.get(dataset.classification, 'categories'), _.get(dataset.classification, 'domain_category')),
-            raw: dataset
-          });
+    return Rx.Observable.range(0, totalCount)
+      .mergeMap((i) => RxHR.get(`http://api.${region}.socrata.com/api/catalog/v1?domains=${portalUrl}&limit=${limit}&offset=${i * limit}`, {
+        json: true,
+        headers: {
+          'User-Agent': _.sample(userAgents)
         }
-      }
+      }), 1);
+  }, 1)
+  .map((result) => {
+    let datasets = [];
+    let data = result.body.results;
 
-      return datasets;
-    });
-  };
+    for (let j = 0, m = data.length; j < m; j++) {
+      let dataset = data[j].resource;
+
+      datasets.push({
+        portalID: portalID,
+        name: dataset.name,
+        portalDatasetID: dataset.id,
+        createdTime: new Date(dataset.createdAt),
+        updatedTime: new Date(dataset.updatedAt),
+        description: dataset.description,
+        dataLink: null,
+        portalLink: dataset.permalink || `${portalUrl}/d/${dataset.id}`,
+        license: _.get(dataset.metadata, 'license'),
+        publisher: portalName,
+        tags: _.concat(_.get(dataset.classification, 'tags'), _.get(dataset.classificatio, 'domain_tags')),
+        categories: _.concat(_.get(dataset.classification, 'categories'), _.get(dataset.classification, 'domain_category')),
+        raw: dataset
+      });
+    }
+
+    return datasets;
+  });
 }
