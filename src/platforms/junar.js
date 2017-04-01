@@ -1,11 +1,13 @@
 import _ from 'lodash';
 import config from 'config';
 import Rx from 'rxjs';
+import log4js from 'log4js';
 import { RxHR } from "@akanass/rx-http-request";
 import { getDB } from '../database';
 
 const limit = config.get('platforms.Junar.limit');
 const userAgents = config.get('harvester.user_agents');
+const logger = log4js.getLogger('Junar');
 
 /**
  * Get a list of harvesting Jobs.
@@ -81,5 +83,9 @@ export function download(portalID, portalName, apiUrl, apiKey) {
     }
 
     return datasets;
+  })
+  .catch((error) => {
+    logger.error(`Unable to download data from ${portalName}. Message: ${error.message}.`);
+    return Rx.Observable.of([]);
   });
 }

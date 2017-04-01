@@ -27,7 +27,8 @@ describe('platfoms/socrata.js', () => {
     let requestCount = 0;
 
     downloadAll()
-      .subscribe(() => {
+      .subscribe((data) => {
+        expect(data).to.be.an('array');
         requestCount += 1;
       },
       null,

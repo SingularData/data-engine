@@ -1,10 +1,12 @@
 import _ from 'lodash';
 import config from 'config';
 import Rx from 'rxjs';
+import log4js from 'log4js';
 import { RxHR } from "@akanass/rx-http-request";
 import { getDB } from '../database';
 
 const userAgents = config.get('harvester.user_agents');
+const logger = log4js.getLogger('DKAN');
 
 /**
  * Get a list of harvesting jobs.
@@ -40,7 +42,7 @@ export function download(portalID, portalName, portalUrl) {
   .map((result) => {
 
     if (_.isString(result.body)) {
-      return Rx.Observable.throw(new Error(`Invalid API response: ${portalUrl}/data.json`));
+      throw new Error(`Invalid API response: ${portalUrl}/data.json`);
     }
 
     let data = _.isArray(result.body) ? result.body : result.body.dataset;
@@ -73,7 +75,7 @@ export function download(portalID, portalName, portalUrl) {
     return datasets;
   })
   .catch((error) => {
-    console.error(error);
+    logger.error(`Unable to download data from ${portalUrl}. Message: ${error.message}.`);
     return Rx.Observable.of([]);
   });
 }

@@ -1,10 +1,12 @@
 import _ from 'lodash';
 import config from 'config';
 import Rx from 'rxjs';
+import log4js from 'log4js';
 import { RxHR } from "@akanass/rx-http-request";
 import { getDB } from '../database';
 
 const userAgents = config.get('harvester.user_agents');
+const logger = log4js.getLogger('GeoNode');
 
 /**
  * Get a list of harvesting jobs.
@@ -63,7 +65,7 @@ export function download(portalID, portalName, portalUrl) {
     return datasets;
   })
   .catch((error) => {
-    console.error(error);
+    logger.error(`Unable to download data from ${url}. Message: ${error.message}.`);
     return Rx.Observable.of([]);
   });
 }

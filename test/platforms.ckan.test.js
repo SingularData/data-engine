@@ -27,7 +27,8 @@ describe('platfoms/ckan.js', () => {
     let requestCount = 0;
 
     downloadAll()
-      .subscribe(() => {
+      .subscribe((data) => {
+        expect(data).to.be.an('array');
         requestCount += 1;
       },
       null,
@@ -188,7 +189,7 @@ describe('platfoms/ckan.js', () => {
       },
       null,
       () => {
-        expect(requestCount).to.equal(2);
+        expect(requestCount).to.equal(4);
         done();
       }
       );

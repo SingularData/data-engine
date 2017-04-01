@@ -1,11 +1,13 @@
 import _ from 'lodash';
 import config from 'config';
 import Rx from 'rxjs';
+import log4js from 'log4js';
 import { RxHR } from "@akanass/rx-http-request";
 import { getDB } from '../database';
 
 const perPage = config.get('platforms.ArcGIS.per_page');
 const userAgents = config.get('harvester.user_agents');
+const logger = log4js.getLogger('ArcGIS Open Data');
 
 /**
  * Get a list of harvesting Jobs.
@@ -64,7 +66,7 @@ export function download(portalID, portalUrl) {
         portalID: portalID,
         name: dataset.name,
         portalDatasetID: dataset.id,
-        createdTime: new Date(dataset.created_at),
+        createdTime: dataset.created_at ? new Date(dataset.created_at) : null,
         updatedTime: new Date(dataset.updated_at),
         description: dataset.description,
         dataLink: null,
@@ -80,7 +82,7 @@ export function download(portalID, portalUrl) {
     return datasets;
   })
   .catch((error) => {
-    console.error(error);
+    logger.error(`Unable to download data from ${portalUrl}. Message: ${error.message}.`);
     return Rx.Observable.of([]);
   });
 }

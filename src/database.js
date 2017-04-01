@@ -2,7 +2,10 @@ import pgrx from 'pg-reactive';
 import config from 'config';
 import _ from 'lodash';
 import Rx from 'rxjs';
+import log4js from 'log4js';
 import { valueToString } from './utils/pg-util';
+
+const logger = log4js.getLogger('database');
 
 let db = null;
 
@@ -56,7 +59,6 @@ export function save(metadatas) {
       raw
     ) VALUES
   `;
-
   let values = _.map(metadatas, (metadata) => {
     return `(
       ${valueToString(metadata.portalID)},
@@ -74,5 +76,9 @@ export function save(metadatas) {
     )`;
   });
 
-  return db.query(query + values.join(','));
+  return db.query(query + values.join(','))
+    .catch((error) => {
+      logger.error('Unable to save data: ', error);
+      return Rx.Observable.empty();
+    });
 }

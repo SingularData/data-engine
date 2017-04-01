@@ -2,6 +2,9 @@
 # to the Datarea.io database
 
 import psycopg2 as pg
+import os.path
+
+basepath = os.path.dirname(__file__)
 
 src_db = 'host=odd-main.cfoxcbrlgeta.us-east-1.rds.amazonaws.com port=5432 user=odd_admin password=Bko9tu39 dbname=odd'
 dest_db = 'host=localhost port=5432 user=postgres password=9795388 dbname=datarea'
@@ -11,6 +14,21 @@ dest_conn = pg.connect(dest_db)
 
 src_cur = src_conn.cursor()
 dest_cur = dest_conn.cursor()
+
+# parepare database
+with open(os.path.join(basepath, '../database/tables.sql')) as sql_file:
+    dest_cur.execute(sql_file.read())
+
+with open(os.path.join(basepath, '../database/views.sql')) as sql_file:
+    dest_cur.execute(sql_file.read())
+
+with open(os.path.join(basepath, '../database/indexes.sql')) as sql_file:
+    dest_cur.execute(sql_file.read())
+
+with open(os.path.join(basepath, '../database/triggers.sql')) as sql_file:
+    dest_cur.execute(sql_file.read())
+
+dest_cur.execute('CREATE EXTENSION postgis')
 
 # Add platform
 src_cur.execute('SELECT name, website FROM platform')

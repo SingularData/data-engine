@@ -1,11 +1,13 @@
 import _ from 'lodash';
 import config from 'config';
 import Rx from 'rxjs';
+import log4js from 'log4js';
 import { RxHR } from "@akanass/rx-http-request";
 import { getDB } from '../database';
 
 const rows = config.get('platforms.CKAN.rows');
 const userAgents = config.get('harvester.user_agents');
+const logger = log4js.getLogger('CKAN');
 
 /**
  * Get a list of harvesting Jobs.
@@ -37,7 +39,12 @@ export function download(portalID, portalUrl) {
       'User-Agent': _.sample(userAgents)
     }
   })
-  .mergeMap(result => {
+  .mergeMap((result) => {
+
+    if (_.isString(result.body)) {
+      throw new Error('Invalid API response.');
+    }
+
     let totalCount = Math.ceil(result.body.result.count / rows);
 
     return Rx.Observable.range(0, totalCount)
@@ -49,6 +56,11 @@ export function download(portalID, portalUrl) {
       }), 1);
   }, 1)
   .map((result) => {
+
+    if (_.isString(result.body)) {
+      throw new Error('Invalid API response.');
+    }
+
     let data = result.body.result.results;
     let datasets = [];
 
@@ -59,8 +71,8 @@ export function download(portalID, portalUrl) {
         portalID: portalID,
         name: dataset.title,
         portalDatasetID: dataset.id,
-        createdTime: new Date(dataset.metadata_created),
-        updatedTime: new Date(dataset.metadata_modified),
+        createdTime: dataset.__extras ? new Date(dataset.__extras.metadata_created) : new Date(dataset.metadata_created),
+        updatedTime: dataset.__extras ? new Date(dataset.__extras.metadata_modified) : new Date(dataset.metadata_modified),
         description: dataset.notes,
         dataLink: dataset.url,
         portalLink: `${portalUrl}/dataset/${dataset.package_id || dataset.id}`,
@@ -75,7 +87,7 @@ export function download(portalID, portalUrl) {
     return datasets;
   })
   .catch((error) => {
-    console.error(error);
+    logger.error(`Unable to download data from ${portalUrl}. Message: ${error.message}.`);
     return Rx.Observable.of([]);
   });
 }

@@ -1,11 +1,13 @@
 import _ from 'lodash';
 import config from 'config';
 import Rx from 'rxjs';
+import log4js from 'log4js';
 import { RxHR } from "@akanass/rx-http-request";
 import { getDB } from '../database';
 
 const rows = config.get('platforms.OpenDataSoft.rows');
 const userAgents = config.get('harvester.user_agents');
+const logger = log4js.getLogger('OpenDataSoft');
 
 /**
  * Get a list of harvesting Jobs.
@@ -36,9 +38,8 @@ export function downloadAll() {
         let totalCount = Math.ceil(result.body.total_count / rows);
 
         return Rx.Observable.range(0, totalCount)
-          .mergeMap((i) => download(`https://data.opendatasoft.com/api/v2/catalog/datasets?rows=${rows}&start=${i * rows}`, portalIDs), 1);
-      })
-      .mergeAll(1);
+          .mergeMap((i) => download(`https://data.opendatasoft.com/api/v2/catalog/datasets?rows=${rows}&start=${i * rows}`, portalIDs));
+      });
     });
 }
 
@@ -59,6 +60,11 @@ export function download(url, portalIDs) {
   .map((result) => {
     let datasets = [];
     let data = result.body;
+
+    if (data.status === 500) {
+      logger.warn(`Unable to download data from ${url}. Message: ${data.message}.`);
+      return [];
+    }
 
     for (let i = 0, n = data.datasets.length; i < n; i++) {
       let item = data.datasets[i];
@@ -88,6 +94,10 @@ export function download(url, portalIDs) {
     }
 
     return datasets;
+  })
+  .catch((error) => {
+    logger.error(`Unable to download data from ${url}. Message: ${error.message}.`);
+    return Rx.Observable.of([]);
   });
 }
 

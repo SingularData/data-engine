@@ -1,20 +1,23 @@
 import Rx from 'rxjs';
+import log4js from 'log4js';
 import { getDB, save } from './database';
 
-// import * as opendatasoft from './platforms/opendatasoft';
+import * as opendatasoft from './platforms/opendatasoft';
 import * as arcgis from './platforms/arcgis';
-// import * as socrata from './platforms/socrata';
-// import * as ckan from './platforms/ckan';
-// import * as junar from './platforms/junar';
+import * as socrata from './platforms/socrata';
+import * as ckan from './platforms/ckan';
+import * as junar from './platforms/junar';
 import * as geonode from './platforms/geonode';
 import * as dkan from './platforms/dkan';
 
+const logger = log4js.getLogger('harvester');
+
 let downlaodAllFn = {
-  // 'OpenDataSoft': opendatasoft.downloadAll,
+  'OpenDataSoft': opendatasoft.downloadAll,
   'ArcGIS Open Data': arcgis.downloadAll,
-  // 'Socrata': socrata.downloadAll,
-  // 'CKAN': ckan.downloadAll,
-  // 'Junar': junar.downloadAll,
+  'Socrata': socrata.downloadAll,
+  'CKAN': ckan.downloadAll,
+  'Junar': junar.downloadAll,
   'GeoNode': geonode.downloadAll,
   'DKAN': dkan.downloadAll
 };
@@ -43,5 +46,10 @@ export function harvestAll() {
   let db = getDB();
 
   return db.query('SELECT name FROM platform')
-    .mergeMap((platform) => harvest(platform), 1);
+    .mergeMap((platform) => {
+      return harvest(platform).catch((error) => {
+        logger.error(`Unable to download data from ${platform}`, error);
+        return Rx.Observable.empty();
+      });
+    }, 1);
 }

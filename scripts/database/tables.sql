@@ -26,6 +26,11 @@ CREATE TABLE region (
   geom geometry(MultiPolygon,4326)
 );
 
+CREATE TABLE dataset_publisher (
+  id serial PRIMARY KEY,
+  name text NOT NULL
+);
+
 CREATE TABLE dataset (
   id serial PRIMARY KEY,
   name text NOT NULL,
@@ -62,9 +67,4 @@ CREATE TABLE dataset_category_xref (
   id serial PRIMARY KEY,
   dataset_id integer REFERENCES dataset (id),
   dataset_category_id integer REFERENCES dataset_category (id)
-);
-
-CREATE TABLE dataset_publisher (
-  id serial PRIMARY KEY,
-  name text NOT NULL
 );

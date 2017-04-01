@@ -10,7 +10,7 @@
       "limit": 100
     },
     "CKAN": {
-      "rows": 1000
+      "rows": 500
     },
     "Junar": {
       "limit": 100

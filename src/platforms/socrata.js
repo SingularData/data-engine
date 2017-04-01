@@ -1,11 +1,13 @@
 import _ from 'lodash';
 import config from 'config';
 import Rx from 'rxjs';
+import log4js from 'log4js';
 import { RxHR } from "@akanass/rx-http-request";
 import { getDB } from '../database';
 
 const limit = config.get('platforms.Socrata.limit');
 const userAgents = config.get('harvester.user_agents');
+const logger = log4js.getLogger('Socrata');
 
 /**
  * Get a list of harvesting Jobs.
@@ -44,7 +46,11 @@ export function download(portalID, portalName, portalUrl, region) {
       'User-Agent': _.sample(userAgents)
     }
   })
-  .mergeMap(result => {
+  .mergeMap((result) => {
+    if (result.body.error) {
+      return Rx.Observable.throw(new Error(result.body.error));
+    }
+
     let totalCount = Math.ceil(result.body.resultSetSize / limit);
 
     return Rx.Observable.range(0, totalCount)
@@ -56,6 +62,10 @@ export function download(portalID, portalName, portalUrl, region) {
       }), 1);
   }, 1)
   .map((result) => {
+    if (result.body.error) {
+      throw new Error(result.body.error);
+    }
+
     let datasets = [];
     let data = result.body.results;
 
@@ -80,5 +90,9 @@ export function download(portalID, portalName, portalUrl, region) {
     }
 
     return datasets;
+  })
+  .catch((error) => {
+    logger.error(`Unable to download data from ${portalUrl}. Message: ${error.message}.`);
+    return Rx.Observable.of([]);
   });
 }
