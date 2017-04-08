@@ -17,7 +17,7 @@
     }
   },
   "database": {
-    "url": "pg://postgres:1sdf234@localhost:5432/datarea"
+    "url": "pg://datarea_admin:1sdf234@localhost:5432/datarea"
   },
   "harvester": {
     "user_agents": [

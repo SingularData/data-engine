@@ -47,8 +47,8 @@ export function harvestAll() {
 
   return db.query('SELECT name FROM platform')
     .mergeMap((platform) => {
-      return harvest(platform).catch((error) => {
-        logger.error(`Unable to download data from ${platform}`, error);
+      return harvest(platform.name).catch((error) => {
+        logger.error(`Unable to download data from ${platform.name}`, error);
         return Rx.Observable.empty();
       });
     }, 1);
