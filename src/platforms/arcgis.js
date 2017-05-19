@@ -6,8 +6,6 @@ import { RxHR } from "@akanass/rx-http-request";
 import { getDB } from '../database';
 import { toUTC } from '../utils/pg-util';
 
-import { inspect } from 'util';
-
 const userAgents = config.get('harvester.user_agents');
 const logger = log4js.getLogger('ArcGIS Open Data');
 

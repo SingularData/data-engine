@@ -3,6 +3,7 @@ import { save, getDB, getLatestCheckList } from './database';
 import { dateToString } from './utils/pg-util';
 import log4js from 'log4js';
 import config from 'config';
+import md5 from 'md5';
 
 import * as opendatasoft from './platforms/opendatasoft';
 import * as arcgis from './platforms/arcgis';
@@ -52,7 +53,7 @@ export function harvest(platform) {
 
         dataset.versionNumber = 1;
         dataset.versionPeriod = `[${dateToString(createTime)},)`;
-      } else if (existing.updated === dataset.updatedTime.getTime()) {
+      } else if (existing.md5 === md5(JSON.stringify(dataset.raw))) {
         delete dataCache[key];
         return null;
       } else {

@@ -101,7 +101,7 @@ export function getLatestCheckList(platform) {
       portal_id,
       portal_dataset_id,
       version_number,
-      updated_time
+      md5(raw::text)
     FROM dataset AS d
     LEFT JOIN portal AS p ON p.id = d.portal_id
     WHERE p.platform_id = (
@@ -114,7 +114,7 @@ export function getLatestCheckList(platform) {
     .map((row) => toCamelCase(row))
     .reduce((collection, dataset) => {
       collection[`${dataset.portalId}:${dataset.portalDatasetId}`] = {
-        updated: dataset.updatedTime.getTime(),
+        md5: dataset.md5,
         version: dataset.versionNumber
       };
 

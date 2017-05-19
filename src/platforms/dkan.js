@@ -2,8 +2,10 @@ import _ from 'lodash';
 import config from 'config';
 import Rx from 'rxjs';
 import log4js from 'log4js';
-import { RxHR } from "@akanass/rx-http-request";
+import { RxHR } from '@akanass/rx-http-request';
+import { Geometry } from 'wkx';
 import { getDB } from '../database';
+import { toUTC } from '../utils/pg-util';
 
 const userAgents = config.get('harvester.user_agents');
 const logger = log4js.getLogger('DKAN');
@@ -39,7 +41,7 @@ export function download(portalID, portalName, portalUrl) {
       'User-Agent': _.sample(userAgents)
     }
   })
-  .map((result) => {
+  .mergeMap((result) => {
 
     if (_.isString(result.body)) {
       throw new Error(`Invalid API response: ${portalUrl}/data.json`);
@@ -51,32 +53,44 @@ export function download(portalID, portalName, portalUrl) {
     for (let j = 0, m = data.length; j < m; j++) {
       let dataset = data[j];
 
-      if (!dataset.title) {
+      if (!dataset.title || dataset.title === 'Data Catalog') {
         continue;
       }
+
+      let dataFiles = _.map(dataset.distribution, (file) => {
+        return {
+          name: file.title || file.format,
+          format: _.toLower(file.format),
+          link: file.downloadURL || file.accessURL,
+          description: file.description
+        };
+      })
+      .filter((file) => file.link && file.format);
 
       datasets.push({
         portalID: portalID,
         name: dataset.title,
         portalDatasetID: dataset.identifier,
-        createdTime: dataset.issued ? new Date(getDateString(dataset.issued)) : null,
-        updatedTime: dataset.modified ? new Date(getDateString(dataset.modified)) : new Date(),
+        createdTime: dataset.issued ? toUTC(new Date(getDateString(dataset.issued))) : null,
+        updatedTime: toUTC(dataset.modified ? new Date(getDateString(dataset.modified)) : new Date()),
         description: dataset.description,
-        dataLink: null,
-        portalLink: `${portalUrl}/search/type/dataset?query=${_.escape(dataset.title.replace(/ /g, '+'))}`,
+        portalLink: dataset.landingPage || `${portalUrl}/search/type/dataset?query=${_.escape(dataset.title.replace(/ /g, '+'))}`,
         license: dataset.license,
         publisher: dataset.publisher ? dataset.publisher.name : portalName,
         tags: dataset.keyword || [],
         categories: [],
-        raw: dataset
+        raw: dataset,
+        region: wktToGeoJSON(dataset.spatial),
+        data: dataFiles
       });
+      // console.log(datasets[datasets.length - 1]);
     }
 
-    return datasets;
+    return Rx.Observable.of(...datasets);
   })
   .catch((error) => {
     logger.error(`Unable to download data from ${portalUrl}. Message: ${error.message}.`);
-    return Rx.Observable.of([]);
+    return Rx.Observable.empty();
   });
 }
 
@@ -90,4 +104,16 @@ function getDateString(raw) {
   if (match > -1) {
     return raw.substr(match, 10);
   }
+}
+
+function wktToGeoJSON(polygon) {
+  if (!polygon || !polygon.startsWith('POLYGON')) {
+    return null;
+  }
+
+  let multi = Geometry.parse(polygon).toGeoJSON();
+  multi.type = 'MultiPolygon';
+  multi.coordinates = [multi.coordinates];
+
+  return multi;
 }
