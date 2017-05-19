@@ -12,12 +12,12 @@ export function validateMetadata(metadata) {
   expect(metadata).to.have.property('updatedTime');
   expect(metadata).to.have.property('description');
   expect(metadata).to.have.property('portalLink');
-  expect(metadata).to.have.property('dataLink');
   expect(metadata).to.have.property('license');
   expect(metadata).to.have.property('publisher');
   expect(metadata).to.have.property('tags');
   expect(metadata).to.have.property('categories');
   expect(metadata).to.have.property('raw');
+  expect(metadata).to.have.property('data');
 
   expect(metadata.portalID).to.be.a('number');
   expect(metadata.name).to.be.a('string');
@@ -27,6 +27,7 @@ export function validateMetadata(metadata) {
   expect(metadata.tags).to.be.an('array');
   expect(metadata.categories).to.be.an('array');
   expect(metadata.raw).to.be.an('object');
+  expect(metadata.categories).to.be.an('array');
 }
 
 describe('database.js', () => {
@@ -34,7 +35,17 @@ describe('database.js', () => {
   it('save() should succefully construct the query to save metadata.', (done) => {
     ToDosRewireAPI.__Rewire__('getDB', () => {
       return {
-        query: (sql) => Rx.Observable.of(sql)
+        tx: (fn) => {
+          let input;
+
+          fn({
+            query: (sql) => {
+              input = sql;
+            }
+          });
+
+          return Rx.Observable.of(input);
+        }
       };
     });
 
@@ -46,11 +57,13 @@ describe('database.js', () => {
       createdTime: null,
       updatedTime: new Date(Date.UTC(2017, 1, 1)),
       portalLink: 'http://localhost',
-      dataLink: null,
       publisher: 'my portal',
       tags: ['of no use'],
       categories: ['ToDelete'],
-      raw: {}
+      raw: {},
+      data: [],
+      versionNumber: 1,
+      versionPeriod: '[,)'
     }];
 
     let expectedSQL = `
@@ -62,11 +75,14 @@ describe('database.js', () => {
       created_time,
       updated_time,
       portal_link,
-      data_link,
       publisher,
       tags,
       categories,
-      raw
+      raw,
+      version_number,
+      version_period,
+      region,
+      data
     ) VALUES
   (
       1,
@@ -76,11 +92,14 @@ describe('database.js', () => {
       NULL,
       '2017-02-01T00:00:00.000Z',
       'http://localhost',
-      NULL,
       'my portal',
       ARRAY['of no use']::text[],
       ARRAY['ToDelete']::text[],
-      '{}'
+      '{}',
+      1,
+      '[,)',
+      ST_SetSRID(ST_Force2D(ST_GeomFromGeoJSON(NULL)), 4326),
+      ARRAY[]::json[]
     )`;
 
     save(metadatas)

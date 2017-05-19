@@ -1,8 +1,13 @@
 import Rx from 'rxjs';
 import chai from 'chai';
+import _ from 'lodash';
 import { harvest, harvestAll, __RewireAPI__ as ToDosRewireAPI } from '../src/harvester';
 
 const expect = chai.expect;
+
+function dataset(portalID, portalDatasetID, updatedTime) {
+  return { portalID, portalDatasetID, updatedTime };
+}
 
 describe('harvester.js', () => {
 
@@ -11,30 +16,29 @@ describe('harvester.js', () => {
     ToDosRewireAPI.__Rewire__('downlaodAllFn', {
       'DKAN': () => {
         return Rx.Observable.create((observer) => {
-          observer.next(Rx.Observable.empty());
-          observer.next(Rx.Observable.empty());
+          observer.next(dataset(1, '1', new Date()));
+          observer.next(dataset(1, '2', new Date()));
           observer.complete();
         });
       }
     });
 
-    ToDosRewireAPI.__Rewire__('save', () => {
+    ToDosRewireAPI.__Rewire__('save', (metadatas) => {
+      expect(metadatas).to.have.lengthOf(2);
+
       return Rx.Observable.create((observer) => {
         observer.next(Rx.Observable.empty());
         observer.complete();
       });
     });
 
-    let requestCount = 0;
+    ToDosRewireAPI.__Rewire__('getLatestCheckList', () => Rx.Observable.of({}));
 
     harvest('DKAN')
       .subscribe(
-        () => { requestCount++; },
-        null,
-        () => {
-          expect(requestCount).to.equal(2);
-          done();
-        }
+        _.noop,
+        _.noop,
+        () => done()
       );
   });
 
@@ -54,14 +58,14 @@ describe('harvester.js', () => {
       });
     });
 
-    let requestCount = 0;
+    let datasetCount = 0;
 
     harvestAll()
       .subscribe(
-        () => { requestCount++; },
+        () => { datasetCount++; },
         null,
         () => {
-          expect(requestCount).to.equal(2);
+          expect(datasetCount).to.equal(2);
           done();
         }
       );

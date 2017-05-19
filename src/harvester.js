@@ -1,6 +1,8 @@
-import Rx from 'rxjs';
+import { Observable } from 'rxjs';
+import { save, getDB, getLatestCheckList } from './database';
+import { dateToString } from './utils/pg-util';
 import log4js from 'log4js';
-import { getDB, save } from './database';
+import config from 'config';
 
 import * as opendatasoft from './platforms/opendatasoft';
 import * as arcgis from './platforms/arcgis';
@@ -25,22 +27,50 @@ let downlaodAllFn = {
 /**
  * Harvest the dataset metadata from one platform and save into the database.
  * @param  {String}         platform      platform name
- * @return {Rx.Observable}                no return
+ * @return {Observable}                   no return
  */
 export function harvest(platform) {
   let downloadAll = downlaodAllFn[platform];
 
   if (!downloadAll) {
-    return Rx.Observable.throw(new Error(`Platform ${platform} is unknown.`));
+    return Observable.throw(new Error(`Platform ${platform} is unknown.`));
   }
 
-  return downloadAll()
+  let dataCache;
+  let getDataChecklist = getLatestCheckList(platform).mergeMap((checklist) => {
+    dataCache = checklist;
+    return Observable.empty();
+  });
+
+  return Observable.concat(getDataChecklist, downloadAll())
+    .map((dataset) => {
+      let key = `${dataset.portalID}:${dataset.portalDatasetID}`;
+      let existing = dataCache[key];
+
+      if (!existing) {
+        let createTime = dataset.createTime || new Date(dataset.updatedTime.getTime() - 1);
+
+        dataset.versionNumber = 1;
+        dataset.versionPeriod = `[${dateToString(createTime)},)`;
+      } else if (existing.updated === dataset.updatedTime.getTime()) {
+        delete dataCache[key];
+        return null;
+      } else {
+        dataset.versionNumber = existing.version + 1;
+        dataset.versionPeriod = `[${dateToString(dataset.updatedTime)},)`;
+        delete dataCache[key];
+      }
+
+      return dataset;
+    })
+    .filter((dataset) => dataset !== null)
+    .bufferCount(config.get('database.insert_limit'))
     .mergeMap((metadatas) => save(metadatas), 1);
 }
 
 /**
  * Harvest the dataset metadata from all platforms and save into the database.
- * @return {Rx.Observable}              no return
+ * @return {Observable}              no return
  */
 export function harvestAll() {
   let db = getDB();
@@ -49,7 +79,7 @@ export function harvestAll() {
     .mergeMap((platform) => {
       return harvest(platform.name).catch((error) => {
         logger.error(`Unable to download data from ${platform.name}`, error);
-        return Rx.Observable.empty();
+        return Observable.empty();
       });
     }, 1);
 }
