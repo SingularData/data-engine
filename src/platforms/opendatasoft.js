@@ -4,6 +4,7 @@ import Rx from 'rxjs';
 import log4js from 'log4js';
 import { RxHR } from "@akanass/rx-http-request";
 import { getDB } from '../database';
+import { toUTC } from '../utils/pg-util';
 
 const rows = config.get('platforms.OpenDataSoft.rows');
 const userAgents = config.get('harvester.user_agents');
@@ -57,17 +58,15 @@ export function download(url, portalIDs) {
       'User-Agent': _.sample(userAgents)
     }
   })
-  .map((result) => {
+  .mergeMap((result) => {
     let datasets = [];
     let data = result.body;
 
     if (data.status === 500) {
-      logger.warn(`Unable to download data from ${url}. Message: ${data.message}.`);
-      return [];
+      throw new Error(`Unable to download data from ${url}. Message: ${data.message}.`);
     }
 
-    for (let i = 0, n = data.datasets.length; i < n; i++) {
-      let item = data.datasets[i];
+    for (let item of data.datasets) {
       let metas = item.dataset.metas.default;
 
       if (!portalIDs[metas.source_domain_title]) {
@@ -79,25 +78,26 @@ export function download(url, portalIDs) {
         name: metas.title,
         portalDatasetID: item.dataset.dataset_id,
         createdTime: null,
-        updatedTime: metas.modified ? new Date(metas.modified) : new Date(),
+        updatedTime: toUTC(metas.modified ? new Date(metas.modified) : new Date()),
         description: metas.description,
         portalLink: createLink(metas.source_domain_address, metas.source_dataset),
-        dataLink: null,
         license: metas.license,
         publisher: metas.publisher,
         tags: getValidArray(metas.keyword),
         categories: getValidArray(metas.theme),
-        raw: item
+        raw: item,
+        region: null,
+        data: []
       };
 
       datasets.push(dataset);
     }
 
-    return datasets;
+    return Rx.Observable.of(...datasets);
   })
   .catch((error) => {
     logger.error(`Unable to download data from ${url}. Message: ${error.message}.`);
-    return Rx.Observable.of([]);
+    return Rx.Observable.empty();
   });
 }
 

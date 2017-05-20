@@ -3,9 +3,9 @@ import config from 'config';
 import Rx from 'rxjs';
 import log4js from 'log4js';
 import { RxHR } from '@akanass/rx-http-request';
-import { Geometry } from 'wkx';
 import { getDB } from '../database';
 import { toUTC } from '../utils/pg-util';
+import { wktToGeoJSON } from '../utils/geom-util';
 
 const userAgents = config.get('harvester.user_agents');
 const logger = log4js.getLogger('DKAN');
@@ -83,7 +83,6 @@ export function download(portalID, portalName, portalUrl) {
         region: wktToGeoJSON(dataset.spatial),
         data: dataFiles
       });
-      // console.log(datasets[datasets.length - 1]);
     }
 
     return Rx.Observable.of(...datasets);
@@ -104,16 +103,4 @@ function getDateString(raw) {
   if (match > -1) {
     return raw.substr(match, 10);
   }
-}
-
-function wktToGeoJSON(polygon) {
-  if (!polygon || !polygon.startsWith('POLYGON')) {
-    return null;
-  }
-
-  let multi = Geometry.parse(polygon).toGeoJSON();
-  multi.type = 'MultiPolygon';
-  multi.coordinates = [multi.coordinates];
-
-  return multi;
 }

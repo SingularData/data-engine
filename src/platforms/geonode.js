@@ -4,6 +4,8 @@ import Rx from 'rxjs';
 import log4js from 'log4js';
 import { RxHR } from "@akanass/rx-http-request";
 import { getDB } from '../database';
+import { toUTC } from '../utils/pg-util';
+import { wktToGeoJSON } from '../utils/geom-util';
 
 const userAgents = config.get('harvester.user_agents');
 const logger = log4js.getLogger('GeoNode');
@@ -39,33 +41,39 @@ export function download(portalID, portalName, portalUrl) {
       'User-Agent': _.sample(userAgents)
     }
   })
-  .map((result) => {
+  .mergeMap((result) => {
     let datasets = [];
 
     for (let j = 0, m = result.body.objects.length; j < m; j++) {
       let dataset = result.body.objects[j];
+      let dataFiles = [];
+
+      if (dataset.distribution_description && dataset.distribution_url) {
+        dataFiles.push({ description: dataset.distribution_description, link: dataset.distribution_url });
+      }
 
       datasets.push({
         portalID: portalID,
         name: dataset.title,
         portalDatasetID: dataset.uuid,
         createdTime: null,
-        updatedTime: new Date(dataset.date),
+        updatedTime: toUTC(new Date(dataset.date)),
         description: dataset.abstract,
-        dataLink: null,
         portalLink: dataset.distribution_url || `${portalUrl}${dataset.detail_url}`,
         license: null,
         publisher: portalName,
         tags: [],
         categories: [dataset.category__gn_description],
-        raw: dataset
+        raw: dataset,
+        region: wktToGeoJSON(dataset.csw_wkt_geometry),
+        data: dataFiles
       });
     }
 
-    return datasets;
+    return Rx.Observable.of(...datasets);
   })
   .catch((error) => {
-    logger.error(`Unable to download data from ${url}. Message: ${error.message}.`);
-    return Rx.Observable.of([]);
+    logger.error(`Unable to download data from ${portalUrl}. Message: ${error.message}.`);
+    return Rx.Observable.empty();
   });
 }

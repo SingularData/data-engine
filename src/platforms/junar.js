@@ -4,6 +4,7 @@ import Rx from 'rxjs';
 import log4js from 'log4js';
 import { RxHR } from "@akanass/rx-http-request";
 import { getDB } from '../database';
+import { toUTC } from '../utils/pg-util';
 
 const limit = config.get('platforms.Junar.limit');
 const userAgents = config.get('harvester.user_agents');
@@ -42,7 +43,12 @@ export function download(portalID, portalName, apiUrl, apiKey) {
       'User-Agent': _.sample(userAgents)
     }
   })
-  .mergeMap(result => {
+  .mergeMap((result) => {
+
+    if (!Number.isInteger(result.body.count)) {
+      throw new Error(`Invalid data count for ${apiUrl}`);
+    }
+
     let totalCount = Math.ceil(result.body.count / limit);
 
     return Rx.Observable.range(0, totalCount)
@@ -51,14 +57,13 @@ export function download(portalID, portalName, apiUrl, apiKey) {
         headers: {
           'User-Agent': _.sample(userAgents)
         }
-      }), 1);
+      }));
   })
-  .map(result => {
+  .mergeMap((result) => {
     let datasets = [];
     let data = result.body.results;
 
-    for (let j = 0, m = data.length; j < m; j++) {
-      let dataset = data[j];
+    for (let dataset of data) {
       let createdTime = new Date();
       let updatedTime = new Date();
 
@@ -69,23 +74,24 @@ export function download(portalID, portalName, apiUrl, apiKey) {
         portalID: portalID,
         name: dataset.title,
         portalDatasetID: dataset.guid,
-        createdTime: createdTime,
-        updatedTime: updatedTime,
+        createdTime: toUTC(createdTime),
+        updatedTime: toUTC(updatedTime),
         description: dataset.description,
-        dataLink: null,
         license: 'Unknown',
         portalLink: dataset.link,
         publisher: portalName,
         tags: dataset.tags,
         categories: [dataset.category_name],
-        raw: dataset
+        raw: dataset,
+        data: [],
+        region: null
       });
     }
 
-    return datasets;
+    return Rx.Observable.of(...datasets);
   })
   .catch((error) => {
     logger.error(`Unable to download data from ${portalName}. Message: ${error.message}.`);
-    return Rx.Observable.of([]);
+    return Rx.Observable.empty();
   });
 }

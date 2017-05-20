@@ -4,6 +4,7 @@ import Rx from 'rxjs';
 import log4js from 'log4js';
 import { RxHR } from "@akanass/rx-http-request";
 import { getDB } from '../database';
+import { toUTC } from '../utils/pg-util';
 
 const limit = config.get('platforms.Socrata.limit');
 const userAgents = config.get('harvester.user_agents');
@@ -48,7 +49,7 @@ export function download(portalID, portalName, portalUrl, region) {
   })
   .mergeMap((result) => {
     if (result.body.error) {
-      return Rx.Observable.throw(new Error(result.body.error));
+      throw new Error(result.body.error);
     }
 
     let totalCount = Math.ceil(result.body.resultSetSize / limit);
@@ -59,9 +60,9 @@ export function download(portalID, portalName, portalUrl, region) {
         headers: {
           'User-Agent': _.sample(userAgents)
         }
-      }), 1);
-  }, 1)
-  .map((result) => {
+      }));
+  })
+  .mergeMap((result) => {
     if (result.body.error) {
       throw new Error(result.body.error);
     }
@@ -76,23 +77,24 @@ export function download(portalID, portalName, portalUrl, region) {
         portalID: portalID,
         name: dataset.name,
         portalDatasetID: dataset.id,
-        createdTime: new Date(dataset.createdAt),
-        updatedTime: new Date(dataset.updatedAt),
+        createdTime: toUTC(new Date(dataset.createdAt)),
+        updatedTime: toUTC(new Date(dataset.updatedAt)),
         description: dataset.description,
-        dataLink: null,
         portalLink: dataset.permalink || `${portalUrl}/d/${dataset.id}`,
         license: _.get(dataset.metadata, 'license'),
         publisher: portalName,
         tags: _.concat(_.get(dataset.classification, 'tags'), _.get(dataset.classificatio, 'domain_tags')),
         categories: _.concat(_.get(dataset.classification, 'categories'), _.get(dataset.classification, 'domain_category')),
-        raw: dataset
+        raw: dataset,
+        data: [],
+        region: null
       });
     }
 
-    return datasets;
+    return Rx.Observable.of(...datasets);
   })
   .catch((error) => {
     logger.error(`Unable to download data from ${portalUrl}. Message: ${error.message}.`);
-    return Rx.Observable.of([]);
+    return Rx.Observable.empty();
   });
 }
