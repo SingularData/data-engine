@@ -64,6 +64,10 @@ export function harvest(platform) {
 
       return dataset;
     })
+    .catch((err) => {
+      logger.error(`Error of data processing at ${platform}`, err);
+      return Observable.empty();
+    })
     .filter((dataset) => dataset !== null)
     .bufferCount(config.get('database.insert_limit'))
     .mergeMap((metadatas) => save(metadatas), 1);
