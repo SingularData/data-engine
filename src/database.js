@@ -101,7 +101,7 @@ export function getLatestCheckList(platform) {
       portal_id,
       portal_dataset_id,
       version_number,
-      md5(raw::text)
+      raw_md5 AS md5
     FROM dataset AS d
     LEFT JOIN portal AS p ON p.id = d.portal_id
     WHERE p.platform_id = (

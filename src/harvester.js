@@ -53,13 +53,11 @@ export function harvest(platform) {
 
         dataset.versionNumber = 1;
         dataset.versionPeriod = `[${dateToString(createTime)},)`;
-        dataCache[key] = {
-          version: 1,
-          md5: md5(JSON.stringify(dataset.raw))
-        };
       } else if (existing.md5 === md5(JSON.stringify(dataset.raw))) {
+        delete dataCache[key];
         return null;
       } else {
+        delete dataCache[key];
         dataset.versionNumber = existing.version + 1;
         dataset.versionPeriod = `[${dateToString(dataset.updatedTime)},)`;
       }
@@ -72,7 +70,7 @@ export function harvest(platform) {
     })
     .filter((dataset) => dataset !== null)
     .bufferCount(config.get('database.insert_limit'))
-    .mergeMap((datasets) => save(datasets), 1);
+    .concatMap((datasets) => save(datasets));
 }
 
 /**
@@ -83,10 +81,10 @@ export function harvestAll() {
   let db = getDB();
 
   return db.query('SELECT name FROM platform')
-    .mergeMap((platform) => {
+    .concatMap((platform) => {
       return harvest(platform.name).catch((error) => {
         logger.error(`Unable to download data from ${platform.name}`, error);
         return Observable.empty();
       });
-    }, 1);
+    });
 }

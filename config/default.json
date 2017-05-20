@@ -15,7 +15,7 @@
   },
   "database": {
     "url": "pg://datarea_admin:1sdf234@localhost:5432/datarea",
-    "insert_limit": 1000
+    "insert_limit": 300
   },
   "harvester": {
     "user_agents": [
