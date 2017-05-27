@@ -7,7 +7,7 @@ import { toCamelCase, valueToString } from './utils/pg-util';
 
 const logger = log4js.getLogger('database');
 
-let db = null;
+let db;
 
 /**
  * Get the current database connection.
@@ -26,7 +26,11 @@ export function initialize() {
     db.end();
   }
 
-  db = new pgrx(config.get('database.url'));
+  if (process.env.NODE_ENV === 'production') {
+    db = new pgrx(config.get('database.aws.url'));
+  } else {
+    db = new pgrx(config.get('database.development.url'));
+  }
 
   return db;
 }
@@ -47,6 +51,7 @@ export function save(metadatas) {
     INSERT INTO view_latest_dataset (
       portal_id,
       portal_dataset_id,
+      uuid,
       name,
       description,
       created_time,
@@ -66,6 +71,7 @@ export function save(metadatas) {
     return `(
       ${valueToString(metadata.portalID)},
       ${valueToString(metadata.portalDatasetID)},
+      ${valueToString(metadata.uuid)},
       ${valueToString(metadata.name || 'Untitled Dataset')},
       ${valueToString(metadata.description)},
       ${valueToString(metadata.createdTime)},
@@ -97,27 +103,57 @@ export function save(metadatas) {
 export function getLatestCheckList(platform) {
   let db = getDB();
   let sql = `
-    SELECT DISTINCT ON (portal_id, portal_dataset_id)
-      portal_id,
-      portal_dataset_id,
+    SELECT DISTINCT ON (uuid)
+      uuid,
       version_number,
-      raw_md5 AS md5
+      raw_md5
     FROM dataset AS d
     LEFT JOIN portal AS p ON p.id = d.portal_id
     WHERE p.platform_id = (
       SELECT id FROM platform WHERE name = $1::text LIMIT 1
     )
-    ORDER BY portal_id, portal_dataset_id, version_number DESC
+    ORDER BY uuid, version_number DESC
   `;
 
   return db.query(sql, [platform])
     .map((row) => toCamelCase(row))
     .reduce((collection, dataset) => {
-      collection[`${dataset.portalId}:${dataset.portalDatasetId}`] = {
-        md5: dataset.md5,
+      collection[dataset.portalDatasetMd5] = {
+        uuid: dataset.uuid,
+        md5: dataset.rawMd5,
         version: dataset.versionNumber
       };
 
       return collection;
     }, {});
+}
+
+/**
+ * Refresh database views.
+ * @returns {Observable} empty Observable
+ */
+export function refreshDatabase() {
+  let db = getDB();
+  let sql = 'REFRESH MATERIALIZED VIEW public.view_portal;';
+  return db.query(sql);
+}
+
+/**
+ * Clear all metadata data from the database
+ * @returns {Observable} empty observable
+ */
+export function clear() {
+  let db = getDB();
+  let sql = `
+    DELETE FROM dataset_tag_xref;
+    DELETE FROM dataset_category_xref;
+    DELETE FROM dataset_tag;
+    DELETE FROM dataset_category;
+    DELETE FROM dataset_data;
+    DELETE FROM dataset;
+    DELETE FROM dataset_region;
+    DELETE FROM dataset_publisher;
+  `;
+
+  return db.query(sql);
 }

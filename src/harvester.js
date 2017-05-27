@@ -1,6 +1,8 @@
 import { Observable } from 'rxjs';
-import { save, getDB, getLatestCheckList } from './database';
+import { save, getDB, getLatestCheckList, refreshDatabase } from './database';
+import { upsert } from './elasticsearch';
 import { dateToString } from './utils/pg-util';
+import uuid from 'uuid';
 import log4js from 'log4js';
 import config from 'config';
 import md5 from 'md5';
@@ -49,15 +51,16 @@ export function harvest(platform) {
       let existing = dataCache[key];
 
       if (!existing) {
-        let createTime = dataset.createTime || new Date(dataset.updatedTime.getTime() - 1);
-
-        dataset.versionNumber = 1;
-        dataset.versionPeriod = `[${dateToString(createTime)},)`;
+        dataset.uuid = uuid.v4();
+        dataset.versionNumber = 2;
+        dataset.versionPeriod = `[${dateToString(dataset.updatedTime)},)`;
       } else if (existing.md5 === md5(JSON.stringify(dataset.raw))) {
         delete dataCache[key];
         return null;
       } else {
         delete dataCache[key];
+
+        dataset.uuid = existing.uuid;
         dataset.versionNumber = existing.version + 1;
         dataset.versionPeriod = `[${dateToString(dataset.updatedTime)},)`;
       }
@@ -70,7 +73,8 @@ export function harvest(platform) {
     })
     .filter((dataset) => dataset !== null)
     .bufferCount(config.get('database.insert_limit'))
-    .concatMap((datasets) => save(datasets));
+    .concatMap((datasets) => Observable.merge(save(datasets), upsert(datasets)))
+    .concat(refreshDatabase());
 }
 
 /**

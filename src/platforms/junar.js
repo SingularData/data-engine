@@ -67,8 +67,8 @@ export function download(portalID, portalName, apiUrl, apiKey) {
       let createdTime = new Date();
       let updatedTime = new Date();
 
-      createdTime.setTime(dataset.created_at);
-      updatedTime.setTime(dataset.modified_at);
+      createdTime.setTime(dataset.created_at * 1000);
+      updatedTime.setTime(dataset.modified_at * 1000);
 
       datasets.push({
         portalID: portalID,
