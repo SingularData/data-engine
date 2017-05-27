@@ -33,6 +33,8 @@ describe('harvester.js', () => {
     });
 
     ToDosRewireAPI.__Rewire__('getLatestCheckList', () => Rx.Observable.of({}));
+    ToDosRewireAPI.__Rewire__('refreshDatabase', () => Rx.Observable.empty());
+    ToDosRewireAPI.__Rewire__('upsert', () => Rx.Observable.empty());
 
     harvest('DKAN')
       .subscribe(

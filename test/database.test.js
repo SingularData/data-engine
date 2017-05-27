@@ -52,6 +52,7 @@ describe('database.js', () => {
     let metadatas = [{
       portalID: 1,
       portalDatasetID: 1,
+      uuid: 'test-uuid',
       name: 'test',
       description: null,
       createdTime: null,
@@ -70,6 +71,7 @@ describe('database.js', () => {
     INSERT INTO view_latest_dataset (
       portal_id,
       portal_dataset_id,
+      uuid,
       name,
       description,
       created_time,
@@ -87,6 +89,7 @@ describe('database.js', () => {
   (
       1,
       1,
+      'test-uuid',
       'test',
       NULL,
       NULL,
