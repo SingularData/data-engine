@@ -1,7 +1,7 @@
 import Rx from 'rxjs';
 import chai from 'chai';
 import _ from 'lodash';
-import { harvest, harvestAll, __RewireAPI__ as ToDosRewireAPI } from '../src/harvester';
+import { harvestPlatform, harvestAll, __RewireAPI__ as ToDosRewireAPI } from '../src/harvester';
 
 const expect = chai.expect;
 
@@ -36,7 +36,7 @@ describe('harvester.js', () => {
     ToDosRewireAPI.__Rewire__('refreshDatabase', () => Rx.Observable.empty());
     ToDosRewireAPI.__Rewire__('upsert', () => Rx.Observable.empty());
 
-    harvest('DKAN')
+    harvestPlatform('DKAN')
       .subscribe(
         _.noop,
         _.noop,
@@ -52,7 +52,7 @@ describe('harvester.js', () => {
       };
     });
 
-    ToDosRewireAPI.__Rewire__('harvest', () => {
+    ToDosRewireAPI.__Rewire__('harvestPlatform', () => {
       return Rx.Observable.create((observer) => {
         observer.next(Rx.Observable.empty());
         observer.next(Rx.Observable.empty());

@@ -35,17 +35,7 @@ describe('database.js', () => {
   it('save() should succefully construct the query to save metadata.', (done) => {
     ToDosRewireAPI.__Rewire__('getDB', () => {
       return {
-        tx: (fn) => {
-          let input;
-
-          fn({
-            query: (sql) => {
-              input = sql;
-            }
-          });
-
-          return Rx.Observable.of(input);
-        }
+        query: (sql) => Rx.Observable.of(sql)
       };
     });
 
