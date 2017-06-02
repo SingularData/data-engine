@@ -29,11 +29,30 @@ export function downloadAll() {
 
   return getDB()
     .query(sql, ['Socrata', 'Socrata-EU'])
-    .mergeMap((portal) => download(portal.id, portal.name, portal.url, portal.region));
+    .concatMap((portal) => download(portal.id, portal.name, portal.url, portal.region));
 }
 
 /**
- * Harvest the given ArcGIS Open Data portal.
+ * Harvest a Socrata portal.
+ * @param   {String}      name    portal name
+ * @param   {String}      region  portal region (us or eu)
+ * @return  {Observable}          a stream of dataset metadata
+ */
+export function downloadPortal(name, region) {
+  let sql = `
+    SELECT p.id, p.name, p.url FROM portal AS p
+    LEFT JOIN platform AS pl ON pl.id = p.platform_id
+    WHERE p.name = $1::text AND pl.name = $2::text
+    LIMIT 1
+  `;
+
+  return getDB()
+    .query(sql, [name, 'Socrata'])
+    .concatMap((row) => download(row.id, row.name, row.url, region));
+}
+
+/**
+ * Harvest the given Socrata portal.
  * @param  {Number}             portalID    portal ID
  * @param  {String}             portalName  portal name
  * @param  {String}             portalUrl   portal url
@@ -47,7 +66,7 @@ export function download(portalID, portalName, portalUrl, region) {
       'User-Agent': _.sample(userAgents)
     }
   })
-  .mergeMap((result) => {
+  .concatMap((result) => {
     if (result.body.error) {
       throw new Error(result.body.error);
     }
@@ -55,14 +74,14 @@ export function download(portalID, portalName, portalUrl, region) {
     let totalCount = Math.ceil(result.body.resultSetSize / limit);
 
     return Rx.Observable.range(0, totalCount)
-      .mergeMap((i) => RxHR.get(`http://api.${region}.socrata.com/api/catalog/v1?domains=${portalUrl}&limit=${limit}&offset=${i * limit}`, {
+      .concatMap((i) => RxHR.get(`http://api.${region}.socrata.com/api/catalog/v1?domains=${portalUrl}&limit=${limit}&offset=${i * limit}`, {
         json: true,
         headers: {
           'User-Agent': _.sample(userAgents)
         }
       }));
   })
-  .mergeMap((result) => {
+  .concatMap((result) => {
     if (result.body.error) {
       throw new Error(result.body.error);
     }

@@ -14,24 +14,11 @@
     }
   },
   "database": {
-    "development": {
-      "url": "pg://datarea_admin:1sdf234@localhost:5432/datarea"
-    },
-    "aws": {
-      "url": "null"
-    },
+    "url": "pg://datarea_admin:1sdf234@localhost:5432/datarea",
     "insert_limit": 300
   },
   "elasticsearch": {
-    "development": {
-      "host": "http://localhost:9200"
-    },
-    "aws": {
-      "host": "toadd",
-      "region": "us-east-1",
-      "accessKey": "AKID",
-      "secretKey": "secret"
-    }
+    "host": "http://localhost:9200"
   },
   "harvester": {
     "user_agents": [

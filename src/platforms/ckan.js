@@ -24,7 +24,25 @@ export function downloadAll() {
 
   return getDB()
     .query(sql, ['CKAN'])
-    .mergeMap((portal) => download(portal.id, portal.url));
+    .concatMap((portal) => download(portal.id, portal.url));
+}
+
+/**
+ * Harvest a CAKN portal.
+ * @param   {String}      name  portal name
+ * @return  {Observable}        a stream of dataset metadata
+ */
+export function downloadPortal(name) {
+  let sql = `
+    SELECT p.id, p.url FROM portal AS p
+    LEFT JOIN platform AS pl ON pl.id = p.platform_id
+    WHERE p.name = $1::text AND pl.name = $2::text
+    LIMIT 1
+  `;
+
+  return getDB()
+    .query(sql, [name, 'CKAN'])
+    .concatMap((row) => download(row.id, row.url));
 }
 
 /**
@@ -40,7 +58,7 @@ export function download(portalID, portalUrl) {
       'User-Agent': _.sample(userAgents)
     }
   })
-  .mergeMap((result) => {
+  .concatMap((result) => {
 
     if (_.isString(result.body)) {
       throw new Error('Invalid API response.');
@@ -49,14 +67,14 @@ export function download(portalID, portalUrl) {
     let totalCount = Math.ceil(result.body.result.count / rows);
 
     return Rx.Observable.range(0, totalCount)
-      .mergeMap((i) => RxHR.get(`${portalUrl}/api/3/action/package_search?rows=${rows}&start=${i * rows}`, {
+      .concatMap((i) => RxHR.get(`${portalUrl}/api/3/action/package_search?rows=${rows}&start=${i * rows}`, {
         json: true,
         headers: {
           'User-Agent': _.sample(userAgents)
         }
       }));
   })
-  .mergeMap((result) => {
+  .concatMap((result) => {
 
     if (_.isString(result.body)) {
       throw new Error('Invalid API response.');

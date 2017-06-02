@@ -24,7 +24,25 @@ export function downloadAll() {
 
   return getDB()
     .query(sql, ['GeoNode'])
-    .mergeMap((portal) => download(portal.id, portal.name, portal.url));
+    .concatMap((portal) => download(portal.id, portal.name, portal.url));
+}
+
+/**
+ * Harvest a GeoNode portal.
+ * @param   {String}      name  portal name
+ * @return  {Observable}        a stream of dataset metadata
+ */
+export function downloadPortal(name) {
+  let sql = `
+    SELECT p.id, p.name, p.url FROM portal AS p
+    LEFT JOIN platform AS pl ON pl.id = p.platform_id
+    WHERE p.name = $1::text AND pl.name = $2::text
+    LIMIT 1
+  `;
+
+  return getDB()
+    .query(sql, [name, 'GeoNode'])
+    .concatMap((row) => download(row.id, row.name, row.url));
 }
 
 /**
@@ -41,7 +59,7 @@ export function download(portalID, portalName, portalUrl) {
       'User-Agent': _.sample(userAgents)
     }
   })
-  .mergeMap((result) => {
+  .concatMap((result) => {
     let datasets = [];
 
     for (let j = 0, m = result.body.objects.length; j < m; j++) {

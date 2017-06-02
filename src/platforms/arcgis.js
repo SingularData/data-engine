@@ -23,14 +23,32 @@ export function downloadAll() {
 
   return getDB()
     .query(sql, ['ArcGIS Open Data'])
-    .mergeMap((portal) => download(portal.id, portal.url));
+    .concatMap((portal) => download(portal.id, portal.url));
+}
+
+/**
+ * Harvest an ArcGIS Open Data portal.
+ * @param   {String}      name  portal name
+ * @return  {Observable}        a stream of dataset metadata
+ */
+export function downloadPortal(name) {
+  let sql = `
+    SELECT p.id, p.url FROM portal AS p
+    LEFT JOIN platform AS pl ON pl.id = p.platform_id
+    WHERE p.name = $1::text AND pl.name = $2::text
+    LIMIT 1
+  `;
+
+  return getDB()
+    .query(sql, [name, 'ArcGIS Open Data'])
+    .concatMap((row) => download(row.id, row.url));
 }
 
 /**
  * Harvest the given ArcGIS Open Data portal.
- * @param  {Number}             portalID    portal ID
- * @param  {String}             portalUrl   portal Url
- * @return {Observable}                  harvest job
+ * @param  {Number}      portalID    portal ID
+ * @param  {String}      portalUrl   portal Url
+ * @return {Observable}              a stream of dataset metadata
  */
 export function download(portalID, portalUrl) {
   return RxHR.get(`${portalUrl}/data.json`, {
@@ -39,7 +57,7 @@ export function download(portalID, portalUrl) {
       'User-Agent': _.sample(userAgents)
     }
   })
-  .mergeMap((result) => {
+  .concatMap((result) => {
 
     if (_.isString(result.body)) {
       return Observable.throw(new Error(`The target portal doesn't provide APIs: ${portalUrl}`));

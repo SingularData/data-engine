@@ -28,18 +28,51 @@ export function downloadAll() {
       collection[portal.name] = portal.id;
       return collection;
     }, {})
-    .mergeMap((portalIDs) => {
+    .concatMap((portalIDs) => {
       return RxHR.get('https://data.opendatasoft.com/api/v2/catalog/datasets?rows=0&start=0', {
         json: true,
         headers: {
           'User-Agent': _.sample(userAgents)
         }
       })
-      .mergeMap((result) => {
+      .concatMap((result) => {
         let totalCount = Math.ceil(result.body.total_count / rows);
 
         return Rx.Observable.range(0, totalCount)
-          .mergeMap((i) => download(`https://data.opendatasoft.com/api/v2/catalog/datasets?rows=${rows}&start=${i * rows}`, portalIDs));
+          .concatMap((i) => download(`https://data.opendatasoft.com/api/v2/catalog/datasets?rows=${rows}&start=${i * rows}`, portalIDs));
+      });
+    });
+}
+
+/**
+ * Harvest a OpenDataSoft portal.
+ * @param   {String}      name  portal name
+ * @return  {Observable}        a stream of dataset metadata
+ */
+export function downloadPortal(name) {
+  let sql = `
+    SELECT p.id, p.name, p.url FROM portal AS p
+    LEFT JOIN platform AS pl ON pl.id = p.platform_id
+    WHERE p.name = $1::text AND pl.name = $2::text
+    LIMIT 1
+  `;
+
+  return getDB()
+    .query(sql, [name, 'OpenDataSoft'])
+    .concatMap((row) => {
+      return RxHR.get(`${row.url}/api/v2/catalog/datasets?rows=0&start=0`, {
+        json: true,
+        headers: {
+          'User-Agent': _.sample(userAgents)
+        }
+      })
+      .concatMap((result) => {
+        let totalCount = Math.ceil(result.body.total_count / rows);
+        let idMap = {};
+        idMap[row.name] = row.id;
+
+        return Rx.Observable.range(0, totalCount)
+          .concatMap((i) => download(`${row.url}/api/v2/catalog/datasets?rows=${rows}&start=${i * rows}`, idMap));
       });
     });
 }
@@ -58,7 +91,7 @@ export function download(url, portalIDs) {
       'User-Agent': _.sample(userAgents)
     }
   })
-  .mergeMap((result) => {
+  .concatMap((result) => {
     let datasets = [];
     let data = result.body;
 

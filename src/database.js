@@ -26,11 +26,7 @@ export function initialize() {
     db.end();
   }
 
-  if (process.env.NODE_ENV === 'production') {
-    db = new pgrx(config.get('database.aws.url'));
-  } else {
-    db = new pgrx(config.get('database.development.url'));
-  }
+  db = new pgrx(config.get('database.url'));
 
   return db;
 }
@@ -88,7 +84,7 @@ export function save(metadatas) {
     )`;
   });
 
-  return db.tx((t) => t.query(query + values.join(',')))
+  return db.query(query + values.join(','))
     .catch((error) => {
       logger.error('Unable to save data: ', error);
       return Observable.empty();
@@ -98,27 +94,53 @@ export function save(metadatas) {
 /**
  * Get a check list for latest datasets in a platform.
  * @param   {String} platform platform name
+ * @param   {String} [portal] portal name (optional)
  * @returns {Observable<any>} a checklist keyed by portal id and portal dataset id
  */
-export function getLatestCheckList(platform) {
+export function getLatestCheckList(platform, portal) {
   let db = getDB();
-  let sql = `
-    SELECT DISTINCT ON (uuid)
-      uuid,
-      version_number,
-      raw_md5
-    FROM dataset AS d
-    LEFT JOIN portal AS p ON p.id = d.portal_id
-    WHERE p.platform_id = (
-      SELECT id FROM platform WHERE name = $1::text LIMIT 1
-    )
-    ORDER BY uuid, version_number DESC
-  `;
+  let sql, task;
 
-  return db.query(sql, [platform])
+  if (portal) {
+    sql = `
+      SELECT DISTINCT ON (uuid)
+        uuid,
+        version_number,
+        raw_md5
+      FROM dataset AS d
+      LEFT JOIN portal AS p ON p.id = d.portal_id
+      WHERE p.name = $1::text AND p.platform_id = (
+        SELECT id FROM platform WHERE name = $2::text LIMIT 1
+      )
+      ORDER BY uuid, version_number DESC
+    `;
+
+    task = db.query(sql, [portal, platform]);
+  } else {
+    sql = `
+      SELECT DISTINCT ON (uuid)
+        portal_id,
+        portal_dataset_id,
+        uuid,
+        version_number,
+        raw_md5
+      FROM dataset AS d
+      LEFT JOIN portal AS p ON p.id = d.portal_id
+      WHERE p.platform_id = (
+        SELECT id FROM platform WHERE name = $1::text LIMIT 1
+      )
+      ORDER BY uuid, version_number DESC
+    `;
+
+    task = db.query(sql, [platform]);
+  }
+
+  return task
     .map((row) => toCamelCase(row))
     .reduce((collection, dataset) => {
-      collection[dataset.portalDatasetMd5] = {
+      let key = `${dataset.portal_id}:${dataset.portal_dataset_id}`;
+
+      collection[key] = {
         uuid: dataset.uuid,
         md5: dataset.rawMd5,
         version: dataset.versionNumber

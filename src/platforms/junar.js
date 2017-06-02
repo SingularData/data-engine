@@ -25,11 +25,30 @@ export function downloadAll() {
 
   return getDB()
     .query(sql, ['Junar'])
-    .mergeMap((portal) => download(portal.id, portal.name, portal.url, portal.key));
+    .concatMap((portal) => download(portal.id, portal.name, portal.url, portal.key));
 }
 
 /**
- * Harvest the given ArcGIS Open Data portal.
+ * Harvest a Junar portal.
+ * @param   {String}      name  portal name
+ * @return  {Observable}        a stream of dataset metadata
+ */
+export function downloadPortal(name) {
+  let sql = `
+    SELECT p.id, p.name, jpi.api_url, jpi.api_key FROM portal AS p
+    LEFT JOIN platform AS pl ON pl.id = p.platform_id
+    LEFT JOIN junar_portal_info AS jpi ON jpi.portal_id = p.id
+    WHERE p.name = $1::text AND pl.name = $2::text
+    LIMIT 1
+  `;
+
+  return getDB()
+    .query(sql, [name, 'Junar'])
+    .concatMap((row) => download(row.id, row.name, row.api_url, row.api_key));
+}
+
+/**
+ * Harvest the given Junar portal.
  * @param  {Number}             portalID    portal ID
  * @param  {String}             portalName  portal Name
  * @param  {String}             apiUrl      portal API url
@@ -43,7 +62,7 @@ export function download(portalID, portalName, apiUrl, apiKey) {
       'User-Agent': _.sample(userAgents)
     }
   })
-  .mergeMap((result) => {
+  .concatMap((result) => {
 
     if (!Number.isInteger(result.body.count)) {
       throw new Error(`Invalid data count for ${apiUrl}`);
@@ -52,14 +71,14 @@ export function download(portalID, portalName, apiUrl, apiKey) {
     let totalCount = Math.ceil(result.body.count / limit);
 
     return Rx.Observable.range(0, totalCount)
-      .mergeMap((i) => RxHR.get(`${apiUrl}/api/v2/datasets/?auth_key=${apiKey}&offset=${i * limit}&limit=${limit}`, {
+      .concatMap((i) => RxHR.get(`${apiUrl}/api/v2/datasets/?auth_key=${apiKey}&offset=${i * limit}&limit=${limit}`, {
         json: true,
         headers: {
           'User-Agent': _.sample(userAgents)
         }
       }));
   })
-  .mergeMap((result) => {
+  .concatMap((result) => {
     let datasets = [];
     let data = result.body.results;
 
