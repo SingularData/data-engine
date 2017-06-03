@@ -110,31 +110,25 @@ export function download(portalID, portalName, portalUrl, region) {
       throw new Error(result.body.error);
     }
 
-    let datasets = [];
-    let data = result.body.results;
-
-    for (let j = 0, m = data.length; j < m; j++) {
-      let dataset = data[j].resource;
-
-      datasets.push({
-        portalID: portalID,
-        name: dataset.name,
-        portalDatasetID: dataset.id,
-        createdTime: toUTC(new Date(dataset.createdAt)),
-        updatedTime: toUTC(new Date(dataset.updatedAt)),
-        description: dataset.description,
-        portalLink: dataset.permalink || `${portalUrl}/d/${dataset.id}`,
-        license: _.get(dataset.metadata, 'license'),
-        publisher: portalName,
-        tags: _.concat(_.get(dataset.classification, 'tags'), _.get(dataset.classificatio, 'domain_tags')),
-        categories: _.concat(_.get(dataset.classification, 'categories'), _.get(dataset.classification, 'domain_category')),
-        raw: dataset,
-        data: [],
-        region: null
-      });
-    }
-
-    return Rx.Observable.of(...datasets);
+    return Rx.Observable.of(...result.body.results);
+  })
+  .map((dataset) =>{
+    return {
+      portalID: portalID,
+      name: dataset.name,
+      portalDatasetID: dataset.id,
+      createdTime: toUTC(new Date(dataset.createdAt)),
+      updatedTime: toUTC(new Date(dataset.updatedAt)),
+      description: dataset.description,
+      portalLink: dataset.permalink || `${portalUrl}/d/${dataset.id}`,
+      license: _.get(dataset.metadata, 'license'),
+      publisher: portalName,
+      tags: _.concat(_.get(dataset.classification, 'tags'), _.get(dataset.classificatio, 'domain_tags')),
+      categories: _.concat(_.get(dataset.classification, 'categories'), _.get(dataset.classification, 'domain_category')),
+      raw: dataset,
+      data: [],
+      region: null
+    };
   })
   .catch((error) => {
     logger.error(`Unable to download data from ${portalUrl}. Message: ${error.message}.`);

@@ -54,36 +54,30 @@ export function downloadPortal(name) {
  */
 export function download(portalID, portalName, portalUrl) {
   return RxHR.get(`${portalUrl}/api/base`, getOptions())
-  .concatMap((result) => {
-    let datasets = [];
+  .concatMap((result) => Rx.Observable.of(...result.body.objects))
+  .map((dataset) => {
+    let dataFiles = [];
 
-    for (let j = 0, m = result.body.objects.length; j < m; j++) {
-      let dataset = result.body.objects[j];
-      let dataFiles = [];
-
-      if (dataset.distribution_description && dataset.distribution_url) {
-        dataFiles.push({ description: dataset.distribution_description, link: dataset.distribution_url });
-      }
-
-      datasets.push({
-        portalID: portalID,
-        name: dataset.title,
-        portalDatasetID: dataset.uuid,
-        createdTime: null,
-        updatedTime: toUTC(new Date(dataset.date)),
-        description: dataset.abstract,
-        portalLink: dataset.distribution_url || `${portalUrl}${dataset.detail_url}`,
-        license: null,
-        publisher: portalName,
-        tags: [],
-        categories: [dataset.category__gn_description],
-        raw: dataset,
-        region: wktToGeoJSON(dataset.csw_wkt_geometry),
-        data: dataFiles
-      });
+    if (dataset.distribution_description && dataset.distribution_url) {
+      dataFiles.push({ description: dataset.distribution_description, link: dataset.distribution_url });
     }
 
-    return Rx.Observable.of(...datasets);
+    return {
+      portalID: portalID,
+      name: dataset.title,
+      portalDatasetID: dataset.uuid,
+      createdTime: null,
+      updatedTime: toUTC(new Date(dataset.date)),
+      description: dataset.abstract,
+      portalLink: dataset.distribution_url || `${portalUrl}${dataset.detail_url}`,
+      license: null,
+      publisher: portalName,
+      tags: [],
+      categories: [dataset.category__gn_description],
+      raw: dataset,
+      region: wktToGeoJSON(dataset.csw_wkt_geometry),
+      data: dataFiles
+    };
   })
   .catch((error) => {
     logger.error(`Unable to download data from ${portalUrl}. Message: ${error.message}.`);

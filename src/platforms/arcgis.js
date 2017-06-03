@@ -56,41 +56,36 @@ export function download(portalID, portalUrl) {
   .concatMap((result) => {
 
     if (_.isString(result.body)) {
-      return Observable.throw(new Error(`The target portal doesn't provide APIs: ${portalUrl}`));
+      throw new Error(`The target portal doesn't provide APIs: ${portalUrl}`);
     }
 
-    let datasets = [];
-    let data = result.body.dataset;
+    return Observable.of(...result.body.dataset);
+  })
+  .map((dataset) => {
+    let dataFiles = _.map(dataset.distribution, (file) => {
+      return {
+        name: file.title || file.format,
+        format: _.toLower(file.format),
+        link: file.downloadURL || file.accessURL
+      };
+    });
 
-    for (let j = 0, m = data.length; j < m; j++) {
-      let dataset = data[j];
-      let dataFiles = _.map(dataset.distribution, (file) => {
-        return {
-          name: file.title || file.format,
-          format: _.toLower(file.format),
-          link: file.downloadURL || file.accessURL
-        };
-      });
-
-      datasets.push({
-        portalID: portalID,
-        name: dataset.title,
-        portalDatasetID: dataset.identifier,
-        createdTime: dataset.issued ? toUTC(new Date(dataset.issued)) : null,
-        updatedTime: toUTC(new Date(dataset.modified)),
-        description: dataset.description,
-        portalLink: dataset.landingPage,
-        license: dataset.license,
-        publisher: dataset.publisher.name,
-        tags: dataset.keyword,
-        categories: [],
-        raw: dataset,
-        region: bboxToGeoJSON(dataset.spatial),
-        data: dataFiles
-      });
-    }
-
-    return Observable.of(...datasets);
+    return {
+      portalID: portalID,
+      name: dataset.title,
+      portalDatasetID: dataset.identifier,
+      createdTime: dataset.issued ? toUTC(new Date(dataset.issued)) : null,
+      updatedTime: toUTC(new Date(dataset.modified)),
+      description: dataset.description,
+      portalLink: dataset.landingPage,
+      license: dataset.license,
+      publisher: dataset.publisher.name,
+      tags: dataset.keyword,
+      categories: [],
+      raw: dataset,
+      region: bboxToGeoJSON(dataset.spatial),
+      data: dataFiles
+    };
   })
   .catch((error) => {
     logger.error(`Unable to download data from ${portalUrl}. Message: ${error.message}.`);

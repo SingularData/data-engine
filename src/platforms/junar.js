@@ -68,36 +68,30 @@ export function download(portalID, portalName, apiUrl, apiKey) {
     return Rx.Observable.range(0, totalCount)
       .mergeMap((i) => RxHR.get(`${apiUrl}/api/v2/datasets/?auth_key=${apiKey}&offset=${i * limit}&limit=${limit}`, getOptions()), cocurrency);
   })
-  .concatMap((result) => {
-    let datasets = [];
-    let data = result.body.results;
+  .concatMap((result) => Rx.Observable.of(...result.body.results))
+  .map((dataset) => {
+    let createdTime = new Date();
+    let updatedTime = new Date();
 
-    for (let dataset of data) {
-      let createdTime = new Date();
-      let updatedTime = new Date();
+    createdTime.setTime(dataset.created_at * 1000);
+    updatedTime.setTime(dataset.modified_at * 1000);
 
-      createdTime.setTime(dataset.created_at * 1000);
-      updatedTime.setTime(dataset.modified_at * 1000);
-
-      datasets.push({
-        portalID: portalID,
-        name: dataset.title,
-        portalDatasetID: dataset.guid,
-        createdTime: toUTC(createdTime),
-        updatedTime: toUTC(updatedTime),
-        description: dataset.description,
-        license: 'Unknown',
-        portalLink: dataset.link,
-        publisher: portalName,
-        tags: dataset.tags,
-        categories: [dataset.category_name],
-        raw: dataset,
-        data: [],
-        region: null
-      });
-    }
-
-    return Rx.Observable.of(...datasets);
+    return {
+      portalID: portalID,
+      name: dataset.title,
+      portalDatasetID: dataset.guid,
+      createdTime: toUTC(createdTime),
+      updatedTime: toUTC(updatedTime),
+      description: dataset.description,
+      license: 'Unknown',
+      portalLink: dataset.link,
+      publisher: portalName,
+      tags: dataset.tags,
+      categories: [dataset.category_name],
+      raw: dataset,
+      data: [],
+      region: null
+    };
   })
   .catch((error) => {
     logger.error(`Unable to download data from ${portalName}. Message: ${error.message}.`);

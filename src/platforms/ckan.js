@@ -71,39 +71,34 @@ export function download(portalID, portalUrl) {
       throw new Error('Invalid API response.');
     }
 
-    let data = result.body.result.results;
-    let datasets = [];
+    return Rx.Observable.of(...result.body.result.results);
+  })
+  .map((dataset) => {
+    let dataFiles = _.map(dataset.resources, (file) => {
+      return {
+        name: file.title || file.name || file.format,
+        description: file.description,
+        link: file.url,
+        format: file.format
+      };
+    });
 
-    for (let j = 0, m = data.length; j < m; j++) {
-      let dataset = data[j];
-      let dataFiles = _.map(dataset.resources, (file) => {
-        return {
-          name: file.title || file.name || file.format,
-          description: file.description,
-          link: file.url,
-          format: file.format
-        };
-      });
-
-      datasets.push({
-        portalID: portalID,
-        name: dataset.title,
-        portalDatasetID: dataset.id,
-        createdTime: toUTC(dataset.__extras ? new Date(dataset.__extras.metadata_created) : new Date(dataset.metadata_created)),
-        updatedTime: toUTC(dataset.__extras ? new Date(dataset.__extras.metadata_modified) : new Date(dataset.metadata_modified)),
-        description: dataset.notes,
-        portalLink: `${portalUrl}/dataset/${dataset.package_id || dataset.id}`,
-        license: dataset.license_title,
-        publisher: _.get(dataset.organization, 'name'),
-        tags: _.map(dataset.tags, 'display_name'),
-        categories: _.map(dataset.groups, 'display_name'),
-        raw: dataset,
-        region: null,
-        data: dataFiles
-      });
-    }
-
-    return Rx.Observable.of(...datasets);
+    return {
+      portalID: portalID,
+      name: dataset.title,
+      portalDatasetID: dataset.id,
+      createdTime: toUTC(dataset.__extras ? new Date(dataset.__extras.metadata_created) : new Date(dataset.metadata_created)),
+      updatedTime: toUTC(dataset.__extras ? new Date(dataset.__extras.metadata_modified) : new Date(dataset.metadata_modified)),
+      description: dataset.notes,
+      portalLink: `${portalUrl}/dataset/${dataset.package_id || dataset.id}`,
+      license: dataset.license_title,
+      publisher: _.get(dataset.organization, 'name'),
+      tags: _.map(dataset.tags, 'display_name'),
+      categories: _.map(dataset.groups, 'display_name'),
+      raw: dataset,
+      region: null,
+      data: dataFiles
+    };
   })
   .catch((error) => {
     logger.error(`Unable to download data from ${portalUrl}. Message: ${error.message}.`);

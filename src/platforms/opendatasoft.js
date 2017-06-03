@@ -78,46 +78,41 @@ export function download(url, portalIDs) {
 
   return RxHR.get(url, getOptions())
   .concatMap((result) => {
-    let datasets = [];
-    let data = result.body;
-
-    if (data.status === 500) {
-      throw new Error(`Unable to download data from ${url}. Message: ${data.message}.`);
+    if (result.body.status === 500) {
+      throw new Error(`Unable to download data from ${url}. Message: ${result.body.message}.`);
     }
 
-    for (let item of data.datasets) {
-      let metas = item.dataset.metas.default;
+    return Rx.Observable.of(...result.body.datasets);
+  })
+  .map((dataset) => {
+    let metas = dataset.dataset.metas.default;
 
-      if (!portalIDs[metas.source_domain_title]) {
-        continue;
-      }
-
-      let dataset = {
-        portalID: portalIDs[metas.source_domain_title],
-        name: metas.title,
-        portalDatasetID: item.dataset.dataset_id,
-        createdTime: null,
-        updatedTime: toUTC(metas.modified ? new Date(metas.modified) : new Date()),
-        description: metas.description,
-        portalLink: createLink(metas.source_domain_address, metas.source_dataset),
-        license: metas.license,
-        publisher: metas.publisher,
-        tags: getValidArray(metas.keyword),
-        categories: getValidArray(metas.theme),
-        raw: item,
-        region: null,
-        data: []
-      };
-
-      datasets.push(dataset);
+    if (!portalIDs[metas.source_domain_title]) {
+      return null;
     }
 
-    return Rx.Observable.of(...datasets);
+    return {
+      portalID: portalIDs[metas.source_domain_title],
+      name: metas.title,
+      portalDatasetID: dataset.dataset.dataset_id,
+      createdTime: null,
+      updatedTime: toUTC(metas.modified ? new Date(metas.modified) : new Date()),
+      description: metas.description,
+      portalLink: createLink(metas.source_domain_address, metas.source_dataset),
+      license: metas.license,
+      publisher: metas.publisher,
+      tags: getValidArray(metas.keyword),
+      categories: getValidArray(metas.theme),
+      raw: dataset,
+      region: null,
+      data: []
+    };
   })
   .catch((error) => {
     logger.error(`Unable to download data from ${url}. Message: ${error.message}.`);
     return Rx.Observable.empty();
-  });
+  })
+  .filter((dataset) => dataset !== null);
 }
 
 /**

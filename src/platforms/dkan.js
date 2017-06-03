@@ -62,44 +62,35 @@ export function download(portalID, portalName, portalUrl) {
     }
 
     let data = _.isArray(result.body) ? result.body : result.body.dataset;
-    let datasets = [];
+    return Rx.Observable.of(...data);
+  })
+  .map((dataset) => {
+    let dataFiles = _.map(dataset.distribution, (file) => {
+      return {
+        name: file.title || file.format,
+        format: _.toLower(file.format),
+        link: file.downloadURL || file.accessURL,
+        description: file.description
+      };
+    })
+    .filter((file) => file.link && file.format);
 
-    for (let j = 0, m = data.length; j < m; j++) {
-      let dataset = data[j];
-
-      if (!dataset.title || dataset.title === 'Data Catalog') {
-        continue;
-      }
-
-      let dataFiles = _.map(dataset.distribution, (file) => {
-        return {
-          name: file.title || file.format,
-          format: _.toLower(file.format),
-          link: file.downloadURL || file.accessURL,
-          description: file.description
-        };
-      })
-      .filter((file) => file.link && file.format);
-
-      datasets.push({
-        portalID: portalID,
-        name: dataset.title,
-        portalDatasetID: dataset.identifier,
-        createdTime: dataset.issued ? toUTC(new Date(getDateString(dataset.issued))) : null,
-        updatedTime: toUTC(dataset.modified ? new Date(getDateString(dataset.modified)) : new Date()),
-        description: dataset.description,
-        portalLink: dataset.landingPage || `${portalUrl}/search/type/dataset?query=${_.escape(dataset.title.replace(/ /g, '+'))}`,
-        license: dataset.license,
-        publisher: dataset.publisher ? dataset.publisher.name : portalName,
-        tags: dataset.keyword || [],
-        categories: [],
-        raw: dataset,
-        region: wktToGeoJSON(dataset.spatial),
-        data: dataFiles
-      });
-    }
-
-    return Rx.Observable.of(...datasets);
+    return {
+      portalID: portalID,
+      name: dataset.title,
+      portalDatasetID: dataset.identifier,
+      createdTime: dataset.issued ? toUTC(new Date(getDateString(dataset.issued))) : null,
+      updatedTime: toUTC(dataset.modified ? new Date(getDateString(dataset.modified)) : new Date()),
+      description: dataset.description,
+      portalLink: dataset.landingPage || `${portalUrl}/search/type/dataset?query=${_.escape(dataset.title.replace(/ /g, '+'))}`,
+      license: dataset.license,
+      publisher: dataset.publisher ? dataset.publisher.name : portalName,
+      tags: dataset.keyword || [],
+      categories: [],
+      raw: dataset,
+      region: wktToGeoJSON(dataset.spatial),
+      data: dataFiles
+    };
   })
   .catch((error) => {
     logger.error(`Unable to download data from ${portalUrl}. Message: ${error.message}.`);

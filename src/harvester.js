@@ -38,6 +38,12 @@ const downloadPortalFn = {
   'DKAN': dkan.downloadPortal
 };
 
+/**
+ * Harvest data for a given portal.
+ * @param   {String}      platform   platform name
+ * @param   {String}      portal     portal name
+ * @returns {Observable}             no return
+ */
 export function harvestPortal(platform, portal) {
   let downloadPortal = downloadPortalFn[platform];
 
