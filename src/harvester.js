@@ -20,7 +20,8 @@ const logger = log4js.getLogger('harvester');
 const downlaodAllFn = {
   'OpenDataSoft': opendatasoft.downloadAll,
   'ArcGIS Open Data': arcgis.downloadAll,
-  'Socrata': socrata.downloadAll,
+  'Socrata': socrata.downloadAllUS,
+  'Socrata-EU': socrata.downloadAllEU,
   'CKAN': ckan.downloadAll,
   'Junar': junar.downloadAll,
   'GeoNode': geonode.downloadAll,

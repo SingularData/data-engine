@@ -5,8 +5,9 @@ import { Observable } from 'rxjs';
 import { RxHR } from "@akanass/rx-http-request";
 import { getDB } from '../database';
 import { toUTC } from '../utils/pg-util';
+import { getOptions } from '../utils/request-util';
 
-const userAgents = config.get('harvester.user_agents');
+const cocurrency = config.get('cocurrency');
 const logger = log4js.getLogger('ArcGIS Open Data');
 
 /**
@@ -41,7 +42,7 @@ export function downloadPortal(name) {
 
   return getDB()
     .query(sql, [name, 'ArcGIS Open Data'])
-    .concatMap((row) => download(row.id, row.url));
+    .mergeMap((row) => download(row.id, row.url), cocurrency);
 }
 
 /**
@@ -51,12 +52,7 @@ export function downloadPortal(name) {
  * @return {Observable}              a stream of dataset metadata
  */
 export function download(portalID, portalUrl) {
-  return RxHR.get(`${portalUrl}/data.json`, {
-    json: true,
-    headers: {
-      'User-Agent': _.sample(userAgents)
-    }
-  })
+  return RxHR.get(`${portalUrl}/data.json`, getOptions())
   .concatMap((result) => {
 
     if (_.isString(result.body)) {

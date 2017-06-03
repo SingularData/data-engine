@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import config from 'config';
 import Rx from 'rxjs';
 import log4js from 'log4js';
@@ -6,8 +5,9 @@ import { RxHR } from "@akanass/rx-http-request";
 import { getDB } from '../database';
 import { toUTC } from '../utils/pg-util';
 import { wktToGeoJSON } from '../utils/geom-util';
+import { getOptions } from '../utils/request-util';
 
-const userAgents = config.get('harvester.user_agents');
+const cocurrency = config.get('cocurrency');
 const logger = log4js.getLogger('GeoNode');
 
 /**
@@ -42,7 +42,7 @@ export function downloadPortal(name) {
 
   return getDB()
     .query(sql, [name, 'GeoNode'])
-    .concatMap((row) => download(row.id, row.name, row.url));
+    .mergeMap((row) => download(row.id, row.name, row.url), cocurrency);
 }
 
 /**
@@ -53,12 +53,7 @@ export function downloadPortal(name) {
  * @return {Rx.Observable}                  harvest job
  */
 export function download(portalID, portalName, portalUrl) {
-  return RxHR.get(`${portalUrl}/api/base`, {
-    json: true,
-    headers: {
-      'User-Agent': _.sample(userAgents)
-    }
-  })
+  return RxHR.get(`${portalUrl}/api/base`, getOptions())
   .concatMap((result) => {
     let datasets = [];
 

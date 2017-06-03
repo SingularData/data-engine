@@ -104,6 +104,8 @@ export function getLatestCheckList(platform, portal) {
   if (portal) {
     sql = `
       SELECT DISTINCT ON (uuid)
+        portal_id,
+        portal_dataset_id,
         uuid,
         version_number,
         raw_md5
@@ -138,9 +140,7 @@ export function getLatestCheckList(platform, portal) {
   return task
     .map((row) => toCamelCase(row))
     .reduce((collection, dataset) => {
-      let key = `${dataset.portal_id}:${dataset.portal_dataset_id}`;
-
-      collection[key] = {
+      collection[`${dataset.portal_id}:${dataset.portal_dataset_id}`] = {
         uuid: dataset.uuid,
         md5: dataset.rawMd5,
         version: dataset.versionNumber

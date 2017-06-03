@@ -1,13 +1,13 @@
-import _ from 'lodash';
 import config from 'config';
 import Rx from 'rxjs';
 import log4js from 'log4js';
 import { RxHR } from "@akanass/rx-http-request";
 import { getDB } from '../database';
 import { toUTC } from '../utils/pg-util';
+import { getOptions } from '../utils/request-util';
 
+const cocurrency = config.get('cocurrency');
 const limit = config.get('platforms.Junar.limit');
-const userAgents = config.get('harvester.user_agents');
 const logger = log4js.getLogger('Junar');
 
 /**
@@ -56,12 +56,7 @@ export function downloadPortal(name) {
  * @return {Rx.Observable}                  harvest job
  */
 export function download(portalID, portalName, apiUrl, apiKey) {
-  return RxHR.get(`${apiUrl}/api/v2/datasets/?auth_key=${apiKey}&offset=0&limit=1`, {
-    json: true,
-    headers: {
-      'User-Agent': _.sample(userAgents)
-    }
-  })
+  return RxHR.get(`${apiUrl}/api/v2/datasets/?auth_key=${apiKey}&offset=0&limit=1`, getOptions())
   .concatMap((result) => {
 
     if (!Number.isInteger(result.body.count)) {
@@ -71,12 +66,7 @@ export function download(portalID, portalName, apiUrl, apiKey) {
     let totalCount = Math.ceil(result.body.count / limit);
 
     return Rx.Observable.range(0, totalCount)
-      .concatMap((i) => RxHR.get(`${apiUrl}/api/v2/datasets/?auth_key=${apiKey}&offset=${i * limit}&limit=${limit}`, {
-        json: true,
-        headers: {
-          'User-Agent': _.sample(userAgents)
-        }
-      }));
+      .mergeMap((i) => RxHR.get(`${apiUrl}/api/v2/datasets/?auth_key=${apiKey}&offset=${i * limit}&limit=${limit}`, getOptions()), cocurrency);
   })
   .concatMap((result) => {
     let datasets = [];

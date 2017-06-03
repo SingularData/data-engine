@@ -5,17 +5,17 @@ import log4js from 'log4js';
 import { RxHR } from "@akanass/rx-http-request";
 import { getDB } from '../database';
 import { toUTC } from '../utils/pg-util';
+import { getOptions } from '../utils/request-util';
 
+const cocurrency = config.get('cocurrency');
 const limit = config.get('platforms.Socrata.limit');
-const userAgents = config.get('harvester.user_agents');
 const logger = log4js.getLogger('Socrata');
 
 /**
- * Get a list of harvesting Jobs.
+ * Download all Socrata data.
  * @return {Rx.Observable}        harvest job
  */
 export function downloadAll() {
-
   let sql = `
     SELECT
       portal.id,
@@ -29,7 +29,41 @@ export function downloadAll() {
 
   return getDB()
     .query(sql, ['Socrata', 'Socrata-EU'])
-    .concatMap((portal) => download(portal.id, portal.name, portal.url, portal.region));
+    .mergeMap((portal) => download(portal.id, portal.name, portal.url, portal.region), cocurrency);
+}
+
+export function downloadAllUS() {
+  let sql = `
+    SELECT
+      portal.id,
+      portal.name,
+      portal.url,
+      'us' as region
+    FROM portal
+    LEFT JOIN platform ON platform.id = portal.platform_id
+    WHERE platform.name = $1::text
+  `;
+
+  return getDB()
+    .query(sql, ['Socrata'])
+    .mergeMap((portal) => download(portal.id, portal.name, portal.url, portal.region), cocurrency);
+}
+
+export function downloadAllEU() {
+  let sql = `
+    SELECT
+      portal.id,
+      portal.name,
+      portal.url,
+      'EU' as region
+    FROM portal
+    LEFT JOIN platform ON platform.id = portal.platform_id
+    WHERE platform.name = $1::text
+  `;
+
+  return getDB()
+    .query(sql, ['Socrata-EU'])
+    .mergeMap((portal) => download(portal.id, portal.name, portal.url, portal.region), cocurrency);
 }
 
 /**
@@ -60,12 +94,7 @@ export function downloadPortal(name, region) {
  * @return {Rx.Observable}                  harvest job
  */
 export function download(portalID, portalName, portalUrl, region) {
-  return RxHR.get(`http://api.${region}.socrata.com/api/catalog/v1?domains=${portalUrl}&offset=0&limit=0`, {
-    json: true,
-    headers: {
-      'User-Agent': _.sample(userAgents)
-    }
-  })
+  return RxHR.get(`http://api.${region}.socrata.com/api/catalog/v1?domains=${portalUrl}&offset=0&limit=0`, getOptions())
   .concatMap((result) => {
     if (result.body.error) {
       throw new Error(result.body.error);
@@ -74,12 +103,7 @@ export function download(portalID, portalName, portalUrl, region) {
     let totalCount = Math.ceil(result.body.resultSetSize / limit);
 
     return Rx.Observable.range(0, totalCount)
-      .concatMap((i) => RxHR.get(`http://api.${region}.socrata.com/api/catalog/v1?domains=${portalUrl}&limit=${limit}&offset=${i * limit}`, {
-        json: true,
-        headers: {
-          'User-Agent': _.sample(userAgents)
-        }
-      }));
+      .concatMap((i) => RxHR.get(`http://api.${region}.socrata.com/api/catalog/v1?domains=${portalUrl}&limit=${limit}&offset=${i * limit}`, getOptions()));
   })
   .concatMap((result) => {
     if (result.body.error) {

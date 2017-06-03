@@ -5,9 +5,10 @@ import log4js from 'log4js';
 import { RxHR } from "@akanass/rx-http-request";
 import { getDB } from '../database';
 import { toUTC } from '../utils/pg-util';
+import { getOptions } from '../utils/request-util';
 
+const cocurrency = config.get('cocurrency');
 const rows = config.get('platforms.OpenDataSoft.rows');
-const userAgents = config.get('harvester.user_agents');
 const logger = log4js.getLogger('OpenDataSoft');
 
 /**
@@ -29,17 +30,12 @@ export function downloadAll() {
       return collection;
     }, {})
     .concatMap((portalIDs) => {
-      return RxHR.get('https://data.opendatasoft.com/api/v2/catalog/datasets?rows=0&start=0', {
-        json: true,
-        headers: {
-          'User-Agent': _.sample(userAgents)
-        }
-      })
+      return RxHR.get('https://data.opendatasoft.com/api/v2/catalog/datasets?rows=0&start=0', getOptions())
       .concatMap((result) => {
         let totalCount = Math.ceil(result.body.total_count / rows);
 
         return Rx.Observable.range(0, totalCount)
-          .concatMap((i) => download(`https://data.opendatasoft.com/api/v2/catalog/datasets?rows=${rows}&start=${i * rows}`, portalIDs));
+          .mergeMap((i) => download(`https://data.opendatasoft.com/api/v2/catalog/datasets?rows=${rows}&start=${i * rows}`, portalIDs), cocurrency);
       });
     });
 }
@@ -60,19 +56,14 @@ export function downloadPortal(name) {
   return getDB()
     .query(sql, [name, 'OpenDataSoft'])
     .concatMap((row) => {
-      return RxHR.get(`${row.url}/api/v2/catalog/datasets?rows=0&start=0`, {
-        json: true,
-        headers: {
-          'User-Agent': _.sample(userAgents)
-        }
-      })
+      return RxHR.get(`${row.url}/api/v2/catalog/datasets?rows=0&start=0`, getOptions())
       .concatMap((result) => {
         let totalCount = Math.ceil(result.body.total_count / rows);
         let idMap = {};
         idMap[row.name] = row.id;
 
         return Rx.Observable.range(0, totalCount)
-          .concatMap((i) => download(`${row.url}/api/v2/catalog/datasets?rows=${rows}&start=${i * rows}`, idMap));
+          .mergeMap((i) => download(`${row.url}/api/v2/catalog/datasets?rows=${rows}&start=${i * rows}`, idMap), cocurrency);
       });
     });
 }
@@ -85,12 +76,7 @@ export function downloadPortal(name) {
  */
 export function download(url, portalIDs) {
 
-  return RxHR.get(url, {
-    json: true,
-    headers: {
-      'User-Agent': _.sample(userAgents)
-    }
-  })
+  return RxHR.get(url, getOptions())
   .concatMap((result) => {
     let datasets = [];
     let data = result.body;

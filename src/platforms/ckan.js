@@ -5,9 +5,10 @@ import log4js from 'log4js';
 import { RxHR } from "@akanass/rx-http-request";
 import { getDB } from '../database';
 import { toUTC } from '../utils/pg-util';
+import { getOptions } from '../utils/request-util';
 
+const cocurrency = config.get('cocurrency');
 const rows = config.get('platforms.CKAN.rows');
-const userAgents = config.get('harvester.user_agents');
 const logger = log4js.getLogger('CKAN');
 
 /**
@@ -52,12 +53,7 @@ export function downloadPortal(name) {
  * @return {Rx.Observable}                  harvest job
  */
 export function download(portalID, portalUrl) {
-  return RxHR.get(`${portalUrl}/api/3/action/package_search?start=0&rows=0`, {
-    json: true,
-    headers: {
-      'User-Agent': _.sample(userAgents)
-    }
-  })
+  return RxHR.get(`${portalUrl}/api/3/action/package_search?start=0&rows=0`, getOptions())
   .concatMap((result) => {
 
     if (_.isString(result.body)) {
@@ -67,12 +63,7 @@ export function download(portalID, portalUrl) {
     let totalCount = Math.ceil(result.body.result.count / rows);
 
     return Rx.Observable.range(0, totalCount)
-      .concatMap((i) => RxHR.get(`${portalUrl}/api/3/action/package_search?rows=${rows}&start=${i * rows}`, {
-        json: true,
-        headers: {
-          'User-Agent': _.sample(userAgents)
-        }
-      }));
+      .mergeMap((i) => RxHR.get(`${portalUrl}/api/3/action/package_search?rows=${rows}&start=${i * rows}`, getOptions()), cocurrency);
   })
   .concatMap((result) => {
 
