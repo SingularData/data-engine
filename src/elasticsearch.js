@@ -2,9 +2,13 @@ const es = require('elasticsearch');
 const awsES = require('http-aws-es');
 
 import config from 'config';
+import { resolve } from 'path';
+import { readFileSync } from 'fs';
 import { flatMap, omit } from 'lodash';
 import { Observable } from 'rxjs';
+import { getDB } from './database';
 
+let cocurrency = config.get('cocurrency');
 let currentClient;
 
 /**
@@ -50,12 +54,9 @@ export function upsert(datasets) {
         _id: dataset.uuid
       }
     };
+    let source = omit(dataset, 'uuid', 'portalID', 'raw', 'versionNumber', 'versionPeriod');
 
-    let body = {
-      upsert: omit(dataset, 'uuid', 'portalID', 'raw', 'versionNumber', 'versionPeriod')
-    };
-
-    return [action, body];
+    return [action, source];
   });
 
   return Observable.fromPromise(client.bulk({ body }));
@@ -78,4 +79,20 @@ export function clear() {
   };
 
   return Observable.fromPromise(client.deleteByQuery(configs));
+}
+
+/**
+ * Clear all indexes and rebuild the indexes.
+ * @returns {Observable} empty observable
+ */
+export function reindex() {
+  return clear()
+    .mergeMap(() => {
+      let db = getDB();
+      let sql = readFileSync(resolve(__dirname, 'queries/get_latest_data.sql'), 'utf8');
+
+      return db.query(sql);
+    })
+    .bufferCount(config.get('database.insert_limit'))
+    .mergeMap((datasets) => upsert(datasets), cocurrency);
 }
