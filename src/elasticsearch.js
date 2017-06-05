@@ -13,6 +13,7 @@ let currentClient;
 
 /**
  * Get the ElasticSearch client based on the application environment.
+ * @returns {Client}  ElasticSearch Client
  */
 export function getClient() {
 
