@@ -4,7 +4,7 @@
   "description": "data pipeline for datarea.io",
   "main": "index.js",
   "scripts": {
-    "update-all": "bable-node scripts/update.all.js",
+    "update-all": "babel-node scripts/update.all.js",
     "test-connection": "babel-node scripts/connection.test.js",
     "test": "mocha test/**/*.test.js --require babel-register",
     "prepush": "npm test"
