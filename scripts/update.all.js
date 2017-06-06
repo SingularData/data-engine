@@ -1,4 +1,4 @@
-import { harvestAll } from '../../src/harvester';
+import { harvestAll } from '../src/harvester';
 import _ from 'lodash';
 
 harvestAll()
