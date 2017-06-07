@@ -156,7 +156,10 @@ export function getLatestCheckList(platform, portal) {
  */
 export function refreshDatabase() {
   let db = getDB();
-  let sql = 'REFRESH MATERIALIZED VIEW public.view_portal;';
+  let sql = `
+    REFRESH MATERIALIZED VIEW public.mview_portal;
+    REFRESH MATERIALIZED VIEW public.mview_latest_dataset;
+  `;
   return db.query(sql);
 }
 

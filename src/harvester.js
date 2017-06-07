@@ -40,11 +40,15 @@ const downloadPortalFn = {
 
 /**
  * Harvest data for a given portal.
- * @param   {String}      platform   platform name
- * @param   {String}      portal     portal name
- * @returns {Observable}             no return
+ * @param   {String}      platform            platform name
+ * @param   {String}      portal              portal name
+ * @param   {Object}      [options]           options
+ * @param   {Boolean}     [options.refreshDB] a boolean value indicating whether
+ *                                            to refresh database after data
+ *                                            harvesting
+ * @returns {Observable}                      empty observable
  */
-export function harvestPortal(platform, portal) {
+export function harvestPortal(platform, portal, options = {}) {
   let downloadPortal = downloadPortalFn[platform];
 
   if (!downloadPortal) {
@@ -57,7 +61,7 @@ export function harvestPortal(platform, portal) {
     return Observable.empty();
   });
 
-  return Observable.concat(getDataChecklist, downloadPortal(portal))
+  let observable = Observable.concat(getDataChecklist, downloadPortal(portal))
     .map((dataset) => checkDataset(dataset, dataCache))
     .catch((err) => {
       logger.error(`Error of data processing at ${platform}`, err);
@@ -65,16 +69,29 @@ export function harvestPortal(platform, portal) {
     })
     .filter((dataset) => dataset !== null)
     .bufferCount(config.get('database.insert_limit'))
-    .concatMap((datasets) => Observable.merge(save(datasets), upsert(datasets)))
-    .concat(refreshDatabase());
+    .concatMap((datasets) => Observable.merge(save(datasets), upsert(datasets)));
+
+  if (options.refreshDB === undefined) {
+    options.refreshDB = true;
+  }
+
+  if (options.refreshDB) {
+    observable = observable.concat(refreshDatabase());
+  }
+
+  return observable;
 }
 
 /**
  * Harvest the dataset metadata from one platform and save into the database.
- * @param  {String}         platform      platform name
- * @return {Observable}                   no return
+ * @param  {String}      platform            platform name
+ * @param  {Object}      [options]           options
+ * @param  {Boolean}     [options.refreshDB] a boolean value indicating whether
+ *                                           to refresh database after data
+ *                                           harvesting
+ * @return {Observable}                      empty observable
  */
-export function harvestPlatform(platform) {
+export function harvestPlatform(platform, options = {}) {
   let downloadAll = downlaodAllFn[platform];
 
   if (!downloadAll) {
@@ -87,7 +104,7 @@ export function harvestPlatform(platform) {
     return Observable.empty();
   });
 
-  return Observable.concat(getDataChecklist, downloadAll())
+  let observable = Observable.concat(getDataChecklist, downloadAll())
     .map((dataset) => checkDataset(dataset, dataCache))
     .catch((err) => {
       logger.error(`Error of data processing at ${platform}`, err);
@@ -95,8 +112,17 @@ export function harvestPlatform(platform) {
     })
     .filter((dataset) => dataset !== null)
     .bufferCount(config.get('database.insert_limit'))
-    .concatMap((datasets) => Observable.merge(save(datasets), upsert(datasets)))
-    .concat(refreshDatabase());
+    .concatMap((datasets) => Observable.merge(save(datasets), upsert(datasets)));
+
+  if (options.refreshDB === undefined) {
+    options.refreshDB = true;
+  }
+
+  if (options.refreshDB) {
+    observable = observable.concat(refreshDatabase());
+  }
+
+  return observable;
 }
 
 /**
@@ -108,11 +134,12 @@ export function harvestAll() {
 
   return db.query('SELECT name FROM platform')
     .concatMap((platform) => {
-      return harvestPlatform(platform.name).catch((error) => {
+      return harvestPlatform(platform.name, { refreshDB: false }).catch((error) => {
         logger.error(`Unable to download data from ${platform.name}`, error);
         return Observable.empty();
       });
-    });
+    })
+    .concat(refreshDatabase());
 }
 
 function checkDataset(dataset, checkList) {
