@@ -47,11 +47,11 @@ export function downloadPortal(name) {
 
 /**
  * Harvest the given ArcGIS Open Data portal.
- * @param  {Number}      portalID    portal ID
+ * @param  {Number}      portalId    portal ID
  * @param  {String}      portalUrl   portal Url
  * @return {Observable}              a stream of dataset metadata
  */
-export function download(portalID, portalUrl) {
+export function download(portalId, portalUrl) {
   return RxHR.get(`${portalUrl}/data.json`, getOptions())
   .concatMap((result) => {
 
@@ -66,25 +66,25 @@ export function download(portalID, portalUrl) {
       return {
         name: file.title || file.format,
         format: _.toLower(file.format),
-        link: file.downloadURL || file.accessURL
+        url: file.downloadURL || file.accessURL
       };
     });
 
     return {
-      portalID: portalID,
+      portalId: portalId,
       name: dataset.title,
-      portalDatasetID: dataset.identifier,
-      createdTime: dataset.issued ? toUTC(new Date(dataset.issued)) : null,
-      updatedTime: toUTC(new Date(dataset.modified)),
+      portalDatasetId: dataset.identifier,
+      created: dataset.issued ? toUTC(new Date(dataset.issued)) : null,
+      updated: toUTC(new Date(dataset.modified)),
       description: dataset.description,
-      portalLink: dataset.landingPage,
+      url: dataset.landingPage,
       license: dataset.license,
       publisher: dataset.publisher.name,
       tags: dataset.keyword,
       categories: [],
       raw: dataset,
       region: bboxToGeoJSON(dataset.spatial),
-      data: dataFiles
+      files: dataFiles
     };
   })
   .catch((error) => {

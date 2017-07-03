@@ -87,13 +87,13 @@ export function downloadPortal(name, region) {
 
 /**
  * Harvest the given Socrata portal.
- * @param  {Number}             portalID    portal ID
+ * @param  {Number}             portalId    portal ID
  * @param  {String}             portalName  portal name
  * @param  {String}             portalUrl   portal url
  * @param  {String}             region      portal region (us or eu)
  * @return {Rx.Observable}                  harvest job
  */
-export function download(portalID, portalName, portalUrl, region) {
+export function download(portalId, portalName, portalUrl, region) {
   return RxHR.get(`http://api.${region}.socrata.com/api/catalog/v1?domains=${portalUrl}&offset=0&limit=0`, getOptions())
   .concatMap((result) => {
     if (result.body.error) {
@@ -113,20 +113,22 @@ export function download(portalID, portalName, portalUrl, region) {
     return Rx.Observable.of(...result.body.results);
   })
   .map((dataset) =>{
+    let resource = dataset.resource;
+
     return {
-      portalID: portalID,
-      name: dataset.name,
-      portalDatasetID: dataset.id,
-      createdTime: toUTC(new Date(dataset.createdAt)),
-      updatedTime: toUTC(new Date(dataset.updatedAt)),
-      description: dataset.description,
-      portalLink: dataset.permalink || `${portalUrl}/d/${dataset.id}`,
+      portalId,
+      name: resource.name,
+      portalDatasetId: resource.id,
+      created: toUTC(new Date(resource.createdAt)),
+      updated: toUTC(new Date(resource.updatedAt)),
+      description: resource.description,
+      url: dataset.permalink || `${portalUrl}/d/${dataset.id}`,
       license: _.get(dataset.metadata, 'license'),
       publisher: portalName,
       tags: _.concat(_.get(dataset.classification, 'tags'), _.get(dataset.classificatio, 'domain_tags')),
       categories: _.concat(_.get(dataset.classification, 'categories'), _.get(dataset.classification, 'domain_category')),
       raw: dataset,
-      data: [],
+      files: [],
       region: null
     };
   })

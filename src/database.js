@@ -50,37 +50,37 @@ export function save(metadatas) {
       uuid,
       name,
       description,
-      created_time,
-      updated_time,
-      portal_link,
+      created,
+      updated,
+      url,
       publisher,
       tags,
       categories,
       raw,
-      version_number,
+      version,
       version_period,
       region,
-      data
+      files
     ) VALUES
   `;
   let values = _.map(metadatas, (metadata) => {
     return `(
-      ${valueToString(metadata.portalID)},
-      ${valueToString(metadata.portalDatasetID)},
+      ${valueToString(metadata.portalId)},
+      ${valueToString(metadata.portalDatasetId)},
       ${valueToString(metadata.uuid)},
       ${valueToString(metadata.name || 'Untitled Dataset')},
       ${valueToString(metadata.description)},
-      ${valueToString(metadata.createdTime)},
-      ${valueToString(metadata.updatedTime)},
-      ${valueToString(metadata.portalLink)},
+      ${valueToString(metadata.created)},
+      ${valueToString(metadata.updated)},
+      ${valueToString(metadata.url)},
       ${valueToString(metadata.publisher || 'Unknown')},
       ${valueToString(_.uniq(metadata.tags))}::text[],
       ${valueToString(_.uniq(metadata.categories))}::text[],
       ${valueToString(metadata.raw)},
-      ${valueToString(metadata.versionNumber)},
+      ${valueToString(metadata.version)},
       ${valueToString(metadata.versionPeriod)},
-      ST_SetSRID(ST_Force2D(ST_GeomFromGeoJSON(${valueToString(metadata.region)})), 4326),
-      ${valueToString(metadata.data)}::json[]
+      ${valueToString(metadata.region)},
+      ${valueToString(metadata.files)}::json[]
     )`;
   });
 
@@ -107,14 +107,14 @@ export function getLatestCheckList(platform, portal) {
         portal_id,
         portal_dataset_id,
         uuid,
-        version_number,
+        version,
         raw_md5
       FROM dataset AS d
       LEFT JOIN portal AS p ON p.id = d.portal_id
       WHERE p.name = $1::text AND p.platform_id = (
         SELECT id FROM platform WHERE name = $2::text LIMIT 1
       )
-      ORDER BY uuid, version_number DESC
+      ORDER BY uuid, version DESC
     `;
 
     task = db.query(sql, [portal, platform]);
@@ -124,14 +124,14 @@ export function getLatestCheckList(platform, portal) {
         portal_id,
         portal_dataset_id,
         uuid,
-        version_number,
+        version,
         raw_md5
       FROM dataset AS d
       LEFT JOIN portal AS p ON p.id = d.portal_id
       WHERE p.platform_id = (
         SELECT id FROM platform WHERE name = $1::text LIMIT 1
       )
-      ORDER BY uuid, version_number DESC
+      ORDER BY uuid, version DESC
     `;
 
     task = db.query(sql, [platform]);
@@ -143,7 +143,7 @@ export function getLatestCheckList(platform, portal) {
       collection[`${dataset.portal_id}:${dataset.portal_dataset_id}`] = {
         uuid: dataset.uuid,
         md5: dataset.rawMd5,
-        version: dataset.versionNumber
+        version: dataset.version
       };
 
       return collection;

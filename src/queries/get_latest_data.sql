@@ -4,7 +4,7 @@ SELECT
   description,
   publisher,
   portal,
-  portal_link,
+  url,
   platform,
   tags,
   categories

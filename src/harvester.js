@@ -143,13 +143,13 @@ export function harvestAll() {
 }
 
 function checkDataset(dataset, checkList) {
-  let key = `${dataset.portalID}:${dataset.portalDatasetID}`;
+  let key = `${dataset.portalId}:${dataset.portalDatasetId}`;
   let existing = checkList[key];
 
   if (!existing) {
     dataset.uuid = uuid.v4();
-    dataset.versionNumber = 2;
-    dataset.versionPeriod = `[${dateToString(dataset.updatedTime)},)`;
+    dataset.version = 2;
+    dataset.versionPeriod = `[${dateToString(dataset.updated)},)`;
   } else if (existing.md5 === md5(JSON.stringify(dataset.raw))) {
     delete checkList[key];
     return null;
@@ -157,8 +157,8 @@ function checkDataset(dataset, checkList) {
     delete checkList[key];
 
     dataset.uuid = existing.uuid;
-    dataset.versionNumber = existing.version + 1;
-    dataset.versionPeriod = `[${dateToString(dataset.updatedTime)},)`;
+    dataset.version = existing.version + 1;
+    dataset.versionPeriod = `[${dateToString(dataset.updated)},)`;
   }
 
   return dataset;

@@ -5,8 +5,8 @@ import { harvestPlatform, harvestAll, __RewireAPI__ as ToDosRewireAPI } from '..
 
 const expect = chai.expect;
 
-function dataset(portalID, portalDatasetID, updatedTime) {
-  return { portalID, portalDatasetID, updatedTime, raw: {} };
+function dataset(portalID, portalDatasetID, updated) {
+  return { portalID, portalDatasetID, updated, raw: {} };
 }
 
 describe('harvester.js', () => {

@@ -55,7 +55,7 @@ export function upsert(datasets) {
         _id: dataset.uuid
       }
     };
-    let source = omit(dataset, 'uuid', 'portalID', 'raw', 'versionNumber', 'versionPeriod');
+    let source = omit(dataset, 'uuid', 'portalId', 'raw', 'version', 'versionPeriod');
 
     return [action, source];
   });

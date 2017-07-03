@@ -48,12 +48,12 @@ export function downloadPortal(name) {
 
 /**
  * Harvest the given DKAN portal.
- * @param  {Number}             portalID    portal ID
+ * @param  {Number}             portalId    portal ID
  * @param  {String}             portalName  portal name
  * @param  {String}             portalUrl   portal URL
  * @return {Rx.Observable}                  harvest job
  */
-export function download(portalID, portalName, portalUrl) {
+export function download(portalId, portalName, portalUrl) {
   return RxHR.get(`${portalUrl}/data.json`, getOptions())
   .concatMap((result) => {
 
@@ -69,27 +69,27 @@ export function download(portalID, portalName, portalUrl) {
       return {
         name: file.title || file.format,
         format: _.toLower(file.format),
-        link: file.downloadURL || file.accessURL,
+        url: file.downloadURL || file.accessURL,
         description: file.description
       };
     })
-    .filter((file) => file.link && file.format);
+    .filter((file) => file.url && file.format);
 
     return {
-      portalID: portalID,
+      portalId,
       name: dataset.title,
-      portalDatasetID: dataset.identifier,
-      createdTime: dataset.issued ? toUTC(new Date(getDateString(dataset.issued))) : null,
-      updatedTime: toUTC(dataset.modified ? new Date(getDateString(dataset.modified)) : new Date()),
+      portalDatasetId: dataset.identifier,
+      created: dataset.issued ? toUTC(new Date(getDateString(dataset.issued))) : null,
+      updated: toUTC(dataset.modified ? new Date(getDateString(dataset.modified)) : new Date()),
       description: dataset.description,
-      portalLink: dataset.landingPage || `${portalUrl}/search/type/dataset?query=${_.escape(dataset.title.replace(/ /g, '+'))}`,
+      url: dataset.landingPage || `${portalUrl}/search/type/dataset?query=${_.escape(dataset.title.replace(/ /g, '+'))}`,
       license: dataset.license,
       publisher: dataset.publisher ? dataset.publisher.name : portalName,
       tags: dataset.keyword || [],
       categories: [],
       raw: dataset,
       region: wktToGeoJSON(dataset.spatial),
-      data: dataFiles
+      files: dataFiles
     };
   })
   .catch((error) => {

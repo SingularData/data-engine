@@ -49,13 +49,13 @@ export function downloadPortal(name) {
 
 /**
  * Harvest the given Junar portal.
- * @param  {Number}             portalID    portal ID
+ * @param  {Number}             portalId    portal ID
  * @param  {String}             portalName  portal Name
  * @param  {String}             apiUrl      portal API url
  * @param  {String}             apiKey      portal API key
  * @return {Rx.Observable}                  harvest job
  */
-export function download(portalID, portalName, apiUrl, apiKey) {
+export function download(portalId, portalName, apiUrl, apiKey) {
   return RxHR.get(`${apiUrl}/api/v2/datasets/?auth_key=${apiKey}&offset=0&limit=1`, getOptions())
   .concatMap((result) => {
 
@@ -70,26 +70,26 @@ export function download(portalID, portalName, apiUrl, apiKey) {
   })
   .concatMap((result) => Rx.Observable.of(...result.body.results))
   .map((dataset) => {
-    let createdTime = new Date();
-    let updatedTime = new Date();
+    let created = new Date();
+    let updated = new Date();
 
-    createdTime.setTime(dataset.created_at * 1000);
-    updatedTime.setTime(dataset.modified_at * 1000);
+    created.setTime(dataset.created_at * 1000);
+    updated.setTime(dataset.modified_at * 1000);
 
     return {
-      portalID: portalID,
+      portalId: portalId,
       name: dataset.title,
-      portalDatasetID: dataset.guid,
-      createdTime: toUTC(createdTime),
-      updatedTime: toUTC(updatedTime),
+      portalDatasetId: dataset.guid,
+      created: toUTC(created),
+      updated: toUTC(updated),
       description: dataset.description,
-      license: 'Unknown',
-      portalLink: dataset.link,
+      license: null,
+      url: dataset.link,
       publisher: portalName,
       tags: dataset.tags,
       categories: [dataset.category_name],
       raw: dataset,
-      data: [],
+      files: [],
       region: null
     };
   })

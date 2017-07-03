@@ -47,36 +47,36 @@ export function downloadPortal(name) {
 
 /**
  * Harvest the given GeoNode portal.
- * @param  {Number}             portalID    portal ID
+ * @param  {Number}             portalId    portal ID
  * @param  {String}             portalName  portal name
  * @param  {String}             portalUrl   portal URL
  * @return {Rx.Observable}                  harvest job
  */
-export function download(portalID, portalName, portalUrl) {
+export function download(portalId, portalName, portalUrl) {
   return RxHR.get(`${portalUrl}/api/base`, getOptions())
   .concatMap((result) => Rx.Observable.of(...result.body.objects))
   .map((dataset) => {
     let dataFiles = [];
 
     if (dataset.distribution_description && dataset.distribution_url) {
-      dataFiles.push({ description: dataset.distribution_description, link: dataset.distribution_url });
+      dataFiles.push({ description: dataset.distribution_description, url: dataset.distribution_url });
     }
 
     return {
-      portalID: portalID,
+      portalId: portalId,
       name: dataset.title,
-      portalDatasetID: dataset.uuid,
-      createdTime: null,
-      updatedTime: toUTC(new Date(dataset.date)),
+      portalDatasetId: dataset.uuid,
+      created: null,
+      updated: toUTC(new Date(dataset.date)),
       description: dataset.abstract,
-      portalLink: dataset.distribution_url || `${portalUrl}${dataset.detail_url}`,
+      url: dataset.distribution_url || `${portalUrl}${dataset.detail_url}`,
       license: null,
       publisher: portalName,
       tags: [],
       categories: [dataset.category__gn_description],
       raw: dataset,
       region: wktToGeoJSON(dataset.csw_wkt_geometry),
-      data: dataFiles
+      files: dataFiles
     };
   })
   .catch((error) => {

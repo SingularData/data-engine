@@ -5,29 +5,30 @@ import { save, __RewireAPI__ as ToDosRewireAPI } from '../src/database.js';
 const expect = chai.expect;
 
 export function validateMetadata(metadata) {
-  expect(metadata).to.have.property('portalID');
+  expect(metadata).to.have.property('portalId');
   expect(metadata).to.have.property('name');
-  expect(metadata).to.have.property('portalDatasetID');
-  expect(metadata).to.have.property('createdTime');
-  expect(metadata).to.have.property('updatedTime');
+  expect(metadata).to.have.property('portalDatasetId');
+  expect(metadata).to.have.property('created');
+  expect(metadata).to.have.property('updated');
   expect(metadata).to.have.property('description');
-  expect(metadata).to.have.property('portalLink');
+  expect(metadata).to.have.property('url');
   expect(metadata).to.have.property('license');
   expect(metadata).to.have.property('publisher');
   expect(metadata).to.have.property('tags');
   expect(metadata).to.have.property('categories');
   expect(metadata).to.have.property('raw');
-  expect(metadata).to.have.property('data');
+  expect(metadata).to.have.property('files');
 
-  expect(metadata.portalID).to.be.a('number');
+  expect(metadata.portalId).to.be.a('number');
   expect(metadata.name).to.be.a('string');
-  expect(metadata.updatedTime).to.be.a('date');
-  expect(metadata.portalDatasetID).to.be.a('string');
-  expect(metadata.portalLink).to.be.a('string');
+  expect(metadata.updated).to.be.a('date');
+  expect(metadata.portalDatasetId).to.be.a('string');
+  expect(metadata.url).to.be.a('string');
   expect(metadata.tags).to.be.an('array');
   expect(metadata.categories).to.be.an('array');
   expect(metadata.raw).to.be.an('object');
   expect(metadata.categories).to.be.an('array');
+  expect(metadata.files).to.be.an('array');
 }
 
 describe('database.js', () => {
@@ -40,20 +41,20 @@ describe('database.js', () => {
     });
 
     let metadatas = [{
-      portalID: 1,
-      portalDatasetID: 1,
+      portalId: 1,
+      portalDatasetId: 1,
       uuid: 'test-uuid',
       name: 'test',
       description: null,
-      createdTime: null,
-      updatedTime: new Date(Date.UTC(2017, 1, 1)),
-      portalLink: 'http://localhost',
+      created: null,
+      updated: new Date(Date.UTC(2017, 1, 1)),
+      url: 'http://localhost',
       publisher: 'my portal',
       tags: ['of no use'],
       categories: ['ToDelete'],
       raw: {},
       data: [],
-      versionNumber: 1,
+      version: 1,
       versionPeriod: '[,)'
     }];
 
@@ -64,17 +65,17 @@ describe('database.js', () => {
       uuid,
       name,
       description,
-      created_time,
-      updated_time,
-      portal_link,
+      created,
+      updated,
+      url,
       publisher,
       tags,
       categories,
       raw,
-      version_number,
+      version,
       version_period,
       region,
-      data
+      files
     ) VALUES
   (
       1,
@@ -91,8 +92,8 @@ describe('database.js', () => {
       '{}',
       1,
       '[,)',
-      ST_SetSRID(ST_Force2D(ST_GeomFromGeoJSON(NULL)), 4326),
-      ARRAY[]::json[]
+      NULL,
+      NULL::json[]
     )`;
 
     save(metadatas)

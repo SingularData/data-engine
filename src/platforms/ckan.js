@@ -35,7 +35,7 @@ export function downloadAll() {
  */
 export function downloadPortal(name) {
   let sql = `
-    SELECT p.id, p.url FROM portal AS p
+    SELECT p.id, p.name, p.url FROM portal AS p
     LEFT JOIN platform AS pl ON pl.id = p.platform_id
     WHERE p.name = $1::text AND pl.name = $2::text
     LIMIT 1
@@ -43,16 +43,17 @@ export function downloadPortal(name) {
 
   return getDB()
     .query(sql, [name, 'CKAN'])
-    .concatMap((row) => download(row.id, row.url));
+    .concatMap((row) => download(row.id, row.name, row.url));
 }
 
 /**
  * Harvest the given CKAN portal.
- * @param  {Number}             portalID    portal ID
+ * @param  {Number}             portalId    portal ID
+ * @param  {String}             portalName  portal Name
  * @param  {String}             portalUrl   portal Url
  * @return {Rx.Observable}                  harvest job
  */
-export function download(portalID, portalUrl) {
+export function download(portalId, portalName, portalUrl) {
   return RxHR.get(`${portalUrl}/api/3/action/package_search?start=0&rows=0`, getOptions())
   .concatMap((result) => {
 
@@ -78,26 +79,26 @@ export function download(portalID, portalUrl) {
       return {
         name: file.title || file.name || file.format,
         description: file.description,
-        link: file.url,
+        url: file.url,
         format: file.format
       };
     });
 
     return {
-      portalID: portalID,
+      portalId: portalId,
       name: dataset.title,
-      portalDatasetID: dataset.id,
-      createdTime: toUTC(dataset.__extras ? new Date(dataset.__extras.metadata_created) : new Date(dataset.metadata_created)),
-      updatedTime: toUTC(dataset.__extras ? new Date(dataset.__extras.metadata_modified) : new Date(dataset.metadata_modified)),
+      portalDatasetId: dataset.id,
+      created: toUTC(dataset.__extras ? new Date(dataset.__extras.metadata_created) : new Date(dataset.metadata_created)),
+      updated: toUTC(dataset.__extras ? new Date(dataset.__extras.metadata_modified) : new Date(dataset.metadata_modified)),
       description: dataset.notes,
-      portalLink: `${portalUrl}/dataset/${dataset.package_id || dataset.id}`,
+      url: `${portalUrl}/dataset/${dataset.package_id || dataset.id}`,
       license: dataset.license_title,
-      publisher: _.get(dataset.organization, 'name'),
+      publisher: _.get(dataset.organization, 'name') || portalName,
       tags: _.map(dataset.tags, 'display_name'),
       categories: _.map(dataset.groups, 'display_name'),
       raw: dataset,
       region: null,
-      data: dataFiles
+      files: dataFiles
     };
   })
   .catch((error) => {
