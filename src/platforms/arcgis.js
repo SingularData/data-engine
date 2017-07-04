@@ -34,7 +34,7 @@ export function downloadAll() {
  */
 export function downloadPortal(name) {
   let sql = `
-    SELECT p.id, p.url FROM portal AS p
+    SELECT p.id, p.name, p.url FROM portal AS p
     LEFT JOIN platform AS pl ON pl.id = p.platform_id
     WHERE p.name = $1::text AND pl.name = $2::text
     LIMIT 1
@@ -42,55 +42,58 @@ export function downloadPortal(name) {
 
   return getDB()
     .query(sql, [name, 'ArcGIS Open Data'])
-    .mergeMap((row) => download(row.id, row.url), cocurrency);
+    .mergeMap((row) => download(row.id, row.name, row.url), cocurrency);
 }
 
 /**
  * Harvest the given ArcGIS Open Data portal.
  * @param  {Number}      portalId    portal ID
+ * @param  {String}      portalName  portal name
  * @param  {String}      portalUrl   portal Url
  * @return {Observable}              a stream of dataset metadata
  */
-export function download(portalId, portalUrl) {
+export function download(portalId, portalName, portalUrl) {
   return RxHR.get(`${portalUrl}/data.json`, getOptions())
-  .concatMap((result) => {
+    .concatMap((result) => {
 
-    if (_.isString(result.body)) {
-      throw new Error(`The target portal doesn't provide APIs: ${portalUrl}`);
-    }
+      if (_.isString(result.body)) {
+        throw new Error(`The target portal doesn't provide APIs: ${portalUrl}`);
+      }
 
-    return Observable.of(...result.body.dataset);
-  })
-  .map((dataset) => {
-    let dataFiles = _.map(dataset.distribution, (file) => {
+      return Observable.of(...result.body.dataset);
+    })
+    .map((dataset) => {
+      let dataFiles = _.map(dataset.distribution, (file) => {
+        return {
+          name: file.title || file.format,
+          format: _.toLower(file.format),
+          url: file.downloadURL || file.accessURL
+        };
+      });
+
       return {
-        name: file.title || file.format,
-        format: _.toLower(file.format),
-        url: file.downloadURL || file.accessURL
+        portalId: portalId,
+        portal: portalName,
+        platform: 'ArcGIS Open Data',
+        name: dataset.title,
+        portalDatasetId: dataset.identifier,
+        created: dataset.issued ? toUTC(new Date(dataset.issued)) : null,
+        updated: toUTC(new Date(dataset.modified)),
+        description: dataset.description,
+        url: dataset.landingPage,
+        license: dataset.license,
+        publisher: dataset.publisher.name,
+        tags: dataset.keyword,
+        categories: [],
+        raw: dataset,
+        region: bboxToGeoJSON(dataset.spatial),
+        files: dataFiles
       };
+    })
+    .catch((error) => {
+      logger.error(`Unable to download data from ${portalUrl}. Message: ${error.message}.`);
+      return Observable.empty();
     });
-
-    return {
-      portalId: portalId,
-      name: dataset.title,
-      portalDatasetId: dataset.identifier,
-      created: dataset.issued ? toUTC(new Date(dataset.issued)) : null,
-      updated: toUTC(new Date(dataset.modified)),
-      description: dataset.description,
-      url: dataset.landingPage,
-      license: dataset.license,
-      publisher: dataset.publisher.name,
-      tags: dataset.keyword,
-      categories: [],
-      raw: dataset,
-      region: bboxToGeoJSON(dataset.spatial),
-      files: dataFiles
-    };
-  })
-  .catch((error) => {
-    logger.error(`Unable to download data from ${portalUrl}. Message: ${error.message}.`);
-    return Observable.empty();
-  });
 }
 
 function bboxToGeoJSON(bboxString) {

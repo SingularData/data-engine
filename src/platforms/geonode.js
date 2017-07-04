@@ -54,33 +54,35 @@ export function downloadPortal(name) {
  */
 export function download(portalId, portalName, portalUrl) {
   return RxHR.get(`${portalUrl}/api/base`, getOptions())
-  .concatMap((result) => Rx.Observable.of(...result.body.objects))
-  .map((dataset) => {
-    let dataFiles = [];
+    .concatMap((result) => Rx.Observable.of(...result.body.objects))
+    .map((dataset) => {
+      let dataFiles = [];
 
-    if (dataset.distribution_description && dataset.distribution_url) {
-      dataFiles.push({ description: dataset.distribution_description, url: dataset.distribution_url });
-    }
+      if (dataset.distribution_description && dataset.distribution_url) {
+        dataFiles.push({ description: dataset.distribution_description, url: dataset.distribution_url });
+      }
 
-    return {
-      portalId: portalId,
-      name: dataset.title,
-      portalDatasetId: dataset.uuid,
-      created: null,
-      updated: toUTC(new Date(dataset.date)),
-      description: dataset.abstract,
-      url: dataset.distribution_url || `${portalUrl}${dataset.detail_url}`,
-      license: null,
-      publisher: portalName,
-      tags: [],
-      categories: [dataset.category__gn_description],
-      raw: dataset,
-      region: wktToGeoJSON(dataset.csw_wkt_geometry),
-      files: dataFiles
-    };
-  })
-  .catch((error) => {
-    logger.error(`Unable to download data from ${portalUrl}. Message: ${error.message}.`);
-    return Rx.Observable.empty();
-  });
+      return {
+        portalId: portalId,
+        portal: portalName,
+        platfom: 'GeoNode',
+        name: dataset.title,
+        portalDatasetId: dataset.uuid,
+        created: null,
+        updated: toUTC(new Date(dataset.date)),
+        description: dataset.abstract,
+        url: dataset.distribution_url || `${portalUrl}${dataset.detail_url}`,
+        license: null,
+        publisher: portalName,
+        tags: [],
+        categories: [dataset.category__gn_description],
+        raw: dataset,
+        region: wktToGeoJSON(dataset.csw_wkt_geometry),
+        files: dataFiles
+      };
+    })
+    .catch((error) => {
+      logger.error(`Unable to download data from ${portalUrl}. Message: ${error.message}.`);
+      return Rx.Observable.empty();
+    });
 }

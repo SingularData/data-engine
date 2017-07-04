@@ -55,47 +55,48 @@ export function downloadPortal(name) {
  */
 export function download(portalId, portalName, portalUrl) {
   return RxHR.get(`${portalUrl}/data.json`, getOptions())
-  .concatMap((result) => {
+    .concatMap((result) => {
 
-    if (_.isString(result.body)) {
-      throw new Error(`Invalid API response: ${portalUrl}/data.json`);
-    }
+      if (_.isString(result.body)) {
+        throw new Error(`Invalid API response: ${portalUrl}/data.json`);
+      }
 
-    let data = _.isArray(result.body) ? result.body : result.body.dataset;
-    return Rx.Observable.of(...data);
-  })
-  .map((dataset) => {
-    let dataFiles = _.map(dataset.distribution, (file) => {
+      let data = _.isArray(result.body) ? result.body : result.body.dataset;
+      return Rx.Observable.of(...data);
+    })
+    .map((dataset) => {
+      let dataFiles = _.map(dataset.distribution, (file) => {
+        return {
+          name: file.title || file.format,
+          format: _.toLower(file.format),
+          url: file.downloadURL || file.accessURL,
+          description: file.description
+        };
+      }).filter((file) => file.url && file.format);
+
       return {
-        name: file.title || file.format,
-        format: _.toLower(file.format),
-        url: file.downloadURL || file.accessURL,
-        description: file.description
+        portalId,
+        portal: 'portalName',
+        platform: 'DKAN',
+        name: dataset.title,
+        portalDatasetId: dataset.identifier,
+        created: dataset.issued ? toUTC(new Date(getDateString(dataset.issued))) : null,
+        updated: toUTC(dataset.modified ? new Date(getDateString(dataset.modified)) : new Date()),
+        description: dataset.description,
+        url: dataset.landingPage || `${portalUrl}/search/type/dataset?query=${_.escape(dataset.title.replace(/ /g, '+'))}`,
+        license: dataset.license,
+        publisher: dataset.publisher ? dataset.publisher.name : portalName,
+        tags: dataset.keyword || [],
+        categories: [],
+        raw: dataset,
+        region: wktToGeoJSON(dataset.spatial),
+        files: dataFiles
       };
     })
-    .filter((file) => file.url && file.format);
-
-    return {
-      portalId,
-      name: dataset.title,
-      portalDatasetId: dataset.identifier,
-      created: dataset.issued ? toUTC(new Date(getDateString(dataset.issued))) : null,
-      updated: toUTC(dataset.modified ? new Date(getDateString(dataset.modified)) : new Date()),
-      description: dataset.description,
-      url: dataset.landingPage || `${portalUrl}/search/type/dataset?query=${_.escape(dataset.title.replace(/ /g, '+'))}`,
-      license: dataset.license,
-      publisher: dataset.publisher ? dataset.publisher.name : portalName,
-      tags: dataset.keyword || [],
-      categories: [],
-      raw: dataset,
-      region: wktToGeoJSON(dataset.spatial),
-      files: dataFiles
-    };
-  })
-  .catch((error) => {
-    logger.error(`Unable to download data from ${portalUrl}. Message: ${error.message}.`);
-    return Rx.Observable.empty();
-  });
+    .catch((error) => {
+      logger.error(`Unable to download data from ${portalUrl}. Message: ${error.message}.`);
+      return Rx.Observable.empty();
+    });
 }
 
 function getDateString(raw) {

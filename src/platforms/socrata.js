@@ -95,45 +95,47 @@ export function downloadPortal(name, region) {
  */
 export function download(portalId, portalName, portalUrl, region) {
   return RxHR.get(`http://api.${region}.socrata.com/api/catalog/v1?domains=${portalUrl}&offset=0&limit=0`, getOptions())
-  .concatMap((result) => {
-    if (result.body.error) {
-      throw new Error(result.body.error);
-    }
+    .concatMap((result) => {
+      if (result.body.error) {
+        throw new Error(result.body.error);
+      }
 
-    let totalCount = Math.ceil(result.body.resultSetSize / limit);
+      let totalCount = Math.ceil(result.body.resultSetSize / limit);
 
-    return Rx.Observable.range(0, totalCount)
-      .concatMap((i) => RxHR.get(`http://api.${region}.socrata.com/api/catalog/v1?domains=${portalUrl}&limit=${limit}&offset=${i * limit}`, getOptions()));
-  })
-  .concatMap((result) => {
-    if (result.body.error) {
-      throw new Error(result.body.error);
-    }
+      return Rx.Observable.range(0, totalCount)
+        .concatMap((i) => RxHR.get(`http://api.${region}.socrata.com/api/catalog/v1?domains=${portalUrl}&limit=${limit}&offset=${i * limit}`, getOptions()));
+    })
+    .concatMap((result) => {
+      if (result.body.error) {
+        throw new Error(result.body.error);
+      }
 
-    return Rx.Observable.of(...result.body.results);
-  })
-  .map((dataset) =>{
-    let resource = dataset.resource;
+      return Rx.Observable.of(...result.body.results);
+    })
+    .map((dataset) =>{
+      let resource = dataset.resource;
 
-    return {
-      portalId,
-      name: resource.name,
-      portalDatasetId: resource.id,
-      created: toUTC(new Date(resource.createdAt)),
-      updated: toUTC(new Date(resource.updatedAt)),
-      description: resource.description,
-      url: dataset.permalink || `${portalUrl}/d/${dataset.id}`,
-      license: _.get(dataset.metadata, 'license'),
-      publisher: portalName,
-      tags: _.concat(_.get(dataset.classification, 'tags'), _.get(dataset.classificatio, 'domain_tags')),
-      categories: _.concat(_.get(dataset.classification, 'categories'), _.get(dataset.classification, 'domain_category')),
-      raw: dataset,
-      files: [],
-      region: null
-    };
-  })
-  .catch((error) => {
-    logger.error(`Unable to download data from ${portalUrl}. Message: ${error.message}.`);
-    return Rx.Observable.empty();
-  });
+      return {
+        portalId,
+        portal: portalName,
+        platform: 'Socrata',
+        name: resource.name,
+        portalDatasetId: resource.id,
+        created: toUTC(new Date(resource.createdAt)),
+        updated: toUTC(new Date(resource.updatedAt)),
+        description: resource.description,
+        url: dataset.permalink || `${portalUrl}/d/${dataset.id}`,
+        license: _.get(dataset.metadata, 'license'),
+        publisher: portalName,
+        tags: _.concat(_.get(dataset.classification, 'tags'), _.get(dataset.classificatio, 'domain_tags')),
+        categories: _.concat(_.get(dataset.classification, 'categories'), _.get(dataset.classification, 'domain_category')),
+        raw: dataset,
+        files: [],
+        region: null
+      };
+    })
+    .catch((error) => {
+      logger.error(`Unable to download data from ${portalUrl}. Message: ${error.message}.`);
+      return Rx.Observable.empty();
+    });
 }

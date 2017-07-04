@@ -7,5 +7,10 @@ SELECT
   url,
   platform,
   tags,
-  categories
+  categories,
+  created,
+  updated,
+  license,
+  files,
+  region
 FROM public.mview_latest_dataset

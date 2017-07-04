@@ -57,44 +57,46 @@ export function downloadPortal(name) {
  */
 export function download(portalId, portalName, apiUrl, apiKey) {
   return RxHR.get(`${apiUrl}/api/v2/datasets/?auth_key=${apiKey}&offset=0&limit=1`, getOptions())
-  .concatMap((result) => {
+    .concatMap((result) => {
 
-    if (!Number.isInteger(result.body.count)) {
-      throw new Error(`Invalid data count for ${apiUrl}`);
-    }
+      if (!Number.isInteger(result.body.count)) {
+        throw new Error(`Invalid data count for ${apiUrl}`);
+      }
 
-    let totalCount = Math.ceil(result.body.count / limit);
+      let totalCount = Math.ceil(result.body.count / limit);
 
-    return Rx.Observable.range(0, totalCount)
-      .mergeMap((i) => RxHR.get(`${apiUrl}/api/v2/datasets/?auth_key=${apiKey}&offset=${i * limit}&limit=${limit}`, getOptions()), cocurrency);
-  })
-  .concatMap((result) => Rx.Observable.of(...result.body.results))
-  .map((dataset) => {
-    let created = new Date();
-    let updated = new Date();
+      return Rx.Observable.range(0, totalCount)
+        .mergeMap((i) => RxHR.get(`${apiUrl}/api/v2/datasets/?auth_key=${apiKey}&offset=${i * limit}&limit=${limit}`, getOptions()), cocurrency);
+    })
+    .concatMap((result) => Rx.Observable.of(...result.body.results))
+    .map((dataset) => {
+      let created = new Date();
+      let updated = new Date();
 
-    created.setTime(dataset.created_at * 1000);
-    updated.setTime(dataset.modified_at * 1000);
+      created.setTime(dataset.created_at * 1000);
+      updated.setTime(dataset.modified_at * 1000);
 
-    return {
-      portalId: portalId,
-      name: dataset.title,
-      portalDatasetId: dataset.guid,
-      created: toUTC(created),
-      updated: toUTC(updated),
-      description: dataset.description,
-      license: null,
-      url: dataset.link,
-      publisher: portalName,
-      tags: dataset.tags,
-      categories: [dataset.category_name],
-      raw: dataset,
-      files: [],
-      region: null
-    };
-  })
-  .catch((error) => {
-    logger.error(`Unable to download data from ${portalName}. Message: ${error.message}.`);
-    return Rx.Observable.empty();
-  });
+      return {
+        portalId: portalId,
+        portal: portalName,
+        platform: 'Junar',
+        name: dataset.title,
+        portalDatasetId: dataset.guid,
+        created: toUTC(created),
+        updated: toUTC(updated),
+        description: dataset.description,
+        license: null,
+        url: dataset.link,
+        publisher: portalName,
+        tags: dataset.tags,
+        categories: [dataset.category_name],
+        raw: dataset,
+        files: [],
+        region: null
+      };
+    })
+    .catch((error) => {
+      logger.error(`Unable to download data from ${portalName}. Message: ${error.message}.`);
+      return Rx.Observable.empty();
+    });
 }

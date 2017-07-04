@@ -16,7 +16,7 @@
   },
   "database": {
     "url": "pg://datarea_admin:1sdf234@localhost:5432/datarea",
-    "insert_limit": 300
+    "insert_limit": 150
   },
   "elasticsearch": {
     "host": "http://localhost:9200"

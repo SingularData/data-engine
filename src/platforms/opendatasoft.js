@@ -31,12 +31,12 @@ export function downloadAll() {
     }, {})
     .concatMap((portalIDs) => {
       return RxHR.get('https://data.opendatasoft.com/api/v2/catalog/datasets?rows=0&start=0', getOptions())
-      .concatMap((result) => {
-        let totalCount = Math.ceil(result.body.total_count / rows);
+        .concatMap((result) => {
+          let totalCount = Math.ceil(result.body.total_count / rows);
 
-        return Rx.Observable.range(0, totalCount)
-          .mergeMap((i) => download(`https://data.opendatasoft.com/api/v2/catalog/datasets?rows=${rows}&start=${i * rows}`, portalIDs), cocurrency);
-      });
+          return Rx.Observable.range(0, totalCount)
+            .mergeMap((i) => download(`https://data.opendatasoft.com/api/v2/catalog/datasets?rows=${rows}&start=${i * rows}`, portalIDs), cocurrency);
+        });
     });
 }
 
@@ -57,14 +57,14 @@ export function downloadPortal(name) {
     .query(sql, [name, 'OpenDataSoft'])
     .concatMap((row) => {
       return RxHR.get(`${row.url}/api/v2/catalog/datasets?rows=0&start=0`, getOptions())
-      .concatMap((result) => {
-        let totalCount = Math.ceil(result.body.total_count / rows);
-        let idMap = {};
-        idMap[row.name] = row.id;
+        .concatMap((result) => {
+          let totalCount = Math.ceil(result.body.total_count / rows);
+          let idMap = {};
+          idMap[row.name] = row.id;
 
-        return Rx.Observable.range(0, totalCount)
-          .mergeMap((i) => download(`${row.url}/api/v2/catalog/datasets?rows=${rows}&start=${i * rows}`, idMap), cocurrency);
-      });
+          return Rx.Observable.range(0, totalCount)
+            .mergeMap((i) => download(`${row.url}/api/v2/catalog/datasets?rows=${rows}&start=${i * rows}`, idMap), cocurrency);
+        });
     });
 }
 
@@ -77,42 +77,44 @@ export function downloadPortal(name) {
 export function download(url, portalIDs) {
 
   return RxHR.get(url, getOptions())
-  .concatMap((result) => {
-    if (result.body.status === 500) {
-      throw new Error(`Unable to download data from ${url}. Message: ${result.body.message}.`);
-    }
+    .concatMap((result) => {
+      if (result.body.status === 500) {
+        throw new Error(`Unable to download data from ${url}. Message: ${result.body.message}.`);
+      }
 
-    return Rx.Observable.of(...result.body.datasets);
-  })
-  .map((dataset) => {
-    let metas = dataset.dataset.metas.default;
+      return Rx.Observable.of(...result.body.datasets);
+    })
+    .map((dataset) => {
+      let metas = dataset.dataset.metas.default;
 
-    if (!portalIDs[metas.source_domain_title]) {
-      return null;
-    }
+      if (!portalIDs[metas.source_domain_title]) {
+        return null;
+      }
 
-    return {
-      portalId: portalIDs[metas.source_domain_title],
-      name: metas.title,
-      portalDatasetId: dataset.dataset.dataset_id,
-      created: null,
-      updated: toUTC(metas.modified ? new Date(metas.modified) : new Date()),
-      description: metas.description,
-      url: createLink(metas.source_domain_address, metas.source_dataset),
-      license: metas.license,
-      publisher: metas.publisher,
-      tags: getValidArray(metas.keyword),
-      categories: getValidArray(metas.theme),
-      raw: dataset,
-      region: null,
-      files: []
-    };
-  })
-  .catch((error) => {
-    logger.error(`Unable to download data from ${url}. Message: ${error.message}.`);
-    return Rx.Observable.empty();
-  })
-  .filter((dataset) => dataset !== null);
+      return {
+        portalId: portalIDs[metas.source_domain_title],
+        portal: metas.source_domain_title,
+        platform: 'OpenDataSoft',
+        name: metas.title,
+        portalDatasetId: dataset.dataset.dataset_id,
+        created: null,
+        updated: toUTC(metas.modified ? new Date(metas.modified) : new Date()),
+        description: metas.description,
+        url: createLink(metas.source_domain_address, metas.source_dataset),
+        license: metas.license,
+        publisher: metas.publisher,
+        tags: getValidArray(metas.keyword),
+        categories: getValidArray(metas.theme),
+        raw: dataset,
+        region: null,
+        files: []
+      };
+    })
+    .catch((error) => {
+      logger.error(`Unable to download data from ${url}. Message: ${error.message}.`);
+      return Rx.Observable.empty();
+    })
+    .filter((dataset) => dataset !== null);
 }
 
 /**

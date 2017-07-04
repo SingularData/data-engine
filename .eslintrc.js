@@ -1,7 +1,4 @@
 module.exports = {
-  "ecmaFeatures": {
-    "blockBindings": true
-  },
   "parser": "babel-eslint",
   "env": {
     "node": true,
