@@ -76,17 +76,10 @@ export function upsert(datasets) {
  */
 export function clear() {
   let client = getClient();
-  let configs = {
-    index: 'datarea',
-    type: 'metadata',
-    body: {
-      query: {
-        match_all: {}
-      }
-    }
-  };
 
-  return Observable.fromPromise(client.deleteByQuery(configs));
+  return Observable.fromPromise(client.indices.delete({
+    index: 'datarea'
+  }));
 }
 
 /**
