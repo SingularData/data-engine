@@ -18,14 +18,14 @@ const logger = log4js.getLogger('CKAN');
 export function downloadAll() {
 
   let sql = `
-    SELECT portal.id, portal.url FROM portal
+    SELECT portal.id, portal.name, portal.url FROM portal
     LEFT JOIN platform ON platform.id = portal.platform_id
     WHERE platform.name = $1::text
   `;
 
   return getDB()
     .query(sql, ['CKAN'])
-    .concatMap((portal) => download(portal.id, portal.url));
+    .concatMap((portal) => download(portal.id, portal.name, portal.url));
 }
 
 /**

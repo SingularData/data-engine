@@ -17,14 +17,14 @@ const logger = log4js.getLogger('ArcGIS Open Data');
 export function downloadAll() {
 
   let sql = `
-    SELECT portal.id, portal.url FROM portal
+    SELECT portal.id, portal.name, portal.url FROM portal
     LEFT JOIN platform ON platform.id = portal.platform_id
     WHERE platform.name = $1::text
   `;
 
   return getDB()
     .query(sql, ['ArcGIS Open Data'])
-    .concatMap((portal) => download(portal.id, portal.url));
+    .concatMap((portal) => download(portal.id, portal.name, portal.url));
 }
 
 /**
