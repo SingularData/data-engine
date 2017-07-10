@@ -1,5 +1,6 @@
 const es = require('elasticsearch');
 const awsES = require('http-aws-es');
+const AWS = require('aws-sdk');
 
 import config from 'config';
 import { resolve } from 'path';
@@ -7,6 +8,14 @@ import { readFileSync } from 'fs';
 import { flatMap, omit } from 'lodash';
 import { Observable } from 'rxjs';
 import { getDB } from './database';
+
+AWS.config.update({
+  region: 'us-east-1',
+  credentials: new AWS.Credentials(
+    config.get('elasticsearch.accessKey'),
+    config.get('elasticsearch.secretKey')
+  )
+});
 
 let cocurrency = config.get('cocurrency');
 let currentClient;
@@ -23,13 +32,8 @@ export function getClient() {
 
   if (process.env.NODE_ENV === 'production') {
     currentClient = new es.Client({
-      hosts: config.get('elasticsearch.host'),
-      connectionClass: awsES,
-      amazonES: {
-        region: config.get('elasticsearch.region'),
-        accessKey: config.get('elasticsearch.accessKey'),
-        secretKey: config.get('elasticsearch.secretKey')
-      }
+      hosts: [config.get('elasticsearch.host')],
+      connectionClass: awsES
     });
   } else {
     currentClient = new es.Client({
