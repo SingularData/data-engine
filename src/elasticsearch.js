@@ -1,4 +1,5 @@
 const es = require('elasticsearch');
+const QueryStream = require('pg-query-stream');
 
 import config from 'config';
 import { resolve } from 'path';
@@ -92,13 +93,28 @@ export function clear() {
  * @returns {Observable} empty observable
  */
 export function reindex() {
+  let stream;
+
   return clear()
+    .catch(() => Observable.of(null))
     .mergeMap(() => {
-      let db = getDB();
+      let db = getDB('pg-pool');
       let sql = readFileSync(resolve(__dirname, 'queries/get_latest_data.sql'), 'utf8');
 
-      return db.query(sql);
+      return Observable.fromPromise(db.connect())
+        .concatMap((client) => {
+          return Observable.create((observer) => {
+            stream = client.query(new QueryStream(sql));
+            stream.on('data', (row) => observer.next(row));
+            stream.on('error', (error) => observer.error(error));
+            stream.on('end', () => observer.complete());
+
+            return client.release;
+          });
+        });
     })
     .bufferCount(config.get('database.insert_limit'))
-    .mergeMap((datasets) => upsert(datasets), cocurrency);
+    .do(() => stream.pause())
+    .mergeMap((datasets) => upsert(datasets), cocurrency)
+    .do(() => stream.resume());
 }

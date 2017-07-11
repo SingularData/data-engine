@@ -1,7 +1,10 @@
+const Pool = require('pg-pool');
+
 import pgrx from 'pg-reactive';
 import config from 'config';
 import _ from 'lodash';
 import log4js from 'log4js';
+import { parse } from 'url';
 import { Observable } from 'rxjs';
 import { toCamelCase, valueToString } from './utils/pg-util';
 
@@ -13,20 +16,35 @@ let db;
  * Get the current database connection.
  * @return {Object} pgp database connection.
  */
-export function getDB() {
-  return db ? db : initialize();
+export function getDB(type = 'pg-reactive') {
+  return db ? db : initialize(type);
 }
 
 /**
  * Initialize database connection.
  * @return {Object} pgp database connection.
  */
-export function initialize() {
+export function initialize(type = 'pg-reactive') {
   if (db) {
     db.end();
   }
 
-  db = new pgrx(config.get('database.url'));
+  if (type === 'pg-reactive') {
+    db = new pgrx(config.get('database.url'));
+  } else {
+    let params = parse(config.get('database.url'));
+    let auth = params.auth.split(':');
+    let connConfig = {
+      user: auth[0],
+      password: auth[1],
+      host: params.hostname,
+      port: params.port,
+      database: params.pathname.split('/')[1]
+    };
+
+    db = new Pool(connConfig);
+  }
+
 
   return db;
 }
