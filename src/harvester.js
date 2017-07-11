@@ -56,7 +56,7 @@ export function harvestPortal(platform, portal, options = {}) {
   }
 
   let dataCache;
-  let getDataChecklist = getLatestCheckList(platform).mergeMap((checklist) => {
+  let getDataChecklist = getLatestCheckList(platform).concatMap((checklist) => {
     dataCache = checklist;
     return Observable.empty();
   });
@@ -69,7 +69,7 @@ export function harvestPortal(platform, portal, options = {}) {
     })
     .filter((dataset) => dataset !== null)
     .bufferCount(config.get('database.insert_limit'))
-    .concatMap((datasets) => Observable.merge(save(datasets), upsert(datasets)));
+    .concatMap((datasets) => Observable.concat(save(datasets), upsert(datasets)));
 
   if (options.refreshDB === undefined) {
     options.refreshDB = true;
@@ -99,7 +99,7 @@ export function harvestPlatform(platform, options = {}) {
   }
 
   let dataCache;
-  let getDataChecklist = getLatestCheckList(platform).mergeMap((checklist) => {
+  let getDataChecklist = getLatestCheckList(platform).concatMap((checklist) => {
     dataCache = checklist;
     return Observable.empty();
   });
