@@ -1,7 +1,7 @@
 {
-  "name": "datarea-pipeline",
+  "name": "data-pipeline",
   "version": "1.0.0",
-  "description": "data pipeline for datarea.io",
+  "description": "data pipeline for SingularData.io",
   "main": "index.js",
   "scripts": {
     "update-all": "babel-node --max_old_space_size=4096 scripts/update.all.js",
@@ -11,11 +11,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/DatareaIO/datarea-pipeline.git"
+    "url": "git+https://github.com/SingularData/data-pipeline.git"
   },
   "author": "Haoliang Yu <haholiang.yu@outlook.com>",
   "license": "ISC",
-  "homepage": "https://github.com/DatareaIO/datarea-pipeline",
+  "homepage": "https://github.com/SingularData/data-pipeline",
   "devDependencies": {
     "babel-cli": "^6.24.1",
     "babel-core": "^6.25.0",

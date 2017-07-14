@@ -1,3 +1,3 @@
-* datarea-collector
+* data-collector
 
-The data collector for datarea.io 
+The data pipeline for SingularData.io 
