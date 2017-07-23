@@ -14,6 +14,7 @@ let db;
 
 /**
  * Get the current database connection.
+ * @param {string} type database object type: pg-reactive or pg
  * @return {Object} pgp database connection.
  */
 export function getDB(type = 'pg-reactive') {
@@ -22,6 +23,7 @@ export function getDB(type = 'pg-reactive') {
 
 /**
  * Initialize database connection.
+ * @param {string} type database object type: pg-reactive or pg
  * @return {Object} pgp database connection.
  */
 export function initialize(type = 'pg-reactive') {

@@ -40,6 +40,7 @@
     "lodash": "^4.17.4",
     "log4js": "^1.1.1",
     "md5": "^2.2.1",
+    "node-geocoder": "^3.18.0",
     "pg": "^6.4.0",
     "pg-query-stream": "^1.0.0",
     "pg-reactive": "^0.2.3",
