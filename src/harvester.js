@@ -56,12 +56,11 @@ export function harvestPortal(platform, portal, options = {}) {
   }
 
   let dataCache;
-  let getDataChecklist = getLatestCheckList(platform).concatMap((checklist) => {
+  let getDataChecklist = getLatestCheckList(platform).do((checklist) => {
     dataCache = checklist;
-    return Observable.empty();
   });
 
-  let observable = Observable.concat(getDataChecklist, downloadPortal(portal))
+  let downloadData = downloadPortal(portal)
     .map((dataset) => checkDataset(dataset, dataCache))
     .catch((err) => {
       logger.error(`Error of data processing at ${platform}`, err);
@@ -75,11 +74,13 @@ export function harvestPortal(platform, portal, options = {}) {
     options.refreshDB = true;
   }
 
+  let task = Observable.concat(getDataChecklist, downloadData);
+
   if (options.refreshDB) {
-    observable = observable.concat(refreshDatabase());
+    task = task.concat(refreshDatabase());
   }
 
-  return observable;
+  return task;
 }
 
 /**
@@ -99,12 +100,12 @@ export function harvestPlatform(platform, options = {}) {
   }
 
   let dataCache;
-  let getDataChecklist = getLatestCheckList(platform).concatMap((checklist) => {
-    dataCache = checklist;
-    return Observable.empty();
-  });
+  let getDataChecklist = getLatestCheckList(platform)
+    .do((checklist) => {
+      dataCache = checklist;
+    });
 
-  let observable = Observable.concat(getDataChecklist, downloadAll())
+  let downloadData = downloadAll()
     .map((dataset) => checkDataset(dataset, dataCache))
     .catch((err) => {
       logger.error(`Error of data processing at ${platform}`, err);
@@ -118,11 +119,13 @@ export function harvestPlatform(platform, options = {}) {
     options.refreshDB = true;
   }
 
+  let task = Observable.concat(getDataChecklist, downloadData);
+
   if (options.refreshDB) {
-    observable = observable.concat(refreshDatabase());
+    task = task.concat(refreshDatabase());
   }
 
-  return observable;
+  return task;
 }
 
 /**
@@ -132,14 +135,18 @@ export function harvestPlatform(platform, options = {}) {
 export function harvestAll() {
   let db = getDB();
 
-  return db.query('SELECT name FROM platform')
+  let collectData = db.query('SELECT name FROM platform')
     .concatMap((platform) => {
-      return harvestPlatform(platform.name, { refreshDB: false }).catch((error) => {
-        logger.error(`Unable to download data from ${platform.name}`, error);
-        return Observable.empty();
-      });
-    })
-    .concat(refreshDatabase());
+      return harvestPlatform(platform.name, { refreshDB: false })
+        .catch((error) => {
+          logger.error(`Unable to download data from ${platform.name}`, error);
+          return Observable.empty();
+        });
+    });
+
+  let refreshDB = refreshDatabase();
+
+  return Observable.concat(collectData, refreshDB);
 }
 
 function checkDataset(dataset, checkList) {

@@ -176,11 +176,11 @@ export function getLatestCheckList(platform, portal) {
  */
 export function refreshDatabase() {
   let db = getDB();
-  let sql = `
-    REFRESH MATERIALIZED VIEW public.mview_portal;
-    REFRESH MATERIALIZED VIEW public.mview_latest_dataset;
-  `;
-  return db.query(sql);
+
+  return db.tx((t) => Observable.concat(
+    t.query('REFRESH MATERIALIZED VIEW public.mview_portal'),
+    t.query('REFRESH MATERIALIZED VIEW public.mview_latest_dataset')
+  ));
 }
 
 /**
@@ -189,16 +189,15 @@ export function refreshDatabase() {
  */
 export function clear() {
   let db = getDB();
-  let sql = `
-    DELETE FROM dataset_tag_xref;
-    DELETE FROM dataset_category_xref;
-    DELETE FROM dataset_tag;
-    DELETE FROM dataset_category;
-    DELETE FROM dataset_data;
-    DELETE FROM dataset;
-    DELETE FROM dataset_region;
-    DELETE FROM dataset_publisher;
-  `;
 
-  return db.query(sql);
+  return db.tx((t) => Observable.concat(
+    t.query('DELETE FROM dataset_tag_xref'),
+    t.query('DELETE FROM dataset_category_xref'),
+    t.query('DELETE FROM dataset_tag'),
+    t.query('DELETE FROM dataset_category'),
+    t.query('DELETE FROM dataset_file'),
+    t.query('DELETE FROM dataset'),
+    t.query('DELETE FROM dataset_region'),
+    t.query('DELETE FROM dataset_publisher')
+  ));
 }
