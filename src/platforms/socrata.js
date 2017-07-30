@@ -2,6 +2,7 @@ import _ from 'lodash';
 import config from 'config';
 import Rx from 'rxjs';
 import log4js from 'log4js';
+import { readFileSync } from 'fs';
 import { RxHR } from "@akanass/rx-http-request";
 import { getDB } from '../database';
 import { toUTC } from '../utils/pg-util';
@@ -16,85 +17,88 @@ const logger = log4js.getLogger('Socrata');
  * @return {Rx.Observable}        harvest job
  */
 export function downloadAll() {
-  let sql = `
-    SELECT
-      portal.id,
-      portal.name,
-      portal.url,
-      CASE WHEN platform.name = 'Socrata' THEN 'us' ELSE 'eu' END as region
-    FROM portal
-    LEFT JOIN platform ON platform.id = portal.platform_id
-    WHERE platform.name = $1::text OR platform.name = $2::text
-  `;
+
+  let sql = readFileSync(__dirname + '/../queries/get_platform_portals.sql', 'utf-8');
 
   return getDB()
     .query(sql, ['Socrata', 'Socrata-EU'])
-    .mergeMap((portal) => download(portal.id, portal.name, portal.url, portal.region), cocurrency);
+    .map((portal) => {
+      portal.region = portal.platform === 'Socrata' ? 'us' : 'eu';
+
+      return portal;
+    })
+    .mergeMap((portal) => download(portal), cocurrency);
 }
 
 export function downloadAllUS() {
-  let sql = `
-    SELECT
-      portal.id,
-      portal.name,
-      portal.url,
-      'us' as region
-    FROM portal
-    LEFT JOIN platform ON platform.id = portal.platform_id
-    WHERE platform.name = $1::text
-  `;
+
+  let sql = readFileSync(__dirname + '/../queries/get_platform_portals.sql', 'utf-8');
 
   return getDB()
     .query(sql, ['Socrata'])
-    .mergeMap((portal) => download(portal.id, portal.name, portal.url, portal.region), cocurrency);
+    .map((portal) => {
+      portal.region = 'us';
+
+      return portal;
+    })
+    .mergeMap((portal) => download(portal), cocurrency);
 }
 
 export function downloadAllEU() {
-  let sql = `
-    SELECT
-      portal.id,
-      portal.name,
-      portal.url,
-      'EU' as region
-    FROM portal
-    LEFT JOIN platform ON platform.id = portal.platform_id
-    WHERE platform.name = $1::text
-  `;
+
+  let sql = readFileSync(__dirname + '/../queries/get_platform_portals', 'utf-8');
 
   return getDB()
     .query(sql, ['Socrata-EU'])
-    .mergeMap((portal) => download(portal.id, portal.name, portal.url, portal.region), cocurrency);
+    .map((portal) => {
+      portal.region = 'us';
+
+      return portal;
+    })
+    .mergeMap((portal) => download(portal), cocurrency);
 }
 
 /**
  * Harvest a Socrata portal.
  * @param   {String}      name    portal name
- * @param   {String}      region  portal region (us or eu)
  * @return  {Observable}          a stream of dataset metadata
  */
-export function downloadPortal(name, region) {
+export function downloadPortal(name) {
+
   let sql = `
-    SELECT p.id, p.name, p.url FROM portal AS p
+    SELECT
+      p.id,
+      p.name,
+      p.url,
+      p.description,
+      pl.name AS platform,
+      l.name AS location
+    FROM portal AS p
     LEFT JOIN platform AS pl ON pl.id = p.platform_id
-    WHERE p.name = $1::text AND pl.name = $2::text
+    LEFT JOIN location AS l ON l.id = p.location_id
+    WHERE p.name = $1::text AND (
+      pl.name = $2::text OR pl.name = $3::text
+    )
     LIMIT 1
   `;
 
   return getDB()
-    .query(sql, [name, 'Socrata'])
-    .concatMap((row) => download(row.id, row.name, row.url, region));
+    .query(sql, [name, 'Socrata', 'Socrata-EU'])
+    .map((portal) => {
+      portal.region = 'us';
+
+      return portal;
+    })
+    .concatMap((portal) => download(portal));
 }
 
 /**
  * Harvest the given Socrata portal.
- * @param  {Number}             portalId    portal ID
- * @param  {String}             portalName  portal name
- * @param  {String}             portalUrl   portal url
- * @param  {String}             region      portal region (us or eu)
- * @return {Rx.Observable}                  harvest job
+ * @param  {Portal}      portal    portal information
+ * @return {Rx.Observable}         dataset stream
  */
-export function download(portalId, portalName, portalUrl, region) {
-  return RxHR.get(`http://api.${region}.socrata.com/api/catalog/v1?domains=${portalUrl}&offset=0&limit=0`, getOptions())
+export function download(portal) {
+  return RxHR.get(`http://api.${portal.region}.socrata.com/api/catalog/v1?domains=${portal.url}&offset=0&limit=0`, getOptions())
     .concatMap((result) => {
       if (result.body.error) {
         throw new Error(result.body.error);
@@ -103,7 +107,7 @@ export function download(portalId, portalName, portalUrl, region) {
       let totalCount = Math.ceil(result.body.resultSetSize / limit);
 
       return Rx.Observable.range(0, totalCount)
-        .concatMap((i) => RxHR.get(`http://api.${region}.socrata.com/api/catalog/v1?domains=${portalUrl}&limit=${limit}&offset=${i * limit}`, getOptions()));
+        .concatMap((i) => RxHR.get(`http://api.${portal.region}.socrata.com/api/catalog/v1?domains=${portal.url}&limit=${limit}&offset=${i * limit}`, getOptions()));
     })
     .concatMap((result) => {
       if (result.body.error) {
@@ -116,17 +120,16 @@ export function download(portalId, portalName, portalUrl, region) {
       let resource = dataset.resource;
 
       return {
-        portalId,
-        portal: portalName,
-        platform: 'Socrata',
+        portalId: portal.id,
+        portal: _.omit(portal, 'region'),
         name: resource.name,
         portalDatasetId: resource.id,
         created: toUTC(new Date(resource.createdAt)),
         updated: toUTC(new Date(resource.updatedAt)),
         description: resource.description,
-        url: dataset.permalink || `${portalUrl}/d/${dataset.id}`,
+        url: dataset.permalink || `${portal.url}/d/${dataset.id}`,
         license: _.get(dataset.metadata, 'license'),
-        publisher: portalName,
+        publisher: portal.name,
         tags: _.concat(_.get(dataset.classification, 'tags'), _.get(dataset.classificatio, 'domain_tags')),
         categories: _.concat(_.get(dataset.classification, 'categories'), _.get(dataset.classification, 'domain_category')),
         raw: dataset,
@@ -135,7 +138,7 @@ export function download(portalId, portalName, portalUrl, region) {
       };
     })
     .catch((error) => {
-      logger.error(`Unable to download data from ${portalUrl}. Message: ${error.message}.`);
+      logger.error(`Unable to download data from ${portal.url}. Message: ${error.message}.`);
       return Rx.Observable.empty();
     });
 }

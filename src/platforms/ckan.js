@@ -2,6 +2,7 @@ import _ from 'lodash';
 import config from 'config';
 import Rx from 'rxjs';
 import log4js from 'log4js';
+import { readFileSync } from 'fs';
 import { RxHR } from "@akanass/rx-http-request";
 import { getDB } from '../database';
 import { toUTC } from '../utils/pg-util';
@@ -17,15 +18,11 @@ const logger = log4js.getLogger('CKAN');
  */
 export function downloadAll() {
 
-  let sql = `
-    SELECT portal.id, portal.name, portal.url FROM portal
-    LEFT JOIN platform ON platform.id = portal.platform_id
-    WHERE platform.name = $1::text
-  `;
+  let sql = readFileSync(__dirname + '/../queries/get_platform_portals.sql', 'utf-8');
 
   return getDB()
     .query(sql, ['CKAN'])
-    .concatMap((portal) => download(portal.id, portal.name, portal.url));
+    .concatMap((portal) => download(portal));
 }
 
 /**
@@ -34,27 +31,21 @@ export function downloadAll() {
  * @return  {Observable}        a stream of dataset metadata
  */
 export function downloadPortal(name) {
-  let sql = `
-    SELECT p.id, p.name, p.url FROM portal AS p
-    LEFT JOIN platform AS pl ON pl.id = p.platform_id
-    WHERE p.name = $1::text AND pl.name = $2::text
-    LIMIT 1
-  `;
+
+  let sql = readFileSync(__dirname + '/../queries/get_portal.sql', 'utf-8');
 
   return getDB()
     .query(sql, [name, 'CKAN'])
-    .concatMap((row) => download(row.id, row.name, row.url));
+    .concatMap((portal) => download(portal));
 }
 
 /**
  * Harvest the given CKAN portal.
- * @param  {Number}             portalId    portal ID
- * @param  {String}             portalName  portal Name
- * @param  {String}             portalUrl   portal Url
- * @return {Rx.Observable}                  harvest job
+ * @param  {Portal}          portal    portal information
+ * @return {Rx.Observable}             dataset
  */
-export function download(portalId, portalName, portalUrl) {
-  return RxHR.get(`${portalUrl}/api/3/action/package_search?start=0&rows=0`, getOptions())
+export function download(portal) {
+  return RxHR.get(`${portal.url}/api/3/action/package_search?start=0&rows=0`, getOptions())
     .concatMap((result) => {
 
       if (_.isString(result.body)) {
@@ -64,7 +55,7 @@ export function download(portalId, portalName, portalUrl) {
       let totalCount = Math.ceil(result.body.result.count / rows);
 
       return Rx.Observable.range(0, totalCount)
-        .mergeMap((i) => RxHR.get(`${portalUrl}/api/3/action/package_search?rows=${rows}&start=${i * rows}`, getOptions()), cocurrency);
+        .mergeMap((i) => RxHR.get(`${portal.url}/api/3/action/package_search?rows=${rows}&start=${i * rows}`, getOptions()), cocurrency);
     })
     .concatMap((result) => {
 
@@ -85,17 +76,16 @@ export function download(portalId, portalName, portalUrl) {
       });
 
       return {
-        portalId: portalId,
-        portal: portalName,
-        platform: 'CKAN',
+        portalId: portal.id,
+        portal: portal,
         name: dataset.title,
         portalDatasetId: dataset.id,
         created: toUTC(dataset.__extras ? new Date(dataset.__extras.metadata_created) : new Date(dataset.metadata_created)),
         updated: toUTC(dataset.__extras ? new Date(dataset.__extras.metadata_modified) : new Date(dataset.metadata_modified)),
         description: dataset.notes,
-        url: `${portalUrl}/dataset/${dataset.package_id || dataset.id}`,
+        url: `${portal.url}/dataset/${dataset.package_id || dataset.id}`,
         license: dataset.license_title,
-        publisher: _.get(dataset.organization, 'name') || portalName,
+        publisher: _.get(dataset.organization, 'name') || portal.name,
         tags: _.map(dataset.tags, 'display_name'),
         categories: _.map(dataset.groups, 'display_name'),
         raw: dataset,
@@ -104,7 +94,7 @@ export function download(portalId, portalName, portalUrl) {
       };
     })
     .catch((error) => {
-      logger.error(`Unable to download data from ${portalUrl}. Message: ${error.message}.`);
+      logger.error(`Unable to download data from ${portal.url}. Message: ${error.message}.`);
       return Rx.Observable.empty();
     });
 }

@@ -73,10 +73,12 @@ describe('platfoms/geonode.js', () => {
       })
     });
 
-    download(1, 'testPortal', 'testUrl')
-      .subscribe((result) => validateMetadata(result),
-      null,
-      () => done());
+    download({ id: 1, name: 'portal', url: 'test' })
+      .subscribe(
+        (result) => validateMetadata(result),
+        null,
+        () => done()
+      );
   });
 
 });

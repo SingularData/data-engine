@@ -1,13 +1,12 @@
 import _ from 'lodash';
-import config from 'config';
 import log4js from 'log4js';
+import { readFileSync } from 'fs';
 import { Observable } from 'rxjs';
 import { RxHR } from "@akanass/rx-http-request";
 import { getDB } from '../database';
 import { toUTC } from '../utils/pg-util';
 import { getOptions } from '../utils/request-util';
 
-const cocurrency = config.get('cocurrency');
 const logger = log4js.getLogger('ArcGIS Open Data');
 
 /**
@@ -16,48 +15,38 @@ const logger = log4js.getLogger('ArcGIS Open Data');
  */
 export function downloadAll() {
 
-  let sql = `
-    SELECT portal.id, portal.name, portal.url FROM portal
-    LEFT JOIN platform ON platform.id = portal.platform_id
-    WHERE platform.name = $1::text
-  `;
+  let sql = readFileSync(__dirname + '/../queries/get_platform_portals.sql', 'utf-8');
 
   return getDB()
     .query(sql, ['ArcGIS Open Data'])
-    .concatMap((portal) => download(portal.id, portal.name, portal.url));
+    .concatMap((portal) => download(portal));
 }
 
 /**
  * Harvest an ArcGIS Open Data portal.
- * @param   {String}      name  portal name
+ * @param   {string}      name  portal name
  * @return  {Observable}        a stream of dataset metadata
  */
 export function downloadPortal(name) {
-  let sql = `
-    SELECT p.id, p.name, p.url FROM portal AS p
-    LEFT JOIN platform AS pl ON pl.id = p.platform_id
-    WHERE p.name = $1::text AND pl.name = $2::text
-    LIMIT 1
-  `;
+
+  let sql = readFileSync(__dirname + '/../queries/get_portal.sql', 'utf-8');
 
   return getDB()
     .query(sql, [name, 'ArcGIS Open Data'])
-    .mergeMap((row) => download(row.id, row.name, row.url), cocurrency);
+    .concatMap((portal) => download(portal));
 }
 
 /**
  * Harvest the given ArcGIS Open Data portal.
- * @param  {Number}      portalId    portal ID
- * @param  {String}      portalName  portal name
- * @param  {String}      portalUrl   portal Url
- * @return {Observable}              a stream of dataset metadata
+ * @param  {Portal}      portal    portal information
+ * @return {Observable}            a stream of dataset metadata
  */
-export function download(portalId, portalName, portalUrl) {
-  return RxHR.get(`${portalUrl}/data.json`, getOptions())
+export function download(portal) {
+  return RxHR.get(`${portal.url}/data.json`, getOptions())
     .concatMap((result) => {
 
       if (_.isString(result.body)) {
-        throw new Error(`The target portal doesn't provide APIs: ${portalUrl}`);
+        throw new Error(`The target portal doesn't provide APIs: ${portal.url}`);
       }
 
       return Observable.of(...result.body.dataset);
@@ -72,9 +61,8 @@ export function download(portalId, portalName, portalUrl) {
       });
 
       return {
-        portalId: portalId,
-        portal: portalName,
-        platform: 'ArcGIS Open Data',
+        portalId: portal.id,
+        portal: portal,
         name: dataset.title,
         portalDatasetId: dataset.identifier,
         created: dataset.issued ? toUTC(new Date(dataset.issued)) : null,
@@ -91,7 +79,7 @@ export function download(portalId, portalName, portalUrl) {
       };
     })
     .catch((error) => {
-      logger.error(`Unable to download data from ${portalUrl}. Message: ${error.message}.`);
+      logger.error(`Unable to download data from ${portal.url}. Message: ${error.message}.`);
       return Observable.empty();
     });
 }

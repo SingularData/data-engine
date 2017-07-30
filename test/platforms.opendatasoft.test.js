@@ -93,11 +93,11 @@ describe('platforms/opendatasoft.js', () => {
       }
     });
 
-    let portalIDs = {
-      'OPEN DATA RTE': 1
+    let portals = {
+      'OPEN DATA RTE': { id: 1 }
     };
 
-    download('https://data.opendatasoft.com/api/v2/catalog/datasets?rows=1&start=0', portalIDs)
+    download('https://data.opendatasoft.com/api/v2/catalog/datasets?rows=1&start=0', portals)
       .subscribe(
         (result) => validateMetadata(result),
         null,

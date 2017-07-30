@@ -127,7 +127,7 @@ describe('platfoms/arcgis.js', () => {
       }
     });
 
-    download(1, 'testUrl')
+    download({ id: 1, url: 'test' })
       .subscribe((dataset) => {
         validateMetadata(dataset);
       }, _.noop, () => done());

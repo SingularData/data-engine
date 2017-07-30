@@ -1,14 +1,13 @@
 import _ from 'lodash';
-import config from 'config';
 import Rx from 'rxjs';
 import log4js from 'log4js';
+import { readFileSync } from 'fs';
 import { RxHR } from '@akanass/rx-http-request';
 import { getDB } from '../database';
 import { toUTC } from '../utils/pg-util';
 import { wktToGeoJSON } from '../utils/geom-util';
 import { getOptions } from '../utils/request-util';
 
-const cocurrency = config.get('cocurrency');
 const logger = log4js.getLogger('DKAN');
 
 /**
@@ -17,15 +16,11 @@ const logger = log4js.getLogger('DKAN');
  */
 export function downloadAll() {
 
-  let sql = `
-    SELECT portal.id, portal.name, portal.url FROM portal
-    LEFT JOIN platform ON platform.id = portal.platform_id
-    WHERE platform.name = $1::text
-  `;
+  let sql = readFileSync(__dirname + '/../queries/get_platform_portals.sql', 'utf-8');
 
   return getDB()
     .query(sql, ['DKAN'])
-    .concatMap((portal) => download(portal.id, portal.name, portal.url));
+    .concatMap((portal) => download(portal));
 }
 
 /**
@@ -34,31 +29,25 @@ export function downloadAll() {
  * @return  {Observable}        a stream of dataset metadata
  */
 export function downloadPortal(name) {
-  let sql = `
-    SELECT p.id, p.name, p.url FROM portal AS p
-    LEFT JOIN platform AS pl ON pl.id = p.platform_id
-    WHERE p.name = $1::text AND pl.name = $2::text
-    LIMIT 1
-  `;
+
+  let sql = readFileSync(__dirname + '/../queries/get_portal.sql', 'utf-8');
 
   return getDB()
     .query(sql, [name, 'DKAN'])
-    .mergeMap((row) => download(row.id, row.name, row.url), cocurrency);
+    .concatMap((portal) => download(portal));
 }
 
 /**
  * Harvest the given DKAN portal.
- * @param  {Number}             portalId    portal ID
- * @param  {String}             portalName  portal name
- * @param  {String}             portalUrl   portal URL
- * @return {Rx.Observable}                  harvest job
+ * @param  {Portal}          portal    portal information
+ * @return {Rx.Observable}             dataset
  */
-export function download(portalId, portalName, portalUrl) {
-  return RxHR.get(`${portalUrl}/data.json`, getOptions())
+export function download(portal) {
+  return RxHR.get(`${portal.url}/data.json`, getOptions())
     .concatMap((result) => {
 
       if (_.isString(result.body)) {
-        throw new Error(`Invalid API response: ${portalUrl}/data.json`);
+        throw new Error(`Invalid API response: ${portal.url}/data.json`);
       }
 
       let data = _.isArray(result.body) ? result.body : result.body.dataset;
@@ -75,17 +64,16 @@ export function download(portalId, portalName, portalUrl) {
       }).filter((file) => file.url && file.format);
 
       return {
-        portalId,
-        portal: 'portalName',
-        platform: 'DKAN',
+        portalId: portal.id,
+        portal: portal,
         name: dataset.title,
         portalDatasetId: dataset.identifier,
         created: dataset.issued ? toUTC(new Date(getDateString(dataset.issued))) : null,
         updated: toUTC(dataset.modified ? new Date(getDateString(dataset.modified)) : new Date()),
         description: dataset.description,
-        url: dataset.landingPage || `${portalUrl}/search/type/dataset?query=${_.escape(dataset.title.replace(/ /g, '+'))}`,
+        url: dataset.landingPage || `${portal.url}/search/type/dataset?query=${_.escape(dataset.title.replace(/ /g, '+'))}`,
         license: dataset.license,
-        publisher: dataset.publisher ? dataset.publisher.name : portalName,
+        publisher: dataset.publisher ? dataset.publisher.name : portal.name,
         tags: dataset.keyword || [],
         categories: [],
         raw: dataset,
@@ -94,7 +82,7 @@ export function download(portalId, portalName, portalUrl) {
       };
     })
     .catch((error) => {
-      logger.error(`Unable to download data from ${portalUrl}. Message: ${error.message}.`);
+      logger.error(`Unable to download data from ${portal.url}. Message: ${error.message}.`);
       return Rx.Observable.empty();
     });
 }

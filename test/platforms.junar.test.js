@@ -76,10 +76,12 @@ describe('platfoms/junar.js', () => {
       }
     });
 
-    download(1, 'testUrl')
-      .subscribe((result) => validateMetadata(result),
-      null,
-      () => done());
+    download({ id: 1, url: 'test' })
+      .subscribe(
+        (result) => validateMetadata(result),
+        null,
+        () => done()
+      );
   });
 
 });

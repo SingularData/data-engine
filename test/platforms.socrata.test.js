@@ -118,10 +118,12 @@ describe('platfoms/socrata.js', () => {
       }
     });
 
-    download(1, 'test portal', 'testURL', 'eu')
-      .subscribe((result) => validateMetadata(result),
-      null,
-      () => done());
+    download({ id: 1, name: 'portal', region: 'us', url: 'test' })
+      .subscribe(
+        (result) => validateMetadata(result),
+        null,
+        () => done()
+      );
   });
 
 });

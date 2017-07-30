@@ -1,9 +1,11 @@
 import config from 'config';
 import Rx from 'rxjs';
 import log4js from 'log4js';
+import { omit } from 'lodash';
+import { readFileSync } from 'fs';
 import { RxHR } from "@akanass/rx-http-request";
 import { getDB } from '../database';
-import { toUTC } from '../utils/pg-util';
+import { toUTC, toCamelCase } from '../utils/pg-util';
 import { getOptions } from '../utils/request-util';
 
 const cocurrency = config.get('cocurrency');
@@ -16,16 +18,12 @@ const logger = log4js.getLogger('Junar');
  */
 export function downloadAll() {
 
-  let sql = `
-    SELECT portal.id, portal.name, jpi.api_url AS url, jpi.api_key AS key FROM portal
-    LEFT JOIN platform ON platform.id = portal.platform_id
-    LEFT JOIN junar_portal_info AS jpi ON jpi.portal_id = portal.id
-    WHERE platform.name = $1::text
-  `;
+  let sql = readFileSync(__dirname + '/../queries/get_junar_portals.sql', 'utf-8');
 
   return getDB()
     .query(sql, ['Junar'])
-    .concatMap((portal) => download(portal.id, portal.name, portal.url, portal.key));
+    .map((portal) => toCamelCase(portal))
+    .concatMap((portal) => download(portal));
 }
 
 /**
@@ -34,39 +32,32 @@ export function downloadAll() {
  * @return  {Observable}        a stream of dataset metadata
  */
 export function downloadPortal(name) {
-  let sql = `
-    SELECT p.id, p.name, jpi.api_url, jpi.api_key FROM portal AS p
-    LEFT JOIN platform AS pl ON pl.id = p.platform_id
-    LEFT JOIN junar_portal_info AS jpi ON jpi.portal_id = p.id
-    WHERE p.name = $1::text AND pl.name = $2::text
-    LIMIT 1
-  `;
+
+  let sql = readFileSync(__dirname + '/../queries/get_junar_portal.sql', 'utf-8');
 
   return getDB()
     .query(sql, [name, 'Junar'])
-    .concatMap((row) => download(row.id, row.name, row.api_url, row.api_key));
+    .map((portal) => toCamelCase(portal))
+    .concatMap((portal) => download(portal));
 }
 
 /**
  * Harvest the given Junar portal.
- * @param  {Number}             portalId    portal ID
- * @param  {String}             portalName  portal Name
- * @param  {String}             apiUrl      portal API url
- * @param  {String}             apiKey      portal API key
- * @return {Rx.Observable}                  harvest job
+ * @param  {Portal}          portal    portal information
+ * @return {Rx.Observable}             harvest job
  */
-export function download(portalId, portalName, apiUrl, apiKey) {
-  return RxHR.get(`${apiUrl}/api/v2/datasets/?auth_key=${apiKey}&offset=0&limit=1`, getOptions())
+export function download(portal) {
+  return RxHR.get(`${portal.apiUrl}/api/v2/datasets/?auth_key=${portal.apiKey}&offset=0&limit=1`, getOptions())
     .concatMap((result) => {
 
       if (!Number.isInteger(result.body.count)) {
-        throw new Error(`Invalid data count for ${apiUrl}`);
+        throw new Error(`Invalid data count for ${portal.apiUrl}`);
       }
 
       let totalCount = Math.ceil(result.body.count / limit);
 
       return Rx.Observable.range(0, totalCount)
-        .mergeMap((i) => RxHR.get(`${apiUrl}/api/v2/datasets/?auth_key=${apiKey}&offset=${i * limit}&limit=${limit}`, getOptions()), cocurrency);
+        .mergeMap((i) => RxHR.get(`${portal.apiUrl}/api/v2/datasets/?auth_key=${portal.apiKey}&offset=${i * limit}&limit=${limit}`, getOptions()), cocurrency);
     })
     .concatMap((result) => Rx.Observable.of(...result.body.results))
     .map((dataset) => {
@@ -77,9 +68,8 @@ export function download(portalId, portalName, apiUrl, apiKey) {
       updated.setTime(dataset.modified_at * 1000);
 
       return {
-        portalId: portalId,
-        portal: portalName,
-        platform: 'Junar',
+        portalId: portal.id,
+        portal: omit(portal, 'apiUrl', 'apiKey'),
         name: dataset.title,
         portalDatasetId: dataset.guid,
         created: toUTC(created),
@@ -87,7 +77,7 @@ export function download(portalId, portalName, apiUrl, apiKey) {
         description: dataset.description,
         license: null,
         url: dataset.link,
-        publisher: portalName,
+        publisher: portal.name,
         tags: dataset.tags,
         categories: [dataset.category_name],
         raw: dataset,
@@ -96,7 +86,7 @@ export function download(portalId, portalName, apiUrl, apiKey) {
       };
     })
     .catch((error) => {
-      logger.error(`Unable to download data from ${portalName}. Message: ${error.message}.`);
+      logger.error(`Unable to download data from ${portal.name}. Message: ${error.message}.`);
       return Rx.Observable.empty();
     });
 }
