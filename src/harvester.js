@@ -2,6 +2,7 @@ import { Observable } from 'rxjs';
 import { save, getDB, getLatestCheckList, refreshDatabase } from './database';
 import { upsert } from './elasticsearch';
 import { dateToString } from './utils/pg-util';
+import { defaults } from 'lodash';
 import uuid from 'uuid';
 import log4js from 'log4js';
 import config from 'config';
@@ -38,18 +39,28 @@ const downloadPortalFn = {
   'DKAN': dkan.downloadPortal
 };
 
+const harvestOptions = {
+  updateES: true,
+  refreshDB: true
+};
+
 /**
  * Harvest data for a given portal.
  * @param   {String}      platform            platform name
  * @param   {String}      portal              portal name
  * @param   {Object}      [options]           options
- * @param   {Boolean}     [options.refreshDB] a boolean value indicating whether
- *                                            to refresh database after data
- *                                            harvesting
+ * @param   {Boolean}     [options.refreshDB=true] a boolean value indicating whether
+ *                                                 to refresh database after data
+ *                                                 harvesting
+ * @param   {boolean}     [options.updateES=true]  a boolean value indicating whether
+ *                                                 to update ElasticSearch at the
+ *                                                 same time
  * @returns {Observable}                      empty observable
  */
 export function harvestPortal(platform, portal, options = {}) {
   let downloadPortal = downloadPortalFn[platform];
+
+  options = defaults(options, harvestOptions);
 
   if (!downloadPortal) {
     return Observable.throw(new Error(`Platform ${platform} is unknown.`));
@@ -67,11 +78,12 @@ export function harvestPortal(platform, portal, options = {}) {
       return Observable.empty();
     })
     .filter((dataset) => dataset !== null)
-    .bufferCount(config.get('database.insert_limit'))
-    .concatMap((datasets) => Observable.concat(save(datasets), upsert(datasets)));
+    .bufferCount(config.get('database.insert_limit'));
 
-  if (options.refreshDB === undefined) {
-    options.refreshDB = true;
+  if (options.updateES) {
+    downloadData = downloadData.concatMap((datasets) => Observable.concat(save(datasets), upsert(datasets)));
+  } else {
+    downloadData = downloadData.concatMap((datasets) => save(datasets));
   }
 
   let task = Observable.concat(getDataChecklist, downloadData);
@@ -87,13 +99,18 @@ export function harvestPortal(platform, portal, options = {}) {
  * Harvest the dataset metadata from one platform and save into the database.
  * @param  {String}      platform            platform name
  * @param  {Object}      [options]           options
- * @param  {Boolean}     [options.refreshDB] a boolean value indicating whether
- *                                           to refresh database after data
- *                                           harvesting
+ * @param  {Boolean}     [options.refreshDB=true] a boolean value indicating whether
+ *                                                to refresh database after data
+ *                                                harvesting
+ * @param   {boolean}    [options.updateES=true]  a boolean value indicating whether
+ *                                                to update ElasticSearch at the
+ *                                                same time
  * @return {Observable}                      empty observable
  */
 export function harvestPlatform(platform, options = {}) {
   let downloadAll = downlaodAllFn[platform];
+
+  options = defaults(options, harvestOptions);
 
   if (!downloadAll) {
     return Observable.throw(new Error(`Platform ${platform} is unknown.`));
@@ -112,11 +129,12 @@ export function harvestPlatform(platform, options = {}) {
       return Observable.empty();
     })
     .filter((dataset) => dataset !== null)
-    .bufferCount(config.get('database.insert_limit'))
-    .concatMap((datasets) => Observable.merge(save(datasets), upsert(datasets)));
+    .bufferCount(config.get('database.insert_limit'));
 
-  if (options.refreshDB === undefined) {
-    options.refreshDB = true;
+  if (options.updateES) {
+    downloadData = downloadData.concatMap((datasets) => Observable.concat(save(datasets), upsert(datasets)));
+  } else {
+    downloadData = downloadData.concatMap((datasets) => save(datasets));
   }
 
   let task = Observable.concat(getDataChecklist, downloadData);
@@ -130,23 +148,39 @@ export function harvestPlatform(platform, options = {}) {
 
 /**
  * Harvest the dataset metadata from all platforms and save into the database.
- * @return {Observable}              no return
+ * @param   {object}      [options]                 harvester options
+ * @param   {boolean}     [options.refreshDB=true]  a boolean value indicating whether
+ *                                                  to refresh database after data
+ *                                                  harvesting
+ * @param   {boolean}     [options.updateES=true]   a boolean value indicating whether
+ *                                                  to update ElasticSearch at the
+ *                                                  same time
+ * @returns {Observable}                            no return
  */
-export function harvestAll() {
+export function harvestAll(options = {}) {
   let db = getDB();
+
+  options = defaults(options, harvestOptions);
+
+  let platformOptions = {
+    refreshDB : false,
+    updateES: options.updateES
+  };
 
   let collectData = db.query('SELECT name FROM platform')
     .concatMap((platform) => {
-      return harvestPlatform(platform.name, { refreshDB: false })
+      return harvestPlatform(platform.name, platformOptions)
         .catch((error) => {
           logger.error(`Unable to download data from ${platform.name}`, error);
           return Observable.empty();
         });
     });
 
-  let refreshDB = refreshDatabase();
+  if (options.refreshDB) {
+    return Observable.concat(collectData, refreshDatabase());
+  }
 
-  return Observable.concat(collectData, refreshDB);
+  return collectData;
 }
 
 function checkDataset(dataset, checkList) {

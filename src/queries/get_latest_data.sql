@@ -20,4 +20,3 @@ SELECT
 FROM public.mview_latest_dataset AS mld
 LEFT JOIN portal AS p ON p.name = mld.portal
 LEFT JOIN location AS l ON p.location_id = l.id
-LIMIT 1

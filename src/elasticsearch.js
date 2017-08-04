@@ -93,28 +93,27 @@ export function clear() {
  * @returns {Observable} empty observable
  */
 export function reindex() {
+  let clearData = clear().catch(() => Observable.empty());
+
   let stream;
+  let db = getDB('pg-pool');
+  let insertData = Observable.defer(() => db.connect())
+    .concatMap((client) => {
+      return Observable.create((observer) => {
+        let sql = readFileSync(resolve(__dirname, 'queries/get_latest_data.sql'), 'utf8');
 
-  return clear()
-    .catch(() => Observable.of(null))
-    .mergeMap(() => {
-      let db = getDB('pg-pool');
-      let sql = readFileSync(resolve(__dirname, 'queries/get_latest_data.sql'), 'utf8');
+        stream = client.query(new QueryStream(sql));
+        stream.on('data', (row) => observer.next(row));
+        stream.on('error', (error) => observer.error(error));
+        stream.on('end', () => observer.complete());
 
-      return Observable.fromPromise(db.connect())
-        .concatMap((client) => {
-          return Observable.create((observer) => {
-            stream = client.query(new QueryStream(sql));
-            stream.on('data', (row) => observer.next(row));
-            stream.on('error', (error) => observer.error(error));
-            stream.on('end', () => observer.complete());
-
-            return client.release;
-          });
-        });
+        return client.release;
+      });
     })
     .bufferCount(config.get('database.insert_limit'))
     .do(() => stream.pause())
     .mergeMap((datasets) => upsert(datasets), cocurrency)
     .do(() => stream.resume());
+
+  return Observable.concat(clearData, insertData);
 }

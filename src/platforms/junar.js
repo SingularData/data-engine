@@ -47,6 +47,7 @@ export function downloadPortal(name) {
  * @return {Rx.Observable}             harvest job
  */
 export function download(portal) {
+
   return RxHR.get(`${portal.apiUrl}/api/v2/datasets/?auth_key=${portal.apiKey}&offset=0&limit=1`, getOptions())
     .concatMap((result) => {
 

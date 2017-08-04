@@ -6,6 +6,7 @@
   "scripts": {
     "update-all": "babel-node --max_old_space_size=4096 scripts/update.all.js",
     "test-connection": "babel-node scripts/connection.test.js",
+    "reindex": "babel-node scripts/reindex.js",
     "test": "mocha test/**/*.test.js --require babel-register",
     "prepush": "npm test"
   },
@@ -29,16 +30,16 @@
     "eslint": "^4.3.0",
     "eslint-plugin-json": "^1.2.0",
     "husky": "^0.14.3",
-    "mocha": "^3.4.2"
+    "mocha": "^3.5.0"
   },
   "dependencies": {
     "@akanass/rx-http-request": "^2.5.0",
-    "aws-sdk": "^2.92.0",
+    "aws-sdk": "^2.94.0",
     "config": "^1.26.1",
     "elasticsearch": "^13.2.0",
-    "http-aws-es": "^2.0.4",
+    "http-aws-es": "^2.0.5",
     "lodash": "^4.17.4",
-    "log4js": "^2.3.2",
+    "log4js": "^2.3.3",
     "md5": "^2.2.1",
     "node-geocoder": "^3.19.0",
     "pg": "^7.0.2",
