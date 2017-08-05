@@ -1,8 +1,10 @@
 import chai from 'chai';
 import Rx from 'rxjs';
+import config from 'config';
 import { download, downloadAll, __RewireAPI__ as ToDosRewireAPI } from '../src/platforms/opendatasoft';
 import { validateMetadata } from './database.test';
 
+const rows = config.get('platforms.OpenDataSoft.rows');
 const expect = chai.expect;
 
 describe('platforms/opendatasoft.js', () => {
@@ -207,6 +209,9 @@ describe('platforms/opendatasoft.js', () => {
   });
 
   it('downloadAll() should return a series of datasets.', (done) => {
+
+    let datasetCount = 450;
+
     ToDosRewireAPI.__Rewire__('getDB', () => {
       return {
         query: () => Rx.Observable.create((observer) => {
@@ -227,22 +232,22 @@ describe('platforms/opendatasoft.js', () => {
       get: () => {
         return Rx.Observable.of({
           body: {
-            total_count: 450,
+            total_count: datasetCount,
           }
         });
       }
     });
 
-    let datasetCount = 0;
+    let requestCount = 0;
 
     downloadAll()
       .subscribe((data) => {
         expect(data).to.be.an('object');
-        datasetCount++;
+        requestCount++;
       },
       null,
       () => {
-        expect(datasetCount).to.equal(2);
+        expect(requestCount).to.equal(Math.ceil(datasetCount / rows));
         done();
       });
   });
