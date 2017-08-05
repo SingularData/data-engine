@@ -64,13 +64,14 @@ export function downloadPortal(name) {
 /**
  * Harvest the open data network of OpenDataSoft with a given url.
  * @param  {String}             url         OpenDataSoft data network API url
- * @param  {Object}             portals   portals indexed by portal name
+ * @param  {Object}             portals     portals indexed by portal name
  * @return {Rx.Observable}                  harvest job
  */
 export function download(url, portals) {
 
   return RxHR.get(url, getOptions())
     .concatMap((result) => {
+      console.log(result);
       if (result.body.status === 500) {
         throw new Error(`Unable to download data from ${url}. Message: ${result.body.message}.`);
       }
@@ -100,7 +101,7 @@ export function download(url, portals) {
         tags: getValidArray(metas.keyword),
         categories: getValidArray(metas.theme),
         raw: dataset,
-        region: null,
+        region: metas.geographic_area ? forceMulti(metas.geographic_area.geometry) : null,
         files: []
       };
     })
@@ -129,4 +130,13 @@ function getValidArray(array) {
   }
 
   return [];
+}
+
+function forceMulti(geometry) {
+  if (!geometry.type.startsWith('Multi')) {
+    geometry.type = `Multi${geometry.type}`;
+    geometry.coordinates = [geometry.coordinates];
+  }
+
+  return geometry;
 }

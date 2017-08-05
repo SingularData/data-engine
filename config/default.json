@@ -2,7 +2,7 @@
   "cocurrency": 5,
   "platforms": {
     "OpenDataSoft": {
-      "rows": 300
+      "rows": 100
     },
     "Socrata": {
       "limit": 100
