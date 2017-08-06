@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import config from 'config';
-import Rx from 'rxjs';
 import log4js from 'log4js';
+import { Observable } from 'rxjs';
 import { readFileSync } from 'fs';
 import { RxHR } from "@akanass/rx-http-request";
 import { getDB } from '../database';
@@ -14,7 +14,7 @@ const logger = log4js.getLogger('OpenDataSoft');
 
 /**
  * Get a list of harvesting Jobs.
- * @return {Rx.Observable}        harvest job
+ * @return {Observable}        harvest job
  */
 export function downloadAll() {
 
@@ -27,12 +27,12 @@ export function downloadAll() {
       return collection;
     }, {})
     .concatMap((portals) => {
-      return RxHR.get('https://data.opendatasoft.com/api/v2/catalog/datasets?rows=0&start=0', getOptions())
+      return RxHR.get(createSearchLink('https://data.opendatasoft.com', 0, 0), getOptions())
         .concatMap((result) => {
           let totalCount = Math.ceil(result.body.total_count / rows);
 
-          return Rx.Observable.range(0, totalCount)
-            .mergeMap((i) => download(`https://data.opendatasoft.com/api/v2/catalog/datasets?rows=${rows}&start=${i * rows}`, portals), cocurrency);
+          return Observable.range(0, totalCount)
+            .mergeMap((i) => download(createSearchLink('https://data.opendatasoft.com', i * rows, rows), portals), cocurrency);
         });
     });
 }
@@ -49,14 +49,14 @@ export function downloadPortal(name) {
   return getDB()
     .query(sql, [name, 'OpenDataSoft'])
     .concatMap((row) => {
-      return RxHR.get(`${row.url}/api/v2/catalog/datasets?rows=0&start=0`, getOptions())
+      return RxHR.get(createSearchLink(row.url, 0, 0), getOptions())
         .concatMap((result) => {
           let totalCount = Math.ceil(result.body.total_count / rows);
           let idMap = {};
           idMap[row.name] = row;
 
-          return Rx.Observable.range(0, totalCount)
-            .mergeMap((i) => download(`${row.url}/api/v2/catalog/datasets?rows=${rows}&start=${i * rows}`, idMap), cocurrency);
+          return Observable.range(0, totalCount)
+            .mergeMap((i) => download(createSearchLink(row.url, i * rows, rows), idMap), cocurrency);
         });
     });
 }
@@ -65,7 +65,7 @@ export function downloadPortal(name) {
  * Harvest the open data network of OpenDataSoft with a given url.
  * @param  {String}             url         OpenDataSoft data network API url
  * @param  {Object}             portals     portals indexed by portal name
- * @return {Rx.Observable}                  harvest job
+ * @return {Observable}                  harvest job
  */
 export function download(url, portals) {
 
@@ -75,7 +75,7 @@ export function download(url, portals) {
         throw new Error(`Unable to download data from ${url}. Message: ${result.body.message}.`);
       }
 
-      return Rx.Observable.of(...result.body.datasets);
+      return Observable.of(...result.body.datasets);
     })
     .map((dataset) => {
       let metas = dataset.dataset.metas.default;
@@ -100,13 +100,13 @@ export function download(url, portals) {
         tags: getValidArray(metas.keyword),
         categories: getValidArray(metas.theme),
         raw: dataset,
-        region: checkGeom(metas.geographic_area.geometry),
+        region: metas.geographic_area ? checkGeom(metas.geographic_area.geometry) : null,
         files: []
       };
     })
     .catch((error) => {
       logger.error(`Unable to download data from ${url}. Message: ${error.message}.`);
-      return Rx.Observable.empty();
+      return Observable.of(null);
     })
     .filter((dataset) => dataset !== null);
 }
@@ -119,6 +119,10 @@ export function download(url, portals) {
  */
 function createLink(domain, dataset) {
   return `https://${domain}/explore/dataset/${dataset}`;
+}
+
+function createSearchLink(domain, start, rows) {
+  return `${domain}/api/v2/catalog/datasets?rows=${rows}&start=${start}`;
 }
 
 function getValidArray(array) {
