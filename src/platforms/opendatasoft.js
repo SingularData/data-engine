@@ -71,7 +71,6 @@ export function download(url, portals) {
 
   return RxHR.get(url, getOptions())
     .concatMap((result) => {
-      console.log(result);
       if (result.body.status === 500) {
         throw new Error(`Unable to download data from ${url}. Message: ${result.body.message}.`);
       }
