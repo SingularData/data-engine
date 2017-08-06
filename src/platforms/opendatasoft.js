@@ -101,7 +101,7 @@ export function download(url, portals) {
         tags: getValidArray(metas.keyword),
         categories: getValidArray(metas.theme),
         raw: dataset,
-        region: metas.geographic_area ? forceMulti(metas.geographic_area.geometry) : null,
+        region: checkGeom(metas.geographic_area.geometry),
         files: []
       };
     })
@@ -132,9 +132,13 @@ function getValidArray(array) {
   return [];
 }
 
-function forceMulti(geometry) {
-  if (!geometry.type.startsWith('Multi')) {
-    geometry.type = `Multi${geometry.type}`;
+function checkGeom(geometry) {
+  if (!geometry || geometry.type !== 'Polygon' || geometry.type !== 'MultiPolygon') {
+    return null;
+  }
+
+  if (geometry.type !== 'MultiPolygon') {
+    geometry.type = 'MultiPolygon';
     geometry.coordinates = [geometry.coordinates];
   }
 
