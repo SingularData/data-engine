@@ -178,8 +178,8 @@ export function refreshDatabase() {
   let db = getDB();
 
   return db.tx((t) => Observable.concat(
-    t.query('REFRESH MATERIALIZED VIEW public.mview_portal'),
-    t.query('REFRESH MATERIALIZED VIEW public.mview_latest_dataset')
+    t.query('REFRESH MATERIALIZED VIEW public.mview_latest_dataset'),
+    t.query('REFRESH MATERIALIZED VIEW public.mview_portal')
   ));
 }
 
