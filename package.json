@@ -4,9 +4,11 @@
   "description": "data pipeline for SingularData.io",
   "main": "index.js",
   "scripts": {
-    "update-all": "babel-node --max_old_space_size=4096 scripts/update.all.js",
-    "test-connection": "babel-node scripts/connection.test.js",
+    "update": "babel-node --max_old_space_size=8000 scripts/update.all.js",
+    "update-prod": "NODE_ENV=production babel-node --max_old_space_size=8000 scripts/update.all.js",
     "reindex": "babel-node scripts/reindex.js",
+    "reindex-prod": "NODE_ENV=production babel-node --max_old_space_size=8000 scripts/reindex.js",
+    "test-connection": "babel-node scripts/connection.test.js",
     "test": "mocha test/**/*.test.js --require babel-register",
     "prepush": "npm test"
   },
