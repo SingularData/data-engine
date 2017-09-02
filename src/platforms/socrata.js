@@ -46,7 +46,7 @@ export function downloadAllUS() {
 
 export function downloadAllEU() {
 
-  let sql = readFileSync(__dirname + '/../queries/get_platform_portals', 'utf-8');
+  let sql = readFileSync(__dirname + '/../queries/get_platform_portals.sql', 'utf-8');
 
   return getDB()
     .query(sql, ['Socrata-EU'])
