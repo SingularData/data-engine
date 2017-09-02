@@ -127,7 +127,11 @@ export function ensureIndex(index = 'datarea') {
   return Observable.defer(() => {
     let client = getClient();
     let task = client.indices.exists({ index })
-      .catch(() => client.indexes.create({ index }));
+      .then((exists) => {
+        if (!exists) {
+          return client.indices.create({ index });
+        }
+      });
 
     return task;
   });
