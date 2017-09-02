@@ -117,3 +117,18 @@ export function reindex() {
 
   return Observable.concat(clearData, insertData);
 }
+
+/**
+ * Ensure search index exists. If not, create it.
+ * @param   {String} [index='datarea'] data index
+ * @returns {undefined}                no return
+ */
+export function ensureIndex(index = 'datarea') {
+  return Observable.defer(() => {
+    let client = getClient();
+    let task = client.indices.exists({ index })
+      .catch(() => client.indexes.create({ index }));
+
+    return task;
+  });
+}

@@ -1,6 +1,7 @@
-import { reindex } from '../src/elasticsearch.js';
+import { Observable } from 'rxjs';
+import { ensureIndex, reindex } from '../src/elasticsearch.js';
 
-reindex()
+Observable.concat(ensureIndex(), reindex())
   .subscribe(
     () => {},
     (err) => {
