@@ -5,7 +5,7 @@ import _ from 'lodash';
 
 let collectData = harvestAll({ updateES: false });
 
-Observable.concat(collectData, ensureIndex(), reindex())
+Observable.concat(ensureIndex(), collectData, reindex())
   .subscribe(
     _.noop,
     (error) => {
