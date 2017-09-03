@@ -110,7 +110,7 @@ export function reindex() {
         return client.release;
       });
     })
-    .bufferCount(config.get('database.insert_limit'))
+    .bufferCount(config.get('elasticsearch.insert_limit'))
     .do(() => stream.pause())
     .mergeMap((datasets) => upsert(datasets), cocurrency)
     .do(() => stream.resume());

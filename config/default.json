@@ -19,7 +19,8 @@
     "insert_limit": 150
   },
   "elasticsearch": {
-    "host": "http://localhost:9200"
+    "host": "http://localhost:9200",
+    "insert_limit": 50
   },
   "harvester": {
     "user_agents": [
