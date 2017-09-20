@@ -27,7 +27,6 @@ export function validateMetadata(metadata) {
   expect(metadata.tags).to.be.an('array');
   expect(metadata.categories).to.be.an('array');
   expect(metadata.raw).to.be.an('object');
-  expect(metadata.categories).to.be.an('array');
   expect(metadata.files).to.be.an('array');
 }
 
@@ -74,7 +73,7 @@ describe('database.js', () => {
       raw,
       version,
       version_period,
-      region,
+      spatial,
       files
     ) VALUES
   (

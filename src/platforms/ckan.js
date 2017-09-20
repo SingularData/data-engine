@@ -89,7 +89,7 @@ export function download(portal) {
         tags: _.map(dataset.tags, 'display_name'),
         categories: _.map(dataset.groups, 'display_name'),
         raw: dataset,
-        region: null,
+        spatial: null,
         files: dataFiles
       };
     })

@@ -66,6 +66,7 @@ export function upsert(datasets) {
       'portalId',
       'portalDatasetId',
       'raw',
+      'spatial',
       'version',
       'versionPeriod'
     );

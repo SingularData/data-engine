@@ -65,7 +65,7 @@ export function download(portal) {
         tags: [],
         categories: [dataset.category__gn_description],
         raw: dataset,
-        region: wktToGeoJSON(dataset.csw_wkt_geometry),
+        spatial: wktToGeoJSON(dataset.csw_wkt_geometry),
         files: dataFiles
       };
     })

@@ -100,7 +100,7 @@ export function download(url, portals) {
         tags: getValidArray(metas.keyword),
         categories: getValidArray(metas.theme),
         raw: dataset,
-        region: metas.geographic_area ? checkGeom(metas.geographic_area.geometry) : null,
+        spatial: metas.geographic_area ? checkGeom(metas.geographic_area.geometry) : null,
         files: []
       };
     })

@@ -134,7 +134,7 @@ export function download(portal) {
         categories: _.concat(_.get(dataset.classification, 'categories'), _.get(dataset.classification, 'domain_category')),
         raw: dataset,
         files: [],
-        region: null
+        spatial: null
       };
     })
     .catch((error) => {

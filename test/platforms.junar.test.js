@@ -4,6 +4,7 @@ import { download, downloadAll, __RewireAPI__ as ToDosRewireAPI } from '../src/p
 import { validateMetadata } from './database.test';
 
 const expect = chai.expect;
+const dataset = require('./dataset/junar.json');
 
 describe('platfoms/junar.js', () => {
 
@@ -51,24 +52,7 @@ describe('platfoms/junar.js', () => {
           return Rx.Observable.of({
             body: {
               results: [
-                {
-                  "result": null,
-                  "endpoint": "file://4575/0475/75487840637754682629754469421296137673",
-                  "description": "Annual Crime Statistics",
-                  "parameters": [],
-                  "tags": [
-                    ""
-                  ],
-                  "timestamp": 1486742469000,
-                  "created_at": 1486742469,
-                  "title": "Sacramento Annual Crime Statistics",
-                  "modified_at": 1486742469,
-                  "category_id": "38920",
-                  "link": "http://data.cityofsacramento.org/datasets/72416/sacramento-annual-crime-statistics/",
-                  "user": "sacramento",
-                  "guid": "SACRA-ANNUA-CRIME-STATI-90418",
-                  "category_name": "Public Safety"
-                }
+                dataset
               ]
             }
           });

@@ -10,7 +10,7 @@ import { toCamelCase, valueToString } from './utils/pg-util';
 
 const logger = log4js.getLogger('database');
 
-let db;
+let db, dbType;
 
 /**
  * Get the current database connection.
@@ -18,7 +18,11 @@ let db;
  * @return {Object} pgp database connection.
  */
 export function getDB(type = 'pg-reactive') {
-  return db ? db : initialize(type);
+  if (dbType === type && db) {
+    return db;
+  }
+
+  return initialize(type);
 }
 
 /**
@@ -47,6 +51,7 @@ export function initialize(type = 'pg-reactive') {
     db = new Pool(connConfig);
   }
 
+  dbType = type;
 
   return db;
 }
@@ -79,7 +84,7 @@ export function save(metadatas) {
       raw,
       version,
       version_period,
-      region,
+      spatial,
       files
     ) VALUES
   `;
@@ -99,7 +104,7 @@ export function save(metadatas) {
       ${valueToString(metadata.raw)},
       ${valueToString(metadata.version)},
       ${valueToString(metadata.versionPeriod)},
-      ${valueToString(metadata.region)},
+      ${valueToString(metadata.spatial)},
       ${valueToString(metadata.files)}::json[]
     )`;
   });

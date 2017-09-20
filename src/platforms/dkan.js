@@ -77,7 +77,7 @@ export function download(portal) {
         tags: dataset.keyword || [],
         categories: [],
         raw: dataset,
-        region: wktToGeoJSON(dataset.spatial),
+        spatial: wktToGeoJSON(dataset.spatial),
         files: dataFiles
       };
     })

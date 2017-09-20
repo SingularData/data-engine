@@ -83,7 +83,7 @@ export function download(portal) {
         categories: [dataset.category_name],
         raw: dataset,
         files: [],
-        region: null
+        spatial: null
       };
     })
     .catch((error) => {

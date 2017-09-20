@@ -74,7 +74,7 @@ export function download(portal) {
         tags: dataset.keyword,
         categories: [],
         raw: dataset,
-        region: bboxToGeoJSON(dataset.spatial),
+        spatial: bboxToGeoJSON(dataset.spatial),
         files: dataFiles
       };
     })

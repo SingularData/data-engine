@@ -6,6 +6,7 @@ import { validateMetadata } from './database.test';
 
 const rows = config.get('platforms.OpenDataSoft.rows');
 const expect = chai.expect;
+const dataset = require('./dataset/opendatasoft.json');
 
 describe('platforms/opendatasoft.js', () => {
 
@@ -15,62 +16,8 @@ describe('platforms/opendatasoft.js', () => {
         return Rx.Observable.of({
           body: {
             datasets: [
-              {
-                "dataset": {
-                  "dataset_id": "evolution_region_longueurs_circuits_files@rte",
-                  "metas": {
-                    "default": {
-                      "publisher": "RTE",
-                      "source_domain_address": "rte.opendatasoft.com",
-                      "license": "Licence Ouverte (Etalab)",
-                      "source_domain": "rte",
-                      "source_dataset": "evolution_region_longueurs_circuits_files",
-                      "modified": "2016-07-04T12:28:31+00:00",
-                      "theme": [
-                        "Réseau",
-                        "Territoires et régions"
-                      ],
-                      "metadata_processed": "2016-09-02T11:52:16+00:00",
-                      "keyword": [
-                        "Région",
-                        "Bilan électrique"
-                      ],
-                      "source_domain_title": "OPEN DATA RTE",
-                      "data_processed": "2016-09-02T11:52:15+00:00",
-                      "title": "Evolutions régionales annuelles  des longueurs de circuits et files de pylônes du réseau de transport d'électricité (2013 à 2015)",
-                      "description": "test data"
-                    }
-                  }
-                }
-              },
-              {
-                "dataset": {
-                  "dataset_id": "evolution_region_longueurs_circuits_files@rte",
-                  "metas": {
-                    "default": {
-                      "publisher": "RTE",
-                      "source_domain_address": "rte.opendatasoft.com",
-                      "license": "Licence Ouverte (Etalab)",
-                      "source_domain": "rte",
-                      "source_dataset": "evolution_region_longueurs_circuits_files",
-                      "modified": "2016-07-04T12:28:31+00:00",
-                      "theme": [
-                        "Réseau",
-                        "Territoires et régions"
-                      ],
-                      "metadata_processed": "2016-09-02T11:52:16+00:00",
-                      "keyword": [
-                        "Région",
-                        "Bilan électrique"
-                      ],
-                      "source_domain_title": "OPEN DATA RTE",
-                      "data_processed": "2016-09-02T11:52:15+00:00",
-                      "title": "Evolutions régionales annuelles  des longueurs de circuits et files de pylônes du réseau de transport d'électricité (2013 à 2015)",
-                      "description": "test data"
-                    }
-                  }
-                }
-              }
+              dataset,
+              dataset
             ]
           }
         });
@@ -102,49 +49,7 @@ describe('platforms/opendatasoft.js', () => {
         return Rx.Observable.of({
           body: {
             datasets: [
-              {
-                "dataset": {
-                  "dataset_id": "evolution_region_longueurs_circuits_files@rte",
-                  "has_records": true,
-                  "attachments": [],
-                  "data_visible": true,
-                  "metas": {
-                    "default": {
-                      "publisher": "RTE",
-                      "source_domain_address": "rte.opendatasoft.com",
-                      "license": "Licence Ouverte (Etalab)",
-                      "language": "fr",
-                      "records_count": 180,
-                      "source_domain": "rte",
-                      "source_dataset": "evolution_region_longueurs_circuits_files",
-                      "modified": "2016-07-04T12:28:31+00:00",
-                      "theme": [
-                        "Réseau",
-                        "Territoires et régions"
-                      ],
-                      "metadata_processed": "2016-09-02T11:52:16+00:00",
-                      "keyword": [
-                        "Electricité",
-                        "Circuit",
-                        "Réseau",
-                        "File de pylônes",
-                        "Territoire",
-                        "Région",
-                        "Bilan électrique"
-                      ],
-                      "source_domain_title": "OPEN DATA RTE",
-                      "data_processed": "2016-09-02T11:52:15+00:00",
-                      "title": "Evolutions régionales annuelles  des longueurs de circuits et files de pylônes du réseau de transport d'électricité (2013 à 2015)",
-                      "description": "test data"
-                    }
-                  },
-                  "features": [
-                    "geo",
-                    "analyze",
-                    "timeserie"
-                  ]
-                }
-              }
+              dataset
             ]
           }
         });
