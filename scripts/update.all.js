@@ -1,11 +1,11 @@
 import { Observable } from 'rxjs';
 import { harvestAll } from '../src/harvester';
-import { ensureIndex } from '../src/elasticsearch';
+import { ensureIndex, reindex } from '../src/elasticsearch';
 import _ from 'lodash';
 
-let collectData = harvestAll({ updateES: true });
+let collectData = harvestAll({ updateES: false });
 
-Observable.concat(ensureIndex(), collectData)
+Observable.concat(ensureIndex(), collectData, reindex())
   .subscribe(
     _.noop,
     (error) => {
