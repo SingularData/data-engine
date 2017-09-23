@@ -6,28 +6,26 @@ const expect = chai.expect;
 
 export function validateMetadata(metadata) {
   expect(metadata).to.have.property('portalId');
-  expect(metadata).to.have.property('name');
-  expect(metadata).to.have.property('portalDatasetId');
-  expect(metadata).to.have.property('created');
-  expect(metadata).to.have.property('updated');
+  expect(metadata).to.have.property('title');
+  expect(metadata).to.have.property('issued');
+  expect(metadata).to.have.property('modified');
   expect(metadata).to.have.property('description');
-  expect(metadata).to.have.property('url');
+  expect(metadata).to.have.property('landingPage');
   expect(metadata).to.have.property('license');
   expect(metadata).to.have.property('publisher');
-  expect(metadata).to.have.property('tags');
-  expect(metadata).to.have.property('categories');
+  expect(metadata).to.have.property('keyword');
+  expect(metadata).to.have.property('theme');
   expect(metadata).to.have.property('raw');
-  expect(metadata).to.have.property('files');
+  expect(metadata).to.have.property('distribution');
 
   expect(metadata.portalId).to.be.a('number');
-  expect(metadata.name).to.be.a('string');
-  expect(metadata.updated).to.be.a('date');
-  expect(metadata.portalDatasetId).to.be.a('string');
-  expect(metadata.url).to.be.a('string');
-  expect(metadata.tags).to.be.an('array');
-  expect(metadata.categories).to.be.an('array');
+  expect(metadata.title).to.be.a('string');
+  expect(metadata.modified).to.be.a('date');
+  expect(metadata.landingPage).to.be.a('string');
+  expect(metadata.keyword).to.be.an('array');
+  expect(metadata.theme).to.be.an('array');
   expect(metadata.raw).to.be.an('object');
-  expect(metadata.files).to.be.an('array');
+  expect(metadata.distribution).to.be.an('array');
 }
 
 describe('database.js', () => {
@@ -41,18 +39,17 @@ describe('database.js', () => {
 
     let metadatas = [{
       portalId: 1,
-      portalDatasetId: 1,
-      uuid: 'test-uuid',
-      name: 'test',
+      identifier: 'test-identifier',
+      title: 'test',
       description: null,
-      created: null,
-      updated: new Date(Date.UTC(2017, 1, 1)),
-      url: 'http://localhost',
+      issued: null,
+      modified: new Date(Date.UTC(2017, 1, 1)),
+      landingPage: 'http://localhost',
       publisher: 'my portal',
-      tags: ['of no use'],
-      categories: ['ToDelete'],
+      keyword: ['of no use'],
+      theme: ['ToDelete'],
       raw: {},
-      data: [],
+      distribution: [],
       version: 1,
       versionPeriod: '[,)'
     }];
@@ -60,26 +57,24 @@ describe('database.js', () => {
     let expectedSQL = `
     INSERT INTO view_latest_dataset (
       portal_id,
-      portal_dataset_id,
-      uuid,
-      name,
+      identifier,
+      title,
       description,
-      created,
-      updated,
-      url,
+      issued,
+      modified,
+      landing_page,
       publisher,
-      tags,
-      categories,
+      keyword,
+      theme,
       raw,
       version,
       version_period,
       spatial,
-      files
+      distribution
     ) VALUES
   (
       1,
-      1,
-      'test-uuid',
+      'test-identifier',
       'test',
       NULL,
       NULL,
@@ -92,7 +87,7 @@ describe('database.js', () => {
       1,
       '[,)',
       NULL,
-      NULL::json[]
+      ARRAY[]::json[]
     )`;
 
     save(metadatas)

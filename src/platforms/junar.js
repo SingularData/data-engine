@@ -62,27 +62,27 @@ export function download(portal) {
     })
     .concatMap((result) => Rx.Observable.of(...result.body.results))
     .map((dataset) => {
-      let created = new Date();
-      let updated = new Date();
+      let issued = new Date();
+      let modified = new Date();
 
-      created.setTime(dataset.created_at * 1000);
-      updated.setTime(dataset.modified_at * 1000);
+      issued.setTime(dataset.created_at * 1000);
+      modified.setTime(dataset.modified_at * 1000);
 
       return {
         portalId: portal.id,
         portal: omit(portal, 'apiUrl', 'apiKey'),
-        name: dataset.title,
+        title: dataset.title,
         portalDatasetId: dataset.guid,
-        created: toUTC(created),
-        updated: toUTC(updated),
+        issued: toUTC(issued),
+        modified: toUTC(modified),
         description: dataset.description,
         license: null,
-        url: dataset.link,
+        landingPage: dataset.link,
         publisher: portal.name,
-        tags: dataset.tags,
-        categories: [dataset.category_name],
+        keyword: dataset.tags,
+        theme: [dataset.category_name],
         raw: dataset,
-        files: [],
+        distribution: [],
         spatial: null
       };
     })

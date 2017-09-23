@@ -54,31 +54,24 @@ export function download(portal) {
       return Rx.Observable.of(...data);
     })
     .map((dataset) => {
-      let dataFiles = _.map(dataset.distribution, (file) => {
-        return {
-          name: file.title || file.format,
-          format: _.toLower(file.format),
-          url: file.downloadURL || file.accessURL,
-          description: file.description
-        };
-      }).filter((file) => file.url && file.format);
+
+      dataset.distribution = dataset.distribution.filter((dist) => dist.downloadURL || dist.accessURL);
 
       return {
         portalId: portal.id,
         portal: portal,
-        name: dataset.title,
-        portalDatasetId: dataset.identifier,
-        created: dataset.issued ? toUTC(new Date(getDateString(dataset.issued))) : null,
-        updated: toUTC(dataset.modified ? new Date(getDateString(dataset.modified)) : new Date()),
+        title: dataset.title,
+        issued: dataset.issued ? toUTC(new Date(getDateString(dataset.issued))) : null,
+        modified: toUTC(dataset.modified ? new Date(getDateString(dataset.modified)) : new Date()),
         description: dataset.description,
-        url: dataset.landingPage || `${portal.url}/search/type/dataset?query=${_.escape(dataset.title.replace(/ /g, '+'))}`,
+        landingPage: dataset.landingPage || `${portal.url}/search/type/dataset?query=${_.escape(dataset.title.replace(/ /g, '+'))}`,
         license: dataset.license,
         publisher: dataset.publisher ? dataset.publisher.name : portal.name,
-        tags: dataset.keyword || [],
-        categories: [],
+        keyword: dataset.keyword || [],
+        theme: [],
         raw: dataset,
         spatial: wktToGeoJSON(dataset.spatial),
-        files: dataFiles
+        distribution: dataset.distribution
       };
     })
     .catch((error) => {

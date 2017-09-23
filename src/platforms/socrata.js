@@ -121,19 +121,18 @@ export function download(portal) {
 
       return {
         portalId: portal.id,
-        portal: _.omit(portal, 'region'),
-        name: resource.name,
-        portalDatasetId: resource.id,
-        created: toUTC(new Date(resource.createdAt)),
-        updated: toUTC(new Date(resource.updatedAt)),
+        portal: portal.name,
+        title: resource.name,
+        issued: toUTC(new Date(resource.createdAt)),
+        modified: toUTC(new Date(resource.updatedAt)),
         description: resource.description,
-        url: dataset.permalink || `${portal.url}/d/${dataset.id}`,
+        landingPage: dataset.permalink || `${portal.url}/d/${dataset.id}`,
         license: _.get(dataset.metadata, 'license'),
         publisher: portal.name,
-        tags: _.concat(_.get(dataset.classification, 'tags'), _.get(dataset.classificatio, 'domain_tags')),
-        categories: _.concat(_.get(dataset.classification, 'categories'), _.get(dataset.classification, 'domain_category')),
+        keyword: _.concat(_.get(dataset.classification, 'tags'), _.get(dataset.classificatio, 'domain_tags')),
+        theme: _.concat(_.get(dataset.classification, 'categories'), _.get(dataset.classification, 'domain_category')),
         raw: dataset,
-        files: [],
+        distribution: [],
         spatial: null
       };
     })

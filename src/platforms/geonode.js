@@ -45,28 +45,30 @@ export function download(portal) {
   return RxHR.get(`${portal.url}/api/base`, getOptions())
     .concatMap((result) => Rx.Observable.of(...result.body.objects))
     .map((dataset) => {
-      let dataFiles = [];
+      let distribution = [];
 
       if (dataset.distribution_description && dataset.distribution_url) {
-        dataFiles.push({ description: dataset.distribution_description, url: dataset.distribution_url });
+        distribution.push({
+          description: dataset.distribution_description,
+          url: dataset.distribution_url
+        });
       }
 
       return {
         portalId: portal.id,
         portal: portal,
-        name: dataset.title,
-        portalDatasetId: dataset.uuid,
-        created: null,
-        updated: toUTC(new Date(dataset.date)),
+        title: dataset.title,
+        issued: null,
+        modified: toUTC(new Date(dataset.date)),
         description: dataset.abstract,
-        url: dataset.distribution_url || `${portal.url}${dataset.detail_url}`,
+        landingPage: dataset.distribution_url || `${portal.url}${dataset.detail_url}`,
         license: null,
         publisher: portal.name,
-        tags: [],
-        categories: [dataset.category__gn_description],
+        keyword: [],
+        theme: [dataset.category__gn_description],
         raw: dataset,
         spatial: wktToGeoJSON(dataset.csw_wkt_geometry),
-        files: dataFiles
+        distribution
       };
     })
     .catch((error) => {

@@ -89,19 +89,18 @@ export function download(url, portals) {
       return {
         portalId: portal.id,
         portal: portal,
-        name: metas.title,
-        portalDatasetId: dataset.dataset.dataset_id,
-        created: null,
-        updated: toUTC(metas.modified ? new Date(metas.modified) : new Date()),
+        title: metas.title,
+        issued: null,
+        modified: toUTC(metas.modified ? new Date(metas.modified) : new Date()),
         description: metas.description,
-        url: createLink(metas.source_domain_address, metas.source_dataset),
+        landingPage: createLink(metas.source_domain_address, metas.source_dataset),
         license: metas.license,
         publisher: metas.publisher,
-        tags: getValidArray(metas.keyword),
-        categories: getValidArray(metas.theme),
+        keyword: getValidArray(metas.keyword),
+        theme: getValidArray(metas.theme),
         raw: dataset,
         spatial: metas.geographic_area ? checkGeom(metas.geographic_area.geometry) : null,
-        files: []
+        distribution: []
       };
     })
     .catch((error) => {

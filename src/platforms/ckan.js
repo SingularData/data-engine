@@ -66,11 +66,11 @@ export function download(portal) {
       return Rx.Observable.of(...result.body.result.results);
     })
     .map((dataset) => {
-      let dataFiles = _.map(dataset.resources, (file) => {
+      let distribution = _.map(dataset.resources, (file) => {
         return {
-          name: file.title || file.name || file.format,
+          title: file.title || file.name || file.format,
           description: file.description,
-          url: file.url,
+          accessURL: file.url,
           format: file.format
         };
       });
@@ -78,19 +78,18 @@ export function download(portal) {
       return {
         portalId: portal.id,
         portal: portal,
-        name: dataset.title,
-        portalDatasetId: dataset.id,
-        created: toUTC(dataset.__extras ? new Date(dataset.__extras.metadata_created) : new Date(dataset.metadata_created)),
-        updated: toUTC(dataset.__extras ? new Date(dataset.__extras.metadata_modified) : new Date(dataset.metadata_modified)),
+        title: dataset.title,
+        issued: toUTC(dataset.__extras ? new Date(dataset.__extras.metadata_created) : new Date(dataset.metadata_created)),
+        modified: toUTC(dataset.__extras ? new Date(dataset.__extras.metadata_modified) : new Date(dataset.metadata_modified)),
         description: dataset.notes,
-        url: `${portal.url}/dataset/${dataset.package_id || dataset.id}`,
+        landingPage: dataset.url || `${portal.url}/dataset/${dataset.package_id || dataset.id}`,
         license: dataset.license_title,
         publisher: _.get(dataset.organization, 'name') || portal.name,
-        tags: _.map(dataset.tags, 'display_name'),
-        categories: _.map(dataset.groups, 'display_name'),
+        keyword: _.map(dataset.tags, 'display_name'),
+        theme: _.map(dataset.groups, 'display_name'),
         raw: dataset,
         spatial: null,
-        files: dataFiles
+        distribution
       };
     })
     .catch((error) => {

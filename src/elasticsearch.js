@@ -58,13 +58,13 @@ export function upsert(datasets) {
       index: {
         _index: 'datarea',
         _type: 'metadata',
-        _id: dataset.uuid
+        _id: dataset.identifier
       }
     };
+
     let source = omit(dataset,
-      'uuid',
+      'identifier',
       'portalId',
-      'portalDatasetId',
       'raw',
       'spatial',
       'version',

@@ -71,41 +71,39 @@ export function save(metadatas) {
   let query = `
     INSERT INTO view_latest_dataset (
       portal_id,
-      portal_dataset_id,
-      uuid,
-      name,
+      identifier,
+      title,
       description,
-      created,
-      updated,
-      url,
+      issued,
+      modified,
+      landing_page,
       publisher,
-      tags,
-      categories,
+      keyword,
+      theme,
       raw,
       version,
       version_period,
       spatial,
-      files
+      distribution
     ) VALUES
   `;
   let values = _.map(metadatas, (metadata) => {
     return `(
       ${valueToString(metadata.portalId)},
-      ${valueToString(metadata.portalDatasetId)},
-      ${valueToString(metadata.uuid)},
-      ${valueToString(metadata.name || 'Untitled Dataset')},
+      ${valueToString(metadata.identifier)},
+      ${valueToString(metadata.title || 'Untitled Dataset')},
       ${valueToString(metadata.description)},
-      ${valueToString(metadata.created)},
-      ${valueToString(metadata.updated)},
-      ${valueToString(metadata.url)},
+      ${valueToString(metadata.issued)},
+      ${valueToString(metadata.modified)},
+      ${valueToString(metadata.landingPage)},
       ${valueToString(metadata.publisher || 'Unknown')},
-      ${valueToString(_.uniq(metadata.tags))}::text[],
-      ${valueToString(_.uniq(metadata.categories))}::text[],
+      ${valueToString(_.uniq(metadata.keyword))}::text[],
+      ${valueToString(_.uniq(metadata.theme))}::text[],
       ${valueToString(metadata.raw)},
       ${valueToString(metadata.version)},
       ${valueToString(metadata.versionPeriod)},
       ${valueToString(metadata.spatial)},
-      ${valueToString(metadata.files)}::json[]
+      ${valueToString(metadata.distribution)}::json[]
     )`;
   });
 

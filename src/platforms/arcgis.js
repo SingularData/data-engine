@@ -52,30 +52,22 @@ export function download(portal) {
       return Observable.of(...result.body.dataset);
     })
     .map((dataset) => {
-      let dataFiles = _.map(dataset.distribution, (file) => {
-        return {
-          name: file.title || file.format,
-          format: _.toLower(file.format),
-          url: file.downloadURL || file.accessURL
-        };
-      });
-
       return {
         portalId: portal.id,
         portal: portal,
-        name: dataset.title,
+        title: dataset.title,
         portalDatasetId: dataset.identifier,
-        created: dataset.issued ? toUTC(new Date(dataset.issued)) : null,
-        updated: toUTC(new Date(dataset.modified)),
+        issued: dataset.issued ? toUTC(new Date(dataset.issued)) : null,
+        modified: toUTC(new Date(dataset.modified)),
         description: dataset.description,
-        url: dataset.landingPage,
+        landingPage: dataset.landingPage,
         license: dataset.license,
         publisher: dataset.publisher.name,
-        tags: dataset.keyword,
-        categories: [],
+        keyword: dataset.keyword,
+        theme: [],
         raw: dataset,
         spatial: bboxToGeoJSON(dataset.spatial),
-        files: dataFiles
+        distribution: dataset.distribution
       };
     })
     .catch((error) => {
