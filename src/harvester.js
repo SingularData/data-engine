@@ -3,10 +3,10 @@ import { save, getDB, getLatestCheckList, refreshDatabase } from './database';
 import { upsert } from './elasticsearch';
 import { dateToString } from './utils/pg-util';
 import { defaults } from 'lodash';
-import uuid from 'uuid';
+import { createHash } from 'crypto';
+import { encode } from 'multihashes';
 import log4js from 'log4js';
 import config from 'config';
-import md5 from 'md5';
 
 import * as opendatasoft from './platforms/opendatasoft';
 import * as arcgis from './platforms/arcgis';
@@ -16,6 +16,8 @@ import * as junar from './platforms/junar';
 import * as geonode from './platforms/geonode';
 import * as dkan from './platforms/dkan';
 
+const cryptoFunc = config.get('hash.crypto');
+const multihashFunc = config.get('hash.multihashes');
 const logger = log4js.getLogger('harvester');
 
 const downlaodAllFn = {
@@ -72,12 +74,12 @@ export function harvestPortal(platform, portal, options = {}) {
   });
 
   let downloadData = downloadPortal(portal)
-    .map((dataset) => checkDataset(dataset, dataCache))
+    .map((dataset) => filterDataset(dataset, dataCache))
     .catch((err) => {
       logger.error(`Error of data processing at ${platform}`, err);
       return Observable.empty();
     })
-    .filter((dataset) => dataset !== null)
+    .filter((dataset) => dataset)
     .bufferCount(config.get('database.insert_limit'));
 
   if (options.updateES) {
@@ -123,12 +125,12 @@ export function harvestPlatform(platform, options = {}) {
     });
 
   let downloadData = downloadAll()
-    .map((dataset) => checkDataset(dataset, dataCache))
+    .map((dataset) => filterDataset(dataset, dataCache))
     .catch((err) => {
       logger.error(`Error of data processing at ${platform}`, err);
       return Observable.empty();
     })
-    .filter((dataset) => dataset !== null)
+    .filter((dataset) => dataset)
     .bufferCount(config.get('database.insert_limit'));
 
   if (options.updateES) {
@@ -183,24 +185,28 @@ export function harvestAll(options = {}) {
   return collectData;
 }
 
-function checkDataset(dataset, checkList) {
-  let key = `${dataset.portalId}:${dataset.portalDatasetId}`;
-  let existing = checkList[key];
+function filterDataset(dataset, checkList) {
+  let key = datasetKey(dataset);
 
-  if (!existing) {
-    dataset.uuid = uuid.v4();
-    dataset.version = 2;
-    dataset.versionPeriod = `[${dateToString(dataset.updated)},)`;
-  } else if (existing.md5 === md5(JSON.stringify(dataset.raw))) {
-    delete checkList[key];
-    return null;
-  } else {
-    delete checkList[key];
-
-    dataset.uuid = existing.uuid;
-    dataset.version = existing.version + 1;
-    dataset.versionPeriod = `[${dateToString(dataset.updated)},)`;
+  if (checkList[key]) {
+    return;
   }
 
+  dataset.identifier = hash(dataset.raw.toString());
+  dataset.version = 2;
+  dataset.versionPeriod = `[${dateToString(dataset.updated)},)`;
+  checkList[key] = dataset.version;
+
   return dataset;
+}
+
+function datasetKey(dataset) {
+  return `${dataset.portl}:${dataset.title}:${hash(dataset.raw.toString())}`;
+}
+
+function hash(content) {
+  let hasher = createHash(cryptoFunc);
+  hasher.update(content);
+
+  return encode(hasher.digest(), multihashFunc).toString('hex');
 }

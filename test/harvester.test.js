@@ -5,8 +5,8 @@ import { harvestPlatform, harvestAll, __RewireAPI__ as ToDosRewireAPI } from '..
 
 const expect = chai.expect;
 
-function dataset(portalID, portalDatasetID, updated) {
-  return { portalID, portalDatasetID, updated, raw: {} };
+function dataset(portalID, title, raw) {
+  return { portalID, title, raw };
 }
 
 describe('harvester.js', () => {
@@ -16,8 +16,8 @@ describe('harvester.js', () => {
     ToDosRewireAPI.__Rewire__('downlaodAllFn', {
       'DKAN': () => {
         return Rx.Observable.create((observer) => {
-          observer.next(dataset(1, '1', new Date()));
-          observer.next(dataset(1, '2', new Date()));
+          observer.next(dataset(1, '1', { title: '1' }));
+          observer.next(dataset(1, '2', { title: '2' }));
           observer.complete();
         });
       }
@@ -39,7 +39,7 @@ describe('harvester.js', () => {
     harvestPlatform('DKAN')
       .subscribe(
         _.noop,
-        _.noop,
+        (err) => console.error(err),
         () => done()
       );
   });
@@ -65,7 +65,7 @@ describe('harvester.js', () => {
     harvestAll()
       .subscribe(
         () => { datasetCount++; },
-        null,
+        (err) => console.error(err),
         () => {
           expect(datasetCount).to.equal(2);
           done();

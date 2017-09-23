@@ -6,7 +6,7 @@ import _ from 'lodash';
 import log4js from 'log4js';
 import { parse } from 'url';
 import { Observable } from 'rxjs';
-import { toCamelCase, valueToString } from './utils/pg-util';
+import { valueToString } from './utils/pg-util';
 
 const logger = log4js.getLogger('database');
 
@@ -87,6 +87,7 @@ export function save(metadatas) {
       distribution
     ) VALUES
   `;
+
   let values = _.map(metadatas, (metadata) => {
     return `(
       ${valueToString(metadata.portalId)},
@@ -97,8 +98,8 @@ export function save(metadatas) {
       ${valueToString(metadata.modified)},
       ${valueToString(metadata.landingPage)},
       ${valueToString(metadata.publisher || 'Unknown')},
-      ${valueToString(_.uniq(metadata.keyword))}::text[],
-      ${valueToString(_.uniq(metadata.theme))}::text[],
+      ${valueToString(cleanItems(metadata.keyword))}::text[],
+      ${valueToString(cleanItems(metadata.theme))}::text[],
       ${valueToString(metadata.raw)},
       ${valueToString(metadata.version)},
       ${valueToString(metadata.versionPeriod)},
@@ -118,57 +119,32 @@ export function save(metadatas) {
  * Get a check list for latest datasets in a platform.
  * @param   {String} platform platform name
  * @param   {String} [portal] portal name (optional)
- * @returns {Observable<any>} a checklist keyed by portal id and portal dataset id
+ * @returns {Observable<any>} a checklist keyed by portal, dataset title, and
+ *                            metadata content hash
  */
 export function getLatestCheckList(platform, portal) {
   let db = getDB();
-  let sql, task;
+  let sql = `
+    SELECT
+      p.name || ':' || title || ':' || identifier AS key,
+      version
+    FROM dataset AS ds
+    LEFT JOIN dataset_portal_xref AS dpx ON dpx.dataset_id = d.id
+    LEFT JOIN portal AS p ON p.id = dpx.portal_id
+    WHERE p.platform_id = (
+      SELECT id FROM platform WHERE name = $2::text LIMIT 1
+    )
+  `;
+  let values = [platform];
 
   if (portal) {
-    sql = `
-      SELECT DISTINCT ON (uuid)
-        portal_id,
-        portal_dataset_id,
-        uuid,
-        version,
-        raw_md5
-      FROM dataset AS d
-      LEFT JOIN portal AS p ON p.id = d.portal_id
-      WHERE p.name = $1::text AND p.platform_id = (
-        SELECT id FROM platform WHERE name = $2::text LIMIT 1
-      )
-      ORDER BY uuid, version DESC
-    `;
-
-    task = db.query(sql, [portal, platform]);
-  } else {
-    sql = `
-      SELECT DISTINCT ON (uuid)
-        portal_id,
-        portal_dataset_id,
-        uuid,
-        version,
-        raw_md5
-      FROM dataset AS d
-      LEFT JOIN portal AS p ON p.id = d.portal_id
-      WHERE p.platform_id = (
-        SELECT id FROM platform WHERE name = $1::text LIMIT 1
-      )
-      ORDER BY uuid, version DESC
-    `;
-
-    task = db.query(sql, [platform]);
+    sql += ' AND p.name = $1::text';
+    values.push(portal);
   }
 
-  return task
-    .map((row) => toCamelCase(row))
+  return db.query(sql, values)
     .reduce((collection, dataset) => {
-      collection[`${dataset.portal_id}:${dataset.portal_dataset_id}`] = {
-        uuid: dataset.uuid,
-        md5: dataset.rawMd5,
-        version: dataset.version
-      };
-
+      collection[dataset.key] = dataset.version;
       return collection;
     }, {});
 }
@@ -203,4 +179,8 @@ export function clear() {
     t.query('DELETE FROM dataset_region'),
     t.query('DELETE FROM dataset_publisher')
   ));
+}
+
+function cleanItems(items) {
+  return _.chain(items).filter().forEach((item) => item.trim()).uniq().value();
 }
