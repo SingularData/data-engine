@@ -1,57 +1,36 @@
-const Pool = require('pg-pool');
-
 import pgrx from 'pg-reactive';
 import config from 'config';
 import _ from 'lodash';
 import log4js from 'log4js';
-import { parse } from 'url';
 import { Observable } from 'rxjs';
 import { valueToString } from './utils/pg-util';
 
 const logger = log4js.getLogger('database');
 
-let db, dbType;
+let db;
 
 /**
  * Get the current database connection.
- * @param {string} type database object type: pg-reactive or pg
- * @return {Object} pgp database connection.
+ * @return {Object} database connection.
  */
-export function getDB(type = 'pg-reactive') {
-  if (dbType === type && db) {
+export function getDB() {
+  if (db) {
     return db;
   }
 
-  return initialize(type);
+  return initialize();
 }
 
 /**
  * Initialize database connection.
- * @param {string} type database object type: pg-reactive or pg
- * @return {Object} pgp database connection.
+ * @return {Object} database connection.
  */
-export function initialize(type = 'pg-reactive') {
+export function initialize() {
   if (db) {
     db.end();
   }
 
-  if (type === 'pg-reactive') {
-    db = new pgrx(config.get('database.url'));
-  } else {
-    let params = parse(config.get('database.url'));
-    let auth = params.auth.split(':');
-    let connConfig = {
-      user: auth[0],
-      password: auth[1],
-      host: params.hostname,
-      port: params.port,
-      database: params.pathname.split('/')[1]
-    };
-
-    db = new Pool(connConfig);
-  }
-
-  dbType = type;
+  db = new pgrx(config.get('database.url'));
 
   return db;
 }
@@ -129,16 +108,16 @@ export function getLatestCheckList(platform, portal) {
       p.name || ':' || title || ':' || identifier AS key,
       version
     FROM dataset AS ds
-    LEFT JOIN dataset_portal_xref AS dpx ON dpx.dataset_id = d.id
+    LEFT JOIN dataset_portal_xref AS dpx ON dpx.dataset_id = ds.id
     LEFT JOIN portal AS p ON p.id = dpx.portal_id
     WHERE p.platform_id = (
-      SELECT id FROM platform WHERE name = $2::text LIMIT 1
+      SELECT id FROM platform WHERE name = $1::text LIMIT 1
     )
   `;
   let values = [platform];
 
   if (portal) {
-    sql += ' AND p.name = $1::text';
+    sql += ' AND p.name = $2::text';
     values.push(portal);
   }
 

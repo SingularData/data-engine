@@ -1,5 +1,4 @@
 const es = require('elasticsearch');
-const QueryStream = require('pg-query-stream');
 
 import config from 'config';
 import { resolve } from 'path';
@@ -79,14 +78,21 @@ export function upsert(datasets) {
 
 /**
  * Clear all dataset metadata index
+ * @param   {String} [index='datarea'] data index
  * @returns {Observable} empty observable
  */
-export function clear() {
-  let client = getClient();
+export function clear(index = 'datarea') {
+  return Observable.defer(() => {
+    let client = getClient();
+    let task = client.indices.exists({ index })
+      .then((exists) => {
+        if (exists) {
+          return client.indices.delete({ index });
+        }
+      });
 
-  return Observable.fromPromise(client.indices.delete({
-    index: 'datarea'
-  }));
+    return task;
+  });
 }
 
 /**
@@ -94,29 +100,14 @@ export function clear() {
  * @returns {Observable} empty observable
  */
 export function reindex() {
-  let clearData = clear().catch(() => Observable.empty());
-
-  let stream;
-  let db = getDB('pg-pool');
-  let insertData = Observable.defer(() => db.connect())
-    .concatMap((client) => {
-      return Observable.create((observer) => {
-        let sql = readFileSync(resolve(__dirname, 'queries/get_latest_data.sql'), 'utf8');
-
-        stream = client.query(new QueryStream(sql));
-        stream.on('data', (row) => observer.next(row));
-        stream.on('error', (error) => observer.error(error));
-        stream.on('end', () => observer.complete());
-
-        return client.release;
-      });
+  return clear()
+    .mergeMap(() => {
+      let db = getDB();
+      let sql = readFileSync(resolve(__dirname, 'queries/get_latest_data.sql'), 'utf8');
+      return db.query(sql);
     })
-    .bufferCount(config.get('elasticsearch.insert_limit'))
-    .do(() => stream.pause())
-    .mergeMap((datasets) => upsert(datasets), cocurrency)
-    .do(() => stream.resume());
-
-  return Observable.concat(clearData, insertData);
+    .bufferCount(config.get('database.insert_limit'))
+    .concatMap((datasets) => upsert(datasets), cocurrency);
 }
 
 /**

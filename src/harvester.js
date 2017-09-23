@@ -131,7 +131,8 @@ export function harvestPlatform(platform, options = {}) {
       return Observable.empty();
     })
     .filter((dataset) => dataset)
-    .bufferCount(config.get('database.insert_limit'));
+    .bufferCount(config.get('database.insert_limit'))
+    .do(() => console.log('comming'));
 
   if (options.updateES) {
     downloadData = downloadData.concatMap((datasets) => Observable.concat(save(datasets), upsert(datasets)));
