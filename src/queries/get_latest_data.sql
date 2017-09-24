@@ -3,12 +3,8 @@ SELECT
   mld.title,
   mld.description,
   publisher,
-  mld.landing_page,
-  keywork,
+  keyword,
   theme,
-  issued,
-  modified,
-  license,
   distribution,
   json_build_object(
     'name', portal,

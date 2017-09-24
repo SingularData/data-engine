@@ -100,14 +100,13 @@ export function clear(index = 'datarea') {
  * @returns {Observable} empty observable
  */
 export function reindex() {
-  return clear()
-    .mergeMap(() => {
-      let db = getDB();
-      let sql = readFileSync(resolve(__dirname, 'queries/get_latest_data.sql'), 'utf8');
-      return db.query(sql);
-    })
+  let db = getDB();
+  let sql = readFileSync(resolve(__dirname, 'queries/get_latest_data.sql'), 'utf8');
+  let populate = db.query(sql)
     .bufferCount(config.get('database.insert_limit'))
-    .concatMap((datasets) => upsert(datasets), cocurrency);
+    .concatMap((datasets) => upsert(datasets));
+
+  return Observable.concat(clear(), populate);
 }
 
 /**
