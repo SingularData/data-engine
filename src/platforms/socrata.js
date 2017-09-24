@@ -120,8 +120,7 @@ export function download(portal) {
       let resource = dataset.resource;
 
       return {
-        portalId: portal.id,
-        portal: portal.name,
+        portal: portal,
         title: resource.name,
         issued: toUTC(new Date(resource.createdAt)),
         modified: toUTC(new Date(resource.updatedAt)),

@@ -58,7 +58,6 @@ export function download(portal) {
       dataset.distribution = dataset.distribution.filter((dist) => dist.downloadURL || dist.accessURL);
 
       return {
-        portalId: portal.id,
         portal: portal,
         title: dataset.title,
         issued: dataset.issued ? toUTC(new Date(getDateString(dataset.issued))) : null,

@@ -69,7 +69,6 @@ export function download(portal) {
       modified.setTime(dataset.modified_at * 1000);
 
       return {
-        portalId: portal.id,
         portal: omit(portal, 'apiUrl', 'apiKey'),
         title: dataset.title,
         portalDatasetId: dataset.guid,

@@ -79,7 +79,7 @@ export function harvestPortal(platform, portal, options = {}) {
       logger.error(`Error of data processing at ${platform}`, err);
       return Observable.empty();
     })
-    .filter((dataset) => dataset)
+    .filter((dataset) => dataset !== null)
     .bufferCount(config.get('database.insert_limit'));
 
   if (options.updateES) {
@@ -130,9 +130,8 @@ export function harvestPlatform(platform, options = {}) {
       logger.error(`Error of data processing at ${platform}`, err);
       return Observable.empty();
     })
-    .filter((dataset) => dataset)
-    .bufferCount(config.get('database.insert_limit'))
-    .do(() => console.log('comming'));
+    .filter((dataset) => dataset !== null)
+    .bufferCount(config.get('database.insert_limit'));
 
   if (options.updateES) {
     downloadData = downloadData.concatMap((datasets) => Observable.concat(save(datasets), upsert(datasets)));
@@ -190,19 +189,19 @@ function filterDataset(dataset, checkList) {
   let key = datasetKey(dataset);
 
   if (checkList[key]) {
-    return;
+    return null;
   }
 
   dataset.identifier = hash(dataset.raw.toString());
-  dataset.version = 2;
-  dataset.versionPeriod = `[${dateToString(dataset.updated)},)`;
+  dataset.version = checkList[key] + 1;
+  dataset.versionPeriod = `[${dateToString(dataset.modified)},)`;
   checkList[key] = dataset.version;
 
   return dataset;
 }
 
 function datasetKey(dataset) {
-  return `${dataset.portl}:${dataset.title}:${hash(dataset.raw.toString())}`;
+  return `${dataset.portal.name}:${dataset.title}:${hash(dataset.raw.toString())}`;
 }
 
 function hash(content) {

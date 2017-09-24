@@ -5,7 +5,6 @@ import { save, __RewireAPI__ as ToDosRewireAPI } from '../src/database.js';
 const expect = chai.expect;
 
 export function validateMetadata(metadata) {
-  expect(metadata).to.have.property('portalId');
   expect(metadata).to.have.property('title');
   expect(metadata).to.have.property('issued');
   expect(metadata).to.have.property('modified');
@@ -18,7 +17,6 @@ export function validateMetadata(metadata) {
   expect(metadata).to.have.property('raw');
   expect(metadata).to.have.property('distribution');
 
-  expect(metadata.portalId).to.be.a('number');
   expect(metadata.title).to.be.a('string');
   expect(metadata.modified).to.be.a('date');
   expect(metadata.landingPage).to.be.a('string');
@@ -38,7 +36,9 @@ describe('database.js', () => {
     });
 
     let metadatas = [{
-      portalId: 1,
+      portal: {
+        id: 1
+      },
       identifier: 'test-identifier',
       title: 'test',
       description: null,

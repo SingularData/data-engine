@@ -69,7 +69,7 @@ export function save(metadatas) {
 
   let values = _.map(metadatas, (metadata) => {
     return `(
-      ${valueToString(metadata.portalId)},
+      ${valueToString(metadata.portal.id)},
       ${valueToString(metadata.identifier)},
       ${valueToString(metadata.title || 'Untitled Dataset')},
       ${valueToString(metadata.description)},
@@ -161,5 +161,5 @@ export function clear() {
 }
 
 function cleanItems(items) {
-  return _.chain(items).filter().forEach((item) => item.trim()).uniq().value();
+  return _.chain(items).filter().map((item) => _.trim(item)).uniq().value();
 }

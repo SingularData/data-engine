@@ -87,7 +87,6 @@ export function download(url, portals) {
       let portal = portals[metas.source_domain_title];
 
       return {
-        portalId: portal.id,
         portal: portal,
         title: metas.title,
         issued: null,

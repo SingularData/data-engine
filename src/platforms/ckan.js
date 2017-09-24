@@ -76,7 +76,6 @@ export function download(portal) {
       });
 
       return {
-        portalId: portal.id,
         portal: portal,
         title: dataset.title,
         issued: toUTC(dataset.__extras ? new Date(dataset.__extras.metadata_created) : new Date(dataset.metadata_created)),

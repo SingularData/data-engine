@@ -53,7 +53,6 @@ export function download(portal) {
     })
     .map((dataset) => {
       return {
-        portalId: portal.id,
         portal: portal,
         title: dataset.title,
         portalDatasetId: dataset.identifier,

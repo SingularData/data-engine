@@ -55,7 +55,6 @@ export function download(portal) {
       }
 
       return {
-        portalId: portal.id,
         portal: portal,
         title: dataset.title,
         issued: null,
