@@ -1,0 +1,6027 @@
+[
+  {
+    "name": "Energy Data eXchange",
+    "type": "CKAN",
+    "url": "https://edx.netl.doe.gov"
+  },
+  {
+    "name": "Geospatial Information Clearninghouse",
+    "type": "CKAN",
+    "url": "http://ckan.gsi.go.jp"
+  },
+  {
+    "name": "datos.gob.mx",
+    "type": "CKAN",
+    "url": "http://datos.gob.mx/busca"
+  },
+  {
+    "name": "National Oceanic and Atmospheric Administration",
+    "type": "CKAN",
+    "url": "https://data.noaa.gov"
+  },
+  {
+    "name": "Opendata Lisra",
+    "type": "CKAN",
+    "url": "http://opendata.lisra.jp"
+  },
+  {
+    "name": "OpenDataBC",
+    "type": "CKAN",
+    "url": "https://www.opendatabc.ca"
+  },
+  {
+    "name": "Tainan City Open Data",
+    "type": "CKAN",
+    "url": "http://data.tainan.gov.tw"
+  },
+  {
+    "name": "Environmental Climate Data Sweden",
+    "type": "CKAN",
+    "url": "https://ecds.se"
+  },
+  {
+    "name": "Oppna Data",
+    "type": "CKAN",
+    "url": "http://oppnadata.se"
+  },
+  {
+    "name": "Open Data METI",
+    "type": "CKAN",
+    "url": "http://datameti.go.jp/data"
+  },
+  {
+    "name": "Codeando Mexico",
+    "type": "CKAN",
+    "url": "http://datamx.io"
+  },
+  {
+    "name": "Surrey's Open Data",
+    "type": "CKAN",
+    "url": "http://data.surrey.ca"
+  },
+  {
+    "name": "City of Zagreb Open Data Portal",
+    "type": "CKAN",
+    "url": "http://data.zagreb.hr"
+  },
+  {
+    "name": "CMAP Data Hub",
+    "type": "CKAN",
+    "url": "https://datahub.cmap.illinois.gov"
+  },
+  {
+    "name": "Dados.gov.br",
+    "type": "CKAN",
+    "url": "http://dados.gov.br"
+  },
+  {
+    "name": "Dados Recife",
+    "type": "CKAN",
+    "url": "http://dados.recife.pe.gov.br"
+  },
+  {
+    "name": "data.gov.ro",
+    "type": "CKAN",
+    "url": "http://data.gov.ro"
+  },
+  {
+    "name": "DadosRS",
+    "type": "CKAN",
+    "url": "http://dados.rs.gov.br"
+  },
+  {
+    "name": "data.gov.sk",
+    "type": "CKAN",
+    "url": "https://data.gov.sk"
+  },
+  {
+    "name": "Banube Reference Data and Service Infrastructure",
+    "type": "CKAN",
+    "url": "http://drdsi.jrc.ec.europa.eu"
+  },
+  {
+    "name": "North Dakota GIS Hub Data Portal",
+    "type": "DKAN",
+    "url": "https://gishubdata.nd.gov"
+  },
+  {
+    "name": "HartStat | City of Hartford | HartStat | City of Hartford",
+    "type": "Socrata",
+    "url": "hartstat.hartford.gov"
+  },
+  {
+    "name": "Open Performance | Davenport | City of Davenport",
+    "type": "Socrata",
+    "url": "performance.cityofdavenportiowa.com"
+  },
+  {
+    "name": "IMLS Reports Home | IMLS Reports Home",
+    "type": "Socrata",
+    "url": "reports.data.imls.gov"
+  },
+  {
+    "name": "data.gov.au",
+    "type": "CKAN",
+    "url": "https://data.gov.au"
+  },
+  {
+    "name": "Data.gc.ca",
+    "type": "CKAN",
+    "url": "http://open.canada.ca/data"
+  },
+  {
+    "name": "data.gov.uk",
+    "type": "CKAN",
+    "url": "https://data.gov.uk"
+  },
+  {
+    "name": "data.NSW",
+    "type": "CKAN",
+    "url": "http://data.nsw.gov.au/data"
+  },
+  {
+    "name": "data.overheid.nl",
+    "type": "CKAN",
+    "url": "https://data.overheid.nl/data"
+  },
+  {
+    "name": "Data.Rio",
+    "type": "CKAN",
+    "url": "http://data.rio"
+  },
+  {
+    "name": "Data.vic",
+    "type": "CKAN",
+    "url": "https://www.data.vic.gov.au"
+  },
+  {
+    "name": "data.wa.gov.au",
+    "type": "CKAN",
+    "url": "http://catalogue.beta.data.wa.gov.au"
+  },
+  {
+    "name": "Aragon Open Data",
+    "type": "CKAN",
+    "url": "http://opendata.aragon.es/catalogo"
+  },
+  {
+    "name": "CNMC Open Data",
+    "type": "CKAN",
+    "url": "http://opendata.cnmc.es"
+  },
+  {
+    "name": "openAFRICA",
+    "type": "CKAN",
+    "url": "https://africaopendata.org"
+  },
+  {
+    "name": "Alberta Open Government Portal",
+    "type": "CKAN",
+    "url": "https://open.alberta.ca"
+  },
+  {
+    "name": "DataBC",
+    "type": "CKAN",
+    "url": "https://catalogue.data.gov.bc.ca"
+  },
+  {
+    "name": "Santander Open Data",
+    "type": "CKAN",
+    "url": "http://apicatalogo.santander.es"
+  },
+  {
+    "name":
+      "Department of Transportation - Open Data Portal | Department of Transportation - Data Portal",
+    "type": "Socrata",
+    "url": "data.transportation.gov"
+  },
+  {
+    "name": "DataPOA",
+    "type": "CKAN",
+    "url": "http://datapoa.com.br"
+  },
+  {
+    "name": "Open Data in Uganda",
+    "type": "CKAN",
+    "url": "http://catalog.data.ug"
+  },
+  {
+    "name": "Open Data Kosovo",
+    "type": "CKAN",
+    "url": "http://data.rks-gov.net"
+  },
+  {
+    "name": "Open Data Portal | Open Data | Ramsey County",
+    "type": "Socrata",
+    "url": "opendata.ramseycounty.us"
+  },
+  {
+    "name": "Data.go.jp",
+    "type": "CKAN",
+    "url": "http://www.data.go.jp/data"
+  },
+  {
+    "name": "Datos abiertos Malaga",
+    "type": "CKAN",
+    "url": "http://datosabiertos.malaga.eu"
+  },
+  {
+    "name": "London Datastore    ",
+    "type": "CKAN",
+    "url": "http://data.london.gov.uk"
+  },
+  {
+    "name": "opendata.gov.je",
+    "type": "CKAN",
+    "url": "https://opendata.gov.je"
+  },
+  {
+    "name": "Fortaleza Dados Abertos",
+    "type": "CKAN",
+    "url": "http://dados.fortaleza.ce.gov.br"
+  },
+  {
+    "name": "Glasgow Open Data",
+    "type": "CKAN",
+    "url": "https://data.glasgow.gov.uk"
+  },
+  {
+    "name": "Grand Rapids Open Data",
+    "type": "CKAN",
+    "url": "http://data.grcity.us"
+  },
+  {
+    "name": "Copenhagen Data",
+    "type": "CKAN",
+    "url": "http://data.kk.dk"
+  },
+  {
+    "name": "Annuario Statistico del Comune di Firenze",
+    "type": "CKAN",
+    "url": "http://annuario.comune.fi.it"
+  },
+  {
+    "name": "Amsterdam Open Data",
+    "type": "CKAN",
+    "url": "http://data.amsterdam.nl"
+  },
+  {
+    "name": "Bermuda.io",
+    "type": "CKAN",
+    "url": "http://bermuda.io"
+  },
+  {
+    "name": "Barrow Borough Councils Open Data Portal",
+    "type": "CKAN",
+    "url": "https://data.barrowbc.gov.uk"
+  },
+  {
+    "name": "Paraguay Open Data Catelog",
+    "type": "CKAN",
+    "url": "https://www.datos.gov.py"
+  },
+  {
+    "name": "Data.gov",
+    "type": "CKAN",
+    "url": "https://catalog.data.gov"
+  },
+  {
+    "name": "Uruguay Open Data Catalog",
+    "type": "CKAN",
+    "url": "https://catalogodatos.gub.uy"
+  },
+  {
+    "name": "data.gov.ie",
+    "type": "CKAN",
+    "url": "https://data.gov.ie"
+  },
+  {
+    "name": "Alagoas Data and Information",
+    "type": "CKAN",
+    "url": "http://dados.al.gov.br"
+  },
+  {
+    "name": "Helsinki Region Infoshare",
+    "type": "CKAN",
+    "url": "http://www.hri.fi/fi"
+  },
+  {
+    "name": "Landcare Research NZ DataStore",
+    "type": "CKAN",
+    "url": "https://datastore.landcareresearch.co.nz"
+  },
+  {
+    "name": "Nantou City Open Data",
+    "type": "CKAN",
+    "url": "http://data.nantou.gov.tw"
+  },
+  {
+    "name": "Montreal Open Data",
+    "type": "CKAN",
+    "url": "http://donnees.ville.montreal.qc.ca"
+  },
+  {
+    "name": "NosDonnees.fr",
+    "type": "CKAN",
+    "url": "http://www.nosdonnees.fr"
+  },
+  {
+    "name": "OffeneDaten.de",
+    "type": "CKAN",
+    "url": "https://offenedaten.de"
+  },
+  {
+    "name": "Open Data Aarhus",
+    "type": "CKAN",
+    "url": "https://www.odaa.dk"
+  },
+  {
+    "name": "DigitalC",
+    "type": "DKAN",
+    "url": "http://civicinsights.org"
+  },
+  {
+    "name": "Bangladesh Open Data",
+    "type": "DKAN",
+    "url": "http://data.gov.bd"
+  },
+  {
+    "name": "NebraskaMap",
+    "type": "DKAN",
+    "url": "www.nebraskamap.gov"
+  },
+  {
+    "name": "Votes Without Violence",
+    "type": "DKAN",
+    "url": "https://www.voteswithoutviolence.org"
+  },
+  {
+    "name": "City of Montpellier",
+    "type": "DKAN",
+    "url": "http://data.montpellier3m.fr"
+  },
+  {
+    "name": "Confiscati Bene",
+    "type": "DKAN",
+    "url": "http://www.confiscatibene.it/"
+  },
+  {
+    "name": "Open Data Gortynia",
+    "type": "CKAN",
+    "url": "http://opendatagortynia.gr"
+  },
+  {
+    "name": "Open Data della Regione Toscana",
+    "type": "CKAN",
+    "url": "http://dati.toscana.it"
+  },
+  {
+    "name": "Open Data Lazio",
+    "type": "CKAN",
+    "url": "http://dati.lazio.it/catalog"
+  },
+  {
+    "name": "Czech Telecommunications Office",
+    "type": "DKAN",
+    "url": "http://data.ctu.cz/"
+  },
+  {
+    "name": "Decentralised Administration of Crete",
+    "type": "DKAN",
+    "url": "http://www.apdkritis.gov.gr"
+  },
+  {
+    "name": "Belarus Open Data",
+    "type": "DKAN",
+    "url": "http://opendata.by"
+  },
+  {
+    "name": "data.gov.ua",
+    "type": "DKAN",
+    "url": "http://data.gov.ua"
+  },
+  {
+    "name": "Moscow Region",
+    "type": "DKAN",
+    "url": "http://data.mosreg.ru"
+  },
+  {
+    "name": "data.gov.sa",
+    "type": "DKAN",
+    "url": "http://data.gov.sa"
+  },
+  {
+    "name": "Bogotá Secretariat of Culture, Recreation, and Sport",
+    "type": "DKAN",
+    "url": "http://sispru.scrd.gov.co/siscred"
+  },
+  {
+    "name": "City of Narino",
+    "type": "DKAN",
+    "url": "http://datos.narino.gov.co"
+  },
+  {
+    "name": "Transport for New South Wales, Australia",
+    "type": "DKAN",
+    "url": "https://opendata.transport.nsw.gov.au"
+  },
+  {
+    "name": "data.exim.gov",
+    "type": "Socrata",
+    "url": "data.exim.gov"
+  },
+  {
+    "name":
+      "U.S. Department of Commerce - Data Hub | Department of Commerce Data Hub",
+    "type": "Socrata",
+    "url": "data.commerce.gov"
+  },
+  {
+    "name":
+      "Johns Creek Police Department | Performance Management | Johns Creek Police Department | Performance Management",
+    "type": "Socrata",
+    "url": "policeview.johnscreekga.gov"
+  },
+  {
+    "name": "Forsyth Futures | Forsyth Futures",
+    "type": "Socrata",
+    "url": "www.forsythfutures.org"
+  },
+  {
+    "name": "Michigan - Open Performance Portal | Michigan - Open Performance",
+    "type": "Socrata",
+    "url": "midashboard.michigan.gov"
+  },
+  {
+    "name": "mydata | IDB | IADB",
+    "type": "Socrata",
+    "url": "mydata.iadb.org"
+  },
+  {
+    "name": "Open Data | Socrata",
+    "type": "Socrata",
+    "url": "ntia.data.commerce.gov"
+  },
+  {
+    "name":
+      "MI Transparency - State Expenditures | MI Transparency - State Expenditures",
+    "type": "Socrata",
+    "url": "transparency.michigan.gov"
+  },
+  {
+    "name": "Rally - Open Data Portal | Rally - Open Data Portal",
+    "type": "Socrata",
+    "url": "flintactiontracker.michigan.gov"
+  },
+  {
+    "name": "NOAA",
+    "type": "Socrata",
+    "url": "noaa.data.commerce.gov"
+  },
+  {
+    "name":
+      "Government Financial Reports App | Government Financial Reports App",
+    "type": "Socrata",
+    "url": "performance.franklintn.gov"
+  },
+  {
+    "name": "Open Data | Socrata",
+    "type": "Socrata",
+    "url": "uspto.data.commerce.gov"
+  },
+  {
+    "name":
+      "Performance Carson City Dashboard | Performance Carson City Dashboard",
+    "type": "Socrata",
+    "url": "performance.carson.org"
+  },
+  {
+    "name": "MetroChicagoData",
+    "type": "Socrata",
+    "url": "www.metrochicagodata.org"
+  },
+  {
+    "name":
+      "Results matching topic of elections | Page 1 of 46 | King County | Open Data",
+    "type": "Socrata",
+    "url": "electionsdata.kingcounty.gov"
+  },
+  {
+    "name": "NIST Socrata",
+    "type": "Socrata",
+    "url": "researchdata.nist.gov"
+  },
+  {
+    "name": "data.collideosco.pe",
+    "type": "Socrata-EU",
+    "url": "data.collideosco.pe"
+  },
+  {
+    "name": "West Sussex County Council | West Sussex County Council",
+    "type": "Socrata-EU",
+    "url": "performance.westsussex.gov.uk"
+  },
+  {
+    "name":
+      "Surrey County Council Open Performance | Surrey County Council Open Performance",
+    "type": "Socrata-EU",
+    "url": "performance.surreycc.gov.uk"
+  },
+  {
+    "name": "Government Financial Reports App | 2015 Live City Reporting",
+    "type": "Socrata-EU",
+    "url": "reports.cdp.net"
+  },
+  {
+    "name":
+      "Swindon Borough Council | Performance Dashboard | Swindon Borough Council",
+    "type": "Socrata-EU",
+    "url": "dashboard.swindon.gov.uk"
+  },
+  {
+    "name": "Dades obertes de Catalunya",
+    "type": "Socrata-EU",
+    "url": "analisi.transparenciacatalunya.cat"
+  },
+  {
+    "name": "Ajuntament de L'Hospitalet",
+    "type": "Socrata-EU",
+    "url": "opendata.l-h.cat"
+  },
+  {
+    "name": "Rally | Open Data Portal | Open Data Framingham",
+    "type": "Socrata",
+    "url": "data.framinghamma.gov"
+  },
+  {
+    "name": "OpenData Ottawa",
+    "type": "CKAN",
+    "url": "http://data.ottawa.ca"
+  },
+  {
+    "name": "Open Data Portal | USAC | Data Platform",
+    "type": "Socrata",
+    "url": "opendata.usac.org"
+  },
+  {
+    "name": "Fulton Open Data",
+    "type": "Socrata",
+    "url": "data.fultoncountyga.gov"
+  },
+  {
+    "name": "Agenceore",
+    "type": "OpenDataSoft",
+    "url": "opendata.agenceore.fr"
+  },
+  {
+    "name": "Swisscom Open Data Portal",
+    "type": "OpenDataSoft",
+    "url": "opendata.swisscom.com"
+  },
+  {
+    "name": "Transfermuga!",
+    "type": "OpenDataSoft",
+    "url": "transfermuga.opendatasoft.com"
+  },
+  {
+    "name": "AWC Open Data",
+    "type": "Socrata",
+    "url": "data.awcnet.org"
+  },
+  {
+    "name": "Gaza Strip ArcGIS OpenData Portal",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.deshe.opendata.arcgis.com"
+  },
+  {
+    "name": "churned-data.awcnet.org",
+    "type": "Socrata",
+    "url": "churned-data.awcnet.org"
+  },
+  {
+    "name": "data.kray.com",
+    "type": "Socrata",
+    "url": "data.kray.com"
+  },
+  {
+    "name": "hsmp-data.aspe.hhs.gov",
+    "type": "Socrata",
+    "url": "hsmp-data.aspe.hhs.gov"
+  },
+  {
+    "name": "reports.awcnet.org",
+    "type": "Socrata",
+    "url": "reports.awcnet.org"
+  },
+  {
+    "name": "Análisis de datos JCyL",
+    "type": "Socrata-EU",
+    "url": "analisis.datosabiertos.jcyl.es"
+  },
+  {
+    "name":
+      "santamonicayouth.net - This website is for sale! - santamonicayouth Resources and Information.",
+    "type": "Socrata",
+    "url": "reportcard.santamonicayouth.net"
+  },
+  {
+    "name": "Open Payments Data - CMS | OpenPaymentsData.CMS.gov",
+    "type": "Socrata",
+    "url": "openpaymentsdata.cms.gov"
+  },
+  {
+    "name": "Open Calgary | Open Calgary",
+    "type": "Socrata",
+    "url": "data.calgary.ca"
+  },
+  {
+    "name": "Performance ATX",
+    "type": "Socrata",
+    "url": "performance.austintexas.gov"
+  },
+  {
+    "name": "Salt Lake County Metrostat",
+    "type": "Socrata",
+    "url": "dashboard.slco.org"
+  },
+  {
+    "name": "AMOpen | AMOpen",
+    "type": "Socrata",
+    "url": "amopen.amo.on.ca"
+  },
+  {
+    "name": "Open Data Portal | Naperville Open Performance",
+    "type": "Socrata",
+    "url": "data.naperville.il.us"
+  },
+  {
+    "name": "INSEE OpenData",
+    "type": "OpenDataSoft",
+    "url": "insee.opendatasoft.com"
+  },
+  {
+    "name": "Hackathon-Culture-Tourisme",
+    "type": "OpenDataSoft",
+    "url": "hackathon-culture-tourisme-culture.opendatasoft.com"
+  },
+  {
+    "name": "Open Data Portal | City of Port Moody : Open Data Portal",
+    "type": "Socrata",
+    "url": "data.portmoody.ca"
+  },
+  {
+    "name": "RedesDeValor",
+    "type": "OpenDataSoft",
+    "url": "redesdevalor-bogota-laburbano.opendatasoft.com"
+  },
+  {
+    "name": "Minnesota Geospatial Commons",
+    "type": "CKAN",
+    "url": "https://gisdata.mn.gov"
+  },
+  {
+    "name": "Open Data Hamburg",
+    "type": "CKAN",
+    "url": "http://suche.transparenz.hamburg.de"
+  },
+  {
+    "name": "Open Data Aachen",
+    "type": "CKAN",
+    "url": "http://opendata.aachen.de"
+  },
+  {
+    "name": "Open data portal of Republic of Croatia",
+    "type": "CKAN",
+    "url": "http://data.gov.hr"
+  },
+  {
+    "name": "Open Data Trentino",
+    "type": "CKAN",
+    "url": "http://dati.trentino.it"
+  },
+  {
+    "name": "OpenBelgium",
+    "type": "CKAN",
+    "url": "http://portal.openbelgium.be"
+  },
+  {
+    "name": "Opendata Caceres",
+    "type": "CKAN",
+    "url": "http://opendata.caceres.es"
+  },
+  {
+    "name": "OpenData.HRO",
+    "type": "CKAN",
+    "url": "http://www.opendata-hro.de"
+  },
+  {
+    "name": "OpenDataDC",
+    "type": "CKAN",
+    "url": "http://opendatadc.org"
+  },
+  {
+    "name": "OpenDataReno",
+    "type": "CKAN",
+    "url": "http://opendatareno.org"
+  },
+  {
+    "name": "OpenGovData.ru",
+    "type": "CKAN",
+    "url": "https://hubofdata.ru"
+  },
+  {
+    "name": "BCHC Data Platform",
+    "type": "Socrata",
+    "url": "bchi.bigcitieshealth.org"
+  },
+  {
+    "name": "Hawaii - Open Data Portal | dashboard.hawaii.gov",
+    "type": "Socrata",
+    "url": "dashboard.hawaii.gov"
+  },
+  {
+    "name": "CincyInsights",
+    "type": "Socrata",
+    "url": "insights.cincinnati-oh.gov"
+  },
+  {
+    "name":
+      "Washington State Liquor and Cannabis Board | Washington State Liquor and Cannabis Board Data Portal (WSLCB)",
+    "type": "Socrata",
+    "url": "data.lcb.wa.gov"
+  },
+  {
+    "name": "City of Plano Dashboard | Open Data | Socrata",
+    "type": "Socrata",
+    "url": "dashboard.plano.gov"
+  },
+  {
+    "name": "Ciudadesabiertas",
+    "type": "OpenDataSoft",
+    "url": "ciudadesabiertas.opendatasoft.com"
+  },
+  {
+    "name": "Porto-Vecchio Opendata Corsica",
+    "type": "OpenDataSoft",
+    "url": "porto-vecchio.opendatasoft.com"
+  },
+  {
+    "name": "Chapel Hill Open Data",
+    "type": "OpenDataSoft",
+    "url": "www.chapelhillopendata.org"
+  },
+  {
+    "name": "Groupe BPCE OpenData",
+    "type": "OpenDataSoft",
+    "url": "bpce.opendatasoft.com"
+  },
+  {
+    "name": "Office for National Statistics",
+    "type": "OpenDataSoft",
+    "url": "ons-public.opendatasoft.com"
+  },
+  {
+    "name": "Portail OpenData de l'Agence nationale des fréquences",
+    "type": "OpenDataSoft",
+    "url": "observatoire.anfr.fr"
+  },
+  {
+    "name": "Portal de Dados Abertos da Cidade de Sao Paulo",
+    "type": "CKAN",
+    "url": "http://dados.prefeitura.sp.gov.br"
+  },
+  {
+    "name": "Portal de Dados Abiertos del Gobierno de Misiones",
+    "type": "CKAN",
+    "url": "http://www.datos.misiones.gov.ar"
+  },
+  {
+    "name": "Portale OpenData del Comune di Bari",
+    "type": "CKAN",
+    "url": "http://opendata.comune.bari.it"
+  },
+  {
+    "name": "Queensland Government Data",
+    "type": "CKAN",
+    "url": "https://data.qld.gov.au"
+  },
+  {
+    "name": "Rotterdam Open Data Store",
+    "type": "CKAN",
+    "url": "http://rotterdamopendata.nl"
+  },
+  {
+    "name": "PORTAIL OPEN DATA PARIS-SACLAY",
+    "type": "OpenDataSoft",
+    "url": "opendata.paris-saclay.com"
+  },
+  {
+    "name": "Taijiang Research Data Repository",
+    "type": "CKAN",
+    "url": "http://taijiang.tw"
+  },
+  {
+    "name": "Swiss Open Government Data",
+    "type": "CKAN",
+    "url": "https://opendata.swiss"
+  },
+  {
+    "name": "Ukraine open data community",
+    "type": "CKAN",
+    "url": "http://data-gov-ua.org"
+  },
+  {
+    "name": "Humanitarian Data Exchange",
+    "type": "CKAN",
+    "url": "https://data.humdata.org"
+  },
+  {
+    "name": "Datahub",
+    "type": "CKAN",
+    "url": "https://datahub.io"
+  },
+  {
+    "name": "International Aid Transparency Initiative",
+    "type": "CKAN",
+    "url": "https://iatiregistry.org"
+  },
+  {
+    "name": "Mannheim",
+    "type": "OpenDataSoft",
+    "url": "mannheim.opendatasoft.com"
+  },
+  {
+    "name": "Y4pt",
+    "type": "OpenDataSoft",
+    "url": "y4pt.opendatasoft.com"
+  },
+  {
+    "name": "Nterpolilli",
+    "type": "OpenDataSoft",
+    "url": "nterpolilli.opendatasoft.com"
+  },
+  {
+    "name": "Dataeducation",
+    "type": "OpenDataSoft",
+    "url": "data.education.gouv.fr"
+  },
+  {
+    "name": "Afnic",
+    "type": "OpenDataSoft",
+    "url": "afnic.opendatasoft.com"
+  },
+  {
+    "name": "HealthData.gov",
+    "type": "DKAN",
+    "url": "http://www.healthdata.gov"
+  },
+  {
+    "name": "Open Data Cologne",
+    "type": "DKAN",
+    "url": "http://www.offenedaten-koeln.de"
+  },
+  {
+    "name": "Data Nicaragua",
+    "type": "OpenDataSoft",
+    "url": "fundenic.opendatasoft.com"
+  },
+  {
+    "name": "Code for Cary OpenDataSoft Portal",
+    "type": "OpenDataSoft",
+    "url": "codeforcary.opendatasoft.com"
+  },
+  {
+    "name": "Code for Croatia Data Portal",
+    "type": "OpenDataSoft",
+    "url": "codeforcroatia.opendatasoft.com"
+  },
+  {
+    "name": "Code for Princeton Data Portal",
+    "type": "OpenDataSoft",
+    "url": "codeforprinceton.opendatasoft.com"
+  },
+  {
+    "name": "Icann",
+    "type": "OpenDataSoft",
+    "url": "icann.opendatasoft.com"
+  },
+  {
+    "name": "Statistiques SDES",
+    "type": "OpenDataSoft",
+    "url": "data.statistiques.developpement-durable.gouv.fr"
+  },
+  {
+    "name": "data.ok.gov",
+    "type": "DKAN",
+    "url": "http://data.ok.gov"
+  },
+  {
+    "name": "Interconnectés",
+    "type": "OpenDataSoft",
+    "url": "interco-hubvisory.opendatasoft.com"
+  },
+  {
+    "name": "Datum4services",
+    "type": "OpenDataSoft",
+    "url": "desidedatum.datum4services.com"
+  },
+  {
+    "name": "OPEN DATA RESEAUX-ENERGIES",
+    "type": "OpenDataSoft",
+    "url": "opendata.reseaux-energies.fr"
+  },
+  {
+    "name": "Région académique de Normandie",
+    "type": "OpenDataSoft",
+    "url": "ra-normandie-dataeducation.opendatasoft.com"
+  },
+  {
+    "name": "Grand Poitiers Open Data",
+    "type": "OpenDataSoft",
+    "url": "data.grandpoitiers.fr"
+  },
+  {
+    "name": "Accessnc",
+    "type": "OpenDataSoft",
+    "url": "opendata.nccommerce.com"
+  },
+  {
+    "name": "Megalisbretagne",
+    "type": "OpenDataSoft",
+    "url": "megalisbretagne.opendatasoft.com"
+  },
+  {
+    "name": "Datastro",
+    "type": "OpenDataSoft",
+    "url": "lguerriero.opendatasoft.com"
+  },
+  {
+    "name": "EDF Corse",
+    "type": "OpenDataSoft",
+    "url": "opendata-corse.edf.fr"
+  },
+  {
+    "name": "EDF Réunion",
+    "type": "OpenDataSoft",
+    "url": "opendata-reunion.edf.fr"
+  },
+  {
+    "name": "EDF Guadeloupe",
+    "type": "OpenDataSoft",
+    "url": "opendata-guadeloupe.edf.fr"
+  },
+  {
+    "name": "EDF Martinique",
+    "type": "OpenDataSoft",
+    "url": "opendata-martinique.edf.fr"
+  },
+  {
+    "name": "EDF  Corse et Outre-mer",
+    "type": "OpenDataSoft",
+    "url": "opendata-corse-outremer.edf.fr"
+  },
+  {
+    "name": "Jérémy Autran's domain",
+    "type": "OpenDataSoft",
+    "url": "jautran.opendatasoft.com"
+  },
+  {
+    "name": "Engie France Renewable Energy open data site",
+    "type": "OpenDataSoft",
+    "url": "opendata-renewables.engie.com"
+  },
+  {
+    "name": "Liseguerriero",
+    "type": "OpenDataSoft",
+    "url": "liseguerriero.opendatasoft.com"
+  },
+  {
+    "name": "EDF Guyane",
+    "type": "OpenDataSoft",
+    "url": "opendata-guyane.edf.fr"
+  },
+  {
+    "name": "Open Data Portal for the European Structural Inverstment Funds",
+    "type": "Socrata-EU",
+    "url": "cohesiondata.ec.europa.eu"
+  },
+  {
+    "name": "City of Novi CIP | City of Novi CIP",
+    "type": "Socrata",
+    "url": "cip.cityofnovi.org"
+  },
+  {
+    "name": "2014 Bond Tracker | Open Data | Socrata",
+    "type": "Socrata",
+    "url": "2014bonds.cityofws.org"
+  },
+  {
+    "name": "Open Data | Socrata",
+    "type": "Socrata",
+    "url": "bis.data.commerce.gov"
+  },
+  {
+    "name":
+      "The Partnership to End Childhood Hunger in Maryland | No Kid Hungry",
+    "type": "Socrata",
+    "url": "www.mdchildhungerpartnership.org"
+  },
+  {
+    "name": "KAPSARC Data Portal",
+    "type": "OpenDataSoft",
+    "url": "datasource.kapsarc.org"
+  },
+  {
+    "name": "JD OpenData",
+    "type": "OpenDataSoft",
+    "url": "jdelbourgo.opendatasoft.com"
+  },
+  {
+    "name": "Mobilité Gaz OpenData",
+    "type": "OpenDataSoft",
+    "url": "gnv-grtgaz.opendatasoft.com"
+  },
+  {
+    "name": "Chennevières-sur-Marne",
+    "type": "OpenDataSoft",
+    "url": "data.chennevieres.com"
+  },
+  {
+    "name": "Datajoule Public",
+    "type": "OpenDataSoft",
+    "url": "public-akajoule.opendatasoft.com"
+  },
+  {
+    "name": "data.total",
+    "type": "OpenDataSoft",
+    "url": "data.total"
+  },
+  {
+    "name": "E-agre",
+    "type": "OpenDataSoft",
+    "url": "e-agre.opendatasoft.com"
+  },
+  {
+    "name": "Julien",
+    "type": "OpenDataSoft",
+    "url": "ods.kwet.org"
+  },
+  {
+    "name": "Yannc",
+    "type": "OpenDataSoft",
+    "url": "yannc.my.opendatasoft.com"
+  },
+  {
+    "name": "Data Conflans",
+    "type": "OpenDataSoft",
+    "url": "conflans-sainte-honorine.opendatasoft.com"
+  },
+  {
+    "name": "Itshackathonhamburg",
+    "type": "OpenDataSoft",
+    "url": "itshackathonhamburg.opendatasoft.com"
+  },
+  {
+    "name": "Data Mobilité",
+    "type": "OpenDataSoft",
+    "url": "data-mobilite-parisdata.opendatasoft.com"
+  },
+  {
+    "name": "Portail open data SQY",
+    "type": "OpenDataSoft",
+    "url": "casqy.opendatasoft.com"
+  },
+  {
+    "name": "CityIQ",
+    "type": "OpenDataSoft",
+    "url": "ge-smartcity.opendatasoft.com"
+  },
+  {
+    "name": "Die Schweizerische Post",
+    "type": "OpenDataSoft",
+    "url": "swisspost.opendatasoft.com"
+  },
+  {
+    "name": "INSTITUTO GEOGRÁFICO NACIONAL",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.ignarg.opendata.arcgis.com"
+  },
+  {
+    "name": "Openware",
+    "type": "ArcGIS Open Data",
+    "url": "http://openware.client1.opendata.arcgis.com"
+  },
+  {
+    "name": "Esri Nederland-Arc GIS Open Data Demonstratie",
+    "type": "ArcGIS Open Data",
+    "url": "http://opendata.esrinl-content.opendata.arcgis.com"
+  },
+  {
+    "name": "Esri UK Government Portal",
+    "type": "ArcGIS Open Data",
+    "url": "http://esriuk.govportal.opendata.arcgis.com"
+  },
+  {
+    "name": "Чебоксары-Телеком",
+    "type": "ArcGIS Open Data",
+    "url": "http://chbtk.chbtk.opendata.arcgis.com"
+  },
+  {
+    "name": "Topomat Technologies Opendataportal",
+    "type": "ArcGIS Open Data",
+    "url": "http://portal.topomat.opendata.arcgis.com"
+  },
+  {
+    "name": "桃園市政府開放空間資料",
+    "type": "ArcGIS Open Data",
+    "url": "http://taoyuan.esritw.opendata.arcgis.com"
+  },
+  {
+    "name": "Ville d'Annecy",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.annecy.opendata.arcgis.com"
+  },
+  {
+    "name": "SIT Comunedi Bergamo",
+    "type": "ArcGIS Open Data",
+    "url": "http://data2.bergamo.opendata.arcgis.com"
+  },
+  {
+    "name": "Avri",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.avri.opendata.arcgis.com"
+  },
+  {
+    "name": "Begraafplaatsen2013",
+    "type": "ArcGIS Open Data",
+    "url": "http://begraafplaatsen2013.agel.opendata.arcgis.com"
+  },
+  {
+    "name": "Inspectoratul Generalpentru Situațiide Urgență",
+    "type": "ArcGIS Open Data",
+    "url": "http://date.igsu.opendata.arcgis.com"
+  },
+  {
+    "name": "Centersfor Disease Controland Prevention",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.giscdc.opendata.arcgis.com"
+  },
+  {
+    "name": "Geo Portaal's-Hertogenbosch",
+    "type": "ArcGIS Open Data",
+    "url": "http://geoportaal.s-hertogenbosch.opendata.arcgis.com"
+  },
+  {
+    "name": "Welkombijhet Geo-Portaalvande'gemeente Renkum'",
+    "type": "ArcGIS Open Data",
+    "url": "http://portaal.renkum.opendata.arcgis.com"
+  },
+  {
+    "name": "SENACE",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.sicam.opendata.arcgis.com"
+  },
+  {
+    "name": "Cyfoeth Naturiol Cymru",
+    "type": "ArcGIS Open Data",
+    "url": "http://cyfoethnaturiolcymru.nrw.opendata.arcgis.com"
+  },
+  {
+    "name": "Service Birmingham",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.sbham.opendata.arcgis.com"
+  },
+  {
+    "name": "S Oopendata",
+    "type": "ArcGIS Open Data",
+    "url": "http://sodata.s-hertogenbosch.opendata.arcgis.com"
+  },
+  {
+    "name": "Richard Curry",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.richardcurry.opendata.arcgis.com"
+  },
+  {
+    "name": "Open Data GISMOL",
+    "type": "ArcGIS Open Data",
+    "url": "http://opendatagismol.gis-mol.opendata.arcgis.com"
+  },
+  {
+    "name": "Esri Sverigeskommunportal",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.kommun.opendata.arcgis.com"
+  },
+  {
+    "name": "Nelson City Council Open Data",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.nelsoncity.opendata.arcgis.com"
+  },
+  {
+    "name": "Logan City Council",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.logancity.opendata.arcgis.com"
+  },
+  {
+    "name": "City of Pasadena,CAOpen Data",
+    "type": "ArcGIS Open Data",
+    "url": "http://cityofpasadenaca.pasgis.opendata.arcgis.com"
+  },
+  {
+    "name": "Lincoln County MNGIS Data",
+    "type": "ArcGIS Open Data",
+    "url": "http://lincolncountymngisdata.lcmn.opendata.arcgis.com"
+  },
+  {
+    "name": "Navigate Indy Open Data",
+    "type": "ArcGIS Open Data",
+    "url": "http://data1.indygis.opendata.arcgis.com"
+  },
+  {
+    "name": "New Jersey Officeof GIS-Open Data",
+    "type": "ArcGIS Open Data",
+    "url": "http://njogis.newjersey.opendata.arcgis.com"
+  },
+  {
+    "name": "Three Rivers Park District",
+    "type": "ArcGIS Open Data",
+    "url": "http://gis.trpd.opendata.arcgis.com"
+  },
+  {
+    "name": "Derived Federal Open Data",
+    "type": "ArcGIS Open Data",
+    "url": "http://open.fedmaps.opendata.arcgis.com"
+  },
+  {
+    "name": "Du Page County Illinois",
+    "type": "ArcGIS Open Data",
+    "url": "http://dupageilgis.dupage.opendata.arcgis.com"
+  },
+  {
+    "name": "Esri SDI Team Open Data Site",
+    "type": "ArcGIS Open Data",
+    "url": "http://beta.sdi.opendata.arcgis.com"
+  },
+  {
+    "name": "Hamilton County TNGIS",
+    "type": "ArcGIS Open Data",
+    "url": "http://hcgistn.hamcogis.opendata.arcgis.com"
+  },
+  {
+    "name": "IDPH Open Data",
+    "type": "ArcGIS Open Data",
+    "url": "http://idphopendata.idph.opendata.arcgis.com"
+  },
+  {
+    "name": "IPMP Data Exploration Interface",
+    "type": "ArcGIS Open Data",
+    "url": "http://local.ipmp.opendata.arcgis.com"
+  },
+  {
+    "name": "Lewis& Clark County-City of Helena GIS",
+    "type": "ArcGIS Open Data",
+    "url": "http://gisdata.helenamtmaps.opendata.arcgis.com"
+  },
+  {
+    "name": "MDOT Open Data-About",
+    "type": "ArcGIS Open Data",
+    "url": "http://about.mdot.opendata.arcgis.com"
+  },
+  {
+    "name": "New Hogan Campout-US Army Corpsof Engineers,Sacramento District",
+    "type": "ArcGIS Open Data",
+    "url": "http://nhc.cespk.opendata.arcgis.com"
+  },
+  {
+    "name": "City of Fredericton",
+    "type": "ArcGIS Open Data",
+    "url": "http://data1.fredericton.opendata.arcgis.com"
+  },
+  {
+    "name": "Henry County GIS Layer Download",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.henrycounty.opendata.arcgis.com"
+  },
+  {
+    "name": "Robbinsnest Data",
+    "type": "ArcGIS Open Data",
+    "url": "http://robbinsnestdata.sumter.opendata.arcgis.com"
+  },
+  {
+    "name": "Salt Lake City GIS Open Data",
+    "type": "ArcGIS Open Data",
+    "url": "http://gis.slcgov.opendata.arcgis.com"
+  },
+  {
+    "name": "San Bernardino County Departmentof Public Works Open Data-Copy",
+    "type": "ArcGIS Open Data",
+    "url": "http://gisinfo.sbcountydpw.opendata.arcgis.com"
+  },
+  {
+    "name": "Townof Amherst,MAOpen Data",
+    "type": "ArcGIS Open Data",
+    "url": "http://maps.amherstma.opendata.arcgis.com"
+  },
+  {
+    "name": "UCLAGIS Open Data Portal",
+    "type": "ArcGIS Open Data",
+    "url": "http://mapshare.uclagisadmin.opendata.arcgis.com"
+  },
+  {
+    "name": "Madison County Councilof Governments",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.mccog.opendata.arcgis.com"
+  },
+  {
+    "name": "Open Data SS Ltest",
+    "type": "ArcGIS Open Data",
+    "url": "http://data3.ess-ioo.opendata.arcgis.com"
+  },
+  {
+    "name": "Open Ramsey",
+    "type": "ArcGIS Open Data",
+    "url": "http://openramsey.ramseygis.opendata.arcgis.com"
+  },
+  {
+    "name": "Prince George's County,Maryland-GIS Open Data",
+    "type": "ArcGIS Open Data",
+    "url": "http://gis.princegeorges.opendata.arcgis.com"
+  },
+  {
+    "name": "Farsi Maps",
+    "type": "ArcGIS Open Data",
+    "url": "http://fod.fgt.opendata.arcgis.com"
+  },
+  {
+    "name": "Metropolitan Area Planning Council",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.metroboston.opendata.arcgis.com"
+  },
+  {
+    "name": "MDOT Open Data-Contact",
+    "type": "ArcGIS Open Data",
+    "url": "http://contact.mdot.opendata.arcgis.com"
+  },
+  {
+    "name": "Townof Oakville",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.exploreoakville.opendata.arcgis.com"
+  },
+  {
+    "name":
+      "Regional Approachesto Climate Changefor Pacific Northwest Agriculture(REACCHPNA)",
+    "type": "ArcGIS Open Data",
+    "url": "http://test.reacchpna.opendata.arcgis.com"
+  },
+  {
+    "name": "ringgoldassessor",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.ringgoldcounty.opendata.arcgis.com"
+  },
+  {
+    "name": "Salmonberry",
+    "type": "ArcGIS Open Data",
+    "url": "http://salmonberry.parametrix.opendata.arcgis.com"
+  },
+  {
+    "name": "Smith College Spatial Analysis Lab",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.smithcollege.opendata.arcgis.com"
+  },
+  {
+    "name": "Will County GIS",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.willcountygis.opendata.arcgis.com"
+  },
+  {
+    "name": "Wisconsin State Legislature",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.ltsb.opendata.arcgis.com"
+  },
+  {
+    "name": "Support ESRI Francetug",
+    "type": "ArcGIS Open Data",
+    "url": "http://tug.d2esrifrance.opendata.arcgis.com"
+  },
+  {
+    "name": "Open Data Portal",
+    "type": "ArcGIS Open Data",
+    "url": "http://public.hhsproto.opendata.arcgis.com"
+  },
+  {
+    "name": "Open Salem",
+    "type": "ArcGIS Open Data",
+    "url": "http://opensalem.salem.opendata.arcgis.com"
+  },
+  {
+    "name": "Pottawattamie County GIS",
+    "type": "ArcGIS Open Data",
+    "url": "http://nri.pottcounty.opendata.arcgis.com"
+  },
+  {
+    "name": "Stark County Ohio Open Data",
+    "type": "ArcGIS Open Data",
+    "url": "http://downloads.starkcountyohio.opendata.arcgis.com"
+  },
+  {
+    "name": "Valley Metro",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.valleymetro.opendata.arcgis.com"
+  },
+  {
+    "name": "V Trans",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.vtrans.opendata.arcgis.com"
+  },
+  {
+    "name": "V Transparency",
+    "type": "ArcGIS Open Data",
+    "url": "http://vtransparency.vtrans.opendata.arcgis.com"
+  },
+  {
+    "name": "Avoin Data",
+    "type": "ArcGIS Open Data",
+    "url": "http://avoindata.esrifinland.opendata.arcgis.com"
+  },
+  {
+    "name": "Geo Portaildela Formation Esri France",
+    "type": "ArcGIS Open Data",
+    "url": "http://formation.formaesrifrance.opendata.arcgis.com"
+  },
+  {
+    "name": "Support ESRI France_FLT",
+    "type": "ArcGIS Open Data",
+    "url": "http://flt.d2esrifrance.opendata.arcgis.com"
+  },
+  {
+    "name": "Aalborg OD",
+    "type": "ArcGIS Open Data",
+    "url": "http://aalborg.gis2dk.opendata.arcgis.com"
+  },
+  {
+    "name": "Ayesa Advanced Technologies",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.ayat.opendata.arcgis.com"
+  },
+  {
+    "name": "Open Data-Ayuntamientode Madrid",
+    "type": "ArcGIS Open Data",
+    "url": "http://opendata.madrid.opendata.arcgis.com"
+  },
+  {
+    "name": "Brown County Wisconsin",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.browncounty.opendata.arcgis.com"
+  },
+  {
+    "name": "City of Mc Kinney Open Data",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.cosa.opendata.arcgis.com"
+  },
+  {
+    "name": "City of New Braunfels,Texas",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.newbraunfels.opendata.arcgis.com"
+  },
+  {
+    "name": "City of Rifle Data",
+    "type": "ArcGIS Open Data",
+    "url": "http://cityofrifledata.cityofrifle.opendata.arcgis.com"
+  },
+  {
+    "name": "CWRU Open Data",
+    "type": "ArcGIS Open Data",
+    "url": "http://cwruopendata.cwru.opendata.arcgis.com"
+  },
+  {
+    "name": "Departmentof Education",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.deptofed.opendata.arcgis.com"
+  },
+  {
+    "name": "Superintendênciade Trânsitoe Transportes Públicos",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.sttpcg.opendata.arcgis.com"
+  },
+  {
+    "name": "Données ouvertes de la ville de Québec(démo)",
+    "type": "ArcGIS Open Data",
+    "url": "http://capitale.esriquebec.opendata.arcgis.com"
+  },
+  {
+    "name": "Districtof Lake Country-Open Data",
+    "type": "ArcGIS Open Data",
+    "url": "http://dlc.rdco.opendata.arcgis.com"
+  },
+  {
+    "name": "Jeffrey Holden Hiking,Skiing,and Kayaking",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.jeffreyholden.opendata.arcgis.com"
+  },
+  {
+    "name": "Irwin OAT Data Discovery",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.doildt.opendata.arcgis.com"
+  },
+  {
+    "name": "HIFLD Open Data",
+    "type": "ArcGIS Open Data",
+    "url": "http://hifld-dhs-gii.opendata.arcgis.com"
+  },
+  {
+    "name": "Officeof Geographic Information(Mass GIS)Open Data",
+    "type": "ArcGIS Open Data",
+    "url": "http://maps.massgis.opendata.arcgis.com"
+  },
+  {
+    "name": "Ohio Emergency Management Agency",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.oema.opendata.arcgis.com"
+  },
+  {
+    "name": "Patrimonial Documentation Open Data",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.agdp.opendata.arcgis.com"
+  },
+  {
+    "name": "Esri TW Open Data示範網站",
+    "type": "ArcGIS Open Data",
+    "url": "http://esritw.idt.opendata.arcgis.com"
+  },
+  {
+    "name": "Esri Canada National Capital Region-Open Data",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.esrica-ncr.opendata.arcgis.com"
+  },
+  {
+    "name": "Redsmarts",
+    "type": "ArcGIS Open Data",
+    "url": "http://datamap.reds.opendata.arcgis.com"
+  },
+  {
+    "name": "The Old Methodist Church Museumof Daphne",
+    "type": "ArcGIS Open Data",
+    "url": "http://snowbirds.daphnemuseum.opendata.arcgis.com"
+  },
+  {
+    "name": "Townof Mashpee",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.mashpeegis.opendata.arcgis.com"
+  },
+  {
+    "name": "Raphael",
+    "type": "ArcGIS Open Data",
+    "url": "http://bart.d2esrifrance.opendata.arcgis.com"
+  },
+  {
+    "name": "beta",
+    "type": "ArcGIS Open Data",
+    "url": "http://beta.cso.opendata.arcgis.com"
+  },
+  {
+    "name": "County Donegal Maps",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.donegal.opendata.arcgis.com"
+  },
+  {
+    "name": "Geosystems",
+    "type": "ArcGIS Open Data",
+    "url": "http://open.geosystems.opendata.arcgis.com"
+  },
+  {
+    "name": "Open Data London-Example Site",
+    "type": "ArcGIS Open Data",
+    "url": "http://london.esrica-tsg.opendata.arcgis.com"
+  },
+  {
+    "name": "Hillsborough County Open Data Portal",
+    "type": "ArcGIS Open Data",
+    "url": "http://gis.hillsborough.opendata.arcgis.com"
+  },
+  {
+    "name": "Honolulu Open Geospatial Data",
+    "type": "ArcGIS Open Data",
+    "url": "http://honolulu.cchnl.opendata.arcgis.com"
+  },
+  {
+    "name": "Luna County",
+    "type": "ArcGIS Open Data",
+    "url": "http://parcels.lunacountynm.opendata.arcgis.com"
+  },
+  {
+    "name": "Maiden Planning",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.tomplanning.opendata.arcgis.com"
+  },
+  {
+    "name": "My Open Data Site",
+    "type": "ArcGIS Open Data",
+    "url": "http://sitename.myorg.opendata.arcgis.com"
+  },
+  {
+    "name": "Nebraska Departmentof Roads",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.ndor.opendata.arcgis.com"
+  },
+  {
+    "name": "Open Data | Socrata",
+    "type": "Socrata",
+    "url": "bea.data.commerce.gov"
+  },
+  {
+    "name": "Penn DOTGIS",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.padotgis.opendata.arcgis.com"
+  },
+  {
+    "name": "St. Louis County,Minnesota",
+    "type": "ArcGIS Open Data",
+    "url": "http://stlouiscountymndata.slcgis.opendata.arcgis.com"
+  },
+  {
+    "name": "Georgia SBDC",
+    "type": "ArcGIS Open Data",
+    "url": "http://georgiasbdc.gasbdc.opendata.arcgis.com"
+  },
+  {
+    "name": "g ISU Open Geospatial Data",
+    "type": "ArcGIS Open Data",
+    "url": "http://gisu.isu.opendata.arcgis.com"
+  },
+  {
+    "name": "Highlands County Boardof County Commissioners",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.hcbcc.opendata.arcgis.com"
+  },
+  {
+    "name": "Legislative Services Agency",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.iowa-legis.opendata.arcgis.com"
+  },
+  {
+    "name": "Michigan Departmentof Natural Resources",
+    "type": "ArcGIS Open Data",
+    "url": "http://gis.midnr.opendata.arcgis.com"
+  },
+  {
+    "name": "Racine County,WI",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.racinecounty.opendata.arcgis.com"
+  },
+  {
+    "name": "Smart Communities",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.smartcommunities.opendata.arcgis.com"
+  },
+  {
+    "name": "State Government Open Data",
+    "type": "ArcGIS Open Data",
+    "url": "http://state.gov.opendata.arcgis.com"
+  },
+  {
+    "name": "Western GIS Consulting Open Data",
+    "type": "ArcGIS Open Data",
+    "url": "http://westerngisconsultingopendata.westgis.opendata.arcgis.com"
+  },
+  {
+    "name": "Mairiede Vannes Open Data",
+    "type": "ArcGIS Open Data",
+    "url": "http://geo.mairie-vannes.opendata.arcgis.com"
+  },
+  {
+    "name": "Support ESRI Francetug-Copier",
+    "type": "ArcGIS Open Data",
+    "url": "http://tug-1.d2esrifrance.opendata.arcgis.com"
+  },
+  {
+    "name": "KOBEオープンデータDEMO",
+    "type": "ArcGIS Open Data",
+    "url": "http://esrij-1.ejoosaka.opendata.arcgis.com"
+  },
+  {
+    "name":
+      "Data.Washington | Washington | Results Washington | data.results.wa.gov",
+    "type": "Socrata",
+    "url": "data.results.wa.gov"
+  },
+  {
+    "name": "Download Data Site",
+    "type": "ArcGIS Open Data",
+    "url": "http://opendatakw.openware.opendata.arcgis.com"
+  },
+  {
+    "name": "Esri Press-Official Book Site",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.esripressbooks.opendata.arcgis.com"
+  },
+  {
+    "name": "Virginia Lottery",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.sweeney.opendata.arcgis.com"
+  },
+  {
+    "name": "Open Data CARA",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.agglo-royan.opendata.arcgis.com"
+  },
+  {
+    "name": "GEOREDOPENDATA",
+    "type": "ArcGIS Open Data",
+    "url": "http://datos.geored.opendata.arcgis.com"
+  },
+  {
+    "name": "Fermanagh& Omagh District Council",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.odc.opendata.arcgis.com"
+  },
+  {
+    "name":
+      "gates.org - This website is for sale! - Gates Resources and Information.",
+    "type": "Socrata",
+    "url": "data.gates.org"
+  },
+  {
+    "name": "ПорталоткрытыхданныхСмоленскойобласти",
+    "type": "ArcGIS Open Data",
+    "url": "http://smolensk.company.opendata.arcgis.com"
+  },
+  {
+    "name": "Info Bridge Consultants Ltd",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.ibc.opendata.arcgis.com"
+  },
+  {
+    "name": "Santa Clara County Planningand Development Department",
+    "type": "ArcGIS Open Data",
+    "url": "http://gisdata.sccplanning.opendata.arcgis.com"
+  },
+  {
+    "name": "the Data Driven Detroit Open Data Site",
+    "type": "ArcGIS Open Data",
+    "url": "http://beta.d3.opendata.arcgis.com"
+  },
+  {
+    "name": "Talgov See New Features-Delete Me",
+    "type": "ArcGIS Open Data",
+    "url": "http://talgov-delete.tlcgis.opendata.arcgis.com"
+  },
+  {
+    "name": "Douglas County GIS Open Data-Copy",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.dogis.opendata.arcgis.com"
+  },
+  {
+    "name": "Hack The Commute",
+    "type": "ArcGIS Open Data",
+    "url": "http://hackthecommute.esrihax.opendata.arcgis.com"
+  },
+  {
+    "name": "Myorganisation",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.rasorg1.opendata.arcgis.com"
+  },
+  {
+    "name": "Nashua Regional Planning Commission",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.nashuarpc.opendata.arcgis.com"
+  },
+  {
+    "name": "Erie County,PA",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.ourcountyb.opendata.arcgis.com"
+  },
+  {
+    "name": "GIS Open Data",
+    "type": "ArcGIS Open Data",
+    "url": "http://resources.lakelandflorida.opendata.arcgis.com"
+  },
+  {
+    "name": "Gray& Pape,Inc.",
+    "type": "ArcGIS Open Data",
+    "url": "http://test.g-p.opendata.arcgis.com"
+  },
+  {
+    "name": "Healthand Climate",
+    "type": "ArcGIS Open Data",
+    "url": "http://health.geoplatform.opendata.arcgis.com"
+  },
+  {
+    "name": "Lake County Maps& Apps",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.lcgis.opendata.arcgis.com"
+  },
+  {
+    "name": "Natural Resources Conservation Service Open Data",
+    "type": "ArcGIS Open Data",
+    "url": "http://beta.nrcs.opendata.arcgis.com"
+  },
+  {
+    "name": "神戸市情報マップ ダウンロードページ",
+    "type": "ArcGIS Open Data",
+    "url": "http://opengis.kobecity.opendata.arcgis.com"
+  },
+  {
+    "name": "Esri EANatural Resources",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.esrieanatres.opendata.arcgis.com"
+  },
+  {
+    "name": "Stateof Tennessee STSGIS Downloadable Data",
+    "type": "ArcGIS Open Data",
+    "url": "http://tn.tnmap.opendata.arcgis.com"
+  },
+  {
+    "name": "Sustainable Southeast Partnership Open Data",
+    "type": "ArcGIS Open Data",
+    "url": "http://sspopendata.ssp-community.opendata.arcgis.com"
+  },
+  {
+    "name": "Roscommon Open Data Portal",
+    "type": "ArcGIS Open Data",
+    "url": "http://roscommon.roscoco.opendata.arcgis.com/"
+  },
+  {
+    "name": "Arc GIS Online",
+    "type": "ArcGIS Open Data",
+    "url": "http://kmod.beirutgardens.opendata.arcgis.com"
+  },
+  {
+    "name": "Prototype",
+    "type": "ArcGIS Open Data",
+    "url": "http://prototype.gismontgomery.opendata.arcgis.com"
+  },
+  {
+    "name": "Sarpy Open Data Bank",
+    "type": "ArcGIS Open Data",
+    "url": "http://odb.sarpy.opendata.arcgis.com"
+  },
+  {
+    "name": "SLO Datafinder2.0",
+    "type": "ArcGIS Open Data",
+    "url": "http://slodatafinder.calpoly.opendata.arcgis.com"
+  },
+  {
+    "name": "Universityof Minnesota Enterprise GIS-Demo1",
+    "type": "ArcGIS Open Data",
+    "url": "http://demo1.umn-egis.opendata.arcgis.com"
+  },
+  {
+    "name": "Washington State Departmentof Transportation(ITD)",
+    "type": "ArcGIS Open Data",
+    "url": "http://ptrtest.wsdot-dit.opendata.arcgis.com"
+  },
+  {
+    "name": "Winter Park GIS",
+    "type": "ArcGIS Open Data",
+    "url": "http://winterparkgis.winterpark.opendata.arcgis.com"
+  },
+  {
+    "name": "Jussinopendatademosaitti",
+    "type": "ArcGIS Open Data",
+    "url": "http://jussinopendata.esrifinland.opendata.arcgis.com"
+  },
+  {
+    "name": "GISINATOR",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.gisinator.opendata.arcgis.com"
+  },
+  {
+    "name": "City of Dublin,Ohio-Open Data",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.dublinohio.opendata.arcgis.com"
+  },
+  {
+    "name": "City of Rockville,MD,Open Data",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.rockvillemd.opendata.arcgis.com"
+  },
+  {
+    "name": "Clearinghouse",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.authority.opendata.arcgis.com"
+  },
+  {
+    "name": "Deptof Health& Mental Hygiene GIS Center",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.nycdohmh.opendata.arcgis.com"
+  },
+  {
+    "name": "e Hydro",
+    "type": "ArcGIS Open Data",
+    "url": "http://ehydro.cesamusace.opendata.arcgis.com"
+  },
+  {
+    "name": "Vibrant Maps",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.vibmaps.opendata.arcgis.com"
+  },
+  {
+    "name": "Conseildépartementaldel'Indre-et-Loire",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.cg37.opendata.arcgis.com"
+  },
+  {
+    "name": "Smart City+ Open Data",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.smartcityplus.opendata.arcgis.com"
+  },
+  {
+    "name": "Volkerts GIS Data Portal",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.volkert.opendata.arcgis.com"
+  },
+  {
+    "name": "camvsopendata",
+    "type": "ArcGIS Open Data",
+    "url": "http://mcc.camvs.opendata.arcgis.com"
+  },
+  {
+    "name": "Colmar Agglomération Open Data",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.colmar-agglo.opendata.arcgis.com"
+  },
+  {
+    "name": "Samsýnehf",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.samsyn.opendata.arcgis.com"
+  },
+  {
+    "name": "ECWRPC",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.ecwrpc.opendata.arcgis.com"
+  },
+  {
+    "name": "Esri",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.johntestingtrial.opendata.arcgis.com"
+  },
+  {
+    "name": "Esri Federal Health Open Data",
+    "type": "ArcGIS Open Data",
+    "url": "http://esrifederal.health.opendata.arcgis.com"
+  },
+  {
+    "name": "Esri Story Maps-Open Data-Copy",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.story.opendata.arcgis.com"
+  },
+  {
+    "name": "VCU Rice Rivers Center",
+    "type": "ArcGIS Open Data",
+    "url": "http://vcuriceriverscenter.vcu.opendata.arcgis.com"
+  },
+  {
+    "name": "Westchester County Open Data",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.wcgis.opendata.arcgis.com"
+  },
+  {
+    "name": "Avoin Data-Kopioi",
+    "type": "ArcGIS Open Data",
+    "url": "http://avoindata-1.esrifinland.opendata.arcgis.com"
+  },
+  {
+    "name": "Départementdu Var",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.cgvar.opendata.arcgis.com"
+  },
+  {
+    "name": "ODLAA-åbendatatil Labview",
+    "type": "ArcGIS Open Data",
+    "url": "http://odlaa.aakmef.opendata.arcgis.com"
+  },
+  {
+    "name": "Operation United Assistance(Unclassified)",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.setaf.opendata.arcgis.com"
+  },
+  {
+    "name": "Union County,PA",
+    "type": "ArcGIS Open Data",
+    "url": "http://gis.unioncounty.opendata.arcgis.com"
+  },
+  {
+    "name": "US Census Bureau",
+    "type": "ArcGIS Open Data",
+    "url": "http://census.dcdev.opendata.arcgis.com"
+  },
+  {
+    "name": "Mapping Data",
+    "type": "ArcGIS Open Data",
+    "url": "http://mappingdata.esriireland.opendata.arcgis.com"
+  },
+  {
+    "name": "Gemeente Staphorst",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.gemeentestaphorst.opendata.arcgis.com"
+  },
+  {
+    "name": "Galway County Opendata",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.galwaycoco.opendata.arcgis.com"
+  },
+  {
+    "name": "北海道自然環境地理情報オープンデータサイト",
+    "type": "ArcGIS Open Data",
+    "url": "http://data2.rakuno-gis.opendata.arcgis.com"
+  },
+  {
+    "name": "Esri EASolutions",
+    "type": "ArcGIS Open Data",
+    "url": "http://vegetation.esrieasolutions.opendata.arcgis.com"
+  },
+  {
+    "name": "World Vision GI Sopendata",
+    "type": "ArcGIS Open Data",
+    "url": "http://worldviaioneastafricaregion.gspace.opendata.arcgis.com"
+  },
+  {
+    "name": "Gemeente Goirle",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.goirle.opendata.arcgis.com"
+  },
+  {
+    "name": "Systematics",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.systematics.opendata.arcgis.com"
+  },
+  {
+    "name": "National Geospatial-Intelligence Agency Nepal Earthquake",
+    "type": "ArcGIS Open Data",
+    "url": "http://nepal.nga.opendata.arcgis.com"
+  },
+  {
+    "name": "Esri UK Bureau",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.bureau.opendata.arcgis.com"
+  },
+  {
+    "name": "Open Data Viewer-Cabarrus County,NC",
+    "type": "ArcGIS Open Data",
+    "url": "http://gis.cabarrus.opendata.arcgis.com"
+  },
+  {
+    "name": "Port Angeles,WA",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.pawa.opendata.arcgis.com"
+  },
+  {
+    "name": "Summit Natural Gas",
+    "type": "ArcGIS Open Data",
+    "url": "http://gis.summitutilities.opendata.arcgis.com"
+  },
+  {
+    "name": "Townof Pendleton,IN",
+    "type": "ArcGIS Open Data",
+    "url": "http://pendleton.mccog.opendata.arcgis.com"
+  },
+  {
+    "name": "US Census Bureau-Evaluation Version",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.censusbeta.opendata.arcgis.com"
+  },
+  {
+    "name": "Utah Trust Lands Administration",
+    "type": "ArcGIS Open Data",
+    "url": "http://utah.sitla.opendata.arcgis.com"
+  },
+  {
+    "name": "Esri EASolutions Open Data",
+    "type": "ArcGIS Open Data",
+    "url": "http://easternafricacapitals.esrieasolutions.opendata.arcgis.com"
+  },
+  {
+    "name": "Porin Kaupunki",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.pori.opendata.arcgis.com"
+  },
+  {
+    "name": "HNIT-BALTICUAB Arc GIS Onlinedemopaskyra",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.hb.opendata.arcgis.com"
+  },
+  {
+    "name":
+      "Performance Dashboard | City of Alexandria, VA | Dashboard | City of Alexandria",
+    "type": "Socrata",
+    "url": "dashboard.alexandriava.gov"
+  },
+  {
+    "name": "Expediciónde Datos CR",
+    "type": "ArcGIS Open Data",
+    "url": "http://datos.geomaticacr.opendata.arcgis.com"
+  },
+  {
+    "name": "ICE Sector Electricidad",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.ice-se.opendata.arcgis.com"
+  },
+  {
+    "name": "BostonMaps: Open Data",
+    "type": "ArcGIS Open Data",
+    "url": "http://bostonopendata.boston.opendata.arcgis.com"
+  },
+  {
+    "name": "City of Albany Open Data",
+    "type": "ArcGIS Open Data",
+    "url": "http://cityofalbanyopendata.albanyny.opendata.arcgis.com"
+  },
+  {
+    "name": "City of Denton GIS Technology Services",
+    "type": "ArcGIS Open Data",
+    "url": "http://data-dev.dentontxgis.opendata.arcgis.com"
+  },
+  {
+    "name": "City of Philadelphia-internalonly",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.philly.opendata.arcgis.com"
+  },
+  {
+    "name": "City of Pompano Beach Open Data",
+    "type": "ArcGIS Open Data",
+    "url": "http://cityofpompanobeachopendata.pompanobeach.opendata.arcgis.com"
+  },
+  {
+    "name": "Coshocton County GIS",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.coshcoeng.opendata.arcgis.com"
+  },
+  {
+    "name": "Development Org Open Data",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.arcgis4localgov2.opendata.arcgis.com"
+  },
+  {
+    "name": "Waupaca County Land Information Data",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.waupacacounty.opendata.arcgis.com"
+  },
+  {
+    "name": "Massa Info Julkinen",
+    "type": "ArcGIS Open Data",
+    "url": "http://massainfojulkinen.esrifinland.opendata.arcgis.com"
+  },
+  {
+    "name": "Sitededémo Open Data-Esri France",
+    "type": "ArcGIS Open Data",
+    "url": "http://demo.esrifrance.opendata.arcgis.com"
+  },
+  {
+    "name": "Données Martin",
+    "type": "ArcGIS Open Data",
+    "url": "http://martinc.esrica-services.opendata.arcgis.com"
+  },
+  {
+    "name": "GPMR Open Data",
+    "type": "ArcGIS Open Data",
+    "url": "http://telechargement.gpmr.opendata.arcgis.com"
+  },
+  {
+    "name": "SIGRéseaux",
+    "type": "ArcGIS Open Data",
+    "url": "http://sig.reseaux.opendata.arcgis.com"
+  },
+  {
+    "name": "Home | GovLoop",
+    "type": "Socrata",
+    "url": "data.govloop.com"
+  },
+  {
+    "name": "Cybertech Systems& Software",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.csslce.opendata.arcgis.com"
+  },
+  {
+    "name": "Dati",
+    "type": "ArcGIS Open Data",
+    "url": "http://dati.globo.opendata.arcgis.com"
+  },
+  {
+    "name": "One Team Open Data",
+    "type": "ArcGIS Open Data",
+    "url": "http://oneteamopendata.oneteam.opendata.arcgis.com"
+  },
+  {
+    "name": "流山市オープンデータマップ",
+    "type": "ArcGIS Open Data",
+    "url": "http://data1.nagareyamamidori.opendata.arcgis.com"
+  },
+  {
+    "name": "Northland Regional Council Open Data",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.nrcgis.opendata.arcgis.com"
+  },
+  {
+    "name": "Ethiopian Natural Resources User Community",
+    "type": "ArcGIS Open Data",
+    "url": "http://ethiopianr.gspace.opendata.arcgis.com"
+  },
+  {
+    "name": "Daticos-Datos Abiertos Geotecnologias S.A.",
+    "type": "ArcGIS Open Data",
+    "url": "http://daticos.geotec.opendata.arcgis.com"
+  },
+  {
+    "name": "City of Chesapeake,VAOpen Data Site",
+    "type": "ArcGIS Open Data",
+    "url": "http://public.chesva.opendata.arcgis.com"
+  },
+  {
+    "name": "City of Fort Lauderdale",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.fortlauderdale.opendata.arcgis.com"
+  },
+  {
+    "name": "Don Meltz AGIS",
+    "type": "ArcGIS Open Data",
+    "url": "http://donmeltzagis.dmeltz.opendata.arcgis.com"
+  },
+  {
+    "name": "Washington County,MN",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.wcmn.opendata.arcgis.com"
+  },
+  {
+    "name": "Cyber",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.cba.opendata.arcgis.com"
+  },
+  {
+    "name": "あずまっぷ-板橋区オープンデータポータル-カタログサイト",
+    "type": "ArcGIS Open Data",
+    "url": "http://catalog.azumao.opendata.arcgis.com"
+  },
+  {
+    "name": "Wyoming Gameand Fish Open Data",
+    "type": "ArcGIS Open Data",
+    "url": "http://wyowildlife.wgfd.opendata.arcgis.com"
+  },
+  {
+    "name": "CAVersailles Grand Parc",
+    "type": "ArcGIS Open Data",
+    "url": "http://www.cavgp.opendata.arcgis.com"
+  },
+  {
+    "name": "Ebola Open Data",
+    "type": "ArcGIS Open Data",
+    "url": "http://ebolaopendata.nga.opendata.arcgis.com"
+  },
+  {
+    "name": "REACH",
+    "type": "ArcGIS Open Data",
+    "url": "http://reach.acted.opendata.arcgis.com"
+  },
+  {
+    "name": "ESRIジャパン株式会社",
+    "type": "ArcGIS Open Data",
+    "url": "http://kaiyosample.ej.opendata.arcgis.com"
+  },
+  {
+    "name": "Rakuno Gakuen University",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.rakuno-gis.opendata.arcgis.com"
+  },
+  {
+    "name": "New Plymouth District Council",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.npdc.opendata.arcgis.com"
+  },
+  {
+    "name": "Gemeente Echt-Susteren",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.e-s.opendata.arcgis.com"
+  },
+  {
+    "name": "Open Data Peru Interorganizacional",
+    "type": "ArcGIS Open Data",
+    "url": "http://opendataperu.mitelematica.opendata.arcgis.com"
+  },
+  {
+    "name": "Esri Support Services Isolated Org",
+    "type": "ArcGIS Open Data",
+    "url": "http://data5.ess-ioo.opendata.arcgis.com"
+  },
+  {
+    "name": "gamenoiiz006",
+    "type": "ArcGIS Open Data",
+    "url": "http://rayongacc.gamenoiiz006.opendata.arcgis.com"
+  },
+  {
+    "name": "אתרשיתוףהמידעשלפורטלהשטחיםהפתוחים",
+    "type": "ArcGIS Open Data",
+    "url": "http://olp.deshe.opendata.arcgis.com"
+  },
+  {
+    "name": "SĮ„ Susisiekimopaslaugos“",
+    "type": "ArcGIS Open Data",
+    "url": "http://atviriduomenys.sisp.opendata.arcgis.com"
+  },
+  {
+    "name": "Cyfoeth Naturiol Cymru",
+    "type": "ArcGIS Open Data",
+    "url": "http://cyfoethnaturiolcymru.cncnrw.opendata.arcgis.com"
+  },
+  {
+    "name": "Open Data Peru",
+    "type": "ArcGIS Open Data",
+    "url": "http://opendataperu.mysupport.opendata.arcgis.com"
+  },
+  {
+    "name": "Secretaríade Obras Públicasdela Nación Argentina",
+    "type": "ArcGIS Open Data",
+    "url": "http://gestion.gsop.opendata.arcgis.com"
+  },
+  {
+    "name": "Belize Elections",
+    "type": "ArcGIS Open Data",
+    "url": "http://electionsbze.tbsl.opendata.arcgis.com"
+  },
+  {
+    "name": "Hennepin County GIS Open Data",
+    "type": "ArcGIS Open Data",
+    "url": "http://gis.hennepin.opendata.arcgis.com"
+  },
+  {
+    "name": "HUD Zillow Hackathon Open Data",
+    "type": "ArcGIS Open Data",
+    "url": "http://zillowhack.hud.opendata.arcgis.com"
+  },
+  {
+    "name": "Jeremy AGOL Trial150325",
+    "type": "ArcGIS Open Data",
+    "url": "http://data2.jat150325.opendata.arcgis.com"
+  },
+  {
+    "name": "Mahaska County",
+    "type": "ArcGIS Open Data",
+    "url": "http://mahps.mahaska.opendata.arcgis.com"
+  },
+  {
+    "name": "Maui County Land Mapping Portal",
+    "type": "ArcGIS Open Data",
+    "url": "http://mauicountydataportal.malama.opendata.arcgis.com"
+  },
+  {
+    "name": "Montclair State University Sustainable Situation Room",
+    "type": "ArcGIS Open Data",
+    "url": "http://msuinsitu.sustainablemsu.opendata.arcgis.com"
+  },
+  {
+    "name": "Ohio Environmental Protection Agency",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.oepa.opendata.arcgis.com"
+  },
+  {
+    "name": "Regional Transportation Data Clearinghouse",
+    "type": "ArcGIS Open Data",
+    "url": "http://rtdc.mwcog.opendata.arcgis.com"
+  },
+  {
+    "name": "Townof Groton,CT Open Data Site",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.grotongis.opendata.arcgis.com"
+  },
+  {
+    "name": "Geographic Views",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.mountagung.opendata.arcgis.com"
+  },
+  {
+    "name": "Georgia Tech Open GIS Data",
+    "type": "ArcGIS Open Data",
+    "url": "http://gtopengisdata.gtmaps.opendata.arcgis.com"
+  },
+  {
+    "name": "MDOT Open Data-Home",
+    "type": "ArcGIS Open Data",
+    "url": "http://gis.mdot.opendata.arcgis.com"
+  },
+  {
+    "name": "Sean K. Mc Ginnis",
+    "type": "ArcGIS Open Data",
+    "url": "http://open.seankmcg.opendata.arcgis.com"
+  },
+  {
+    "name": "Stephenson Disaster Management Institute",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.sdmi.opendata.arcgis.com"
+  },
+  {
+    "name": "Townof Erie,CO",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.erieco.opendata.arcgis.com"
+  },
+  {
+    "name": "Opengeodata",
+    "type": "ArcGIS Open Data",
+    "url": "http://opengeodata.d11esrifrance.opendata.arcgis.com"
+  },
+  {
+    "name": "Pickens County,SC-Gov Open Data",
+    "type": "ArcGIS Open Data",
+    "url": "http://pickcosc.pickenscosc.opendata.arcgis.com"
+  },
+  {
+    "name": "San Antonio Regional Office",
+    "type": "ArcGIS Open Data",
+    "url": "http://data1.cosa.opendata.arcgis.com"
+  },
+  {
+    "name": "Smith Roberts Baldischwiler GIS",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.srb.opendata.arcgis.com"
+  },
+  {
+    "name": "Stateof Michigan",
+    "type": "ArcGIS Open Data",
+    "url": "http://uat.michigan.opendata.arcgis.com"
+  },
+  {
+    "name": "Comunedi Rimini",
+    "type": "ArcGIS Open Data",
+    "url": "http://comunedirimini.pianif-territ.opendata.arcgis.com"
+  },
+  {
+    "name": "VALUELAB",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.valuelab.opendata.arcgis.com"
+  },
+  {
+    "name": "Open Street Mapマッピングパーティー用情報共有サイト",
+    "type": "ArcGIS Open Data",
+    "url": "http://happymapping.ejopendataportal.opendata.arcgis.com"
+  },
+  {
+    "name": "Info Graph-Technical Support",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.technicalsupport.opendata.arcgis.com"
+  },
+  {
+    "name": "gemeente3010",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.gemeente3010.opendata.arcgis.com"
+  },
+  {
+    "name": "Maryland",
+    "type": "ArcGIS Open Data",
+    "url": "http://imap.maryland.opendata.arcgis.com/"
+  },
+  {
+    "name": "City-opendataamerica",
+    "type": "OpenDataSoft",
+    "url": "city-opendataamerica.opendataamerica.opendatasoft.com"
+  },
+  {
+    "name": "Villa Online Open Data",
+    "type": "ArcGIS Open Data",
+    "url": "http://villaonlineopendata.telematicaonline.opendata.arcgis.com"
+  },
+  {
+    "name": "IS-Spatial Intelligence",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.sypgis.opendata.arcgis.com"
+  },
+  {
+    "name": "Ramat Hanadiv Open Data",
+    "type": "ArcGIS Open Data",
+    "url": "http://gis.ramathanadiv.opendata.arcgis.com"
+  },
+  {
+    "name": "Consorziodibonificadellamediapianurabergamasca",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.cbonificabergamo.opendata.arcgis.com"
+  },
+  {
+    "name": "Atlas Nacionalde Riesgos",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.cenapred.opendata.arcgis.com"
+  },
+  {
+    "name": "Rotorua Lakes Council Spatial Data",
+    "type": "ArcGIS Open Data",
+    "url": "http://rlcpublicdata.boplass.opendata.arcgis.com"
+  },
+  {
+    "name": "Gemeente Tilburg",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.tilburg.opendata.arcgis.com"
+  },
+  {
+    "name": "Associaçãode Beneficiáriosdo Roxo",
+    "type": "ArcGIS Open Data",
+    "url": "http://qarsc.abroxo.opendata.arcgis.com"
+  },
+  {
+    "name": "Causeway Coastand Glens Open Data-Copy",
+    "type": "ArcGIS Open Data",
+    "url": "http://data-1.cbcni.opendata.arcgis.com"
+  },
+  {
+    "name": "Wairarapa Councils",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.wairarapa.opendata.arcgis.com"
+  },
+  {
+    "name": "Arc GIS Gebruikersgroep Nederland",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.aggn.opendata.arcgis.com"
+  },
+  {
+    "name": "Esri Nederland",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.jraemaekers.opendata.arcgis.com"
+  },
+  {
+    "name": "Open Data Den Haag GEO Portaal",
+    "type": "ArcGIS Open Data",
+    "url": "http://geoportaal.ddh.opendata.arcgis.com"
+  },
+  {
+    "name": "Open Data Peru Interorganizacional-Copiar-2",
+    "type": "ArcGIS Open Data",
+    "url": "http://opendataperu-2.mitelematica.opendata.arcgis.com"
+  },
+  {
+    "name": "Colas Limited",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.colas.opendata.arcgis.com"
+  },
+  {
+    "name": "Kent GIS Open Data Geo Portal",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.kentcounty.opendata.arcgis.com"
+  },
+  {
+    "name": "Paul Hickson OD",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.techsupportuk.opendata.arcgis.com"
+  },
+  {
+    "name": "Město Litoměřice Open Data",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.litomerice.opendata.arcgis.com"
+  },
+  {
+    "name": "Esri UK Defra",
+    "type": "ArcGIS Open Data",
+    "url": "http://defra.govportal.opendata.arcgis.com"
+  },
+  {
+    "name": "Esri UK Technical Support Open Data-Copy",
+    "type": "ArcGIS Open Data",
+    "url":
+      "http://esriuktechnicalsupportopendata-1.techsupportuk.opendata.arcgis.com"
+  },
+  {
+    "name": "Greenshoots Housing",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.greenshoots.opendata.arcgis.com"
+  },
+  {
+    "name": "Arendalenkommune",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.testkommune.opendata.arcgis.com"
+  },
+  {
+    "name": "SERVIR-Mekong",
+    "type": "ArcGIS Open Data",
+    "url": "http://index.servirmekong.opendata.arcgis.com"
+  },
+  {
+    "name": "MDC Open Data",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.marlborough.opendata.arcgis.com"
+  },
+  {
+    "name": "Crane Valley Partnership-Citizen Crane",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.cranevalley.opendata.arcgis.com"
+  },
+  {
+    "name": "Open_data",
+    "type": "ArcGIS Open Data",
+    "url": "http://opendata.hsisro.opendata.arcgis.com"
+  },
+  {
+    "name": "Reitroutenplaner",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.reitroutenplaner.opendata.arcgis.com"
+  },
+  {
+    "name": "Uppsalakommun",
+    "type": "ArcGIS Open Data",
+    "url": "http://uppsala.esrisverige.opendata.arcgis.com"
+  },
+  {
+    "name": "Crossrail",
+    "type": "ArcGIS Open Data",
+    "url": "http://crossrail.techsupportuk.opendata.arcgis.com"
+  },
+  {
+    "name": "ArcČR®500",
+    "type": "ArcGIS Open Data",
+    "url": "http://arccr.arcdata.opendata.arcgis.com"
+  },
+  {
+    "name": "London Underground",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.tube.opendata.arcgis.com"
+  },
+  {
+    "name": "South West Highwaysltd",
+    "type": "ArcGIS Open Data",
+    "url": "http://public.swh.opendata.arcgis.com"
+  },
+  {
+    "name": "Aarhus GIS",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.aarhusgis.opendata.arcgis.com"
+  },
+  {
+    "name": "Juntade Comunidadesde Castilla-La Mancha",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.castillalamancha.opendata.arcgis.com"
+  },
+  {
+    "name": "Open Data | Socrata",
+    "type": "Socrata",
+    "url": "census.data.commerce.gov"
+  },
+  {
+    "name": "CAPCOG",
+    "type": "ArcGIS Open Data",
+    "url": "http://capcog.assessoroffice.opendata.arcgis.com"
+  },
+  {
+    "name": "City of Davis",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.davis.opendata.arcgis.com"
+  },
+  {
+    "name": "City of Flagstaff",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.flagstaff.opendata.arcgis.com"
+  },
+  {
+    "name": "Ed Services Open Data",
+    "type": "ArcGIS Open Data",
+    "url": "http://opendatabeta.esri-ed-demo-sa.opendata.arcgis.com"
+  },
+  {
+    "name": "АтласэкологическихпроблемАзовскогоморя",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.ssc.opendata.arcgis.com"
+  },
+  {
+    "name": "Universitadeglistudidi Milano-Bicocca",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.unibicocca.opendata.arcgis.com"
+  },
+  {
+    "name": "Geodan Open Data(inaanbouw)",
+    "type": "ArcGIS Open Data",
+    "url": "http://beta.geodan.opendata.arcgis.com"
+  },
+  {
+    "name": "Villa Online",
+    "type": "ArcGIS Open Data",
+    "url": "http://villaonline.mitelematica.opendata.arcgis.com"
+  },
+  {
+    "name": "Open Data | Socrata",
+    "type": "Socrata",
+    "url": "ntis.data.commerce.gov"
+  },
+  {
+    "name": "REACH Data Repository",
+    "type": "ArcGIS Open Data",
+    "url": "http://data2.reach-initiative.opendata.arcgis.com"
+  },
+  {
+    "name": "Suriname Online",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.surinameonline.opendata.arcgis.com"
+  },
+  {
+    "name": "Geodatakurs Open Data",
+    "type": "ArcGIS Open Data",
+    "url": "http://geodata.kurs.opendata.arcgis.com"
+  },
+  {
+    "name": "AGE Lopendatasite",
+    "type": "ArcGIS Open Data",
+    "url": "http://agelopendatasite.agel.opendata.arcgis.com"
+  },
+  {
+    "name": "Gemeente BK",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.bkgemeente.opendata.arcgis.com"
+  },
+  {
+    "name": "Open Dataportaal Gemeente Leeuwarden",
+    "type": "ArcGIS Open Data",
+    "url": "http://portaal.gem-lwd.opendata.arcgis.com"
+  },
+  {
+    "name": "מינהלהתכנון",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.pnimgis.opendata.arcgis.com"
+  },
+  {
+    "name": "Geomatic",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.geomatic.opendata.arcgis.com"
+  },
+  {
+    "name": "ČSÚ(demo)",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.csudemo.opendata.arcgis.com"
+  },
+  {
+    "name": "Öppnadata",
+    "type": "ArcGIS Open Data",
+    "url": "http://trafikochparkeringsdata.karlskrona.opendata.arcgis.com"
+  },
+  {
+    "name": "Sunnyshire Open Data",
+    "type": "ArcGIS Open Data",
+    "url": "http://sunnyshire.esriuk-aulg.opendata.arcgis.com"
+  },
+  {
+    "name": "West Berkshire Council",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.westberks.opendata.arcgis.com"
+  },
+  {
+    "name": "Historickádatav GIS",
+    "type": "ArcGIS Open Data",
+    "url": "http://historickygis.cuni.opendata.arcgis.com"
+  },
+  {
+    "name": "Universityof Berne",
+    "type": "ArcGIS Open Data",
+    "url": "http://laotest1.unibern.opendata.arcgis.com"
+  },
+  {
+    "name": "Urban Green Open",
+    "type": "ArcGIS Open Data",
+    "url": "http://urbangreenopen.ugreen.opendata.arcgis.com"
+  },
+  {
+    "name": "ARCDATAŠkolení Open Data",
+    "type": "ArcGIS Open Data",
+    "url": "http://od.arcdatapraha2.opendata.arcgis.com"
+  },
+  {
+    "name": "Mapathon",
+    "type": "OpenDataSoft",
+    "url": "mapathon-public.opendatasoft.com"
+  },
+  {
+    "name": "Esri Sverigeskommunportal",
+    "type": "ArcGIS Open Data",
+    "url": "http://kartor.kommun.opendata.arcgis.com"
+  },
+  {
+    "name": "demo",
+    "type": "ArcGIS Open Data",
+    "url": "http://demo.esrith.opendata.arcgis.com"
+  },
+  {
+    "name": "EPS_ Peru",
+    "type": "ArcGIS Open Data",
+    "url": "http://epsperu.mitelematica.opendata.arcgis.com"
+  },
+  {
+    "name": "Open Data Peru Interorganizacional-Copy",
+    "type": "ArcGIS Open Data",
+    "url": "http://opendataperu-1.mitelematica.opendata.arcgis.com"
+  },
+  {
+    "name": "ARCDATAPRAHASUPPORT",
+    "type": "ArcGIS Open Data",
+    "url": "http://test1.arcdatapraha3.opendata.arcgis.com"
+  },
+  {
+    "name": "Plzeňskýkraj",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.kupk.opendata.arcgis.com"
+  },
+  {
+    "name": "Gislavedskommun",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.gislavedskommun.opendata.arcgis.com"
+  },
+  {
+    "name": "Helsingborg",
+    "type": "ArcGIS Open Data",
+    "url": "http://helsingborg.esrisverige.opendata.arcgis.com"
+  },
+  {
+    "name": "City of Centerton,Arkansas",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.centertonar.opendata.arcgis.com"
+  },
+  {
+    "name": "City of Norfolk",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.orf.opendata.arcgis.com"
+  },
+  {
+    "name": "City of Palestine Open GIS Data",
+    "type": "ArcGIS Open Data",
+    "url": "http://maps.palestinetexas.opendata.arcgis.com"
+  },
+  {
+    "name": "Clark County GIS",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.ccgismo.opendata.arcgis.com"
+  },
+  {
+    "name": "Dauphin County,PA",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.dauphinco.opendata.arcgis.com"
+  },
+  {
+    "name": "Gilbert,Arizona",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.tog.opendata.arcgis.com"
+  },
+  {
+    "name": "marcela",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.zonificacion.opendata.arcgis.com"
+  },
+  {
+    "name": "Ebola",
+    "type": "ArcGIS Open Data",
+    "url": "http://na.ebolaresponse.opendata.arcgis.com"
+  },
+  {
+    "name": "ONF Open Data",
+    "type": "ArcGIS Open Data",
+    "url": "http://test.onf.opendata.arcgis.com"
+  },
+  {
+    "name": "Carbon County MT",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.carboncomt.opendata.arcgis.com"
+  },
+  {
+    "name": "City of Centerville",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.centervilleohio.opendata.arcgis.com"
+  },
+  {
+    "name": "City of Madison,Wisconsin Open Map Data",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.cityofmadison.opendata.arcgis.com"
+  },
+  {
+    "name": "City of Muskego Open Data",
+    "type": "ArcGIS Open Data",
+    "url": "http://wi.muskego.opendata.arcgis.com"
+  },
+  {
+    "name": "City of Nashua,NH Open Data",
+    "type": "ArcGIS Open Data",
+    "url": "http://cityofnashuanhopendata.nashuamaps.opendata.arcgis.com"
+  },
+  {
+    "name": "City of Rockwall,TXGIS",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.rockwall.opendata.arcgis.com"
+  },
+  {
+    "name": "County Assessor Data Sharing Site",
+    "type": "ArcGIS Open Data",
+    "url":
+      "http://countyassessordatasharingsite-2.assessoroffice.opendata.arcgis.com"
+  },
+  {
+    "name": "Esri Open Data(Beta)",
+    "type": "ArcGIS Open Data",
+    "url": "http://beta.esri.opendata.arcgis.com"
+  },
+  {
+    "name": "Franklin County,Ohio",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.fca.opendata.arcgis.com"
+  },
+  {
+    "name": "Gahanna",
+    "type": "ArcGIS Open Data",
+    "url": "http://maps.gahanna.opendata.arcgis.com"
+  },
+  {
+    "name": "Kuwait Municipality",
+    "type": "ArcGIS Open Data",
+    "url": "http://km.beirutgardens.opendata.arcgis.com"
+  },
+  {
+    "name": "MEUC2014 Kuwait",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.meuc2014.opendata.arcgis.com"
+  },
+  {
+    "name": "UDOT Open Data",
+    "type": "ArcGIS Open Data",
+    "url": "http://udot.uplan.opendata.arcgis.com"
+  },
+  {
+    "name": "Universityof Virginia Library Open Data",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.uvalibrary.opendata.arcgis.com"
+  },
+  {
+    "name": "Vista West Engineering",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.vwe.opendata.arcgis.com"
+  },
+  {
+    "name": "WSDOT Arc GIS Open Data Portal",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.wsdot.opendata.arcgis.com"
+  },
+  {
+    "name": "Kaavoituksenladattaviapaikkatietoaineistoja",
+    "type": "ArcGIS Open Data",
+    "url": "http://kaavoitus.agol-koulutus1.opendata.arcgis.com"
+  },
+  {
+    "name": "Communauté d'Agglomérationde Cités-en-Champagne",
+    "type": "ArcGIS Open Data",
+    "url": "http://sig.agglo-chalons.opendata.arcgis.com"
+  },
+  {
+    "name": "Universidad Técnica Nacional",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.utncr.opendata.arcgis.com"
+  },
+  {
+    "name": "Arcville Open Data",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.arcville.opendata.arcgis.com"
+  },
+  {
+    "name": "BETA-Alaska Departmentof Environmental Conservation",
+    "type": "ArcGIS Open Data",
+    "url": "http://beta.adec.opendata.arcgis.com"
+  },
+  {
+    "name": "City of Mc Kinney",
+    "type": "ArcGIS Open Data",
+    "url": "http://data1.mck.opendata.arcgis.com"
+  },
+  {
+    "name": "City of Mesa Enterprise GIS Portal(old)",
+    "type": "ArcGIS Open Data",
+    "url": "http://old.mesaaz.opendata.arcgis.com"
+  },
+  {
+    "name": "Clay County,MN",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.claycountymn.opendata.arcgis.com"
+  },
+  {
+    "name": "Departmentof Housingand Urban Development",
+    "type": "ArcGIS Open Data",
+    "url": "http://egis.hud.opendata.arcgis.com"
+  },
+  {
+    "name": "Food Security",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.foodsecurity.opendata.arcgis.com"
+  },
+  {
+    "name": "Hack SMC",
+    "type": "ArcGIS Open Data",
+    "url": "http://hacksmc.smcmaps.opendata.arcgis.com"
+  },
+  {
+    "name": "Ashtabula County",
+    "type": "ArcGIS Open Data",
+    "url": "http://ashtabulacounty.ashtabulacounty.opendata.arcgis.com"
+  },
+  {
+    "name": "BEXARMETRO9-1-1NETWORKDISTRICT",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.bm911.opendata.arcgis.com"
+  },
+  {
+    "name": "npo_esri",
+    "type": "ArcGIS Open Data",
+    "url": "http://esri.nonprofits.opendata.arcgis.com"
+  },
+  {
+    "name": "londonboroughoflambeth",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.lambethcouncil.opendata.arcgis.com"
+  },
+  {
+    "name": "Чебоксары-Телеком",
+    "type": "ArcGIS Open Data",
+    "url": "http://arcgis.chbtk.opendata.arcgis.com"
+  },
+  {
+    "name": "Chatham-Kent Open Data",
+    "type": "ArcGIS Open Data",
+    "url": "http://chathamkentopendata.chatham-kent.opendata.arcgis.com"
+  },
+  {
+    "name": "City of Kitchener",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.kitchenergis.opendata.arcgis.com"
+  },
+  {
+    "name": "Anchorage Open Data | Anchorage Open Data",
+    "type": "Socrata",
+    "url": "data.muni.org"
+  },
+  {
+    "name": "Données ouvertes de la ville de Montréal(démonstration)",
+    "type": "ArcGIS Open Data",
+    "url": "http://metropole.esriquebec.opendata.arcgis.com"
+  },
+  {
+    "name": "Municipalityof East Hants Open Data",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.easthants.opendata.arcgis.com"
+  },
+  {
+    "name": "OpenData Sicoval",
+    "type": "OpenDataSoft",
+    "url": "data.sicoval.fr"
+  },
+  {
+    "name": "Regional Districtof Central Okanagan",
+    "type": "ArcGIS Open Data",
+    "url": "http://rdcodatadownload.rdco.opendata.arcgis.com"
+  },
+  {
+    "name": "Open Data Portal",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.columbus.opendata.arcgis.com"
+  },
+  {
+    "name": "Open GIS Data",
+    "type": "ArcGIS Open Data",
+    "url": "http://gisdata.csjdotgis.opendata.arcgis.com"
+  },
+  {
+    "name": "Oregon Cascades West: Stateofthe Region Data Portal",
+    "type": "ArcGIS Open Data",
+    "url": "http://sor.cascadeswest.opendata.arcgis.com"
+  },
+  {
+    "name": "Our City Open Data Site",
+    "type": "ArcGIS Open Data",
+    "url": "http://ods.ourcityc.opendata.arcgis.com"
+  },
+  {
+    "name": "Sample Site",
+    "type": "ArcGIS Open Data",
+    "url": "http://sample.brooklynpark.opendata.arcgis.com"
+  },
+  {
+    "name": "Westbank First Nation-GIS Data Download",
+    "type": "ArcGIS Open Data",
+    "url": "http://wfn.rdco.opendata.arcgis.com"
+  },
+  {
+    "name": "CACFPSFSP",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.cacfp-sfsp.opendata.arcgis.com"
+  },
+  {
+    "name": "Open Charlotte: City of Charlotte Open Data Portal",
+    "type": "ArcGIS Open Data",
+    "url": "http://clt.charlotte.opendata.arcgis.com"
+  },
+  {
+    "name": "City of Norwalk CT",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.norwalk.opendata.arcgis.com"
+  },
+  {
+    "name": "Washoe County,Nevada",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.washoe.opendata.arcgis.com"
+  },
+  {
+    "name": "WI Departmentof Administration",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.wi-doa.opendata.arcgis.com"
+  },
+  {
+    "name": "Wisconsin Emergency Management",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.wem.opendata.arcgis.com"
+  },
+  {
+    "name": "Suomenavoimenpaikkatiedonsivusto",
+    "type": "ArcGIS Open Data",
+    "url": "http://suomi1.esrifinland.opendata.arcgis.com"
+  },
+  {
+    "name": "SIT Comunedi Bergamoprove Open Data",
+    "type": "ArcGIS Open Data",
+    "url": "http://data1.bergamo.opendata.arcgis.com"
+  },
+  {
+    "name": "Cobb County,Georgia",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.cobbcountyga.opendata.arcgis.com"
+  },
+  {
+    "name": "Colorado Open Data",
+    "type": "ArcGIS Open Data",
+    "url": "http://coloradodata.statesales.opendata.arcgis.com"
+  },
+  {
+    "name": "Gobierno Local Datos Abiertos",
+    "type": "ArcGIS Open Data",
+    "url": "http://datos.gobloc.opendata.arcgis.com"
+  },
+  {
+    "name": "Municipalidadde Belén",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.munibelen.opendata.arcgis.com"
+  },
+  {
+    "name": "Portal Open Data Ayto Madrid",
+    "type": "ArcGIS Open Data",
+    "url": "http://portal.madrid.opendata.arcgis.com"
+  },
+  {
+    "name": "NYC Comptroller | Open Data | New York City | NYC Data",
+    "type": "Socrata",
+    "url": "www.opendatanyc.com"
+  },
+  {
+    "name": "Center City District-Open Data Portal",
+    "type": "ArcGIS Open Data",
+    "url": "http://ccdopendataportal.ccdphila.opendata.arcgis.com"
+  },
+  {
+    "name": "Open Performance | Ramsey County",
+    "type": "Socrata",
+    "url": "openperformance.ramseycounty.us"
+  },
+  {
+    "name": "LASanitation",
+    "type": "ArcGIS Open Data",
+    "url": "http://opendata.labos.opendata.arcgis.com"
+  },
+  {
+    "name": "ГИСиПЗФ",
+    "type": "ArcGIS Open Data",
+    "url": "http://hub.geolab.opendata.arcgis.com"
+  },
+  {
+    "name": "SERVIR",
+    "type": "ArcGIS Open Data",
+    "url": "http://servir.usf-gsal.opendata.arcgis.com"
+  },
+  {
+    "name": "Green Tn T.org",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.envmaptt.opendata.arcgis.com"
+  },
+  {
+    "name": "Townof Mooresville,NC Open Data",
+    "type": "ArcGIS Open Data",
+    "url": "http://town.mooresvillenc.opendata.arcgis.com"
+  },
+  {
+    "name": "City of Centennial,Colorado",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.centennial.opendata.arcgis.com"
+  },
+  {
+    "name": "Chesterbrook Open Data",
+    "type": "ArcGIS Open Data",
+    "url": "http://data1.countysandbox.opendata.arcgis.com"
+  },
+  {
+    "name": "OpenDataNetwork",
+    "type": "Socrata",
+    "url": "data.opendatanetwork.com"
+  },
+  {
+    "name": "Disaster Responsetothe South Carolina Flooding",
+    "type": "ArcGIS Open Data",
+    "url": "http://scflooding.fema.opendata.arcgis.com"
+  },
+  {
+    "name": "Madison County,Virginia",
+    "type": "ArcGIS Open Data",
+    "url": "http://gis.madisonva.opendata.arcgis.com"
+  },
+  {
+    "name": "Montana Fish,Wildlife& Parks",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.mtfwp.opendata.arcgis.com"
+  },
+  {
+    "name": "Officeof Spatial Analysisand Visualization",
+    "type": "ArcGIS Open Data",
+    "url": "http://osav.usdot.opendata.arcgis.com"
+  },
+  {
+    "name": "SARO_ Open_ Data",
+    "type": "ArcGIS Open Data",
+    "url": "http://saroopendata.saro.opendata.arcgis.com"
+  },
+  {
+    "name": "Shasta Spatial Open Data",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.shastaspatial.opendata.arcgis.com"
+  },
+  {
+    "name": "CNCS Open Data | CNCS Open Data",
+    "type": "Socrata",
+    "url": "data.nationalservice.gov"
+  },
+  {
+    "name": "Sussex County Delaware",
+    "type": "ArcGIS Open Data",
+    "url": "http://gis.sussexcounty.opendata.arcgis.com"
+  },
+  {
+    "name": "Tennessee Aquarium Conservation Institute",
+    "type": "ArcGIS Open Data",
+    "url": "http://conservation.tnaci.opendata.arcgis.com"
+  },
+  {
+    "name": "The Wilderness Society",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.wilderness.opendata.arcgis.com"
+  },
+  {
+    "name": "Delaware County Indiana Open Data-Copy",
+    "type": "ArcGIS Open Data",
+    "url": "http://getdata-1.delcogis.opendata.arcgis.com"
+  },
+  {
+    "name": "EISTAJ'ssite",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.aj-eist.opendata.arcgis.com"
+  },
+  {
+    "name": "ESRI Support Services",
+    "type": "ArcGIS Open Data",
+    "url": "http://data3.ess.opendata.arcgis.com"
+  },
+  {
+    "name": "Friendsofthe Lower Olentangy Watershed",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.olentangy.opendata.arcgis.com"
+  },
+  {
+    "name": "Govt Open Data",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.govtgis.opendata.arcgis.com"
+  },
+  {
+    "name": "Interwest Arc GIS Online",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.interwestgis.opendata.arcgis.com"
+  },
+  {
+    "name": "NW Portal",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.nwdataportal.opendata.arcgis.com"
+  },
+  {
+    "name": "Ohio Valley Regional Development Commission",
+    "type": "ArcGIS Open Data",
+    "url": "http://test.ovrdc.opendata.arcgis.com"
+  },
+  {
+    "name": "Oklahoma Departmentof Transportation",
+    "type": "ArcGIS Open Data",
+    "url": "http://gisdata.okdot.opendata.arcgis.com"
+  },
+  {
+    "name": "District Of Peachland",
+    "type": "ArcGIS Open Data",
+    "url": "http://peachland.rdco.opendata.arcgis.com"
+  },
+  {
+    "name": "Ward County Open Data",
+    "type": "ArcGIS Open Data",
+    "url": "http://gis.wardnd.opendata.arcgis.com"
+  },
+  {
+    "name": "Countyof Riverside Open Data",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.countyofriverside.opendata.arcgis.com"
+  },
+  {
+    "name": "Portal Geográfico Nacional",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.pgn-icde.opendata.arcgis.com"
+  },
+  {
+    "name": "Concellode Lugo",
+    "type": "ArcGIS Open Data",
+    "url": "http://concellolugo.esrism.opendata.arcgis.com"
+  },
+  {
+    "name": "Associationof Washington Cities",
+    "type": "ArcGIS Open Data",
+    "url": "http://yourcitysnapshot.awcnet.opendata.arcgis.com"
+  },
+  {
+    "name": "Associationof Washington Cities",
+    "type": "ArcGIS Open Data",
+    "url": "http://featureddatastories.awcnet.opendata.arcgis.com"
+  },
+  {
+    "name": "Chula Vista GIS",
+    "type": "ArcGIS Open Data",
+    "url": "http://chulavista.cvgis.opendata.arcgis.com"
+  },
+  {
+    "name": "City of Atlanta DPCDGIS Data",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.coaplan.opendata.arcgis.com"
+  },
+  {
+    "name": "City of Detroit",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.detroitmi.opendata.arcgis.com"
+  },
+  {
+    "name": "City of Redlands Open Data",
+    "type": "ArcGIS Open Data",
+    "url": "http://cityofredlandsopendata.coredlands.opendata.arcgis.com"
+  },
+  {
+    "name": "Clayton County",
+    "type": "ArcGIS Open Data",
+    "url": "http://opendata.cccd-gis.opendata.arcgis.com"
+  },
+  {
+    "name": "Metro Omaha Natural Resources Inventory",
+    "type": "ArcGIS Open Data",
+    "url": "http://nri.dogis.opendata.arcgis.com"
+  },
+  {
+    "name": "Montgomery County GIS Open Data,MD-Copy",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.mcgov-gis.opendata.arcgis.com"
+  },
+  {
+    "name": "Pierce County WAOpen Geo Spatial Data Portal",
+    "type": "ArcGIS Open Data",
+    "url": "http://gisdata.piercecowa.opendata.arcgis.com"
+  },
+  {
+    "name": "Santa Cruz County,California GIS",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.sccgis.opendata.arcgis.com"
+  },
+  {
+    "name": "SFWMDEGDL",
+    "type": "ArcGIS Open Data",
+    "url": "http://egdl.k-gis.opendata.arcgis.com"
+  },
+  {
+    "name": "Townof Brookline OLD",
+    "type": "ArcGIS Open Data",
+    "url": "http://data2.brookline.opendata.arcgis.com"
+  },
+  {
+    "name": "In Dnr Spatial Data Portal",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.indnr.opendata.arcgis.com"
+  },
+  {
+    "name": "Irwin Open Data Development",
+    "type": "ArcGIS Open Data",
+    "url": "http://data1.craigmorgan.opendata.arcgis.com"
+  },
+  {
+    "name": "Little Rock Open Data Portal | Little Rock - Open Data Portal",
+    "type": "Socrata",
+    "url": "data.littlerock.gov"
+  },
+  {
+    "name": "Kentucky Open GIS Data",
+    "type": "ArcGIS Open Data",
+    "url": "http://kygovmaps.kygeonet.opendata.arcgis.com"
+  },
+  {
+    "name": "Kittitas County GIS",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.kitcogis.opendata.arcgis.com"
+  },
+  {
+    "name": "Campbell County,Virginia",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.campbellva.opendata.arcgis.com"
+  },
+  {
+    "name": "City of Ann Arborand Washtenaw County Open Data Catalog(Beta)",
+    "type": "ArcGIS Open Data",
+    "url": "http://a2washcoodc.a2-mi.opendata.arcgis.com"
+  },
+  {
+    "name": "City of Lynchburg Open Data",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.cityoflynchburg.opendata.arcgis.com"
+  },
+  {
+    "name": "City of Marion",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.marion.opendata.arcgis.com"
+  },
+  {
+    "name": "City of O'Fallon,Illinois Public Map Data",
+    "type": "ArcGIS Open Data",
+    "url": "http://publicmapdata.ofallon.opendata.arcgis.com"
+  },
+  {
+    "name": "Washington's GIS Open Data Site",
+    "type": "ArcGIS Open Data",
+    "url": "http://washingtonopendata.wa-geoservices.opendata.arcgis.com"
+  },
+  {
+    "name": "Open Data-Région Centre-Valde Loire",
+    "type": "ArcGIS Open Data",
+    "url": "http://sig.crcentre.opendata.arcgis.com"
+  },
+  {
+    "name": "Homeland Infrastructure Foundation-Level Data (HIFLD)",
+    "type": "ArcGIS Open Data",
+    "url": "https://hifld-dhs-gii.opendata.arcgis.com/"
+  },
+  {
+    "name": "Historic Data",
+    "type": "ArcGIS Open Data",
+    "url": "http://historic.cabarrus.opendata.arcgis.com"
+  },
+  {
+    "name": "Patrimonial Documentation",
+    "type": "ArcGIS Open Data",
+    "url": "http://datanl.agdp.opendata.arcgis.com"
+  },
+  {
+    "name": "Patrimonial Documentation",
+    "type": "ArcGIS Open Data",
+    "url": "http://datafr.agdp.opendata.arcgis.com"
+  },
+  {
+    "name": "Cape York NRMATLAS",
+    "type": "ArcGIS Open Data",
+    "url": "http://atlas.cynrm.opendata.arcgis.com"
+  },
+  {
+    "name": "むろらんオープンデータライブラリ-コピー",
+    "type": "ArcGIS Open Data",
+    "url": "http://library.muroran.opendata.arcgis.com"
+  },
+  {
+    "name": "Carver County,MN Open Data Portal",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.carver.opendata.arcgis.com"
+  },
+  {
+    "name": "City of Houston GIS Open Data",
+    "type": "ArcGIS Open Data",
+    "url": "http://cohgis.mycity.opendata.arcgis.com"
+  },
+  {
+    "name": "City of New Orleans Open Data Portal",
+    "type": "ArcGIS Open Data",
+    "url": "http://portal.nolagis.opendata.arcgis.com"
+  },
+  {
+    "name": "Emergency Services Telecommunications Authority",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.esta000.opendata.arcgis.com"
+  },
+  {
+    "name": "Metropolitan Planning Authority",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.planvic.opendata.arcgis.com"
+  },
+  {
+    "name": "West-Vlaamse Intercommunale WVI",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.wvigis.opendata.arcgis.com"
+  },
+  {
+    "name": "Halifax Open Data Catalogue",
+    "type": "ArcGIS Open Data",
+    "url": "http://catalogue.hrm.opendata.arcgis.com"
+  },
+  {
+    "name": "Regional Ecological Data Collection Project",
+    "type": "ArcGIS Open Data",
+    "url": "http://redcp.matawa.opendata.arcgis.com"
+  },
+  {
+    "name": "cqhela",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.cqhela.opendata.arcgis.com"
+  },
+  {
+    "name": "KQGIS",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.kqgis.opendata.arcgis.com"
+  },
+  {
+    "name": "Porirua City Council",
+    "type": "ArcGIS Open Data",
+    "url": "http://gisdata.pcc.opendata.arcgis.com"
+  },
+  {
+    "name": "City of Kennewick",
+    "type": "ArcGIS Open Data",
+    "url": "http://gis.kennewick.opendata.arcgis.com"
+  },
+  {
+    "name": "City of Lebanon",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.lebanon.opendata.arcgis.com"
+  },
+  {
+    "name": "City of Morganton GIS-Open Data",
+    "type": "ArcGIS Open Data",
+    "url": "http://od.morganton.opendata.arcgis.com"
+  },
+  {
+    "name": "City of Yuma,Arizona",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.cityofyumaazgis.opendata.arcgis.com"
+  },
+  {
+    "name": "Countyof Santa Clara",
+    "type": "ArcGIS Open Data",
+    "url": "http://prod.sccgov.opendata.arcgis.com"
+  },
+  {
+    "name": "Open Data | Socrata",
+    "type": "Socrata",
+    "url": "eda.data.commerce.gov"
+  },
+  {
+    "name": "Esri Philadelphia Regional Organization",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.epro.opendata.arcgis.com"
+  },
+  {
+    "name": "Dadesobertes Manlleu",
+    "type": "ArcGIS Open Data",
+    "url": "http://dadesobertes.situam.opendata.arcgis.com"
+  },
+  {
+    "name": "Smart Cities",
+    "type": "ArcGIS Open Data",
+    "url": "http://data2.esrism.opendata.arcgis.com"
+  },
+  {
+    "name": "City of Cupertino",
+    "type": "ArcGIS Open Data",
+    "url": "http://gis.cupertino.opendata.arcgis.com"
+  },
+  {
+    "name": "City of Springfield,Missouri",
+    "type": "ArcGIS Open Data",
+    "url": "http://gisdata.cosmo.opendata.arcgis.com"
+  },
+  {
+    "name": "GIS Day",
+    "type": "ArcGIS Open Data",
+    "url": "http://gisday2015.alcogis.opendata.arcgis.com"
+  },
+  {
+    "name": "Data Adgangfor IG Support",
+    "type": "ArcGIS Open Data",
+    "url": "http://dataadgang.informi-support.opendata.arcgis.com"
+  },
+  {
+    "name": "Søfartsstyrelsen Open Data",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.sofartdk.opendata.arcgis.com"
+  },
+  {
+    "name": "New Jersey Search& Rescue",
+    "type": "ArcGIS Open Data",
+    "url": "http://newjerseysearchrescue.njsar.opendata.arcgis.com"
+  },
+  {
+    "name": "Penn DOT Open Data",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.pennshare.opendata.arcgis.com"
+  },
+  {
+    "name": "Pinal County Maps-Open Data",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.pinal.opendata.arcgis.com"
+  },
+  {
+    "name": "Tacoma Open Data",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.tacoma.opendata.arcgis.com"
+  },
+  {
+    "name": "Talgov New Design",
+    "type": "ArcGIS Open Data",
+    "url": "http://talgovnew.tlcgis.opendata.arcgis.com"
+  },
+  {
+    "name": "Esri Portland R&D Center Open Data",
+    "type": "ArcGIS Open Data",
+    "url": "http://opendata.esri23.opendata.arcgis.com"
+  },
+  {
+    "name": "Hampstead Vol. Fire Company",
+    "type": "ArcGIS Open Data",
+    "url": "http://geodata.hampsteadvfc.opendata.arcgis.com"
+  },
+  {
+    "name": "Idaho Departmentof Water Resources",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.idwr.opendata.arcgis.com"
+  },
+  {
+    "name": "Isolated Organization",
+    "type": "ArcGIS Open Data",
+    "url": "http://dataexport.ess-ioo.opendata.arcgis.com"
+  },
+  {
+    "name": "Mobile District",
+    "type": "ArcGIS Open Data",
+    "url": "http://mobiledistrict.cesamusace.opendata.arcgis.com"
+  },
+  {
+    "name": "Esri EA",
+    "type": "ArcGIS Open Data",
+    "url": "http://esrieats.gspace.opendata.arcgis.com"
+  },
+  {
+    "name": "IGM Bolivia",
+    "type": "ArcGIS Open Data",
+    "url": "http://igm.geosystems.opendata.arcgis.com"
+  },
+  {
+    "name": "MTTALIFT",
+    "type": "ArcGIS Open Data",
+    "url": "http://lift.mtta.opendata.arcgis.com"
+  },
+  {
+    "name": "Ky Gov Maps",
+    "type": "ArcGIS Open Data",
+    "url": "http://kydata.kygeonet.opendata.arcgis.com"
+  },
+  {
+    "name": "Dallas Data Points | Open Performance | Dallas, TX",
+    "type": "Socrata",
+    "url": "datapoints.dallascityhall.com"
+  },
+  {
+    "name": "NCIGIS Portal: Open Data",
+    "type": "ArcGIS Open Data",
+    "url": "http://gis.nci.opendata.arcgis.com"
+  },
+  {
+    "name": "North Jersey Transportation Planning Authority",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.njtpa.opendata.arcgis.com"
+  },
+  {
+    "name": "Open Source GIS",
+    "type": "ArcGIS Open Data",
+    "url": "http://public.colletoncounty.opendata.arcgis.com"
+  },
+  {
+    "name": "Oregon Metro Open Data",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.drcmetro.opendata.arcgis.com"
+  },
+  {
+    "name": "SEMCOG(Southeast Michigan Councilof Governments)Open Data",
+    "type": "ArcGIS Open Data",
+    "url": "http://maps.semcog.opendata.arcgis.com"
+  },
+  {
+    "name": "Sonoma County Open Data",
+    "type": "ArcGIS Open Data",
+    "url": "http://sonomacountyopendata.sonomamap.opendata.arcgis.com"
+  },
+  {
+    "name": "St. Croix County,WI",
+    "type": "ArcGIS Open Data",
+    "url": "http://sccgis.scccdd.opendata.arcgis.com"
+  },
+  {
+    "name": "Suffolk County GIS",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.suffolkgis.opendata.arcgis.com"
+  },
+  {
+    "name": "Suwannee River Water Management District Open Data Portal",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.srwmd.opendata.arcgis.com"
+  },
+  {
+    "name": "Irwin Dev",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.craigmorgan.opendata.arcgis.com"
+  },
+  {
+    "name": "Iowa Departmentof Transportation-Open Data Portal",
+    "type": "ArcGIS Open Data",
+    "url": "http://public.iowadot.opendata.arcgis.com"
+  },
+  {
+    "name": "Police Foundation",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.pf.opendata.arcgis.com"
+  },
+  {
+    "name": "Rapids Open Data",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.wisconsinrapids.opendata.arcgis.com"
+  },
+  {
+    "name": "UCANR Open Data",
+    "type": "ArcGIS Open Data",
+    "url": "http://ucanropendata.ucanr.opendata.arcgis.com"
+  },
+  {
+    "name": "Loudoun GIS Open Data",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.loudoungis.opendata.arcgis.com"
+  },
+  {
+    "name": "MAPS",
+    "type": "ArcGIS Open Data",
+    "url": "http://maps.shoreline.opendata.arcgis.com"
+  },
+  {
+    "name": "Oklahoma State Historic Preservation Office",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.okshpo.opendata.arcgis.com"
+  },
+  {
+    "name": "Open Raleigh GIS Data",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.ral.opendata.arcgis.com"
+  },
+  {
+    "name": "Miljøog Energiforvaltning",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.aakmef.opendata.arcgis.com"
+  },
+  {
+    "name": "Mi Ciudad",
+    "type": "ArcGIS Open Data",
+    "url": "http://mciudad.esrism.opendata.arcgis.com"
+  },
+  {
+    "name": "ESRIジャパンストーリーマップコレクション",
+    "type": "ArcGIS Open Data",
+    "url": "http://ej-sightseeing.ej.opendata.arcgis.com"
+  },
+  {
+    "name": "Demo INE",
+    "type": "ArcGIS Open Data",
+    "url": "http://demoine.esrism.opendata.arcgis.com"
+  },
+  {
+    "name": "Helsinginseudunliikenne(HSL)",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.hslhrt.opendata.arcgis.com"
+  },
+  {
+    "name": "Arizona Departmentof Water Resources",
+    "type": "ArcGIS Open Data",
+    "url": "http://gisdata.azwater.opendata.arcgis.com"
+  },
+  {
+    "name": "City of Anaheim",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.anaheim.opendata.arcgis.com"
+  },
+  {
+    "name": "Colorado Departmentof Public Healthand Environment",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.cdphe.opendata.arcgis.com"
+  },
+  {
+    "name": "Esri Open Health Data Demonstration",
+    "type": "ArcGIS Open Data",
+    "url": "http://modelhealthorg.healthgis.opendata.arcgis.com"
+  },
+  {
+    "name": "Esri National Government Open Data",
+    "type": "ArcGIS Open Data",
+    "url": "http://open.esrifederal.opendata.arcgis.com"
+  },
+  {
+    "name": "Georgia Open Data",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.georgiagio.opendata.arcgis.com"
+  },
+  {
+    "name": "City of Pittsburgh GIS Data",
+    "type": "ArcGIS Open Data",
+    "url": "http://pghgis.pittsburghpa.opendata.arcgis.com"
+  },
+  {
+    "name": "City of Perrysburg Open Data",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.pburg.opendata.arcgis.com"
+  },
+  {
+    "name": "Louisville Metro Departmentof Information Technology",
+    "type": "ArcGIS Open Data",
+    "url": "http://mts.metrotech.opendata.arcgis.com"
+  },
+  {
+    "name": "New Hanover County,NC",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.nhcgov.opendata.arcgis.com"
+  },
+  {
+    "name": "Open Data ZVBN",
+    "type": "ArcGIS Open Data",
+    "url": "http://opendata.zvbn.opendata.arcgis.com"
+  },
+  {
+    "name": "Esri Dubai Office",
+    "type": "ArcGIS Open Data",
+    "url": "http://esridubaioffice.esridubaioffice.opendata.arcgis.com"
+  },
+  {
+    "name": "City of Hobart",
+    "type": "ArcGIS Open Data",
+    "url": "http://data-1.hobartcc.opendata.arcgis.com"
+  },
+  {
+    "name": "Opendata-Villede Shawinigan",
+    "type": "ArcGIS Open Data",
+    "url": "http://donnees.shawinigan.opendata.arcgis.com"
+  },
+  {
+    "name": "Randolph County,NC",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.randolphconc.opendata.arcgis.com"
+  },
+  {
+    "name": "Story County Open GIS Data Portal",
+    "type": "ArcGIS Open Data",
+    "url": "http://openstoryco.storycogis.opendata.arcgis.com"
+  },
+  {
+    "name": "Groep Antwerpen",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.antwerpen.opendata.arcgis.com"
+  },
+  {
+    "name": "Manningham City Council",
+    "type": "ArcGIS Open Data",
+    "url": "http://city.manningham.opendata.arcgis.com"
+  },
+  {
+    "name": "Documento Patrimônio Cultural",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.documento.opendata.arcgis.com"
+  },
+  {
+    "name": "CRB Open Data",
+    "type": "ArcGIS Open Data",
+    "url": "http://crb.capitalregion.opendata.arcgis.com"
+  },
+  {
+    "name": "Geo BC",
+    "type": "ArcGIS Open Data",
+    "url": "http://publicdata.bcgov03.opendata.arcgis.com"
+  },
+  {
+    "name": "Open City",
+    "type": "ArcGIS Open Data",
+    "url": "http://opencity.ourcity.opendata.arcgis.com"
+  },
+  {
+    "name": "Ada County Highway District",
+    "type": "ArcGIS Open Data",
+    "url": "http://maps.achd.opendata.arcgis.com"
+  },
+  {
+    "name": "Arc GI Sfor Parksand Gardens",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.parksandgardens.opendata.arcgis.com"
+  },
+  {
+    "name": "Bedford County,VA",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.bedfordvagis.opendata.arcgis.com"
+  },
+  {
+    "name": "Banner Associates Public Access",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.bannerassociates.opendata.arcgis.com"
+  },
+  {
+    "name": "OC Public Works",
+    "type": "ArcGIS Open Data",
+    "url": "http://oc.ocpw.opendata.arcgis.com"
+  },
+  {
+    "name": "Open Data | Socrata",
+    "type": "Socrata",
+    "url": "nist.data.commerce.gov"
+  },
+  {
+    "name": "County Of Grande Prairie",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.cogp.opendata.arcgis.com"
+  },
+  {
+    "name": "Open Data Share",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.gis-sigmiramichi.opendata.arcgis.com"
+  },
+  {
+    "name": "Your Ville",
+    "type": "ArcGIS Open Data",
+    "url": "http://data1.esric-busdev.opendata.arcgis.com"
+  },
+  {
+    "name": "Open Data | Socrata",
+    "type": "Socrata",
+    "url": "ita.data.commerce.gov"
+  },
+  {
+    "name": "天地图 Open Data计划",
+    "type": "ArcGIS Open Data",
+    "url": "http://tdt.china.opendata.arcgis.com"
+  },
+  {
+    "name": "esrish",
+    "type": "ArcGIS Open Data",
+    "url": "http://opendata.esrichina-sh.opendata.arcgis.com"
+  },
+  {
+    "name": "Alachua County Property Appraiser GIS",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.acpa.opendata.arcgis.com"
+  },
+  {
+    "name": "Telecomunicaciones La Paz",
+    "type": "ArcGIS Open Data",
+    "url": "http://open.geosystems-telco.opendata.arcgis.com"
+  },
+  {
+    "name": "Scottish Natural Heritage",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.snh.opendata.arcgis.com"
+  },
+  {
+    "name": "ESRI Bulgaria",
+    "type": "ArcGIS Open Data",
+    "url": "http://data3.esribulgaria.opendata.arcgis.com"
+  },
+  {
+    "name": "National Instituteof Cultureand History",
+    "type": "ArcGIS Open Data",
+    "url": "http://nich.tbsldemo.opendata.arcgis.com"
+  },
+  {
+    "name": "City of Waterloo Open Data",
+    "type": "ArcGIS Open Data",
+    "url": "http://opendata.city-of-waterloo.opendata.arcgis.com/"
+  },
+  {
+    "name": "PWGSC-Geomatics Open Data",
+    "type": "ArcGIS Open Data",
+    "url": "http://nca.pwgsc-geomatics.opendata.arcgis.com"
+  },
+  {
+    "name": "Hawke's Bay Open Data",
+    "type": "ArcGIS Open Data",
+    "url": "http://hawkesbayopen.hbrcwebmaponline.opendata.arcgis.com"
+  },
+  {
+    "name": "Melbourne Water Open Data Portal",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.melbournewater.opendata.arcgis.com"
+  },
+  {
+    "name": "City of Fredericton",
+    "type": "ArcGIS Open Data",
+    "url": "http://catalogue.fredericton.opendata.arcgis.com"
+  },
+  {
+    "name": "North Central Texas Council of Governments",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.nctcoggis.opendata.arcgis.com"
+  },
+  {
+    "name": "Open Data Portal",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.nevcounty.opendata.arcgis.com"
+  },
+  {
+    "name": "Vic Roads Open Data",
+    "type": "ArcGIS Open Data",
+    "url": "http://vicroadsopendata.vicroadsmaps.opendata.arcgis.com"
+  },
+  {
+    "name": "Logan City Council Data",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.logancity.opendata.arcgis.com/"
+  },
+  {
+    "name": "Scottish Government",
+    "type": "ArcGIS Open Data",
+    "url": "http://scottishgovernment.bureau.opendata.arcgis.com"
+  },
+  {
+    "name": "Mittenwalde Open Data",
+    "type": "ArcGIS Open Data",
+    "url": "http://stadt.mittenwalde.opendata.arcgis.com"
+  },
+  {
+    "name": "City of Santa Ana Open Data",
+    "type": "ArcGIS Open Data",
+    "url": "http://opendata.santa-ana.opendata.arcgis.com"
+  },
+  {
+    "name": "City of Sherman,Texas",
+    "type": "ArcGIS Open Data",
+    "url": "http://data1.cityofsherman.opendata.arcgis.com"
+  },
+  {
+    "name": "Alamo Area MPO",
+    "type": "ArcGIS Open Data",
+    "url": "http://aampo.mpo.opendata.arcgis.com"
+  },
+  {
+    "name": "Ordnance Survey Ireland",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.osi.opendata.arcgis.com"
+  },
+  {
+    "name": "Evansville& Vanderburgh County GIS Data",
+    "type": "ArcGIS Open Data",
+    "url": "http://gisdata.evvc.opendata.arcgis.com"
+  },
+  {
+    "name": "City of Clearwater Open Data",
+    "type": "ArcGIS Open Data",
+    "url": "http://clearwaterconnect.cityofclearwater.opendata.arcgis.com"
+  },
+  {
+    "name": "City of Phoenix",
+    "type": "ArcGIS Open Data",
+    "url": "http://maps.phoenix.opendata.arcgis.com"
+  },
+  {
+    "name": "Geospatial Data Catalogue",
+    "type": "ArcGIS Open Data",
+    "url": "http://actmapi.actgov.opendata.arcgis.com"
+  },
+  {
+    "name": "Open Data Portal | Open Data Portal",
+    "type": "Socrata",
+    "url": "performance.providenceri.gov"
+  },
+  {
+    "name": "City Of Andover,KS",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.andoverks.opendata.arcgis.com"
+  },
+  {
+    "name": "The City of DuPont, WA - Open Data | DuPont Data and Performance",
+    "type": "Socrata",
+    "url": "data.dupontwa.gov"
+  },
+  {
+    "name": "Infocom94",
+    "type": "OpenDataSoft",
+    "url": "https://data.infocom94.fr"
+  },
+  {
+    "name": "Montgomery County | GovStat | Montgomery County MD",
+    "type": "Socrata",
+    "url": "reports.data.montgomerycountymd.gov"
+  },
+  {
+    "name": "PQRS | Open Data | Socrata",
+    "type": "Socrata",
+    "url": "pqrs.cms.gov"
+  },
+  {
+    "name": "Open Data | Socrata",
+    "type": "Socrata",
+    "url": "mbda.data.commerce.gov"
+  },
+  {
+    "name":
+      "Transforming Neighborhoods Initiative | Prince George's County | Transforming Neighborhoods Initiative",
+    "type": "Socrata",
+    "url": "tni.princegeorgescountymd.gov"
+  },
+  {
+    "name":
+      "Cook County | STAR Performance Management | Cook County | STAR Performance Management",
+    "type": "Socrata",
+    "url": "performance.cookcountyil.gov"
+  },
+  {
+    "name": "Open Data | Socrata",
+    "type": "Socrata",
+    "url": "esa.data.commerce.gov"
+  },
+  {
+    "name": "NYS-DFS | SHIP Data",
+    "type": "Socrata",
+    "url": "ship.dfs.ny.gov"
+  },
+  {
+    "name": "datazONE | PVSC | DatazONE |",
+    "type": "Socrata",
+    "url": "www.thedatazone.ca"
+  },
+  {
+    "name": "statGNV | Gainesville Performance Dashboard | stataGNV",
+    "type": "Socrata",
+    "url": "stat.cityofgainesville.org"
+  },
+  {
+    "name": "Safe Streets | Open Data Portal | Safe Streets Data",
+    "type": "Socrata",
+    "url": "data.safest.org"
+  },
+  {
+    "name": "Open Data Tuscaloosa | City of Tuscaloosa Open Data",
+    "type": "Socrata",
+    "url": "data.tuscaloosa.com"
+  },
+  {
+    "name": "San Mateo Performance Dashboards | San Mateo County Performance",
+    "type": "Socrata",
+    "url": "performance.smcgov.org"
+  },
+  {
+    "name": "College Station - Open Data | CSTX Open Data",
+    "type": "Socrata",
+    "url": "data.cstx.gov"
+  },
+  {
+    "name":
+      "ACTION ACT Performance Dashboard | ACTION ACT Performance Dashboard",
+    "type": "Socrata",
+    "url": "performance.action.act.gov.au"
+  },
+  {
+    "name": "Open Data Portal | FPISC Reports | Permitting Data Platform",
+    "type": "Socrata",
+    "url": "data.permits.performance.gov"
+  },
+  {
+    "name": "Validación – Incentivos | Validación – Incentivos",
+    "type": "Socrata",
+    "url": "www.pivcide.pr"
+  },
+  {
+    "name": "GLISPA Impact Dashboard | Open Data | Socrata",
+    "type": "Socrata",
+    "url": "impact.glispa.org"
+  },
+  {
+    "name":
+      "Edmonton - Open Performance Portal | City of Edmonton Citizen Dashboard",
+    "type": "Socrata",
+    "url": "dashboard.edmonton.ca"
+  },
+  {
+    "name": "ChattaData | ChattaData | City of Chattanooga, TN",
+    "type": "Socrata",
+    "url": "performance.chattanooga.gov"
+  },
+  {
+    "name":
+      "CountyStat | Prince George's CountyStat | CountyStat | Prince George's County",
+    "type": "Socrata",
+    "url": "performance.princegeorgescountymd.gov"
+  },
+  {
+    "name": "Mount Pleasant, SC | eMPower | Mount Pleasant, SC | eMPower",
+    "type": "Socrata",
+    "url": "data.tompsc.com"
+  },
+  {
+    "name": "Fulton Performance | Fulton Performance",
+    "type": "Socrata",
+    "url": "performance.fultoncountyga.gov"
+  },
+  {
+    "name":
+      "County of Marin - Open Data Portal | County of Marin Open Data Portal",
+    "type": "Socrata",
+    "url": "data.marincounty.org"
+  },
+  {
+    "name": "Performance | Topeka | Performance | Topeka",
+    "type": "Socrata",
+    "url": "performance.topeka.org"
+  },
+  {
+    "name": "San Antonio Connects | San Antonio Connects",
+    "type": "Socrata",
+    "url": "sa-data.idra.org"
+  },
+  {
+    "name": "City of Danville Dashboard | City of Danville Dashboard",
+    "type": "Socrata",
+    "url": "performance.danvilleva.gov"
+  },
+  {
+    "name":
+      "City of Seattle - Open Performance Portal\n | City of Seattle - Open Performance Portal",
+    "type": "Socrata",
+    "url": "performance.seattle.gov"
+  },
+  {
+    "name":
+      "Williamsburg Performance Management | Williamsburg Performance Management",
+    "type": "Socrata",
+    "url": "performance.williamsburgva.gov"
+  },
+  {
+    "name": "State GeoNode",
+    "type": "GeoNode",
+    "url": "http://geonode.state.gov"
+  },
+  {
+    "name": "UN WFP",
+    "type": "GeoNode",
+    "url": "http://geonode.wfp.org"
+  },
+  {
+    "name": "Bolivia GeoNode",
+    "type": "GeoNode",
+    "url": "http://geosinager.defensacivil.gob.bo"
+  },
+  {
+    "name": "CIGNo",
+    "type": "GeoNode",
+    "url": "http://cigno.ve.ismar.cnr.it"
+  },
+  {
+    "name": "MapStory",
+    "type": "GeoNode",
+    "url": "https://mapstory.org"
+  },
+  {
+    "name": "MASDAP",
+    "type": "GeoNode",
+    "url": "http://www.masdap.mw"
+  },
+  {
+    "name": "GeoAvalanche",
+    "type": "GeoNode",
+    "url": "http://geoavalanche.org"
+  },
+  {
+    "name": "Chennai Flood Management",
+    "type": "GeoNode",
+    "url": "http://chennaifloodmanagement.org/en"
+  },
+  {
+    "name": "MCPS Open Data Portal",
+    "type": "Socrata",
+    "url": "data.montgomeryschoolsmd.org"
+  },
+  {
+    "name": "Open Data Rutland City Police Department",
+    "type": "Socrata",
+    "url": "data.rutlandcitypolice.com"
+  },
+  {
+    "name": "Michigan Open Data",
+    "type": "Socrata",
+    "url": "data.michigan.gov"
+  },
+  {
+    "name": "Maine Open Data",
+    "type": "Socrata",
+    "url": "data.maine.gov"
+  },
+  {
+    "name": "Open Data Montgomery",
+    "type": "Socrata",
+    "url": "data.montgomeryal.gov"
+  },
+  {
+    "name": "Honolulu Open Data Portal",
+    "type": "Socrata",
+    "url": "data.honolulu.gov"
+  },
+  {
+    "name": "Open Data City of Providence",
+    "type": "Socrata",
+    "url": "data.providenceri.gov"
+  },
+  {
+    "name": "Queen Anne's County Open Data",
+    "type": "Socrata",
+    "url": "data.qac.org"
+  },
+  {
+    "name": "Open Data",
+    "type": "OpenDataSoft",
+    "url": "https://opendata.grdf.fr"
+  },
+  {
+    "name": "AWARE",
+    "type": "GeoNode",
+    "url": "http://aware.cirad.fr"
+  },
+  {
+    "name": "Dominode",
+    "type": "GeoNode",
+    "url": "http://dominode.dm"
+  },
+  {
+    "name": "DataRefuge",
+    "type": "CKAN",
+    "url": "https://www.datarefuge.org"
+  },
+  {
+    "name": "Confiscati Bene",
+    "type": "DKAN",
+    "url": "http://www.confiscatibene.it/it"
+  },
+  {
+    "name": "Open Data Ministry of Finance, Czech Republic",
+    "type": "DKAN",
+    "url": "http://data.mfcr.cz"
+  },
+  {
+    "name": "Open Data Ministry of Defence, Czech Republic",
+    "type": "DKAN",
+    "url": "http://data.army.cz"
+  },
+  {
+    "name": "Code for Ikoma",
+    "type": "DKAN",
+    "url": "http://data.code4ikoma.org"
+  },
+  {
+    "name": "Open Data Banda Aceh",
+    "type": "DKAN",
+    "url": "http://data.bandaacehkota.go.id"
+  },
+  {
+    "name": "National League of Cities Open Data Portal",
+    "type": "Socrata",
+    "url": "data.nlc.org"
+  },
+  {
+    "name": "Raleigh Open Data",
+    "type": "Socrata",
+    "url": "data.raleighnc.gov"
+  },
+  {
+    "name": "Renton Open Data Portal",
+    "type": "Socrata",
+    "url": "data.rentonwa.gov"
+  },
+  {
+    "name": "New Castle County Open Data Portal",
+    "type": "Socrata",
+    "url": "data.nccde.org"
+  },
+  {
+    "name": "Data.CMS.Gov",
+    "type": "Socrata",
+    "url": "data.cms.gov"
+  },
+  {
+    "name": "LAC Open Data",
+    "type": "Socrata",
+    "url": "data.lacounty.gov"
+  },
+  {
+    "name": "Open Illinois",
+    "type": "Socrata",
+    "url": "data.illinois.gov"
+  },
+  {
+    "name": "City of Cambridge Open Data",
+    "type": "Socrata",
+    "url": "data.cambridgema.gov"
+  },
+  {
+    "name": "Baltimore Open Data",
+    "type": "Socrata",
+    "url": "data.baltimorecity.gov"
+  },
+  {
+    "name": "City of Austin Open Data",
+    "type": "Socrata",
+    "url": "data.austintexas.gov"
+  },
+  {
+    "name": "City of Grande Prairie Open Data",
+    "type": "Socrata",
+    "url": "data.cityofgp.com"
+  },
+  {
+    "name": "Alameda County Open Data",
+    "type": "Socrata",
+    "url": "data.acgov.org"
+  },
+  {
+    "name": "Auburn Open Data",
+    "type": "Socrata",
+    "url": "data.auburnwa.gov"
+  },
+  {
+    "name": "City of Evanston Open Data",
+    "type": "Socrata",
+    "url": "data.cityofevanston.org"
+  },
+  {
+    "name": "City of Boston Open Data",
+    "type": "Socrata",
+    "url": "data.cityofboston.gov"
+  },
+  {
+    "name": "CHHS Open Data Portal",
+    "type": "Socrata",
+    "url": "chhs.data.ca.gov"
+  },
+  {
+    "name": "Data.HealthCare.gov",
+    "type": "Socrata",
+    "url": "data.healthcare.gov"
+  },
+  {
+    "name": "EPA ENERGY STAR",
+    "type": "Socrata",
+    "url": "data.energystar.gov"
+  },
+  {
+    "name": "San Bernardino Community Vital Signs",
+    "type": "Socrata",
+    "url": "data.communityvitalsigns.org"
+  },
+  {
+    "name": "CIC Open Data",
+    "type": "Socrata",
+    "url": "data.cic.mx"
+  },
+  {
+    "name": "Greensboro Open Data",
+    "type": "Socrata",
+    "url": "data.greensboro-nc.gov"
+  },
+  {
+    "name": "Open Data Douglas County",
+    "type": "Socrata",
+    "url": "data.douglas.co.us"
+  },
+  {
+    "name": "Open ATF",
+    "type": "Socrata",
+    "url": "data.atf.gov"
+  },
+  {
+    "name": "Tacoma Open Data",
+    "type": "Socrata",
+    "url": "data.cityoftacoma.org"
+  },
+  {
+    "name": "Code for South Africa Open Data",
+    "type": "Socrata",
+    "url": "data.code4sa.org"
+  },
+  {
+    "name": "Hawaii Open Data",
+    "type": "Socrata",
+    "url": "data.hawaii.gov"
+  },
+  {
+    "name": "Colorado Information Marketplace",
+    "type": "Socrata",
+    "url": "data.colorado.gov"
+  },
+  {
+    "name": "California Franchise Tax Board Open Data Portal",
+    "type": "Socrata",
+    "url": "data.ftb.ca.gov"
+  },
+  {
+    "name": "Los Angeles Open Data",
+    "type": "Socrata",
+    "url": "controllerdata.lacity.org"
+  },
+  {
+    "name": "Connecticut Open Data",
+    "type": "Socrata",
+    "url": "data.ct.gov"
+  },
+  {
+    "name": "Delaware Data",
+    "type": "Socrata",
+    "url": "data.delaware.gov"
+  },
+  {
+    "name": "Riverside County Open Data",
+    "type": "Socrata",
+    "url": "data.countyofriverside.us"
+  },
+  {
+    "name": "Danville Open Data Portal",
+    "type": "Socrata",
+    "url": "data.danvilleva.gov"
+  },
+  {
+    "name": "Edmonton Open Data Portal",
+    "type": "Socrata",
+    "url": "data.edmonton.ca"
+  },
+  {
+    "name": "Culver Open Data",
+    "type": "Socrata",
+    "url": "data.culvercity.org"
+  },
+  {
+    "name": "Albany Open Data",
+    "type": "Socrata",
+    "url": "data.albanyny.gov"
+  },
+  {
+    "name": "NYC Open Data",
+    "type": "Socrata",
+    "url": "data.cityofnewyork.us"
+  },
+  {
+    "name": "City of Berkeley Open Data Portal",
+    "type": "Socrata",
+    "url": "data.cityofberkeley.info"
+  },
+  {
+    "name": "West Sacramento Open Data",
+    "type": "Socrata",
+    "url": "data.cityofwestsacramento.org"
+  },
+  {
+    "name": "NSW Education Datahub",
+    "type": "Socrata",
+    "url": "data.cese.nsw.gov.au"
+  },
+  {
+    "name": "Hampton Open Data",
+    "type": "Socrata",
+    "url": "data.hampton.gov"
+  },
+  {
+    "name": "Data City of Hartford",
+    "type": "Socrata",
+    "url": "data.hartford.gov"
+  },
+  {
+    "name": "Chattanooga Open Data Portal",
+    "type": "Socrata",
+    "url": "data.chattlibrary.org"
+  },
+  {
+    "name": "King County Open Data",
+    "type": "Socrata",
+    "url": "data.kingcounty.gov"
+  },
+  {
+    "name": "City of Orlando Open Data Portal",
+    "type": "Socrata",
+    "url": "data.cityoforlando.net"
+  },
+  {
+    "name": "City of Baton Rouge Open Data Portal",
+    "type": "Socrata",
+    "url": "data.brla.gov"
+  },
+  {
+    "name": "Burlington Open Data",
+    "type": "Socrata",
+    "url": "data.burlingtonvt.gov"
+  },
+  {
+    "name": "Open Data City of Jackson",
+    "type": "Socrata",
+    "url": "data.jacksonms.gov"
+  },
+  {
+    "name": "EDD Data Library",
+    "type": "Socrata",
+    "url": "data.edd.ca.gov"
+  },
+  {
+    "name": "dataGNV Gainesville Open Data",
+    "type": "Socrata",
+    "url": "data.cityofgainesville.org"
+  },
+  {
+    "name": "Fort Worth Open Data Portal",
+    "type": "Socrata",
+    "url": "data.fortworthtexas.gov"
+  },
+  {
+    "name": "Detroit Open Data Portal",
+    "type": "Socrata",
+    "url": "data.detroitmi.gov"
+  },
+  {
+    "name": "data.iowa.gov",
+    "type": "Socrata",
+    "url": "data.iowa.gov"
+  },
+  {
+    "name": "Cincinnati Open Data Portal",
+    "type": "Socrata",
+    "url": "data.cincinnati-oh.gov"
+  },
+  {
+    "name": "Open Data Centers for Disease Control and Prevention",
+    "type": "Socrata",
+    "url": "chronicdata.cdc.gov"
+  },
+  {
+    "name": "Data.Medicare.gov",
+    "type": "Socrata",
+    "url": "data.medicare.gov"
+  },
+  {
+    "name": "DC PCSB Data Portal",
+    "type": "Socrata",
+    "url": "data.dcpcsb.org"
+  },
+  {
+    "name": "City of Madison Open Data",
+    "type": "Socrata",
+    "url": "data.cityofmadison.com"
+  },
+  {
+    "name": "San Diego Live Well Data Access Portal",
+    "type": "Socrata",
+    "url": "data.livewellsd.org"
+  },
+  {
+    "name": "Macoupin Open Data Portal",
+    "type": "Socrata",
+    "url": "data.macoupincountyil.gov"
+  },
+  {
+    "name": "IMLS Data Catalog",
+    "type": "Socrata",
+    "url": "data.imls.gov"
+  },
+  {
+    "name": "Menlo Park Open Data Portal",
+    "type": "Socrata",
+    "url": "data.menlopark.org"
+  },
+  {
+    "name": "Data.Medicaid.gov",
+    "type": "Socrata",
+    "url": "data.medicaid.gov"
+  },
+  {
+    "name": "Little Rock Open Data Portal",
+    "type": "Socrata",
+    "url": "data.littlerock.org"
+  },
+  {
+    "name": "Monroe County FL Open Data Portal",
+    "type": "Socrata",
+    "url": "data.monroecounty-fl.gov"
+  },
+  {
+    "name": "OCEPR Open Data",
+    "type": "Socrata",
+    "url": "data.oce.gov.pr"
+  },
+  {
+    "name": "City of Melbourne Open Data Portal",
+    "type": "Socrata",
+    "url": "data.melbourne.vic.gov.au"
+  },
+  {
+    "name": "DataLA",
+    "type": "Socrata",
+    "url": "data.lacity.org"
+  },
+  {
+    "name": "Montgomery County Data",
+    "type": "Socrata",
+    "url": "data.montgomerycountymd.gov"
+  },
+  {
+    "name": "Open Reading",
+    "type": "Socrata",
+    "url": "data.readingpa.gov"
+  },
+  {
+    "name": "State of New York Open Data",
+    "type": "Socrata",
+    "url": "data.ny.gov"
+  },
+  {
+    "name": "data.pa.gov",
+    "type": "Socrata",
+    "url": "data.pa.gov"
+  },
+  {
+    "name": "Nova Scotia Government Open Data Portal",
+    "type": "Socrata",
+    "url": "data.novascotia.ca"
+  },
+  {
+    "name": "Puerto Rico Government Open Data Portal",
+    "type": "Socrata",
+    "url": "data.pr.gov"
+  },
+  {
+    "name": "Nashville Open Data",
+    "type": "Socrata",
+    "url": "data.nashville.gov"
+  },
+  {
+    "name": "Open Data Portal City of Richmond, Virginia",
+    "type": "Socrata",
+    "url": "data.richmondgov.com"
+  },
+  {
+    "name": "Roseville Open Data",
+    "type": "Socrata",
+    "url": "data.roseville.ca.us"
+  },
+  {
+    "name": "OpenPGC Open Data",
+    "type": "Socrata",
+    "url": "data.princegeorgescountymd.gov"
+  },
+  {
+    "name": "Open Data City of Oxnard",
+    "type": "Socrata",
+    "url": "data.oxnard.org"
+  },
+  {
+    "name": "LOC Open Data Portal",
+    "type": "Socrata",
+    "url": "data.orcities.org"
+  },
+  {
+    "name": "State of Missouri Data Portal",
+    "type": "Socrata",
+    "url": "data.mo.gov"
+  },
+  {
+    "name": "Oregon Open Data",
+    "type": "Socrata",
+    "url": "data.oregon.gov"
+  },
+  {
+    "name": "Data.Redmond.Gov",
+    "type": "Socrata",
+    "url": "data.redmond.gov"
+  },
+  {
+    "name": "Data Portal State of Montana",
+    "type": "Socrata",
+    "url": "data.datamontana.us"
+  },
+  {
+    "name": "Police Foundation Open Data Portal",
+    "type": "Socrata",
+    "url": "data.policefoundation.org"
+  },
+  {
+    "name": "NASA",
+    "type": "Socrata",
+    "url": "data.nasa.gov"
+  },
+  {
+    "name": "City of Oakland Open Data Portal",
+    "type": "Socrata",
+    "url": "data.oaklandnet.com"
+  },
+  {
+    "name": "California State Treasurer",
+    "type": "Socrata",
+    "url": "data.debtwatch.treasurer.ca.gov"
+  },
+  {
+    "name": "Government Financial Reports California State Controller’s Office",
+    "type": "Socrata",
+    "url": "bythenumbers.sco.ca.gov"
+  },
+  {
+    "name": "Open Data New Jersey OIT",
+    "type": "Socrata",
+    "url": "data.nj.gov"
+  },
+  {
+    "name": "Data.NOLA.gov",
+    "type": "Socrata",
+    "url": "data.nola.gov"
+  },
+  {
+    "name": "Data Center for Disease Control",
+    "type": "Socrata",
+    "url": "data.cdc.gov"
+  },
+  {
+    "name": "City of Chicago Data Portal",
+    "type": "Socrata",
+    "url": "data.cityofchicago.org"
+  },
+  {
+    "name": "State of Texas Open Data Portal",
+    "type": "Socrata",
+    "url": "data.texas.gov"
+  },
+  {
+    "name": "Open Data data.maryland.gov",
+    "type": "Socrata",
+    "url": "data.maryland.gov"
+  },
+  {
+    "name": "Open San Mateo County",
+    "type": "Socrata",
+    "url": "data.smcgov.org"
+  },
+  {
+    "name": "Santa Rosa Open Data",
+    "type": "Socrata",
+    "url": "data.srcity.org"
+  },
+  {
+    "name": "Topeka Open Data",
+    "type": "Socrata",
+    "url": "data.topeka.org"
+  },
+  {
+    "name": "County of Sonoma Open Data",
+    "type": "Socrata",
+    "url": "data.sonomacounty.ca.gov"
+  },
+  {
+    "name": "Seattle Open Data",
+    "type": "Socrata",
+    "url": "data.seattle.gov"
+  },
+  {
+    "name": "State of Washington Open Data Platform",
+    "type": "Socrata",
+    "url": "data.wa.gov"
+  },
+  {
+    "name": "Strathcona County Open Data",
+    "type": "Socrata",
+    "url": "data.strathcona.ca"
+  },
+  {
+    "name": "Miami-Dade County Open Data Portal",
+    "type": "Socrata",
+    "url": "opendata.miamidade.gov"
+  },
+  {
+    "name": "Vermont Open Data",
+    "type": "Socrata",
+    "url": "data.vermont.gov"
+  },
+  {
+    "name": "Howard County Open Data Portal",
+    "type": "Socrata",
+    "url": "opendata.howardcountymd.gov"
+  },
+  {
+    "name": "Santa Monica Sustainable City Plan",
+    "type": "Socrata",
+    "url": "data.sustainablesm.org"
+  },
+  {
+    "name": "New Jersey Depart of Health",
+    "type": "Socrata",
+    "url": "healthdata.nj.gov"
+  },
+  {
+    "name": "Virginia Beach Open Data",
+    "type": "Socrata",
+    "url": "data.vbgov.com"
+  },
+  {
+    "name": "Henderson Open Data",
+    "type": "Socrata",
+    "url": "opendata.cityofhenderson.com"
+  },
+  {
+    "name": "Impact STLCO",
+    "type": "Socrata",
+    "url": "impact.stlouisco.com"
+  },
+  {
+    "name": "Sunshine Coast Council Open Data",
+    "type": "Socrata",
+    "url": "data.sunshinecoast.qld.gov.au"
+  },
+  {
+    "name": "Internet Data Portal",
+    "type": "Socrata",
+    "url": "idp.nz"
+  },
+  {
+    "name": "Santa Monica Open Data",
+    "type": "Socrata",
+    "url": "data.smgov.net"
+  },
+  {
+    "name": "VTA Open Data Portal",
+    "type": "Socrata",
+    "url": "data.vta.org"
+  },
+  {
+    "name": "White House Open Data",
+    "type": "Socrata",
+    "url": "open.whitehouse.gov"
+  },
+  {
+    "name": "Portal de Datos Abiertos Municipio de Puebla",
+    "type": "Socrata",
+    "url": "datosabiertos.pueblacapital.gob.mx"
+  },
+  {
+    "name": "Las Vegas Open Data",
+    "type": "Socrata",
+    "url": "opendata.lasvegasnevada.gov"
+  },
+  {
+    "name": "Urbana Open Data Portal",
+    "type": "Socrata",
+    "url": "data.urbanaillinois.us"
+  },
+  {
+    "name": "Township of Langley Open Data Portal",
+    "type": "Socrata",
+    "url": "data.tol.ca"
+  },
+  {
+    "name": "Richmond Open Data",
+    "type": "Socrata",
+    "url": "opendata.ci.richmond.ca.us"
+  },
+  {
+    "name": "SF OpenData",
+    "type": "Socrata",
+    "url": "data.sfgov.org"
+  },
+  {
+    "name": "Open Data West Hollywood",
+    "type": "Socrata",
+    "url": "data.weho.org"
+  },
+  {
+    "name": "State of New York Open Data Health",
+    "type": "Socrata",
+    "url": "health.data.ny.gov"
+  },
+  {
+    "name": "The City of Saint Paul's Open Data Portal",
+    "type": "Socrata",
+    "url": "information.stpaul.gov"
+  },
+  {
+    "name": "Open Government Data Sunlight Labs",
+    "type": "Socrata",
+    "url": "data.sunlightlabs.com"
+  },
+  {
+    "name": "City of Somerville Open Data",
+    "type": "Socrata",
+    "url": "data.somervillema.gov"
+  },
+  {
+    "name": "Open Data City of Winnipeg",
+    "type": "Socrata",
+    "url": "data.winnipeg.ca"
+  },
+  {
+    "name": "Data Cook County",
+    "type": "Socrata",
+    "url": "datacatalog.cookcountyil.gov"
+  },
+  {
+    "name": "Open Data KC",
+    "type": "Socrata",
+    "url": "data.kcmo.org"
+  },
+  {
+    "name": "Consumer Complaint Data Center Federal Communications Commission",
+    "type": "Socrata",
+    "url": "opendata.fcc.gov"
+  },
+  {
+    "name": "MassData",
+    "type": "Socrata",
+    "url": "data.mass.gov"
+  },
+  {
+    "name": "data.ca.gov",
+    "type": "Socrata",
+    "url": "greengov.data.ca.gov"
+  },
+  {
+    "name": "Mesquite Open Data Portal",
+    "type": "Socrata",
+    "url": "opendata.cityofmesquite.com"
+  },
+  {
+    "name": "City of Philadelphia Open Data",
+    "type": "Socrata",
+    "url": "data.phila.gov"
+  },
+  {
+    "name": "Consumer Complaint Database Consumer Financial Protection Bureau",
+    "type": "Socrata",
+    "url": "data.consumerfinance.gov"
+  },
+  {
+    "name": "Kenya Open Data Portal",
+    "type": "Socrata",
+    "url": "www.opendata.go.ke"
+  },
+  {
+    "name": "SCT Datos Abiertos",
+    "type": "Socrata",
+    "url": "www.datossct.gob.mx"
+  },
+  {
+    "name": "Dallas OpenData",
+    "type": "Socrata",
+    "url": "www.dallasopendata.com"
+  },
+  {
+    "name": "dataACT",
+    "type": "Socrata",
+    "url": "www.data.act.gov.au"
+  },
+  {
+    "name": "State of Utah Open Data Portal",
+    "type": "Socrata",
+    "url": "opendata.utah.gov"
+  },
+  {
+    "name": "Datos Abiertos Colombia",
+    "type": "Socrata",
+    "url": "www.datos.gov.co"
+  },
+  {
+    "name": "Sudan Evidence Base Programme",
+    "type": "Socrata",
+    "url": "www.sudandata.org"
+  },
+  {
+    "name": "Indicadores Puerto Rico",
+    "type": "Socrata",
+    "url": "www.indicadores.pr"
+  },
+  {
+    "name": "dati.gov.it",
+    "type": "DKAN",
+    "url": "http://www.dati.gov.it"
+  },
+  {
+    "name": "OpenColorado",
+    "type": "CKAN",
+    "url": "http://data.opencolorado.org"
+  },
+  {
+    "name": "CONCYTEC",
+    "type": "DKAN",
+    "url": "http://datos.concytec.gob.pe"
+  },
+  {
+    "name": "Datos Minedu",
+    "type": "DKAN",
+    "url": "http://datos.minedu.gob.pe"
+  },
+  {
+    "name": "Repositorio de Datos Minsa",
+    "type": "DKAN",
+    "url": "http://datos.minsa.gob.pe"
+  },
+  {
+    "name": "JNE - Portal de Datos Abiertos",
+    "type": "DKAN",
+    "url": "http://jnedatosabiertos.pe"
+  },
+  {
+    "name": "Trabajo, Ministerio de Trabajo y Promocion del Empleo",
+    "type": "DKAN",
+    "url": "http://datos.trabajo.gob.pe"
+  },
+  {
+    "name": "Open Data Windsor Essex",
+    "type": "DKAN",
+    "url": "http://odwe.ca"
+  },
+  {
+    "name": "Fredericton Open Data",
+    "type": "DKAN",
+    "url": "http://data.fredericton.ca/en"
+  },
+  {
+    "name": "TransformAgriculture",
+    "type": "DKAN",
+    "url": "http://transformagriculture.org"
+  },
+  {
+    "name": "Ghana Open Data Initiative",
+    "type": "DKAN",
+    "url": "http://data.gov.gh"
+  },
+  {
+    "name": "Sayada OpenData",
+    "type": "DKAN",
+    "url": "http://opendata.sayada.tn/fr"
+  },
+  {
+    "name": "Jamaica Open Data",
+    "type": "DKAN",
+    "url": "http://data.gov.jm"
+  },
+  {
+    "name": "South Australia Government Data Directory",
+    "type": "CKAN",
+    "url": "https://data.sa.gov.au/data"
+  },
+  {
+    "name": "Brigade Open Data Sharing Platform",
+    "type": "Socrata",
+    "url": "brigades.opendatanetwork.com"
+  },
+  {
+    "name": "Water Point Data Exchange Data",
+    "type": "Socrata",
+    "url": "data.waterpointdata.org"
+  },
+  {
+    "name": "World Bank Group Finances",
+    "type": "Socrata",
+    "url": "finances.worldbank.org"
+  },
+  {
+    "name": "North American Transportation Statistics NATS",
+    "type": "Socrata",
+    "url": "www.natsdatasct.gob.mx"
+  },
+  {
+    "name": "United Nations Capital Development Fund",
+    "type": "Socrata",
+    "url": "data.map.uncdf.org"
+  },
+  {
+    "name": "USDA National Agricultural Library",
+    "type": "DKAN",
+    "url": "https://data.nal.usda.gov"
+  },
+  {
+    "name": "Stadt Mannheim",
+    "type": "DKAN",
+    "url": "https://opendata.mannheim.de"
+  },
+  {
+    "name": "Belarus",
+    "type": "DKAN",
+    "url": "https://opendata.by"
+  },
+  {
+    "name": "Open Data Bosnia and Herzegovina",
+    "type": "DKAN",
+    "url": "http://opendata.ba"
+  },
+  {
+    "name": "openpompeii",
+    "type": "DKAN",
+    "url": "http://open.pompeiisites.org"
+  },
+  {
+    "name": "Mexican IMSS",
+    "type": "DKAN",
+    "url": "http://datos.imss.gob.mx"
+  },
+  {
+    "name": "Open Knowledge El Salvador",
+    "type": "DKAN",
+    "url": "http://datoselsalvador.org"
+  },
+  {
+    "name": "Louisville Metro Open Data Portal",
+    "type": "DKAN",
+    "url": "https://data.louisvilleky.gov"
+  },
+  {
+    "name": "California OPen Data Portal",
+    "type": "DKAN",
+    "url": "https://data.ca.gov"
+  },
+  {
+    "name": "City of San Diego Open Data Portal",
+    "type": "DKAN",
+    "url": "http://data.sandiego.gov"
+  },
+  {
+    "name": "Cambridgeshire Insight",
+    "type": "DKAN",
+    "url": "http://opendata.cambridgeshireinsight.org.uk"
+  },
+  {
+    "name": "Marine Scotland",
+    "type": "DKAN",
+    "url": "http://marinedata.scotland.gov.uk"
+  },
+  {
+    "name": "Detail Data Portal",
+    "type": "DKAN",
+    "url": "http://data.nicva.org"
+  },
+  {
+    "name": "OFFENE DATEN: BONN",
+    "type": "DKAN",
+    "url": "https://opendata.bonn.de"
+  },
+  {
+    "name": "OFFENE DATEN WUPPERTAL",
+    "type": "DKAN",
+    "url": "http://offenedaten-wuppertal.de"
+  },
+  {
+    "name": "Rhein-Neckar-Verkehr GmbH",
+    "type": "DKAN",
+    "url": "https://opendata.rnv-online.de"
+  },
+  {
+    "name": "OFFENE DATEN: kdvz Rhein-Erft-Rur",
+    "type": "DKAN",
+    "url": "http://offenedaten.kdvz-frechen.de"
+  },
+  {
+    "name": "Open Data del Comune di Genova",
+    "type": "DKAN",
+    "url": "http://dati.comune.genova.it"
+  },
+  {
+    "name": "Open Data Formia",
+    "type": "DKAN",
+    "url": "http://dati.comune.formia.lt.it"
+  },
+  {
+    "name": "Grup Sagessa Dades Obertes",
+    "type": "Socrata-EU",
+    "url": "dadesobertes.grupsagessa.cat"
+  },
+  {
+    "name": "Bath: Hacked",
+    "type": "Socrata-EU",
+    "url": "data.bathhacked.org"
+  },
+  {
+    "name": "CDP Open Data Portal",
+    "type": "Socrata-EU",
+    "url": "data.cdp.net"
+  },
+  {
+    "name": "Eindhoven Open Data",
+    "type": "Socrata-EU",
+    "url": "data.eindhoven.nl"
+  },
+  {
+    "name": "Sheffield Open Data",
+    "type": "Socrata-EU",
+    "url": "data.sheffield.gov.uk"
+  },
+  {
+    "name": "Art Data Impact Open Data Portal",
+    "type": "Socrata-EU",
+    "url": "data.theaudienceagency.org"
+  },
+  {
+    "name": "Gavà Open Data",
+    "type": "Socrata-EU",
+    "url": "gavaobert.gavaciutat.cat"
+  },
+  {
+    "name": "Gijón Open Data",
+    "type": "Socrata-EU",
+    "url": "observa.gijon.es"
+  },
+  {
+    "name": "Bristol City Council Open Data",
+    "type": "Socrata-EU",
+    "url": "opendata.bristol.gov.uk"
+  },
+  {
+    "name": "Camden Council Open Data",
+    "type": "Socrata-EU",
+    "url": "opendata.camden.gov.uk"
+  },
+  {
+    "name": "Cheshire East Open Data",
+    "type": "Socrata-EU",
+    "url": "opendata.cheshireeast.gov.uk"
+  },
+  {
+    "name": "Granollers Open Data",
+    "type": "Socrata-EU",
+    "url": "opendata.granollers.cat"
+  },
+  {
+    "name": "RDW Open Data",
+    "type": "Socrata-EU",
+    "url": "opendata.rdw.nl"
+  },
+  {
+    "name": "Rubí Open Data",
+    "type": "Socrata-EU",
+    "url": "opendata.rubi.cat"
+  },
+  {
+    "name": "Terrassa Open Data",
+    "type": "Socrata-EU",
+    "url": "opendata.terrassa.cat"
+  },
+  {
+    "name": "Portal de Transparència de la Diputació de Lleida",
+    "type": "Socrata-EU",
+    "url": "portaltransparencia.diputaciolleida.cat"
+  },
+  {
+    "name": "Regione Autonoma Friuli Venezia Giulia Open Data",
+    "type": "Socrata-EU",
+    "url": "www.dati.friuliveneziagiulia.it"
+  },
+  {
+    "name": "Open Data Regione Lombardia",
+    "type": "Socrata-EU",
+    "url": "www.dati.lombardia.it"
+  },
+  {
+    "name": "Oxfordshire Open Data",
+    "type": "Socrata-EU",
+    "url": "www2.oxopendata.uk"
+  },
+  {
+    "name": "City of Sacramento Open Data",
+    "type": "Junar",
+    "url": "http://data.cityofsacramento.org",
+    "apiUrl": "http://api.data.cityofsacramento.org",
+    "apiKey": "c2ec3f2208a504bc8c2f84ff47a26b889717cdcf"
+  },
+  {
+    "name": "City of Palo Alto Open Data",
+    "type": "Junar",
+    "url": "http://data.cityofpaloalto.org",
+    "apiUrl": "http://paloalto.cloudapi.junar.com",
+    "apiKey": "4d9c9162004e53492a06a8ba5dda36d083235fb6"
+  },
+  {
+    "name": "Penalolen Open Data",
+    "type": "Junar",
+    "url": "http://recursos.penalolen.cl",
+    "apiUrl": "http://api.recursos.penalolen.cl",
+    "apiKey": "ff6aedb816aaaed3065f9192d422046e1ced4482"
+  },
+  {
+    "name": "City of San Jose Open Data",
+    "type": "Junar",
+    "url": "http://data.sanjoseca.gov",
+    "apiUrl": "http://api.data.sanjoseca.gov",
+    "apiKey": "621b57776170d5e6378b401b150f30769210128e"
+  },
+  {
+    "name": "Puente Alto Open Data",
+    "type": "Junar",
+    "url": "http://datos.mpuentealto.cl",
+    "apiUrl": "http://mpuentealto.cloudapi.junar.com",
+    "apiKey": "138275ea5b2f091fda2a75a55ed837b942f0a998"
+  },
+  {
+    "name": "City of Cupertino Open Data Portal",
+    "type": "Junar",
+    "url": "http://data.cupertino.org",
+    "apiUrl": "http://cupertino.cloudapi.junar.com",
+    "apiKey": "983f88000163d1b968d7412edb522c266ec51d30"
+  },
+  {
+    "name": "City of Pasadena Open Data",
+    "type": "Junar",
+    "url": "http://data.cityofpasadena.net",
+    "apiUrl": "http://pasadena.cloudapi.junar.com",
+    "apiKey": "70281a8c5419414430f08639f78ac000171519ab"
+  },
+  {
+    "name": "La Nacion Data",
+    "type": "Junar",
+    "url": "http://data.lanacion.com.ar",
+    "apiUrl": "http://lanacion.cloudapi.junar.com",
+    "apiKey": "c9e21af2405fa30b4147f0e0a76b7dc328f663ea"
+  },
+  {
+    "name": "Anaheim Open Data Portal",
+    "type": "Junar",
+    "url": "http://anaheim.opendata.junar.com",
+    "apiUrl": "http://anaheim.cloudapi.junar.com",
+    "apiKey": "61a94b3465c14b9fa47b922a14d7c22036e2eb1c"
+  },
+  {
+    "name": "Sacramento County Open Data Portal",
+    "type": "Junar",
+    "url": "http://data.saccounty.net",
+    "apiUrl": "http://saccounty.cloudapi.junar.com",
+    "apiKey": "97c1aa95939fc6ae01930b576ba84b09a80a164c"
+  },
+  {
+    "name": "Cordoba Deliberative Council Open Data",
+    "type": "Junar",
+    "url": "http://cdcordoba.opendata.junar.com",
+    "apiUrl": "http://cdcordoba.cloudapi.junar.com",
+    "apiKey": "4bef13b982da582446f8728f69cbc85a4ae7c873"
+  },
+  {
+    "name": "Norfolk, Va Open Data",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.orf.opendata.arcgis.com/"
+  },
+  {
+    "name": "Open Humanitarian Initiative",
+    "type": "ArcGIS Open Data",
+    "url": "http://ohdr.nethope.opendata.arcgis.com/"
+  },
+  {
+    "name": "Westminster",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.westminster.opendata.arcgis.com/"
+  },
+  {
+    "name": "STAR Data Explore",
+    "type": "OpenDataSoft",
+    "url": "https://data.explore.star.fr"
+  },
+  {
+    "name": "Versailles Open Data",
+    "type": "ArcGIS Open Data",
+    "url": "http://www.cavgp.opendata.arcgis.com/"
+  },
+  {
+    "name": "Brookline",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.brookline.opendata.arcgis.com/"
+  },
+  {
+    "name": "dataNOVA par Le Groupe La Poste",
+    "type": "OpenDataSoft",
+    "url": "https://datanova.laposte.fr"
+  },
+  {
+    "name": "North Frontenac",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.nftwp.opendata.arcgis.com/"
+  },
+  {
+    "name": "Lynchburg, Va Gis Data",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.cityoflynchburg.opendata.arcgis.com/"
+  },
+  {
+    "name": "Carver County, Mn",
+    "type": "ArcGIS Open Data",
+    "url": "http://data.carver.opendata.arcgis.com"
+  },
+  {
+    "name": "Hartford",
+    "type": "ArcGIS Open Data",
+    "url": "http://openharfordct.hartfordgis.opendata.arcgis.com/"
+  },
+  {
+    "name": "Charlotte, Nc Open Data",
+    "type": "ArcGIS Open Data",
+    "url": "http://clt.charlotte.opendata.arcgis.com"
+  },
+  {
+    "name": "South Suburbian Mayors & Managers Association",
+    "type": "ArcGIS Open Data",
+    "url": "http://ssmmaopendata.ssmma-gis.opendata.arcgis.com/"
+  },
+  {
+    "name": "Kentucky",
+    "type": "ArcGIS Open Data",
+    "url": "http://kygovmaps.kygeonet.opendata.arcgis.com/"
+  },
+  {
+    "name": "Data Driven Detroit",
+    "type": "ArcGIS Open Data",
+    "url": "http://d3.d3.opendata.arcgis.com"
+  },
+  {
+    "name": "Miami-Dade County",
+    "type": "ArcGIS Open Data",
+    "url": "http://gis.mdc.opendata.arcgis.com/"
+  },
+  {
+    "name": "Halifax",
+    "type": "ArcGIS Open Data",
+    "url": "http://catalogue.hrm.opendata.arcgis.com/"
+  },
+  {
+    "name": "Chatham-kent, On",
+    "type": "ArcGIS Open Data",
+    "url": "http://chathamkentopendata.chatham-kent.opendata.arcgis.com/"
+  },
+  {
+    "name": "Bexar County, Tx - Gis Open Data",
+    "type": "ArcGIS Open Data",
+    "url": "http://gis.bexar.opendata.arcgis.com/"
+  },
+  {
+    "name": "Public-us",
+    "type": "OpenDataSoft",
+    "url": "https://public-us.opendatasoft.com"
+  },
+  {
+    "name": "OPENDATACORSICA",
+    "type": "OpenDataSoft",
+    "url": "https://data.corse.fr"
+  },
+  {
+    "name": "OpenDataHG",
+    "type": "OpenDataSoft",
+    "url": "https://data.haute-garonne.fr"
+  },
+  {
+    "name": "Transparência",
+    "type": "OpenDataSoft",
+    "url": "https://transparencia.sns.gov.pt"
+  },
+  {
+    "name": "Saemes OpenData",
+    "type": "OpenDataSoft",
+    "url": "https://opendata.saemes.fr"
+  },
+  {
+    "name": "Cschoenfeld",
+    "type": "OpenDataSoft",
+    "url": "https://cschoenfeld.opendatasoft.com"
+  },
+  {
+    "name": "Plateforme open data de la Région Île-de-France",
+    "type": "OpenDataSoft",
+    "url": "https://data.iledefrance.fr"
+  },
+  {
+    "name": "Open Data Hauts-de-Seine",
+    "type": "OpenDataSoft",
+    "url": "https://opendata.hauts-de-seine.fr"
+  },
+  {
+    "name": "Durham Open Data",
+    "type": "OpenDataSoft",
+    "url": "https://opendurham.nc.gov"
+  },
+  {
+    "name": "Placemeter",
+    "type": "OpenDataSoft",
+    "url": "https://placemeter.opendatasoft.com"
+  },
+  {
+    "name": "Hubvisory",
+    "type": "OpenDataSoft",
+    "url": "https://hubvisory.opendatasoft.com"
+  },
+  {
+    "name": "Chapel Hill Open Data",
+    "type": "OpenDataSoft",
+    "url": "https://townofchapelhill.opendatasoft.com"
+  },
+  {
+    "name": "Open Data Ville de Bruxelles",
+    "type": "OpenDataSoft",
+    "url": "https://opendata.bruxelles.be"
+  },
+  {
+    "name": "Boston Smartcity",
+    "type": "OpenDataSoft",
+    "url": "https://boston.opendatasoft.com"
+  },
+  {
+    "name": "API-AGRO",
+    "type": "OpenDataSoft",
+    "url": "https://plateforme.api-agro.fr"
+  },
+  {
+    "name": "Portail Open Data Agen",
+    "type": "OpenDataSoft",
+    "url": "https://data.agen.fr"
+  },
+  {
+    "name": "Bogota-laburbano",
+    "type": "OpenDataSoft",
+    "url": "https://bogota-laburbano.opendatasoft.com"
+  },
+  {
+    "name": "Öppna Växjö",
+    "type": "OpenDataSoft",
+    "url": "https://vaxjo.opendatasoft.com"
+  },
+  {
+    "name": "Paris Data",
+    "type": "OpenDataSoft",
+    "url": "https://opendata.paris.fr"
+  },
+  {
+    "name": "Data infogreffe",
+    "type": "OpenDataSoft",
+    "url": "https://opendata-infogreffe.com"
+  },
+  {
+    "name": "Town of Cary Open Data",
+    "type": "OpenDataSoft",
+    "url": "https://data.townofcary.org"
+  },
+  {
+    "name": "ENEDIS Open Data",
+    "type": "OpenDataSoft",
+    "url": "https://data.enedis.fr"
+  },
+  {
+    "name": "Portail OpenData de l'Agence nationale des fréquences",
+    "type": "OpenDataSoft",
+    "url": "https://anfr.opendatasoft.com"
+  },
+  {
+    "name": "Data.StMalo-Agglomération",
+    "type": "OpenDataSoft",
+    "url": "https://data.stmalo-agglomeration.fr"
+  },
+  {
+    "name": "Open Data Toulouse Metropole",
+    "type": "OpenDataSoft",
+    "url": "https://data.toulouse-metropole.fr"
+  },
+  {
+    "name": "Open data STIF",
+    "type": "OpenDataSoft",
+    "url": "https://opendata.stif.info"
+  },
+  {
+    "name": "Issy-les-moulineaux",
+    "type": "OpenDataSoft",
+    "url": "https://data.issy.com"
+  },
+  {
+    "name": "Open Data RATP",
+    "type": "OpenDataSoft",
+    "url": "https://dataratp2.opendatasoft.com"
+  },
+  {
+    "name": "Les données ouvertes de la Métropole Européenne de Lille",
+    "type": "OpenDataSoft",
+    "url": "https://opendata.lillemetropole.fr"
+  },
+  {
+    "name": "SNCF Open Data",
+    "type": "OpenDataSoft",
+    "url": "https://ressources.data.sncf.com"
+  },
+  {
+    "name": "Dades Obertes Ajuntament Calvià",
+    "type": "OpenDataSoft",
+    "url": "https://calvia.opendatasoft.com"
+  },
+  {
+    "name": "Vbarbaresi",
+    "type": "OpenDataSoft",
+    "url": "https://vbarbaresi.opendatasoft.com"
+  },
+  {
+    "name": "Ministère de la Culture et Communication",
+    "type": "OpenDataSoft",
+    "url": "https://data.culturecommunication.gouv.fr"
+  },
+  {
+    "name": "Cap-collectif",
+    "type": "OpenDataSoft",
+    "url": "https://cap-collectif.opendatasoft.com"
+  },
+  {
+    "name": "SBB DATEN PORTAL",
+    "type": "OpenDataSoft",
+    "url": "https://data.sbb.ch"
+  },
+  {
+    "name": "OPEN DATA RTE",
+    "type": "OpenDataSoft",
+    "url": "https://rte-opendata.opendatasoft.com"
+  },
+  {
+    "name": "Rennes-metropole",
+    "type": "OpenDataSoft",
+    "url": "https://data.rennesmetropole.fr"
+  },
+  {
+    "name": "Code for Tulsa",
+    "type": "OpenDataSoft",
+    "url": "https://codefortulsa.opendatasoft.com"
+  },
+  {
+    "name": "data.sarthe.fr",
+    "type": "OpenDataSoft",
+    "url": "https://data.sarthe.fr"
+  },
+  {
+    "name": "Demo portal using Gold Coast open data",
+    "type": "OpenDataSoft",
+    "url": "https://goldcoast.opendatasoft.com"
+  },
+  {
+    "name": "Dataeducation",
+    "type": "OpenDataSoft",
+    "url": "https://openscol.opendatasoft.com"
+  },
+  {
+    "name": "data.navitia.io",
+    "type": "OpenDataSoft",
+    "url": "https://navitia.opendatasoft.com"
+  },
+  {
+    "name": "Enseignement-agricole",
+    "type": "OpenDataSoft",
+    "url": "https://enseignement-agricole.opendatasoft.com"
+  },
+  {
+    "name":
+      "Ministère en charge de l'Enseignement supérieur et de la Recherche",
+    "type": "OpenDataSoft",
+    "url": "https://data.enseignementsup-recherche.gouv.fr"
+  },
+  {
+    "name": "Eindhoven Open Data",
+    "type": "OpenDataSoft",
+    "url": "https://eindhoven.opendatasoft.com"
+  },
+  {
+    "name": "Waketechanalytics",
+    "type": "OpenDataSoft",
+    "url": "https://waketechanalytics.opendatasoft.com"
+  },
+  {
+    "name": "Angers Loire Métropole Open Data",
+    "type": "OpenDataSoft",
+    "url": "https://data.angers.fr"
+  },
+  {
+    "name": "data.infolocale.fr",
+    "type": "OpenDataSoft",
+    "url": "https://datainfolocale.opendatasoft.com"
+  },
+  {
+    "name": "Public",
+    "type": "OpenDataSoft",
+    "url": "https://public.opendatasoft.com"
+  },
+  {
+    "name": "Roubaix Open Data",
+    "type": "OpenDataSoft",
+    "url": "https://opendata.roubaix.fr"
+  },
+  {
+    "name": "GRTgaz",
+    "type": "OpenDataSoft",
+    "url": "https://opendata.grtgaz.com"
+  },
+  {
+    "name": "Tourisme04",
+    "type": "OpenDataSoft",
+    "url": "https://tourisme04.opendatasoft.com"
+  },
+  {
+    "name": "Bistrotdepays",
+    "type": "OpenDataSoft",
+    "url": "https://b2p.opendatasoft.com"
+  },
+  {
+    "name": "Tourisme62",
+    "type": "OpenDataSoft",
+    "url": "https://tourisme62.opendatasoft.com"
+  },
+  {
+    "name": "Deciderensemble",
+    "type": "OpenDataSoft",
+    "url": "https://deciderensemble.opendatasoft.com"
+  },
+  {
+    "name": "CrocBITE Data Platform",
+    "type": "OpenDataSoft",
+    "url": "https://crocbite.opendatasoft.com"
+  },
+  {
+    "name": "Open Globe Project",
+    "type": "OpenDataSoft",
+    "url": "https://4globaldevelop.opendatasoft.com"
+  },
+  {
+    "name": "Demo portal - Logan City Open Data",
+    "type": "OpenDataSoft",
+    "url": "https://logan-city.opendatasoft.com"
+  },
+  {
+    "name": "My Breizh Open Data",
+    "type": "OpenDataSoft",
+    "url": "https://breizh-sba.opendatasoft.com"
+  },
+  {
+    "name": "Lagabrielle",
+    "type": "OpenDataSoft",
+    "url": "https://lagabrielle.opendatasoft.com"
+  },
+  {
+    "name": "Pod",
+    "type": "OpenDataSoft",
+    "url": "https://pod.opendatasoft.com"
+  },
+  {
+    "name": "Lexpress",
+    "type": "OpenDataSoft",
+    "url": "https://lexpress.opendatasoft.com"
+  },
+  {
+    "name": "Dgal",
+    "type": "OpenDataSoft",
+    "url": "https://dgal.opendatasoft.com"
+  },
+  {
+    "name": "DILA",
+    "type": "OpenDataSoft",
+    "url": "https://visualisation.dila.fr"
+  },
+  {
+    "name": "oddc.opendata.corsica",
+    "type": "OpenDataSoft",
+    "url": "https://oddc.opendatasoft.com"
+  },
+  {
+    "name": "Innovateva",
+    "type": "OpenDataSoft",
+    "url": "https://innovateva.opendatasoft.com"
+  },
+  {
+    "name": "Open Data Soft Example - Anchorage",
+    "type": "OpenDataSoft",
+    "url": "https://codeforanchorage.opendatasoft.com"
+  },
+  {
+    "name": "Codeforcharlotte",
+    "type": "OpenDataSoft",
+    "url": "https://codeforcharlotte.opendatasoft.com"
+  },
+  {
+    "name": "Code for Durham",
+    "type": "OpenDataSoft",
+    "url": "https://codefordurham.opendatasoft.com"
+  },
+  {
+    "name": "Codeforraleigh",
+    "type": "OpenDataSoft",
+    "url": "https://codeforraleigh.opendatasoft.com"
+  },
+  {
+    "name": "Code the South Data Repository",
+    "type": "OpenDataSoft",
+    "url": "https://codeforhuntsville.opendatasoft.com"
+  },
+  {
+    "name": "Codeforgreensboro",
+    "type": "OpenDataSoft",
+    "url": "https://codeforgreensboro.opendatasoft.com"
+  },
+  {
+    "name": "Technology Tank Open Data Portal",
+    "type": "OpenDataSoft",
+    "url": "https://ian-henshaw0.opendatasoft.com"
+  },
+  {
+    "name": "OpenDataAustralia demo platform",
+    "type": "OpenDataSoft",
+    "url": "https://australiademo.opendatasoft.com"
+  },
+  {
+    "name": "M2oconnect",
+    "type": "OpenDataSoft",
+    "url": "https://m2oconnect.opendatasoft.com"
+  },
+  {
+    "name": "Open Performance | Open Performance",
+    "type": "Socrata",
+    "url": "performance.vbgov.com"
+  },
+  {
+    "name": "OutcomeStat | Baltimore City | OutcomeStat | Baltimore City",
+    "type": "Socrata",
+    "url": "outcomestat.baltimorecity.gov"
+  },
+  {
+    "name":
+      "City of Rancho Cucamonga Gov Stat | City of Rancho Cucamonga Gov Stat",
+    "type": "Socrata",
+    "url": "performance.cityofrc.us"
+  },
+  {
+    "name": "MAC Sustainability | Sustainability - Metro Airports",
+    "type": "Socrata",
+    "url": "sustainability.metroairports.org"
+  },
+  {
+    "name": "Open Data Portal | U.S. Army Corps of Engineers Data Platform",
+    "type": "Socrata",
+    "url": "data.navigationdatacenter.us"
+  },
+  {
+    "name":
+      "Park Place Performs! - City of Janesville | Park Place Performs! - City of Janesville",
+    "type": "Socrata",
+    "url": "performance.ci.janesville.wi.us"
+  },
+  {
+    "name":
+      "San Diego Live Well Open Performance Dashboard | San Diego Live Well Open Performance",
+    "type": "Socrata",
+    "url": "results.livewellsd.org"
+  },
+  {
+    "name":
+      "Government Financial Reports App | Government Financial Reports App",
+    "type": "Socrata",
+    "url": "performance.glendaleca.gov"
+  },
+  {
+    "name": "Adams County Performance | Adams County Performance",
+    "type": "Socrata",
+    "url": "performance.adcogov.org"
+  },
+  {
+    "name": "Carrollton - Open Data Portal | Carrollton - Open Data Portal",
+    "type": "Socrata",
+    "url": "stats.cityofcarrollton.com"
+  },
+  {
+    "name": "Dashboard | KCStat | Kansas City, MO",
+    "type": "Socrata",
+    "url": "kcstat.kcmo.org"
+  },
+  {
+    "name":
+      "San Diego County Open Performance | San Diego County Open Performance",
+    "type": "Socrata",
+    "url": "performance.sandiegocounty.gov"
+  },
+  {
+    "name": "Rally - Open Data Portal | OpenCity Fort Collins",
+    "type": "Socrata",
+    "url": "opencity.fcgov.com"
+  },
+  {
+    "name":
+      "Lehman College Community Connect: Bronx Information Portal | Bronx Information Portal | Lehman College",
+    "type": "Socrata",
+    "url": "bronx.lehman.cuny.edu"
+  },
+  {
+    "name": "Gigapp",
+    "type": "OpenDataSoft",
+    "url": "gigapp.opendatasoft.com"
+  },
+  {
+    "name": "Socrata Open Data Network",
+    "type": "Socrata",
+    "url": "https://www.opendatanetwork.com"
+  },
+  {
+    "name": "ArcGIS Open Data",
+    "type": "ArcGIS",
+    "url": "https://hub.arcgis.com/pages/open-data"
+  },
+  {
+    "name": "OpenDataSoft",
+    "type": "OpenDataSoft Data Network",
+    "url": "https://data.opendatasoft.com/pages/home/"
+  }
+]
