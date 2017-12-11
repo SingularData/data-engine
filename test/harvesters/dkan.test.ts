@@ -5,7 +5,7 @@ describe("DKAN harvester", function() {
   this.timeout(10000);
 
   it("should harvest DKAN portal.", done => {
-    harvest("http://demo.getdkan.com")
+    harvest({ url: "http://demo.getdkan.com" })
       .first()
       .subscribe(
         (data: any) => {

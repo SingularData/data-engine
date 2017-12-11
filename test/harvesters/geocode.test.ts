@@ -5,7 +5,7 @@ describe("GeoNode harvester", function() {
   this.timeout(10000);
 
   it("should harvest GeoNode portal.", done => {
-    harvest("http://geonode.state.gov")
+    harvest({ url: "http://geonode.state.gov" })
       .first()
       .subscribe(
         (data: any) => {

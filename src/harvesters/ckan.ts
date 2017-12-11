@@ -9,15 +9,15 @@ const requestSize = 500;
 
 /**
  * Harvest CKAN portal.
- * @param  {string}     url   CKAN portal URL
- * @return {Observable}       a stream of dataset metadata
+ * @param  {object}     source    CKAN data source (portal)
+ * @return {Observable}           a stream of dataset metadata
  */
-export function harvest(url) {
-  return fetchRx(createUrl(url, 0, 0))
+export function harvest(source) {
+  return fetchRx(createUrl(source.url, 0, 0))
     .mergeMap(res =>
       Rx.Observable.range(0, Math.ceil(res.result.count / requestSize))
     )
-    .mergeMap(i => fetchRx(createUrl(url, i, requestSize)), cocurrency)
+    .mergeMap(i => fetchRx(createUrl(source.url, i, requestSize)), cocurrency)
     .mergeMap(res => Rx.Observable.of(...res.result.results))
     .map(data => {
       return {

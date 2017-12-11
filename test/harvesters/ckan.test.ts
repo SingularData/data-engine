@@ -5,7 +5,7 @@ describe("CKAN harvester", function() {
   this.timeout(10000);
 
   it("should harvest CKAN portal.", done => {
-    harvest("http://catalog.data.gov")
+    harvest({ url: "http://catalog.data.gov" })
       .first()
       .subscribe(
         (data: any) => {

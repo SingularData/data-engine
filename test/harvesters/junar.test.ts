@@ -5,10 +5,10 @@ describe("Junar harvester", function() {
   this.timeout(10000);
 
   it("should harvest Junar portal.", done => {
-    harvest(
-      "http://saccounty.cloudapi.junar.com",
-      "47242a5ca37d49fc19a2b8440942865f6e82486b"
-    )
+    harvest({
+      apiUrl: "http://saccounty.cloudapi.junar.com",
+      apiKey: "47242a5ca37d49fc19a2b8440942865f6e82486b"
+    })
       .first()
       .subscribe(
         (data: any) => {

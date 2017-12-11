@@ -7,11 +7,11 @@ import { sha256 } from "../utils/hash-util";
 
 /**
  * Harvest DKAN portal.
- * @param  {string}      url  portal url
- * @return {Observable}       a stream of dataset metadata
+ * @param  {object}      source   DKAN data source (portal)
+ * @return {Observable}           a stream of dataset metadata
  */
-export function harvest(url) {
-  return fetchRx(`${url}/data.json`)
+export function harvest(source) {
+  return fetchRx(`${source.url}/data.json`)
     .mergeMap(res => {
       const datdasets = _.isArray(res) ? res : res.dataset;
       return Rx.Observable.of(...datdasets);

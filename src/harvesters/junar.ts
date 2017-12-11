@@ -9,16 +9,18 @@ const cocurrency: number = config.get("cocurrency");
 const requestSize = 100;
 
 /**
- * Harvest GeoNode portal.
- * @param  {string}     url   portal API url
- * @param  {string}     key   portal API key
- * @return {Observable}       a stream of dataset metadata
+ * Harvest Junar portal.
+ * @param  {object}     source  Junar data source (portal)
+ * @return {Observable}         a stream of dataset metadata
  */
-export function harvest(url, key) {
-  return fetchRx(createUrl(url, key, 0, 1))
+export function harvest(source) {
+  return fetchRx(createUrl(source.apiUrl, source.apiKey, 0, 1))
     .mergeMap(res => Rx.Observable.range(0, Math.ceil(res.count / requestSize)))
     .mergeMap(
-      (i: number) => fetchRx(createUrl(url, key, i * requestSize, requestSize)),
+      (i: number) =>
+        fetchRx(
+          createUrl(source.apiUrl, source.apiKey, i * requestSize, requestSize)
+        ),
       cocurrency
     )
     .mergeMap(res => Rx.Observable.of(...res.results))
