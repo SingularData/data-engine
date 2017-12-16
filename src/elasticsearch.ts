@@ -4,6 +4,9 @@ import Rx = require("rxjs/Rx");
 import * as config from "config";
 import { flatMap } from "lodash";
 
+const index = config.get("elasticsearch.index");
+const type = config.get("elasticsearch.type");
+
 let currentClient;
 
 /**
@@ -28,12 +31,12 @@ export function getClient() {
     });
 
     currentClient = new es.Client({
-      hosts: [config.get("elasticsearch.host")],
+      hosts: [config.get("elasticsearch.url")],
       connectionClass: awsES
     });
   } else {
     currentClient = new es.Client({
-      host: config.get("elasticsearch.host")
+      host: config.get("elasticsearch.url")
     });
   }
 
@@ -48,7 +51,7 @@ export function getChecksumMap() {
   return Rx.Observable.defer(() => {
     const client = getClient();
     const params = {
-      index: "sdn",
+      index,
       _sourceInclude: ["checksum"],
       body: {
         query: {
@@ -80,8 +83,8 @@ export function upsert(datasets) {
     const body = flatMap(datasets, dataset => {
       const action = {
         index: {
-          _index: "sdn",
-          _type: "metadata",
+          _index: index,
+          _type: type,
           _id: dataset.dcat.identifier
         }
       };
@@ -103,9 +106,9 @@ export function upsert(datasets) {
 export function deleteIndex() {
   return Rx.Observable.defer(() => {
     const client = getClient();
-    const task = client.indices.exists({ index: "sdn" }).then(exists => {
+    const task = client.indices.exists({ index }).then(exists => {
       if (exists) {
-        return client.indices.delete({ index: "sdn" });
+        return client.indices.delete({ index });
       }
     });
 
@@ -115,17 +118,28 @@ export function deleteIndex() {
 
 /**
  * Ensure search index exists. If not, create it.
- * @returns {undefined}                no return
+ * @returns {undefined} no return
  */
 export function ensureIndex() {
   return Rx.Observable.defer(() => {
     const client = getClient();
-    const task = client.indices.exists({ index: "sdn" }).then(exists => {
+    const task = client.indices.exists({ index }).then(exists => {
       if (!exists) {
-        return client.indices.create({ index: "sdn" });
+        return client.indices.create({ index });
       }
     });
 
     return task;
+  });
+}
+
+/**
+ * Check whether an index exists.
+ * @return {boolean} a boolean
+ */
+export function indexExists() {
+  return Rx.Observable.defer(() => {
+    const client = getClient();
+    return client.indices.exists({ index });
   });
 }

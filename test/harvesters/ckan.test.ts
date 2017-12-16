@@ -1,10 +1,10 @@
 import { harvest } from "../../src/harvesters/ckan";
 import { expect } from "chai";
 
-describe("CKAN harvester", function() {
+describe("harvesters/ckan.ts", function() {
   this.timeout(10000);
 
-  it("should harvest CKAN portal.", done => {
+  it("harvest() should harvest CKAN portal.", done => {
     harvest({ url: "http://catalog.data.gov" })
       .first()
       .subscribe(

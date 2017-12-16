@@ -1,10 +1,10 @@
 import { harvest } from "../../src/harvesters/geonode";
 import { expect } from "chai";
 
-describe("GeoNode harvester", function() {
+describe("harvesters/geocode.ts", function() {
   this.timeout(10000);
 
-  it("should harvest GeoNode portal.", done => {
+  it("harvest() should harvest GeoNode portal.", done => {
     harvest({ url: "http://geonode.state.gov" })
       .first()
       .subscribe(

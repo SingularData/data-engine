@@ -20,9 +20,6 @@ export function fetchRx(url: string): Rx.Observable<any> {
   };
 
   return Rx.Observable.defer(() => {
-    const task = Rx.Observable.fromPromise(
-      fetch(url, fetchOptions).then(res => res.json())
-    );
-    return task;
+    return fetch(url, fetchOptions).then(res => res.json());
   });
 }

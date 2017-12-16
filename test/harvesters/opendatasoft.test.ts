@@ -1,10 +1,10 @@
 import { harvest } from "../../src/harvesters/opendatasoft";
 import { expect } from "chai";
 
-describe("OpenDataSoft harvester", function() {
+describe("harvesters/opendatasoft.ts", function() {
   this.timeout(10000);
 
-  it("should harvest OpenDataSoft network.", done => {
+  it("harvest() should harvest OpenDataSoft network.", done => {
     harvest()
       .first()
       .subscribe(

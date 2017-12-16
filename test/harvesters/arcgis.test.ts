@@ -1,10 +1,10 @@
 import { harvest } from "../../src/harvesters/arcgis";
 import { expect } from "chai";
 
-describe("ArcGIS harvester", function() {
+describe("harvesters/arcgis.ts", function() {
   this.timeout(10000);
 
-  it("should harvest ArcGIS Open Data network.", done => {
+  it("harvest() should harvest ArcGIS Open Data network.", done => {
     harvest()
       .first()
       .subscribe(

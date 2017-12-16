@@ -4,7 +4,10 @@
   "description": "data pipeline for SingularData.io",
   "main": "index.js",
   "scripts": {
-    "test": "mocha test/**/*.test.ts --require ts-node/register",
+    "start-es": "bash ./scripts/start-es.sh",
+    "stop-es": "bash ./scripts/stop-es.sh",
+    "test": "mocha test/*.test.ts test/**/*.test.ts --require ts-node/register",
+    "test-ci": "NODE_ENV=ci npm run test",
     "precommit": "npm test && lint-staged"
   },
   "lint-staged": {
@@ -20,11 +23,13 @@
   "devDependencies": {
     "@types/chai": "^4.0.8",
     "@types/mocha": "^2.2.44",
+    "@types/sleep": "0.0.7",
     "chai": "^4.1.2",
     "husky": "^0.14.3",
     "lint-staged": "^6.0.0",
     "mocha": "^4.0.1",
     "prettier": "^1.9.1",
+    "sleep": "^5.1.1",
     "ts-node": "^3.3.0",
     "tslint": "^5.8.0",
     "typescript": "^2.6.2"

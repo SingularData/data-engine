@@ -1,10 +1,10 @@
 import { harvest } from "../../src/harvesters/socrata";
 import { expect } from "chai";
 
-describe("Socrata harvester", function() {
+describe("harvesters/socrata.ts", function() {
   this.timeout(10000);
 
-  it("should harvest Socrata network.", done => {
+  it("harvest() should harvest Socrata network.", done => {
     harvest()
       .first()
       .subscribe(
