@@ -6,8 +6,8 @@ import { Dataset } from "w3c-dcat";
 import { sha256 } from "../src/utils/hash-util";
 import s = require("sleep");
 
-describe.only("elasticsearch.ts", function() {
-  this.timeout(20000);
+describe("elasticsearch.ts", function() {
+  this.timeout(10000);
 
   const dataset = {
     dcat: {},

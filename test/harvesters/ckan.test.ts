@@ -2,7 +2,7 @@ import { harvest } from "../../src/harvesters/ckan";
 import { expect } from "chai";
 
 describe("harvesters/ckan.ts", function() {
-  this.timeout(10000);
+  this.timeout(20000);
 
   it("harvest() should harvest CKAN portal.", done => {
     harvest({ url: "http://catalog.data.gov" })
