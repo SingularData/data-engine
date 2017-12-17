@@ -1,0 +1,869 @@
+[
+  {
+    "name": "Energy Data eXchange",
+    "type": "CKAN",
+    "url": "https://edx.netl.doe.gov"
+  },
+  {
+    "name": "Geospatial Information Clearninghouse",
+    "type": "CKAN",
+    "url": "http://ckan.gsi.go.jp"
+  },
+  {
+    "name": "datos.gob.mx",
+    "type": "CKAN",
+    "url": "http://datos.gob.mx/busca"
+  },
+  {
+    "name": "National Oceanic and Atmospheric Administration",
+    "type": "CKAN",
+    "url": "https://data.noaa.gov"
+  },
+  {
+    "name": "Opendata Lisra",
+    "type": "CKAN",
+    "url": "http://opendata.lisra.jp"
+  },
+  {
+    "name": "OpenDataBC",
+    "type": "CKAN",
+    "url": "https://www.opendatabc.ca"
+  },
+  {
+    "name": "Tainan City Open Data",
+    "type": "CKAN",
+    "url": "http://data.tainan.gov.tw"
+  },
+  {
+    "name": "Environmental Climate Data Sweden",
+    "type": "CKAN",
+    "url": "https://ecds.se"
+  },
+  {
+    "name": "Oppna Data",
+    "type": "CKAN",
+    "url": "http://oppnadata.se"
+  },
+  {
+    "name": "Open Data METI",
+    "type": "CKAN",
+    "url": "http://datameti.go.jp/data"
+  },
+  {
+    "name": "Codeando Mexico",
+    "type": "CKAN",
+    "url": "http://datamx.io"
+  },
+  {
+    "name": "Surrey's Open Data",
+    "type": "CKAN",
+    "url": "http://data.surrey.ca"
+  },
+  {
+    "name": "City of Zagreb Open Data Portal",
+    "type": "CKAN",
+    "url": "http://data.zagreb.hr"
+  },
+  {
+    "name": "CMAP Data Hub",
+    "type": "CKAN",
+    "url": "https://datahub.cmap.illinois.gov"
+  },
+  {
+    "name": "Dados.gov.br",
+    "type": "CKAN",
+    "url": "http://dados.gov.br"
+  },
+  {
+    "name": "Dados Recife",
+    "type": "CKAN",
+    "url": "http://dados.recife.pe.gov.br"
+  },
+  {
+    "name": "data.gov.ro",
+    "type": "CKAN",
+    "url": "http://data.gov.ro"
+  },
+  {
+    "name": "DadosRS",
+    "type": "CKAN",
+    "url": "http://dados.rs.gov.br"
+  },
+  {
+    "name": "data.gov.sk",
+    "type": "CKAN",
+    "url": "https://data.gov.sk"
+  },
+  {
+    "name": "Banube Reference Data and Service Infrastructure",
+    "type": "CKAN",
+    "url": "http://drdsi.jrc.ec.europa.eu"
+  },
+  {
+    "name": "North Dakota GIS Hub Data Portal",
+    "type": "DKAN",
+    "url": "https://gishubdata.nd.gov"
+  },
+  {
+    "name": "data.gov.au",
+    "type": "CKAN",
+    "url": "https://data.gov.au"
+  },
+  {
+    "name": "Data.gc.ca",
+    "type": "CKAN",
+    "url": "http://open.canada.ca/data"
+  },
+  {
+    "name": "data.gov.uk",
+    "type": "CKAN",
+    "url": "https://data.gov.uk"
+  },
+  {
+    "name": "data.NSW",
+    "type": "CKAN",
+    "url": "http://data.nsw.gov.au/data"
+  },
+  {
+    "name": "data.overheid.nl",
+    "type": "CKAN",
+    "url": "https://data.overheid.nl/data"
+  },
+  {
+    "name": "Data.Rio",
+    "type": "CKAN",
+    "url": "http://data.rio"
+  },
+  {
+    "name": "Data.vic",
+    "type": "CKAN",
+    "url": "https://www.data.vic.gov.au"
+  },
+  {
+    "name": "data.wa.gov.au",
+    "type": "CKAN",
+    "url": "http://catalogue.beta.data.wa.gov.au"
+  },
+  {
+    "name": "Aragon Open Data",
+    "type": "CKAN",
+    "url": "http://opendata.aragon.es/catalogo"
+  },
+  {
+    "name": "CNMC Open Data",
+    "type": "CKAN",
+    "url": "http://opendata.cnmc.es"
+  },
+  {
+    "name": "openAFRICA",
+    "type": "CKAN",
+    "url": "https://africaopendata.org"
+  },
+  {
+    "name": "Alberta Open Government Portal",
+    "type": "CKAN",
+    "url": "https://open.alberta.ca"
+  },
+  {
+    "name": "DataBC",
+    "type": "CKAN",
+    "url": "https://catalogue.data.gov.bc.ca"
+  },
+  {
+    "name": "Santander Open Data",
+    "type": "CKAN",
+    "url": "http://apicatalogo.santander.es"
+  },
+  {
+    "name": "DataPOA",
+    "type": "CKAN",
+    "url": "http://datapoa.com.br"
+  },
+  {
+    "name": "Open Data in Uganda",
+    "type": "CKAN",
+    "url": "http://catalog.data.ug"
+  },
+  {
+    "name": "Open Data Kosovo",
+    "type": "CKAN",
+    "url": "http://data.rks-gov.net"
+  },
+  {
+    "name": "Data.go.jp",
+    "type": "CKAN",
+    "url": "http://www.data.go.jp/data"
+  },
+  {
+    "name": "Datos abiertos Malaga",
+    "type": "CKAN",
+    "url": "http://datosabiertos.malaga.eu"
+  },
+  {
+    "name": "London Datastore    ",
+    "type": "CKAN",
+    "url": "http://data.london.gov.uk"
+  },
+  {
+    "name": "opendata.gov.je",
+    "type": "CKAN",
+    "url": "https://opendata.gov.je"
+  },
+  {
+    "name": "Fortaleza Dados Abertos",
+    "type": "CKAN",
+    "url": "http://dados.fortaleza.ce.gov.br"
+  },
+  {
+    "name": "Glasgow Open Data",
+    "type": "CKAN",
+    "url": "https://data.glasgow.gov.uk"
+  },
+  {
+    "name": "Grand Rapids Open Data",
+    "type": "CKAN",
+    "url": "http://data.grcity.us"
+  },
+  {
+    "name": "Copenhagen Data",
+    "type": "CKAN",
+    "url": "http://data.kk.dk"
+  },
+  {
+    "name": "Annuario Statistico del Comune di Firenze",
+    "type": "CKAN",
+    "url": "http://annuario.comune.fi.it"
+  },
+  {
+    "name": "Amsterdam Open Data",
+    "type": "CKAN",
+    "url": "http://data.amsterdam.nl"
+  },
+  {
+    "name": "Bermuda.io",
+    "type": "CKAN",
+    "url": "http://bermuda.io"
+  },
+  {
+    "name": "Barrow Borough Councils Open Data Portal",
+    "type": "CKAN",
+    "url": "https://data.barrowbc.gov.uk"
+  },
+  {
+    "name": "Paraguay Open Data Catelog",
+    "type": "CKAN",
+    "url": "https://www.datos.gov.py"
+  },
+  {
+    "name": "Data.gov",
+    "type": "CKAN",
+    "url": "https://catalog.data.gov"
+  },
+  {
+    "name": "Uruguay Open Data Catalog",
+    "type": "CKAN",
+    "url": "https://catalogodatos.gub.uy"
+  },
+  {
+    "name": "data.gov.ie",
+    "type": "CKAN",
+    "url": "https://data.gov.ie"
+  },
+  {
+    "name": "Alagoas Data and Information",
+    "type": "CKAN",
+    "url": "http://dados.al.gov.br"
+  },
+  {
+    "name": "Helsinki Region Infoshare",
+    "type": "CKAN",
+    "url": "http://www.hri.fi/fi"
+  },
+  {
+    "name": "Landcare Research NZ DataStore",
+    "type": "CKAN",
+    "url": "https://datastore.landcareresearch.co.nz"
+  },
+  {
+    "name": "Nantou City Open Data",
+    "type": "CKAN",
+    "url": "http://data.nantou.gov.tw"
+  },
+  {
+    "name": "Montreal Open Data",
+    "type": "CKAN",
+    "url": "http://donnees.ville.montreal.qc.ca"
+  },
+  {
+    "name": "NosDonnees.fr",
+    "type": "CKAN",
+    "url": "http://www.nosdonnees.fr"
+  },
+  {
+    "name": "OffeneDaten.de",
+    "type": "CKAN",
+    "url": "https://offenedaten.de"
+  },
+  {
+    "name": "Open Data Aarhus",
+    "type": "CKAN",
+    "url": "https://www.odaa.dk"
+  },
+  {
+    "name": "DigitalC",
+    "type": "DKAN",
+    "url": "http://civicinsights.org"
+  },
+  {
+    "name": "Bangladesh Open Data",
+    "type": "DKAN",
+    "url": "http://data.gov.bd"
+  },
+  {
+    "name": "NebraskaMap",
+    "type": "DKAN",
+    "url": "www.nebraskamap.gov"
+  },
+  {
+    "name": "Votes Without Violence",
+    "type": "DKAN",
+    "url": "https://www.voteswithoutviolence.org"
+  },
+  {
+    "name": "City of Montpellier",
+    "type": "DKAN",
+    "url": "http://data.montpellier3m.fr"
+  },
+  {
+    "name": "Confiscati Bene",
+    "type": "DKAN",
+    "url": "http://www.confiscatibene.it/"
+  },
+  {
+    "name": "Open Data Gortynia",
+    "type": "CKAN",
+    "url": "http://opendatagortynia.gr"
+  },
+  {
+    "name": "Open Data della Regione Toscana",
+    "type": "CKAN",
+    "url": "http://dati.toscana.it"
+  },
+  {
+    "name": "Open Data Lazio",
+    "type": "CKAN",
+    "url": "http://dati.lazio.it/catalog"
+  },
+  {
+    "name": "Czech Telecommunications Office",
+    "type": "DKAN",
+    "url": "http://data.ctu.cz/"
+  },
+  {
+    "name": "Decentralised Administration of Crete",
+    "type": "DKAN",
+    "url": "http://www.apdkritis.gov.gr"
+  },
+  {
+    "name": "Belarus Open Data",
+    "type": "DKAN",
+    "url": "http://opendata.by"
+  },
+  {
+    "name": "data.gov.ua",
+    "type": "DKAN",
+    "url": "http://data.gov.ua"
+  },
+  {
+    "name": "Moscow Region",
+    "type": "DKAN",
+    "url": "http://data.mosreg.ru"
+  },
+  {
+    "name": "data.gov.sa",
+    "type": "DKAN",
+    "url": "http://data.gov.sa"
+  },
+  {
+    "name": "Bogotá Secretariat of Culture, Recreation, and Sport",
+    "type": "DKAN",
+    "url": "http://sispru.scrd.gov.co/siscred"
+  },
+  {
+    "name": "City of Narino",
+    "type": "DKAN",
+    "url": "http://datos.narino.gov.co"
+  },
+  {
+    "name": "Transport for New South Wales, Australia",
+    "type": "DKAN",
+    "url": "https://opendata.transport.nsw.gov.au"
+  },
+  {
+    "name": "OpenData Ottawa",
+    "type": "CKAN",
+    "url": "http://data.ottawa.ca"
+  },
+  {
+    "name": "Minnesota Geospatial Commons",
+    "type": "CKAN",
+    "url": "https://gisdata.mn.gov"
+  },
+  {
+    "name": "Open Data Hamburg",
+    "type": "CKAN",
+    "url": "http://suche.transparenz.hamburg.de"
+  },
+  {
+    "name": "Open Data Aachen",
+    "type": "CKAN",
+    "url": "http://opendata.aachen.de"
+  },
+  {
+    "name": "Open data portal of Republic of Croatia",
+    "type": "CKAN",
+    "url": "http://data.gov.hr"
+  },
+  {
+    "name": "Open Data Trentino",
+    "type": "CKAN",
+    "url": "http://dati.trentino.it"
+  },
+  {
+    "name": "OpenBelgium",
+    "type": "CKAN",
+    "url": "http://portal.openbelgium.be"
+  },
+  {
+    "name": "Opendata Caceres",
+    "type": "CKAN",
+    "url": "http://opendata.caceres.es"
+  },
+  {
+    "name": "OpenData.HRO",
+    "type": "CKAN",
+    "url": "http://www.opendata-hro.de"
+  },
+  {
+    "name": "OpenDataDC",
+    "type": "CKAN",
+    "url": "http://opendatadc.org"
+  },
+  {
+    "name": "OpenDataReno",
+    "type": "CKAN",
+    "url": "http://opendatareno.org"
+  },
+  {
+    "name": "OpenGovData.ru",
+    "type": "CKAN",
+    "url": "https://hubofdata.ru"
+  },
+  {
+    "name": "Portal de Dados Abertos da Cidade de Sao Paulo",
+    "type": "CKAN",
+    "url": "http://dados.prefeitura.sp.gov.br"
+  },
+  {
+    "name": "Portal de Dados Abiertos del Gobierno de Misiones",
+    "type": "CKAN",
+    "url": "http://www.datos.misiones.gov.ar"
+  },
+  {
+    "name": "Portale OpenData del Comune di Bari",
+    "type": "CKAN",
+    "url": "http://opendata.comune.bari.it"
+  },
+  {
+    "name": "Queensland Government Data",
+    "type": "CKAN",
+    "url": "https://data.qld.gov.au"
+  },
+  {
+    "name": "Rotterdam Open Data Store",
+    "type": "CKAN",
+    "url": "http://rotterdamopendata.nl"
+  },
+  {
+    "name": "Taijiang Research Data Repository",
+    "type": "CKAN",
+    "url": "http://taijiang.tw"
+  },
+  {
+    "name": "Swiss Open Government Data",
+    "type": "CKAN",
+    "url": "https://opendata.swiss"
+  },
+  {
+    "name": "Ukraine open data community",
+    "type": "CKAN",
+    "url": "http://data-gov-ua.org"
+  },
+  {
+    "name": "Humanitarian Data Exchange",
+    "type": "CKAN",
+    "url": "https://data.humdata.org"
+  },
+  {
+    "name": "Datahub",
+    "type": "CKAN",
+    "url": "https://datahub.io"
+  },
+  {
+    "name": "International Aid Transparency Initiative",
+    "type": "CKAN",
+    "url": "https://iatiregistry.org"
+  },
+  {
+    "name": "HealthData.gov",
+    "type": "DKAN",
+    "url": "http://www.healthdata.gov"
+  },
+  {
+    "name": "Open Data Cologne",
+    "type": "DKAN",
+    "url": "http://www.offenedaten-koeln.de"
+  },
+  {
+    "name": "data.ok.gov",
+    "type": "DKAN",
+    "url": "http://data.ok.gov"
+  },
+  {
+    "name": "State GeoNode",
+    "type": "GeoNode",
+    "url": "http://geonode.state.gov"
+  },
+  {
+    "name": "UN WFP",
+    "type": "GeoNode",
+    "url": "http://geonode.wfp.org"
+  },
+  {
+    "name": "Bolivia GeoNode",
+    "type": "GeoNode",
+    "url": "http://geosinager.defensacivil.gob.bo"
+  },
+  {
+    "name": "CIGNo",
+    "type": "GeoNode",
+    "url": "http://cigno.ve.ismar.cnr.it"
+  },
+  {
+    "name": "MapStory",
+    "type": "GeoNode",
+    "url": "https://mapstory.org"
+  },
+  {
+    "name": "MASDAP",
+    "type": "GeoNode",
+    "url": "http://www.masdap.mw"
+  },
+  {
+    "name": "GeoAvalanche",
+    "type": "GeoNode",
+    "url": "http://geoavalanche.org"
+  },
+  {
+    "name": "Chennai Flood Management",
+    "type": "GeoNode",
+    "url": "http://chennaifloodmanagement.org/en"
+  },
+  {
+    "name": "AWARE",
+    "type": "GeoNode",
+    "url": "http://aware.cirad.fr"
+  },
+  {
+    "name": "Dominode",
+    "type": "GeoNode",
+    "url": "http://dominode.dm"
+  },
+  {
+    "name": "DataRefuge",
+    "type": "CKAN",
+    "url": "https://www.datarefuge.org"
+  },
+  {
+    "name": "Confiscati Bene",
+    "type": "DKAN",
+    "url": "http://www.confiscatibene.it/it"
+  },
+  {
+    "name": "Open Data Ministry of Finance, Czech Republic",
+    "type": "DKAN",
+    "url": "http://data.mfcr.cz"
+  },
+  {
+    "name": "Open Data Ministry of Defence, Czech Republic",
+    "type": "DKAN",
+    "url": "http://data.army.cz"
+  },
+  {
+    "name": "Code for Ikoma",
+    "type": "DKAN",
+    "url": "http://data.code4ikoma.org"
+  },
+  {
+    "name": "Open Data Banda Aceh",
+    "type": "DKAN",
+    "url": "http://data.bandaacehkota.go.id"
+  },
+  {
+    "name": "dati.gov.it",
+    "type": "DKAN",
+    "url": "http://www.dati.gov.it"
+  },
+  {
+    "name": "OpenColorado",
+    "type": "CKAN",
+    "url": "http://data.opencolorado.org"
+  },
+  {
+    "name": "CONCYTEC",
+    "type": "DKAN",
+    "url": "http://datos.concytec.gob.pe"
+  },
+  {
+    "name": "Datos Minedu",
+    "type": "DKAN",
+    "url": "http://datos.minedu.gob.pe"
+  },
+  {
+    "name": "Repositorio de Datos Minsa",
+    "type": "DKAN",
+    "url": "http://datos.minsa.gob.pe"
+  },
+  {
+    "name": "JNE - Portal de Datos Abiertos",
+    "type": "DKAN",
+    "url": "http://jnedatosabiertos.pe"
+  },
+  {
+    "name": "Trabajo, Ministerio de Trabajo y Promocion del Empleo",
+    "type": "DKAN",
+    "url": "http://datos.trabajo.gob.pe"
+  },
+  {
+    "name": "Open Data Windsor Essex",
+    "type": "DKAN",
+    "url": "http://odwe.ca"
+  },
+  {
+    "name": "Fredericton Open Data",
+    "type": "DKAN",
+    "url": "http://data.fredericton.ca/en"
+  },
+  {
+    "name": "TransformAgriculture",
+    "type": "DKAN",
+    "url": "http://transformagriculture.org"
+  },
+  {
+    "name": "Ghana Open Data Initiative",
+    "type": "DKAN",
+    "url": "http://data.gov.gh"
+  },
+  {
+    "name": "Sayada OpenData",
+    "type": "DKAN",
+    "url": "http://opendata.sayada.tn/fr"
+  },
+  {
+    "name": "Jamaica Open Data",
+    "type": "DKAN",
+    "url": "http://data.gov.jm"
+  },
+  {
+    "name": "South Australia Government Data Directory",
+    "type": "CKAN",
+    "url": "https://data.sa.gov.au/data"
+  },
+  {
+    "name": "USDA National Agricultural Library",
+    "type": "DKAN",
+    "url": "https://data.nal.usda.gov"
+  },
+  {
+    "name": "Stadt Mannheim",
+    "type": "DKAN",
+    "url": "https://opendata.mannheim.de"
+  },
+  {
+    "name": "Belarus",
+    "type": "DKAN",
+    "url": "https://opendata.by"
+  },
+  {
+    "name": "Open Data Bosnia and Herzegovina",
+    "type": "DKAN",
+    "url": "http://opendata.ba"
+  },
+  {
+    "name": "openpompeii",
+    "type": "DKAN",
+    "url": "http://open.pompeiisites.org"
+  },
+  {
+    "name": "Mexican IMSS",
+    "type": "DKAN",
+    "url": "http://datos.imss.gob.mx"
+  },
+  {
+    "name": "Open Knowledge El Salvador",
+    "type": "DKAN",
+    "url": "http://datoselsalvador.org"
+  },
+  {
+    "name": "Louisville Metro Open Data Portal",
+    "type": "DKAN",
+    "url": "https://data.louisvilleky.gov"
+  },
+  {
+    "name": "California OPen Data Portal",
+    "type": "DKAN",
+    "url": "https://data.ca.gov"
+  },
+  {
+    "name": "City of San Diego Open Data Portal",
+    "type": "DKAN",
+    "url": "http://data.sandiego.gov"
+  },
+  {
+    "name": "Cambridgeshire Insight",
+    "type": "DKAN",
+    "url": "http://opendata.cambridgeshireinsight.org.uk"
+  },
+  {
+    "name": "Marine Scotland",
+    "type": "DKAN",
+    "url": "http://marinedata.scotland.gov.uk"
+  },
+  {
+    "name": "Detail Data Portal",
+    "type": "DKAN",
+    "url": "http://data.nicva.org"
+  },
+  {
+    "name": "OFFENE DATEN: BONN",
+    "type": "DKAN",
+    "url": "https://opendata.bonn.de"
+  },
+  {
+    "name": "OFFENE DATEN WUPPERTAL",
+    "type": "DKAN",
+    "url": "http://offenedaten-wuppertal.de"
+  },
+  {
+    "name": "Rhein-Neckar-Verkehr GmbH",
+    "type": "DKAN",
+    "url": "https://opendata.rnv-online.de"
+  },
+  {
+    "name": "OFFENE DATEN: kdvz Rhein-Erft-Rur",
+    "type": "DKAN",
+    "url": "http://offenedaten.kdvz-frechen.de"
+  },
+  {
+    "name": "Open Data del Comune di Genova",
+    "type": "DKAN",
+    "url": "http://dati.comune.genova.it"
+  },
+  {
+    "name": "Open Data Formia",
+    "type": "DKAN",
+    "url": "http://dati.comune.formia.lt.it"
+  },
+  {
+    "name": "City of Sacramento Open Data",
+    "type": "Junar",
+    "url": "http://data.cityofsacramento.org",
+    "apiUrl": "http://api.data.cityofsacramento.org",
+    "apiKey": "c2ec3f2208a504bc8c2f84ff47a26b889717cdcf"
+  },
+  {
+    "name": "City of Palo Alto Open Data",
+    "type": "Junar",
+    "url": "http://data.cityofpaloalto.org",
+    "apiUrl": "http://paloalto.cloudapi.junar.com",
+    "apiKey": "4d9c9162004e53492a06a8ba5dda36d083235fb6"
+  },
+  {
+    "name": "Penalolen Open Data",
+    "type": "Junar",
+    "url": "http://recursos.penalolen.cl",
+    "apiUrl": "http://api.recursos.penalolen.cl",
+    "apiKey": "ff6aedb816aaaed3065f9192d422046e1ced4482"
+  },
+  {
+    "name": "City of San Jose Open Data",
+    "type": "Junar",
+    "url": "http://data.sanjoseca.gov",
+    "apiUrl": "http://api.data.sanjoseca.gov",
+    "apiKey": "621b57776170d5e6378b401b150f30769210128e"
+  },
+  {
+    "name": "Puente Alto Open Data",
+    "type": "Junar",
+    "url": "http://datos.mpuentealto.cl",
+    "apiUrl": "http://mpuentealto.cloudapi.junar.com",
+    "apiKey": "138275ea5b2f091fda2a75a55ed837b942f0a998"
+  },
+  {
+    "name": "City of Cupertino Open Data Portal",
+    "type": "Junar",
+    "url": "http://data.cupertino.org",
+    "apiUrl": "http://cupertino.cloudapi.junar.com",
+    "apiKey": "983f88000163d1b968d7412edb522c266ec51d30"
+  },
+  {
+    "name": "City of Pasadena Open Data",
+    "type": "Junar",
+    "url": "http://data.cityofpasadena.net",
+    "apiUrl": "http://pasadena.cloudapi.junar.com",
+    "apiKey": "70281a8c5419414430f08639f78ac000171519ab"
+  },
+  {
+    "name": "La Nacion Data",
+    "type": "Junar",
+    "url": "http://data.lanacion.com.ar",
+    "apiUrl": "http://lanacion.cloudapi.junar.com",
+    "apiKey": "c9e21af2405fa30b4147f0e0a76b7dc328f663ea"
+  },
+  {
+    "name": "Anaheim Open Data Portal",
+    "type": "Junar",
+    "url": "http://anaheim.opendata.junar.com",
+    "apiUrl": "http://anaheim.cloudapi.junar.com",
+    "apiKey": "61a94b3465c14b9fa47b922a14d7c22036e2eb1c"
+  },
+  {
+    "name": "Sacramento County Open Data Portal",
+    "type": "Junar",
+    "url": "http://data.saccounty.net",
+    "apiUrl": "http://saccounty.cloudapi.junar.com",
+    "apiKey": "97c1aa95939fc6ae01930b576ba84b09a80a164c"
+  },
+  {
+    "name": "Cordoba Deliberative Council Open Data",
+    "type": "Junar",
+    "url": "http://cdcordoba.opendata.junar.com",
+    "apiUrl": "http://cdcordoba.cloudapi.junar.com",
+    "apiKey": "4bef13b982da582446f8728f69cbc85a4ae7c873"
+  },
+  {
+    "name": "Socrata Open Data Network",
+    "type": "Socrata",
+    "url": "https://www.opendatanetwork.com"
+  },
+  {
+    "name": "ArcGIS Open Data",
+    "type": "ArcGIS",
+    "url": "https://hub.arcgis.com/pages/open-data"
+  },
+  {
+    "name": "OpenDataSoft",
+    "type": "OpenDataSoft Data Network",
+    "url": "https://data.opendatasoft.com/pages/home/"
+  }
+]

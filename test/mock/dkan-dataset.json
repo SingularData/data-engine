@@ -1,0 +1,30 @@
+{
+  "@type": "dcat:Dataset",
+  "accessLevel": "public",
+  "contactPoint": {
+    "fn": "Andrew.Hill",
+    "hasEmail": "mailto:noemailprovided@usa.gov"
+  },
+  "description":
+    "<p>This data provides results from field analyses, from the California Environmental Data Exchange Network (CEDEN).</p>\n",
+  "distribution": [
+    {
+      "@type": "dcat:Distribution",
+      "downloadURL":
+        "https://data.ca.gov/sites/default/files/HabitatData_1994-2017_pipe_0.csv",
+      "mediaType": "text/csv",
+      "format": "csv",
+      "title": "CEDEN Habitat Data 1994-2017 pipe delim csv"
+    }
+  ],
+  "identifier": "308afd50-7398-4af8-926d-14a3e312fcf5",
+  "issued": "2017-12-14",
+  "keyword": ["Water"],
+  "modified": "2017-12-15",
+  "publisher": {
+    "@type": "org:Organization",
+    "name": "California State Water Resources Control Board"
+  },
+  "theme": ["Water"],
+  "title": "Surface Water – Habitat – CEDEN"
+}
