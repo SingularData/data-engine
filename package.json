@@ -6,7 +6,7 @@
   "scripts": {
     "start-es": "bash ./scripts/start-es.sh",
     "stop-es": "bash ./scripts/stop-es.sh",
-    "test": "mocha test/*.test.ts test/**/*.test.ts --require ts-node/register",
+    "test": "mocha \"test/**/*.test.ts\" --require ts-node/register",
     "test-ci": "NODE_ENV=ci npm run test",
     "precommit": "npm test && lint-staged"
   },

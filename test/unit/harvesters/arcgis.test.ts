@@ -1,11 +1,11 @@
-import { harvest } from "../../src/harvesters/ckan";
+import { harvest } from "../../../src/harvesters/arcgis";
 import { expect } from "chai";
 
-describe("harvesters/ckan.ts", function() {
-  this.timeout(20000);
+describe("harvesters/arcgis.ts", function() {
+  this.timeout(10000);
 
-  it("harvest() should harvest CKAN portal.", done => {
-    harvest({ url: "http://catalog.data.gov" })
+  it("harvest() should harvest ArcGIS Open Data network.", done => {
+    harvest()
       .first()
       .subscribe(
         (data: any) => {

@@ -20,6 +20,7 @@ export function harvest() {
     .mergeMap(res => Rx.Observable.of(...res.datasets))
     .map(data => {
       return {
+        type: "opendatasoft",
         dcat: Dataset.from("OpenDataSoft", data).toJSON(),
         checksum: sha256(JSON.stringify(data)),
         original: data

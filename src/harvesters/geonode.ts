@@ -14,6 +14,7 @@ export function harvest(source) {
     .mergeMap(res => Rx.Observable.of(...res.objects))
     .map(data => {
       return {
+        type: "geonode",
         dcat: Dataset.from("GeoNode", data).toJSON(),
         checksum: sha256(JSON.stringify(data)),
         original: data

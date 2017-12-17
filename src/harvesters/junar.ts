@@ -26,6 +26,7 @@ export function harvest(source) {
     .mergeMap(res => Rx.Observable.of(...res.results))
     .map(data => {
       return {
+        type: "junar",
         dcat: Dataset.from("Junar", data).toJSON(),
         checksum: sha256(JSON.stringify(data)),
         original: data

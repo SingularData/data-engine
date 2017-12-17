@@ -28,6 +28,7 @@ export function harvest() {
     .mergeMap(res => Rx.Observable.of(...res.results))
     .map(data => {
       return {
+        type: "socrata",
         dcat: Dataset.from("Socrata", data).toJSON(),
         checksum: sha256(JSON.stringify(data)),
         original: data

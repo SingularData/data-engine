@@ -5,7 +5,6 @@ import * as config from "config";
 import { flatMap } from "lodash";
 
 const index = config.get("elasticsearch.index");
-const type = config.get("elasticsearch.type");
 
 let currentClient;
 
@@ -48,27 +47,48 @@ export function getClient() {
  * @return {Observable} an observable with checksum map
  */
 export function getChecksumMap() {
-  return Rx.Observable.defer(() => {
+  return Rx.Observable.create(observer => {
     const client = getClient();
-    const params = {
-      index,
-      _sourceInclude: ["checksum"],
-      body: {
-        query: {
-          match_all: {}
+    const datasets = [];
+
+    client.search(
+      {
+        index,
+        scroll: "30s",
+        body: {
+          query: {
+            match_all: {}
+          }
+        },
+        size: 1000,
+        _source: ["checksum"]
+      },
+      function getMoreUntilDone(error, response) {
+        if (error) {
+          return observer.error(error);
+        }
+
+        datasets.push(...response.hits.hits);
+
+        if (response.hits.total > datasets.length) {
+          client.scroll(
+            {
+              scrollId: response._scroll_id,
+              scroll: "30s"
+            },
+            getMoreUntilDone
+          );
+        } else {
+          const checksumMap = datasets.reduce((map, dataset) => {
+            map[dataset._id] = dataset._source.checksum;
+            return map;
+          }, {});
+
+          observer.next(checksumMap);
+          observer.complete();
         }
       }
-    };
-
-    return client.search(params).then(result => {
-      const checksumMap = {};
-
-      for (let dataset of result.hits.hits) {
-        checksumMap[dataset._id] = dataset._source.checksum;
-      }
-
-      return checksumMap;
-    });
+    );
   });
 }
 
@@ -80,17 +100,19 @@ export function getChecksumMap() {
 export function upsert(datasets) {
   return Rx.Observable.defer(() => {
     const client = getClient();
-    const body = flatMap(datasets, dataset => {
+    const body = [];
+
+    for (let dataset of datasets) {
       const action = {
         index: {
           _index: index,
-          _type: type,
+          _type: dataset.type,
           _id: dataset.dcat.identifier
         }
       };
 
-      return [action, dataset];
-    });
+      body.push(action, dataset);
+    }
 
     return client.bulk({ body });
   }).catch(err => {

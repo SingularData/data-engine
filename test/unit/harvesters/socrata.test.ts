@@ -1,10 +1,10 @@
-import { harvest } from "../../src/harvesters/opendatasoft";
+import { harvest } from "../../../src/harvesters/socrata";
 import { expect } from "chai";
 
-describe("harvesters/opendatasoft.ts", function() {
+describe("harvesters/socrata.ts", function() {
   this.timeout(10000);
 
-  it("harvest() should harvest OpenDataSoft network.", done => {
+  it("harvest() should harvest Socrata network.", done => {
     harvest()
       .first()
       .subscribe(

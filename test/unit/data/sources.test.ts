@@ -3,7 +3,7 @@ import fse = require("fs-extra");
 
 describe("data/sources.json", () => {
   it("data source should have required properties.", () => {
-    const sources = fse.readJsonSync(__dirname + "/../../data/sources.json");
+    const sources = fse.readJsonSync(__dirname + "/../../../data/sources.json");
 
     for (const source of sources) {
       expect(source.name).to.be.a("string");

@@ -1,11 +1,14 @@
-import { harvest } from "../../src/harvesters/arcgis";
+import { harvest } from "../../../src/harvesters/junar";
 import { expect } from "chai";
 
-describe("harvesters/arcgis.ts", function() {
+describe("harvesters/junar.ts", function() {
   this.timeout(10000);
 
-  it("harvest() should harvest ArcGIS Open Data network.", done => {
-    harvest()
+  it("harvest() should harvest Junar portal.", done => {
+    harvest({
+      apiUrl: "http://saccounty.cloudapi.junar.com",
+      apiKey: "47242a5ca37d49fc19a2b8440942865f6e82486b"
+    })
       .first()
       .subscribe(
         (data: any) => {

@@ -1,14 +1,11 @@
-import { harvest } from "../../src/harvesters/junar";
+import { harvest } from "../../../src/harvesters/opendatasoft";
 import { expect } from "chai";
 
-describe("harvesters/junar.ts", function() {
-  this.timeout(10000);
+describe("harvesters/opendatasoft.ts", function() {
+  this.timeout(30000);
 
-  it("harvest() should harvest Junar portal.", done => {
-    harvest({
-      apiUrl: "http://saccounty.cloudapi.junar.com",
-      apiKey: "47242a5ca37d49fc19a2b8440942865f6e82486b"
-    })
+  it("harvest() should harvest OpenDataSoft network.", done => {
+    harvest()
       .first()
       .subscribe(
         (data: any) => {

@@ -18,6 +18,7 @@ export function harvest(source) {
     })
     .map(data => {
       return {
+        type: "dkan",
         dcat: Dataset.from("DKAN", data).toJSON(),
         checksum: sha256(JSON.stringify(data)),
         original: data

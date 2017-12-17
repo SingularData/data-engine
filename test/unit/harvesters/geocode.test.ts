@@ -1,11 +1,11 @@
-import { harvest } from "../../src/harvesters/socrata";
+import { harvest } from "../../../src/harvesters/geonode";
 import { expect } from "chai";
 
-describe("harvesters/socrata.ts", function() {
+describe("harvesters/geocode.ts", function() {
   this.timeout(10000);
 
-  it("harvest() should harvest Socrata network.", done => {
-    harvest()
+  it("harvest() should harvest GeoNode portal.", done => {
+    harvest({ url: "http://geonode.state.gov" })
       .first()
       .subscribe(
         (data: any) => {

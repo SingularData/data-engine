@@ -1,8 +1,8 @@
 {
-  "cocurrency": 5,
+  "cocurrency": 1,
   "elasticsearch": {
+    "bulkInsertSize": 100,
     "index": "sdn",
-    "type": "dataset",
     "url": "http://localhost:9200"
   },
   "userAgents": [

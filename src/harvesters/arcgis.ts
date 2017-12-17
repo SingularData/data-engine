@@ -20,6 +20,7 @@ export function harvest() {
     .mergeMap(res => Rx.Observable.of(...res.data))
     .map(data => {
       return {
+        type: "acrgis",
         dcat: Dataset.from("ArcGIS", data).toJSON(),
         checksum: sha256(JSON.stringify(data)),
         original: data

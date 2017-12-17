@@ -1,11 +1,11 @@
-import { harvest } from "../../src/harvesters/geonode";
+import { harvest } from "../../../src/harvesters/dkan";
 import { expect } from "chai";
 
-describe("harvesters/geocode.ts", function() {
+describe("harvesters/dkan.ts", function() {
   this.timeout(10000);
 
-  it("harvest() should harvest GeoNode portal.", done => {
-    harvest({ url: "http://geonode.state.gov" })
+  it("harvest() should harvest DKAN portal.", done => {
+    harvest({ url: "https://data.ca.gov" })
       .first()
       .subscribe(
         (data: any) => {

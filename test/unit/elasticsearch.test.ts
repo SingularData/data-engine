@@ -1,37 +1,27 @@
 import fetch, { RequestInit } from "node-fetch";
 import * as config from "config";
-import * as es from "../src/elasticsearch";
+import * as es from "../../src/elasticsearch";
 import { expect } from "chai";
 import { Dataset } from "w3c-dcat";
-import { sha256 } from "../src/utils/hash-util";
+import { sha256 } from "../../src/utils/hash-util";
 import s = require("sleep");
+import fse = require("fs-extra");
 
 describe("elasticsearch.ts", function() {
   this.timeout(10000);
 
+  const dkan = fse.readJsonSync(__dirname + "/../mock/dkan-dataset.json");
   const dataset = {
-    dcat: {},
-    checksum: "",
-    original: {
-      identifier: 12,
-      title: "test data",
-      url: "localhost",
-      publisher: "demo",
-      distribution: []
-    }
+    type: "dkan",
+    dcat: Dataset.from("DKAN", dkan),
+    checksum: sha256(JSON.stringify(dkan)),
+    original: dkan
   };
-
-  dataset.dcat = Dataset.from("DKAN", dataset.original);
-  dataset.checksum = sha256(JSON.stringify(dataset.original));
 
   before(done => {
     fetch(config.get("elasticsearch.url"))
       .then(() => done())
       .catch(() => done(new Error("ElasticSearch is not running")));
-  });
-
-  beforeEach(() => {
-    // s.sleep(5);
   });
 
   it("deleteIndex() should drop existing index.", done => {
@@ -58,8 +48,6 @@ describe("elasticsearch.ts", function() {
       );
   });
 
-  // For some async reason ?, this doesn't work with other tests but it works
-  // by its own.
   it("upsert() should create a new document.", done => {
     es
       .ensureIndex()
@@ -68,7 +56,7 @@ describe("elasticsearch.ts", function() {
       .concatMap(() => es.getChecksumMap())
       .subscribe(
         map => {
-          expect(map).to.has.key((dataset.dcat as Dataset).identifier);
+          expect(map[(dataset.dcat as Dataset).identifier]).to.be.a("string");
         },
         err => done(err),
         () => done()
