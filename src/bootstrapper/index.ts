@@ -9,7 +9,7 @@ exports.handler = (event, context) => {
   const sns = new AWS.SNS();
 
   getSources(dynamodb)
-    .then(list => {
+    .then((list: any) => {
       const tasks = [];
 
       for (let source of list) {
@@ -43,7 +43,7 @@ exports.handler = (event, context) => {
     .catch(err => context.done(err));
 };
 
-async function getSources(dynamodb, start = undefined) {
+async function getSources(dynamodb, start = undefined): Promise<any[]> {
   try {
     const params = {
       TableName: process.env.DYNAMODB_TABLE,
@@ -68,7 +68,7 @@ async function getSources(dynamodb, start = undefined) {
     }
 
     if (data.LastEvaluatedKey) {
-      const rest = await getSources(dynamodb, data.LastEvaluatedKey);
+      const rest: any = await getSources(dynamodb, data.LastEvaluatedKey);
       sources.push(...rest);
     }
 

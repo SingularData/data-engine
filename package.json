@@ -8,7 +8,7 @@
     "stop-es": "bash ./scripts/stop-es.sh",
     "test": "mocha \"test/**/*.test.ts\" --require ts-node/register",
     "test-ci": "NODE_ENV=ci npm run test",
-    "build": "tsc --outDir dist/bootstrapper",
+    "build": "(rm -rf dist || true) && tsc --outDir dist",
     "precommit": "lint-staged"
   },
   "lint-staged": {
@@ -23,7 +23,6 @@
   "homepage": "https://github.com/SingularData/data-pipeline",
   "devDependencies": {
     "@types/chai": "^4.0.10",
-    "@types/es6-promise": "0.0.33",
     "@types/fs-extra": "^5.0.0",
     "@types/mocha": "^2.2.45",
     "@types/sleep": "0.0.7",

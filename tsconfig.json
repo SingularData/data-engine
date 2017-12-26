@@ -5,7 +5,7 @@
     "module": "commonjs",
     "moduleResolution": "node",
     "removeComments": true,
-    "lib": ["es5", "es2015.promise"]
+    "lib": ["es5", "es2015.promise", "esnext.asynciterable"]
   },
-  "include": ["./src/bootstrapper/*.ts", "./src/fetcher/*.ts"]
+  "include": ["./src/bootstrapper/*.ts", "./src/fetcher/**/*.ts"]
 }
