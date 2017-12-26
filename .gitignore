@@ -35,3 +35,5 @@ node_modules
 scripts/javascript
 scripts/system
 config/production.json
+dist
+.env

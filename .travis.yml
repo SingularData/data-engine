@@ -10,4 +10,4 @@ node_js:
   - "node"
 
 script:
-- npm run test-ci
+# - npm run test-ci
