@@ -5,7 +5,7 @@ import { sha256 } from "../hash-util";
 const requestSize = 100;
 const regions = ["us", "eu"];
 
-export function getPageUrls(source) {
+export function getPageUrls() {
   const urls = [];
   const tasks = [];
 
@@ -15,10 +15,12 @@ export function getPageUrls(source) {
       .then(res => {
         const count = Math.ceil(res.resultSetSize / requestSize);
 
-        for (let i = 1; i <= count; i++) {
-          urls.push(createUrl(source.url, i, requestSize));
+        for (let i = 0; i < count; i++) {
+          urls.push(createUrl(region, i * requestSize, requestSize));
         }
       });
+
+    tasks.push(task);
   }
 
   return Promise.all(tasks).then(() => urls);

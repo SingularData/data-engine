@@ -11,8 +11,8 @@ export function getPageUrls(source) {
       const urls = [];
       const count = Math.ceil(res.result.count / requestSize);
 
-      for (let i = 1; i <= count; i++) {
-        urls.push(createUrl(source.url, i, requestSize));
+      for (let i = 0; i < count; i++) {
+        urls.push(createUrl(source.url, i * requestSize, requestSize));
       }
 
       return urls;

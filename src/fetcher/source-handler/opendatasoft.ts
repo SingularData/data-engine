@@ -4,14 +4,14 @@ import { sha256 } from "../hash-util";
 
 const requestSize = 100;
 
-export function getPageUrls(source) {
+export function getPageUrls() {
   return fetch(createUrl(0, 0))
     .then(res => res.json())
     .then(res => {
       const urls = [];
       const count = Math.ceil(res.total_count / requestSize);
 
-      for (let i = 1; i <= count; i++) {
+      for (let i = 0; i < count; i++) {
         urls.push(createUrl(i * requestSize, requestSize));
       }
 
