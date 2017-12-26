@@ -8,11 +8,6 @@ exports.handler = (event, context) => {
   const dynamodb = new AWS.DynamoDB();
   const sns = new AWS.SNS();
 
-  const s3Params = {
-    Bucket: process.env.S3_BUCKET,
-    Key: process.env.SS_DATA_SOURCE_LIST
-  };
-
   getSources(dynamodb)
     .then(list => {
       const tasks = [];
@@ -26,7 +21,7 @@ exports.handler = (event, context) => {
           .publish({
             Message: JSON.stringify(source),
             MessageStructure: "json",
-            TopicArn: process.env.SNS_REQUEST_QUEUE
+            TopicArn: process.env.SNS_FETCH_QUEUE
           })
           .promise()
           .then(() =>
