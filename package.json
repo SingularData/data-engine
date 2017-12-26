@@ -23,6 +23,7 @@
   "homepage": "https://github.com/SingularData/data-pipeline",
   "devDependencies": {
     "@types/chai": "^4.0.10",
+    "@types/es6-promise": "0.0.33",
     "@types/fs-extra": "^5.0.0",
     "@types/mocha": "^2.2.45",
     "@types/sleep": "0.0.7",
