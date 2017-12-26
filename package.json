@@ -47,7 +47,6 @@
     "@types/node-fetch": "^1.6.7",
     "aws-sdk": "^2.175.0",
     "config": "^1.28.1",
-    "dotenv": "^4.0.0",
     "elasticsearch": "^14.0.0",
     "fs-extra": "^5.0.0",
     "http-aws-es": "^4.0.0",
