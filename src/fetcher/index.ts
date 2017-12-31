@@ -24,6 +24,8 @@ exports.fetch = (event, context) => {
 
   switch (source.messageType) {
     case "FetchSource":
+      console.log(`Received fetch source task for: ${source.name}.`);
+
       return sourceHandlers[source.type.toLowerCase()]
         .getPageUrls(source)
         .then(urls => {
@@ -60,9 +62,13 @@ exports.fetch = (event, context) => {
             tasks.push(task);
           }
 
-          return Promise.all(tasks);
+          return Promise.all(tasks).then(() =>
+            console.log(`Finished fetch source task for: ${source.url}.`)
+          );
         });
     case "FetchPage":
+      console.log(`Received fetch page task for: ${source.name}.`);
+
       return sourceHandlers[source.type.toLowerCase()]
         .fetchPage(source)
         .then(datasets => {
@@ -88,7 +94,9 @@ exports.fetch = (event, context) => {
             tasks.push(task);
           }
 
-          return Promise.all(tasks);
+          return Promise.all(tasks).then(() =>
+            console.log(`Finished fetch page task for: ${source.url}.`)
+          );
         });
   }
 };
