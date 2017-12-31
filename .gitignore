@@ -37,3 +37,4 @@ scripts/system
 config/production.json
 dist
 .env
+.serverless

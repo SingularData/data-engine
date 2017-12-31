@@ -8,8 +8,9 @@
     "stop-es": "bash ./scripts/stop-es.sh",
     "test": "mocha \"test/**/*.test.ts\" --require ts-node/register",
     "test-ci": "NODE_ENV=ci npm run test",
-    "build": "(rm -rf dist || true) && tsc --outDir dist",
-    "precommit": "lint-staged"
+    "build": "tsc --outDir dist",
+    "precommit": "lint-staged",
+    "deploy": "npm test && npm run build && SLS_DEBUG=* sls deploy -v"
   },
   "lint-staged": {
     "*.{d.ts,ts,json,md}": ["prettier --write", "git add"]
@@ -29,9 +30,9 @@
     "chai": "^4.1.2",
     "husky": "^0.14.3",
     "lint-staged": "^6.0.0",
-    "mocha": "^4.0.1",
+    "mocha": "^4.1.0",
     "prettier": "^1.9.2",
-    "serverless-offline": "^3.16.0",
+    "serverless": "^1.25.0",
     "sleep": "^5.1.1",
     "ts-node": "^4.1.0",
     "tslint": "^5.8.0",
@@ -45,8 +46,8 @@
     "@types/lodash": "^4.14.91",
     "@types/node": "^8.5.2",
     "@types/node-fetch": "^1.6.7",
-    "aws-sdk": "^2.175.0",
-    "config": "^1.28.1",
+    "aws-sdk": "^2.176.0",
+    "config": "^1.29.0",
     "elasticsearch": "^14.0.0",
     "fs-extra": "^5.0.0",
     "http-aws-es": "^4.0.0",

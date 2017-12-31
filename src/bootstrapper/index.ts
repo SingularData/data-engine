@@ -2,7 +2,7 @@ import AWS = require("aws-sdk");
 
 AWS.config.region = "us-east-1";
 
-exports.handler = (event, context) => {
+exports.bootstrap = (event, context) => {
   console.log("Start publishing data request tasks.");
 
   const dynamodb = new AWS.DynamoDB();
@@ -20,7 +20,6 @@ exports.handler = (event, context) => {
         const task = sns
           .publish({
             Message: JSON.stringify(source),
-            MessageStructure: "json",
             TopicArn: process.env.SNS_FETCH_QUEUE
           })
           .promise()
@@ -43,7 +42,7 @@ exports.handler = (event, context) => {
     .catch(err => context.done(err));
 };
 
-async function getSources(dynamodb, start = undefined): Promise<any[]> {
+async function getSources(dynamodb, start?): Promise<any[]> {
   try {
     const params = {
       TableName: process.env.DYNAMODB_TABLE,
@@ -61,6 +60,10 @@ async function getSources(dynamodb, start = undefined): Promise<any[]> {
       const source = {};
 
       for (let key in item) {
+        if (!item.hasOwnProperty(key)) {
+          continue;
+        }
+
         source[key] = item[key].S;
       }
 
