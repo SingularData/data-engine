@@ -1,5 +1,3 @@
-import { get } from "config";
-
 export function ensureIndex(es, index) {
   return es.indices.exists({ index }).then(exists => {
     if (!exists) {
