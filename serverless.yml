@@ -14,6 +14,8 @@ provider:
     DYNAMODB_TABLE: "sdn-data-source"
     SNS_FETCH_QUEUE: { "Ref": "SNSFetchQueue" }
     SNS_INDEX_QUEUE: { "Ref": "SNSIndexQueue" }
+    ES_INDEX: "metadata"
+    ES_URL: "search-datarea-o2cglxd5agwytjwhzgtedbg4fq.us-east-1.es.amazonaws.com"
 
 functions:
   bootstrapper:
@@ -23,7 +25,7 @@ functions:
   fetcher:
     name: sdn-pipeline-fetcher
     handler: dist/fetcher/index.fetch
-    timeout: 20
+    timeout: 60
     events:
       - sns:
           arn:
@@ -35,6 +37,21 @@ functions:
                 - Ref: "AWS::AccountId"
                 - ":sdn-pipeline-fetch-queue"
           topicName: sdn-pipeline-fetch-queue
+  indexer:
+    name: sdn-pipeline-indexer
+    handler: dist/indexer/index.index
+    timeout: 20
+    events:
+      - sns:
+          arn:
+            Fn::Join:
+              - ""
+              - - "arn:aws:sns:"
+                - Ref: "AWS::Region"
+                - ":"
+                - Ref: "AWS::AccountId"
+                - ":sdn-pipeline-index-queue"
+          topicName: sdn-pipeline-index-queue
 
 resources:
   Resources:
