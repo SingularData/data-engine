@@ -7,6 +7,7 @@ import * as geonode from "./source-handler/geonode";
 import * as junar from "./source-handler/junar";
 import * as opendatasoft from "./source-handler/opendatasoft";
 import * as socrata from "./source-handler/socrata";
+import { deduplicate } from "./util";
 
 const sourceHandlers = {
   arcgis,
@@ -62,15 +63,20 @@ exports.fetch = (event, context) => {
             tasks.push(task);
           }
 
-          return Promise.all(tasks).then(() =>
-            console.log(`Finished fetch source task for: ${source.url}.`)
-          );
-        });
+          return Promise.all(tasks);
+        })
+        .then(() =>
+          context.done(null, "Finished fetch source task for: ${source.url}.")
+        )
+        .catch(err => context.done(err));
     case "FetchPage":
       console.log(`Received fetch page task for: ${source.name}.`);
 
+      const dynamodb = new AWS.DynamoDB();
+
       return sourceHandlers[source.type.toLowerCase()]
         .fetchPage(source)
+        .then(datasets => deduplicate(dynamodb, datasets))
         .then(datasets => {
           const tasks = [];
 
@@ -94,9 +100,11 @@ exports.fetch = (event, context) => {
             tasks.push(task);
           }
 
-          return Promise.all(tasks).then(() =>
-            console.log(`Finished fetch page task for: ${source.url}.`)
-          );
-        });
+          return Promise.all(tasks);
+        })
+        .then(() =>
+          context.done(null, "Finished fetch page task for: ${source.url}.")
+        )
+        .catch(err => context.done(err));
   }
 };

@@ -38,7 +38,7 @@ exports.bootstrap = (event, context) => {
 
       return Promise.all(tasks);
     })
-    .then(() => context.done(null, "Request task publication finished!"))
+    .then(() => context.done(null, "Published task!"))
     .catch(err => context.done(err));
 };
 

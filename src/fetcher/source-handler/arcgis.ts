@@ -1,6 +1,5 @@
 import fetch from "node-fetch";
-import { Dataset } from "w3c-dcat";
-import { sha256 } from "../hash-util";
+import { wrapDataset } from "../util";
 
 const requestSize = 100;
 
@@ -22,20 +21,7 @@ export function getPageUrls() {
 export function fetchPage(source) {
   return fetch(source.url)
     .then(res => res.json())
-    .then(res => {
-      const datasets = [];
-
-      for (let dataset of res.data) {
-        datasets.push({
-          type: "acrgis",
-          dcat: Dataset.from("ArcGIS", dataset).toJSON(),
-          checksum: sha256(JSON.stringify(dataset)),
-          original: dataset
-        });
-      }
-
-      return datasets;
-    });
+    .then(res => res.data.map(d => wrapDataset("ArcGIS", d)));
 }
 
 function createUrl(pageNumber, pageSize) {

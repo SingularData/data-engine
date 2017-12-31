@@ -1,6 +1,5 @@
 import fetch from "node-fetch";
-import { Dataset } from "w3c-dcat";
-import { sha256 } from "../hash-util";
+import { wrapDataset } from "../util";
 
 export function getPageUrls(source) {
   return Promise.resolve([source.url]);
@@ -11,17 +10,6 @@ export function fetchPage(source) {
     .then(res => res.json())
     .then(res => {
       const data = Array.isArray(res) ? res : res.dataset;
-      const datasets = [];
-
-      for (let dataset of data) {
-        datasets.push({
-          type: "dkan",
-          dcat: Dataset.from("DKAN", dataset).toJSON(),
-          checksum: sha256(JSON.stringify(dataset)),
-          original: dataset
-        });
-      }
-
-      return datasets;
+      return data.map(d => wrapDataset("DKAN", d));
     });
 }

@@ -1,6 +1,5 @@
 import fetch from "node-fetch";
-import { Dataset } from "w3c-dcat";
-import { sha256 } from "../hash-util";
+import { wrapDataset } from "../util";
 
 const requestSize = 100;
 
@@ -24,20 +23,7 @@ export function getPageUrls(source) {
 export function fetchPage(source) {
   return fetch(source.url)
     .then(res => res.json())
-    .then(res => {
-      const datasets = [];
-
-      for (let dataset of res.results) {
-        datasets.push({
-          type: "junar",
-          dcat: Dataset.from("JUnar", dataset).toJSON(),
-          checksum: sha256(JSON.stringify(dataset)),
-          original: dataset
-        });
-      }
-
-      return datasets;
-    });
+    .then(res => res.results.map(d => wrapDataset("Junar", d)));
 }
 
 function createUrl(apiUrl, apiKey, offset, limit) {
