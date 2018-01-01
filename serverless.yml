@@ -1,0 +1,84 @@
+service: sdn-pipeline
+
+provider:
+  name: aws
+  runtime: nodejs6.10
+  region: us-east-1
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - sns:*
+        - dynamodb:*
+        - es:*
+      Resource: "*"
+  environment:
+    DYNAMODB_TABLE: "sdn-data-source"
+    SNS_FETCH_QUEUE: { "Ref": "SNSFetchQueue" }
+    SNS_INDEX_QUEUE: { "Ref": "SNSIndexQueue" }
+    ES_INDEX: "metadata"
+    ES_URL: "search-datarea-o2cglxd5agwytjwhzgtedbg4fq.us-east-1.es.amazonaws.com"
+
+functions:
+  bootstrapper:
+    name: sdn-pipeline-bootstrapper
+    handler: dist/bootstrapper/index.bootstrap
+    timeout: 20
+  fetcher:
+    name: sdn-pipeline-fetcher
+    handler: dist/fetcher/index.fetch
+    timeout: 60
+    events:
+      - sns:
+          arn:
+            Fn::Join:
+              - ""
+              - - "arn:aws:sns:"
+                - Ref: "AWS::Region"
+                - ":"
+                - Ref: "AWS::AccountId"
+                - ":sdn-pipeline-fetch-queue"
+          topicName: sdn-pipeline-fetch-queue
+  indexer:
+    name: sdn-pipeline-indexer
+    handler: dist/indexer/index.index
+    timeout: 20
+    events:
+      - sns:
+          arn:
+            Fn::Join:
+              - ""
+              - - "arn:aws:sns:"
+                - Ref: "AWS::Region"
+                - ":"
+                - Ref: "AWS::AccountId"
+                - ":sdn-pipeline-index-queue"
+          topicName: sdn-pipeline-index-queue
+
+resources:
+  Resources:
+    SNSFetchQueue:
+      Type: AWS::SNS::Topic
+      Properties:
+        TopicName: "sdn-pipeline-fetch-queue"
+    SNSIndexQueue:
+      Type: AWS::SNS::Topic
+      Properties:
+        TopicName: "sdn-pipeline-index-queue"
+    # DynamoDBTable:
+    #   Type: AWS::DynamoDB::Table
+    #   Properties:
+    #     TableName: "sdn-data-source"
+    #     AttributeDefinitions:
+    #       - AttributeName: name
+    #         AttributeType: S
+    #       - AttributeName: type
+    #         AttributeType: S
+    #       - AttributeName: url
+    #         AttributeType: S
+    #       - AttributeName: apiKey
+    #         AttributeType: S
+    #       - AttributeName: apiUrl
+    #         AttributeType: S
+    #     KeySchema:
+    #       - AttributeName: name
+    #         KeyType: S
