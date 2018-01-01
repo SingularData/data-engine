@@ -9,6 +9,7 @@ provider:
       Action:
         - sns:*
         - dynamodb:*
+        - es:*
       Resource: "*"
   environment:
     DYNAMODB_TABLE: "sdn-data-source"

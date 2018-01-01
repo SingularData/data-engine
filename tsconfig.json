@@ -7,5 +7,5 @@
     "removeComments": true,
     "lib": ["es5", "es2015.promise", "esnext.asynciterable"]
   },
-  "include": ["./src/bootstrapper/*.ts", "./src/fetcher/**/*.ts"]
+  "include": ["./src/**/*.ts"]
 }

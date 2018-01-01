@@ -16,3 +16,19 @@ export function indexDataset(es, dataset) {
 
   return es.index(params);
 }
+
+export function saveChecksum(dynamodb, dataset) {
+  const params = {
+    Item: {
+      identifier: {
+        S: dataset.dcat.identifier
+      },
+      checksum: {
+        S: dataset.checksum
+      }
+    },
+    TableName: "sdn-dataset-checksum"
+  };
+
+  return dynamodb.putItem(params).promise();
+}

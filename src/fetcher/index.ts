@@ -105,7 +105,7 @@ exports.fetch = (event, context) => {
           return Promise.all(tasks);
         })
         .then(() =>
-          context.done(null, "Finished fetch page task for: ${source.url}.")
+          context.done(null, `Finished fetch page task for: ${source.url}.`)
         )
         .catch(err => context.done(err));
   }

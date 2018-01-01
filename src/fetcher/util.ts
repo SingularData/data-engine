@@ -8,13 +8,15 @@ export function deduplicate(dynamodb, datasets) {
   const params = {
     TableName: "sdn-dataset-checksum",
     Key: {
-      identifier: {}
+      identifier: {
+        S: ""
+      }
     },
     ConsistentRead: true
   };
 
   for (let dataset of datasets) {
-    params.Key.identifier = dataset.dcat.identifier;
+    params.Key.identifier.S = dataset.dcat.identifier;
 
     const task = dynamodb
       .getItem(params)
@@ -24,9 +26,10 @@ export function deduplicate(dynamodb, datasets) {
           filtered.push(dataset);
         }
       })
-      .catch(err =>
-        console.log("Unable to check duplication for item: ", dataset.dcat)
-      );
+      .catch(err => {
+        console.error(err);
+        console.log("Unable to check duplication for item: ", dataset.dcat);
+      });
 
     tasks.push(task);
   }
