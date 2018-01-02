@@ -7,7 +7,7 @@ import * as geonode from "./source-handler/geonode";
 import * as junar from "./source-handler/junar";
 import * as opendatasoft from "./source-handler/opendatasoft";
 import * as socrata from "./source-handler/socrata";
-import { deduplicate } from "./util";
+import { deduplicate, stringPlunk } from "./util";
 
 const sourceHandlers = {
   arcgis,
@@ -79,15 +79,16 @@ exports.fetch = (event, context) => {
       return sourceHandlers[source.type.toLowerCase()]
         .fetchPage(source)
         .then(datasets => deduplicate(dynamodb, datasets))
-        .then(datasets => {
+        .then(datasets => stringPlunk(datasets, 256 * 1000))
+        .then(plunks => {
           const tasks = [];
 
-          for (let dataset of datasets) {
+          for (let plunk of plunks) {
             console.log(`Publishing index task for dataset: ${source.name}.`);
 
             const task = sns
               .publish({
-                Message: JSON.stringify(dataset),
+                Message: plunk,
                 TopicArn: process.env.SNS_INDEX_QUEUE
               })
               .promise()

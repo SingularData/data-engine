@@ -6,29 +6,47 @@ export function ensureIndex(es, index) {
   });
 }
 
-export function indexDataset(es, dataset) {
-  const params = {
-    index: process.env.ES_INDEX,
-    type: dataset.type,
-    _id: dataset.dcat.identifier,
-    body: dataset
-  };
+export function indexDatasets(es, datasets) {
+  const body = [];
 
-  return es.index(params);
+  for (let dataset of datasets) {
+    const action = {
+      index: {
+        _index: process.env.ES_INDEX,
+        _type: dataset.type,
+        _id: dataset.dcat.identifier
+      }
+    };
+
+    body.push(action, dataset);
+  }
+
+  return es.bulk({ body });
 }
 
-export function saveChecksum(dynamodb, dataset) {
+export function saveChecksum(dynamodb, datasets) {
   const params = {
-    Item: {
-      identifier: {
-        S: dataset.dcat.identifier
-      },
-      checksum: {
-        S: dataset.checksum
-      }
-    },
-    TableName: "sdn-dataset-checksum"
+    RequestItems: {}
   };
 
-  return dynamodb.putItem(params).promise();
+  params.RequestItems[process.env.DYNAMODB_CHECKSUM] = [];
+
+  for (let dataset of datasets) {
+    const item = {
+      PutRequest: {
+        Item: {
+          identifier: {
+            S: dataset.dcat.identifier
+          },
+          checksum: {
+            S: dataset.checksum
+          }
+        }
+      }
+    };
+
+    params.RequestItems[process.env.DYNAMODB_CHECKSUM].push(item);
+  }
+
+  return dynamodb.batchWriteItem(params).promise();
 }

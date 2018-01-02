@@ -2,6 +2,32 @@ import { createHash } from "crypto";
 import { Dataset } from "w3c-dcat";
 import * as _ from "lodash";
 
+export function stringPlunk(datasets, size) {
+  const plunks = [];
+  let currentSize = 0;
+  let currentPlunk = [];
+
+  // substract the size of "[]"
+  size -= 4;
+
+  for (let dataset of datasets) {
+    const s = JSON.stringify(dataset);
+    const textSize = claculateSize(s);
+
+    if (textSize + currentSize < size) {
+      currentPlunk.push(s);
+      currentSize += textSize;
+    } else {
+      plunks.push("[" + currentPlunk.join(",") + "]");
+
+      currentSize = 0;
+      currentPlunk = [];
+    }
+  }
+
+  return plunks;
+}
+
 export function deduplicate(dynamodb, datasets) {
   const filtered = [];
   const tasks = [];
@@ -56,4 +82,8 @@ function sha256(data: string): string {
   hash.update(data);
 
   return hash.digest("base64");
+}
+
+function claculateSize(s) {
+  return ~-encodeURI(s).split(/%..|./).length;
 }
