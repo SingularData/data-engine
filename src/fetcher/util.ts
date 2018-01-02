@@ -32,7 +32,7 @@ export function deduplicate(dynamodb, datasets) {
   const filtered = [];
   const tasks = [];
   const params = {
-    TableName: "sdn-dataset-checksum",
+    TableName: process.env.DYNAMODB_CHECKSUM,
     Key: {
       identifier: {
         S: ""
