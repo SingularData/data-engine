@@ -12,7 +12,8 @@ provider:
         - es:*
       Resource: "*"
   environment:
-    DYNAMODB_TABLE: "sdn-data-source"
+    DYNAMODB_SOURCE: "sdn-data-source"
+    DYNAMODB_CHECKSUM: "sdn-dataset-checksum"
     SNS_FETCH_QUEUE: { "Ref": "SNSFetchQueue" }
     SNS_INDEX_QUEUE: { "Ref": "SNSIndexQueue" }
     ES_INDEX: "metadata"

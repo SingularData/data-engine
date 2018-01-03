@@ -45,7 +45,7 @@ exports.bootstrap = (event, context) => {
 async function getSources(dynamodb, start?): Promise<any[]> {
   try {
     const params = {
-      TableName: process.env.DYNAMODB_TABLE,
+      TableName: process.env.DYNAMODB_SOURCE,
       ExclusiveStartKey: start
     };
     const sources = [];
