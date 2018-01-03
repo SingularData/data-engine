@@ -11,5 +11,9 @@ node_js:
 
 script:
   - npm install -g serverless
-  - npm run test-ci
-  - npm run deploy
+
+deploy:
+  provider: script
+  script: ./deploy.sh
+  on:
+    branch: master
