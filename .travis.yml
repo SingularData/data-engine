@@ -10,7 +10,7 @@ node_js:
   - "node"
 
 script:
-  - npm install -g serverless
+  - npm run test-ci
 
 deploy:
   provider: script
