@@ -8,7 +8,8 @@
     "test-ci": "NODE_ENV=ci npm run test",
     "build": "tsc --outDir dist",
     "precommit": "lint-staged",
-    "deploy": "npm test && npm run build && SLS_DEBUG=* sls deploy -v"
+    "deploy": "npm test && npm run build && SLS_DEBUG=* sls deploy -v",
+    "deploy-ci": "npm run build && sls deploy"
   },
   "lint-staged": {
     "*.{d.ts,ts,json,md}": ["prettier --write", "git add"]
