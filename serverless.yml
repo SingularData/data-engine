@@ -24,6 +24,8 @@ functions:
     name: sdn-pipeline-bootstrapper
     handler: dist/bootstrapper/index.bootstrap
     timeout: 20
+    events:
+      - schedule: rate(7 days)
   fetcher:
     name: sdn-pipeline-fetcher
     handler: dist/fetcher/index.fetch
