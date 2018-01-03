@@ -10,4 +10,6 @@ node_js:
   - "node"
 
 script:
-# - npm run test-ci
+  - npm install -g serverless
+  - npm run test-ci
+  - npm run deploy
