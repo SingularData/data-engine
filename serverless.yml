@@ -10,9 +10,11 @@ provider:
         - sns:*
         - dynamodb:*
         - es:*
+        - s3:*
       Resource: "*"
   environment:
-    DYNAMODB_SOURCE: "sdn-data-source"
+    S3_BUCKET: "sdn-data"
+    S3_DATA_SOURCE: "data-sources.json"
     DYNAMODB_CHECKSUM: "sdn-dataset-checksum"
     SNS_FETCH_QUEUE: { "Ref": "SNSFetchQueue" }
     SNS_INDEX_QUEUE: { "Ref": "SNSIndexQueue" }

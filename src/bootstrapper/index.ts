@@ -5,11 +5,19 @@ AWS.config.region = "us-east-1";
 exports.bootstrap = (event, context) => {
   console.log("Start publishing data request tasks.");
 
-  const dynamodb = new AWS.DynamoDB();
+  const s3 = new AWS.S3();
   const sns = new AWS.SNS();
 
-  getSources(dynamodb)
-    .then((list: any) => {
+  const params = {
+    Bucket: process.env.S3_BUCKET,
+    Key: process.env.S3_DATA_SOURCE
+  };
+
+  s3
+    .getObject(params)
+    .promise()
+    .then((data: any) => {
+      const list = JSON.parse(data.Body);
       const tasks = [];
 
       for (let source of list) {
@@ -41,42 +49,3 @@ exports.bootstrap = (event, context) => {
     .then(() => context.done(null, "Published task!"))
     .catch(err => context.done(err));
 };
-
-async function getSources(dynamodb, start?): Promise<any[]> {
-  try {
-    const params = {
-      TableName: process.env.DYNAMODB_SOURCE,
-      ExclusiveStartKey: start
-    };
-    const sources = [];
-
-    const data = await dynamodb.scan(params).promise();
-
-    if (data.Count === 0) {
-      return sources;
-    }
-
-    for (let item of data.Items) {
-      const source = {};
-
-      for (let key in item) {
-        if (!item.hasOwnProperty(key)) {
-          continue;
-        }
-
-        source[key] = item[key].S;
-      }
-
-      sources.push(source);
-    }
-
-    if (data.LastEvaluatedKey) {
-      const rest: any = await getSources(dynamodb, data.LastEvaluatedKey);
-      sources.push(...rest);
-    }
-
-    return sources;
-  } catch (err) {
-    return Promise.reject(err);
-  }
-}
