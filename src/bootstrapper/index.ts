@@ -2,7 +2,7 @@ import AWS = require("aws-sdk");
 
 AWS.config.region = "us-east-1";
 
-exports.bootstrap = (event, context) => {
+exports.bootstrap = (event, context, callback) => {
   console.log("Start publishing data request tasks.");
 
   const s3 = new AWS.S3();
@@ -46,6 +46,9 @@ exports.bootstrap = (event, context) => {
 
       return Promise.all(tasks);
     })
-    .then(() => context.done(null, "Published task!"))
-    .catch(err => context.done(err));
+    .then(() => {
+      console.log("Published tasks!");
+      callback();
+    })
+    .catch(err => callback(err));
 };

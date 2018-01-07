@@ -21,7 +21,7 @@ const sourceHandlers = {
 
 AWS.config.region = "us-east-1";
 
-exports.fetch = (event, context) => {
+exports.fetch = (event, context, callback) => {
   const source = JSON.parse(event.Records[0].Sns.Message);
   const sns = new AWS.SNS();
 
@@ -67,10 +67,11 @@ exports.fetch = (event, context) => {
 
           return Promise.all(tasks);
         })
-        .then(() =>
-          context.done(null, "Finished fetch source task for: ${source.url}.")
-        )
-        .catch(err => context.done(err));
+        .then(() => {
+          console.log(`Finished fetch source task for: ${source.url}.`);
+          callback();
+        })
+        .catch(err => callback(err));
     case "FetchPage":
       console.log(`Received fetch page task for: ${source.name}.`);
 
@@ -105,9 +106,10 @@ exports.fetch = (event, context) => {
 
           return Promise.all(tasks);
         })
-        .then(() =>
-          context.done(null, `Finished fetch page task for: ${source.url}.`)
-        )
-        .catch(err => context.done(err));
+        .then(() => {
+          console.log(`Finished fetch page task for: ${source.url}.`);
+          callback();
+        })
+        .catch(err => callback(err));
   }
 };
