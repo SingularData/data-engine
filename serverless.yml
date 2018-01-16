@@ -28,6 +28,16 @@ functions:
     timeout: 20
     events:
       - schedule: rate(7 days)
+      - sns:
+          arn:
+            Fn::Join:
+              - ""
+              - - "arn:aws:sns:"
+                - Ref: "AWS::Region"
+                - ":"
+                - Ref: "AWS::AccountId"
+                - ":sdn-pipeline-bootstrap-queue"
+          topicName: sdn-pipeline-bootstrap-queue
   fetcher:
     name: sdn-pipeline-fetcher
     handler: dist/fetcher/index.fetch
@@ -61,6 +71,10 @@ functions:
 
 resources:
   Resources:
+    SNSBootstrapQueue:
+      Type: AWS::SNS::Topic
+      Properties:
+        TopicName: "sdn-pipeline-bootstrap-queue"
     SNSFetchQueue:
       Type: AWS::SNS::Topic
       Properties:
