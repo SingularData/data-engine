@@ -21,7 +21,7 @@ const sourceHandlers = {
 
 AWS.config.region = "us-east-1";
 
-exports.fetch = (event, context, callback) => {
+export function fetch(event, context, callback) {
   const source = JSON.parse(event.Records[0].Sns.Message);
   const sns = new AWS.SNS();
 
@@ -112,4 +112,4 @@ exports.fetch = (event, context, callback) => {
         })
         .catch(err => callback(err));
   }
-};
+}

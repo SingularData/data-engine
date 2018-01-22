@@ -23,10 +23,13 @@
   "homepage": "https://github.com/SingularData/data-pipeline",
   "devDependencies": {
     "@types/chai": "^4.0.10",
+    "@types/dotenv": "^4.0.2",
     "@types/fs-extra": "^5.0.0",
     "@types/mocha": "^2.2.45",
     "@types/sleep": "0.0.7",
+    "aws-sdk-mock": "^1.7.0",
     "chai": "^4.1.2",
+    "dotenv": "^4.0.0",
     "husky": "^0.14.3",
     "lint-staged": "^6.0.0",
     "mocha": "^4.1.0",

@@ -2,7 +2,7 @@ import AWS = require("aws-sdk");
 
 AWS.config.region = "us-east-1";
 
-exports.bootstrap = (event, context, callback) => {
+export function bootstrap(event, context, callback) {
   console.log("Start publishing data request tasks.");
 
   const s3 = new AWS.S3();
@@ -51,4 +51,4 @@ exports.bootstrap = (event, context, callback) => {
       callback();
     })
     .catch(err => callback(err));
-};
+}

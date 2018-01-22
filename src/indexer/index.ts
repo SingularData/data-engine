@@ -5,7 +5,7 @@ import { ensureIndex, indexDatasets, saveChecksum } from "./util";
 
 AWS.config.region = "us-east-1";
 
-exports.index = (event, context, callback) => {
+export function index(event, context, callback) {
   const datasets = JSON.parse(event.Records[0].Sns.Message);
   const client = new es.Client({
     hosts: [process.env.ES_URL],
@@ -18,4 +18,4 @@ exports.index = (event, context, callback) => {
     .then(() => saveChecksum(dynamodb, datasets))
     .then(() => callback())
     .catch(error => callback(error));
-};
+}
