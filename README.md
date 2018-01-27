@@ -1,37 +1,57 @@
 # [SingularData.net](http://singulardata.net/) Data Pipeline
 
-A data pipeline to collect and index data metadata from more than 1,000 open data portals.
+A data pipeline to collect, transform, and index open data metadata from various data sources.
 
 ![platforms](images/platforms.png)
 
-## How does it work?
+## Idea
 
-### Portal Metadata Request
+Open data is a great resource to learn, study, and discover our community. But finding suitable data is never an easy job even thought more data are open and more data portals are established. Here is the problem: we are in an ocean of open data and what we are looking at is the data in a island with unknown coordinates.
 
-The open data metadata collection is possible by open data portals providing standardized APIs to allow developers to harvest dataset metadata. For example, the platform [ArcGIS Open Data](https://hub.arcgis.com/pages/open-data) provides a publich API to download all dataset metadata in a portal built with it.
+Can we have a service that directly tells us where the dataset is, without checking each data provider or portal? No yet, but this is what I want to see and intent to do.
 
-```
-GET http://data.cityofmadison.opendata.arcgis.com/data.json
-```
+This is a data pipeline that collects open data metadata from various open data providers and build a universal search index.
 
-This API will output a list of dataset metadata in the portal, which includes basic information like title, keyworks, description, etc.
+## System Design
 
-Even there are hundreds of different data portals built with ArcGIS, they have the same `/data.json` API to export dataset metadata in the same format. A request generator can be built to digest portal URLs, construct metadata request, and send for dataset metadata.
+The data pipeline is built on the top of AWS:
 
-Many open data platforms provide standardized open APIs. In this data pipeline, different requester generators are developed to work with different open data platforms. So far this data pipeline supports [ArcGIS Open Data](https://hub.arcgis.com/pages/open-data), [CKAN](https://ckan.org/), [DKAN](https://getdkan.org/), [GeoNode](http://geonode.org/), [Junar](http://junar.com/index9ed2.html?lang=en), [OpenDataSoft](https://www.opendatasoft.com/), [Socrata](https://socrata.com/).
+* **S3** to store the [data provider list](link here)
 
-![collect](images/collect.png)
+* **Lambda** to generate, schedule, and execute jobs
 
-### Stream Processing
+* **SNS** to transfer jobs between lambda functions
 
-More than 1,000 data portals are harvested by this data pipeline. A stream processing is used to optimize the procedure and reduce required resources.
+* **DynamoDB** to store checksums of dataset metadata for duplication/update check
 
-Collected dataset metadata from each request will be emitted a stream of metadata. Each metadata is processed in the following steps:
+* **ElasticSearch** to create search index for the transformed open data metadata (I am currently using AWS ElasticSearch Service)
 
-* Filter with the existing metadata in the database based on the content hash and remove existing ones.
-* Convert the dataset metadata into a format based on [W3C Data Catalog Vocabulary](https://www.w3.org/TR/vocab-dcat/) (DCAT)
-* Give a version number to each new or updated metadata
-* Aggregate them into chunks
-* Save into Database and ElasticSearch service
+![image](image here)
 
-![process](images/process.png)
+## Workflow
+
+### Bootstrapping
+
+The [bootstrapper]() lambda function is to read the open data provider list, which is currently stored in at S3, and publish a `FetchSource` job with the provider information to a AWS SNS queue _fetch-queue_.
+
+#### Fetching Metadata
+
+The [fetcher]() lambda function subscribes to the _fetch-queue_ queue.
+
+**FetchSource**
+
+When it receives a `FetchSource` job, the fetcher function determines the type of data provider and the way to collect data metadata from the provider.
+
+Currently, the fetcher supports the metadata API from ArcGIS Open Data, CKAN, DKAN, GeoNode, Junar, OpenDataSoft, and Socrata. It generates urls to fetch metadata depending on the design of the API. For some APIs, they provider the one-call-get-all service to download all dataset metadata. For some APIs, we need to do the pagination to read all metadata and therefore a series urls are generated.
+
+Then it publishes a `FetchPage` job with the provider information and the request url to the _fetch-queue_.
+
+**FetchPage**
+
+When it receives a `FetchPage` job, the fetcher function sends a request to the data provider to download a list of dataset metadata and then transforms into the [W3C DCAT schema](). To avoid duplicated indexing and unnecessary work, the fetcher will compute the checksum of each dataset and compare it the one stored in the DynamoDB with the same identifier. If the checksum is different, it means the dataset metadata has been updated and the fetcher can pass the metadata to the next step. If no, the dataset metadata already exists in the index and the fetcher will drops it.
+
+All updated dataset metadata will be enqueued into the _index-queue_ for the indexing.
+
+#### Building the Index
+
+The [indexer](...) function subscribes the _index-queue_ and index the incoming dataset metadata into an ElasticSearch service.
