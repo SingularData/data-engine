@@ -16,7 +16,7 @@ This is a data pipeline that collects open data metadata from various open data 
 
 The data pipeline is built on the top of AWS:
 
-* **S3** to store the [data provider list](link here)
+* **S3** to store the [data provider list](https://github.com/SingularData/data-source/blob/master/data-sources.json)
 
 * **Lambda** to generate, schedule, and execute jobs
 
@@ -32,11 +32,11 @@ The data pipeline is built on the top of AWS:
 
 ### Bootstrapping
 
-The [bootstrapper]() lambda function is to read the open data provider list, which is currently stored in at S3, and publish a `FetchSource` job with the provider information to a AWS SNS queue _fetch-queue_.
+The [bootstrapper](https://github.com/SingularData/data-pipeline/blob/master/src/bootstrapper/index.ts) lambda function is to read the open data provider list, which is currently stored in at S3, and publish a `FetchSource` job with the provider information to a AWS SNS queue _fetch-queue_.
 
 #### Fetching Metadata
 
-The [fetcher]() lambda function subscribes to the _fetch-queue_ queue.
+The [fetcher](https://github.com/SingularData/data-pipeline/blob/master/src/fetcher/index.ts) lambda function subscribes to the _fetch-queue_ queue.
 
 **FetchSource**
 
@@ -48,10 +48,10 @@ Then it publishes a `FetchPage` job with the provider information and the reques
 
 **FetchPage**
 
-When it receives a `FetchPage` job, the fetcher function sends a request to the data provider to download a list of dataset metadata and then transforms into the [W3C DCAT schema](). To avoid duplicated indexing and unnecessary work, the fetcher will compute the checksum of each dataset and compare it the one stored in the DynamoDB with the same identifier. If the checksum is different, it means the dataset metadata has been updated and the fetcher can pass the metadata to the next step. If no, the dataset metadata already exists in the index and the fetcher will drops it.
+When it receives a `FetchPage` job, the fetcher function sends a request to the data provider to download a list of dataset metadata and then transforms into the [W3C DCAT schema](https://www.w3.org/TR/vocab-dcat/). To avoid duplicated indexing and unnecessary work, the fetcher will compute the checksum of each dataset and compare it the one stored in the DynamoDB with the same identifier. If the checksum is different, it means the dataset metadata has been updated and the fetcher can pass the metadata to the next step. If no, the dataset metadata already exists in the index and the fetcher will drops it.
 
 All updated dataset metadata will be enqueued into the _index-queue_ for the indexing.
 
 #### Building the Index
 
-The [indexer](...) function subscribes the _index-queue_ and index the incoming dataset metadata into an ElasticSearch service.
+The [indexer](https://github.com/SingularData/data-pipeline/blob/master/src/indexer/index.ts) function subscribes the _index-queue_ and index the incoming dataset metadata into an ElasticSearch service.
