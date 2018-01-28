@@ -1,0 +1,6 @@
+{
+  "name": "Energy Data eXchange",
+  "type": "CKAN",
+  "url": "https://edx.netl.doe.gov",
+  "messageType": "FetchSource"
+}

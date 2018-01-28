@@ -32,8 +32,7 @@ node_modules
 # Optional REPL history
 .node_repl_history
 
-scripts/javascript
-scripts/system
+scripts/private
 config/production.json
 dist
 .env
