@@ -1,5 +1,12 @@
 service: sdn-pipeline
 
+plugins:
+  - serverless-dotenv-plugin
+
+custom:
+  dotenv:
+    path: .env
+
 provider:
   name: aws
   runtime: nodejs6.10
@@ -13,13 +20,13 @@ provider:
         - s3:*
       Resource: "*"
   environment:
-    S3_BUCKET: "sdn-data"
-    S3_DATA_SOURCE: "data-sources.json"
-    DYNAMODB_CHECKSUM: "sdn-dataset-checksum"
+    S3_BUCKET: ${env:S3_BUCKET}
+    S3_DATA_SOURCE: ${env:S3_DATA_SOURCE}
+    DYNAMODB_CHECKSUM: ${env:DYNAMODB_CHECKSUM}
     SNS_FETCH_QUEUE: { "Ref": "SNSFetchQueue" }
     SNS_INDEX_QUEUE: { "Ref": "SNSIndexQueue" }
-    ES_INDEX: "metadata"
-    ES_URL: "search-datarea-o2cglxd5agwytjwhzgtedbg4fq.us-east-1.es.amazonaws.com"
+    ES_INDEX: ${env:ES_INDEX}
+    ES_URL: ${env:ES_URL}
 
 functions:
   bootstrapper:
@@ -83,21 +90,3 @@ resources:
       Type: AWS::SNS::Topic
       Properties:
         TopicName: "sdn-pipeline-index-queue"
-    # DynamoDBTable:
-    #   Type: AWS::DynamoDB::Table
-    #   Properties:
-    #     TableName: "sdn-data-source"
-    #     AttributeDefinitions:
-    #       - AttributeName: name
-    #         AttributeType: S
-    #       - AttributeName: type
-    #         AttributeType: S
-    #       - AttributeName: url
-    #         AttributeType: S
-    #       - AttributeName: apiKey
-    #         AttributeType: S
-    #       - AttributeName: apiUrl
-    #         AttributeType: S
-    #     KeySchema:
-    #       - AttributeName: name
-    #         KeyType: S

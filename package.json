@@ -7,8 +7,8 @@
     "test": "mocha \"test/**/*.test.ts\" --require ts-node/register",
     "test-ci": "NODE_ENV=ci npm run test",
     "build": "tsc --outDir dist",
-    "precommit": "lint-staged",
-    "deploy": "npm test && npm run build && SLS_DEBUG=* sls deploy -v",
+    "precommit": "npm run build && npm run test && lint-staged",
+    "deploy": "npm run build && npm test && SLS_DEBUG=* sls deploy -v",
     "deploy-ci": "bash deploy.sh"
   },
   "lint-staged": {
@@ -36,6 +36,7 @@
     "mocha": "^4.1.0",
     "prettier": "^1.9.2",
     "serverless": "^1.25.0",
+    "serverless-dotenv-plugin": "^1.0.2",
     "ts-node": "^4.1.0",
     "tslint": "^5.8.0",
     "typescript": "^2.6.2"
