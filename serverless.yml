@@ -27,6 +27,7 @@ provider:
     SNS_INDEX_QUEUE: { "Ref": "SNSIndexQueue" }
     ES_INDEX: ${env:ES_INDEX}
     ES_URL: ${env:ES_URL}
+    MAX_SNS_MESSAGE_SIZE: ${env:MAX_SNS_MESSAGE_SIZE}
 
 functions:
   bootstrapper:

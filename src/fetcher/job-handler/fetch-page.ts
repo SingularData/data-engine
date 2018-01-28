@@ -7,15 +7,15 @@ export function fetchPage(job, aws) {
     .fetchPage(job)
     .then(datasets => deduplicate(aws.dynamodb, datasets))
     .then(datasets => chunkBySize(datasets, process.env.MAX_SNS_MESSAGE_SIZE))
-    .then(plunks => {
+    .then(chunks => {
       const tasks = [];
 
-      for (let plunk of plunks) {
+      for (let chunk of chunks) {
         console.log(`Publishing index task for dataset: ${job.name}.`);
 
         const task = aws.sns
           .publish({
-            Message: JSON.stringify(plunk),
+            Message: JSON.stringify(chunk),
             TopicArn: process.env.SNS_INDEX_QUEUE
           })
           .promise()
