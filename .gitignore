@@ -38,3 +38,4 @@ dist
 test/temp
 .env
 .serverless
+.nyc_output

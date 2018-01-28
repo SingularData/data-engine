@@ -4,7 +4,7 @@
   "description": "data pipeline for SingularData.io",
   "main": "index.js",
   "scripts": {
-    "test": "mocha \"test/**/*.test.ts\" --require ts-node/register",
+    "test": "nyc mocha",
     "test-ci": "NODE_ENV=ci npm run test",
     "build": "tsc --outDir dist",
     "precommit": "npm run build && npm run test && lint-staged",
@@ -34,9 +34,11 @@
     "husky": "^0.14.3",
     "lint-staged": "^6.0.0",
     "mocha": "^4.1.0",
+    "nyc": "^11.4.1",
     "prettier": "^1.9.2",
     "serverless": "^1.25.0",
     "serverless-dotenv-plugin": "^1.0.2",
+    "source-map-support": "^0.5.3",
     "ts-node": "^4.1.0",
     "tslint": "^5.8.0",
     "typescript": "^2.6.2"
@@ -54,5 +56,11 @@
     "lodash": "^4.17.4",
     "node-fetch": "^1.7.3",
     "w3c-dcat": "^0.2.0"
+  },
+  "nyc": {
+    "extension": [".ts"],
+    "exclude": ["**/*.d.ts"],
+    "reporter": ["text-summary", "html"],
+    "all": true
   }
 }

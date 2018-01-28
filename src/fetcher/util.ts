@@ -48,7 +48,7 @@ export function deduplicate(dynamodb, datasets) {
       .getItem(params)
       .promise()
       .then(data => {
-        if (_.get(data, "Item.checksum") !== dataset.checksum) {
+        if (_.get(data, "Item.checksum.S") !== dataset.checksum) {
           filtered.push(dataset);
         }
       })
@@ -65,8 +65,8 @@ export function deduplicate(dynamodb, datasets) {
 
 export function wrapDataset(type, dataset) {
   return {
-    type,
-    dcat: Dataset.from(type, dataset).toJSON(),
+    type: type.toLowerCase(),
+    dcat: Dataset.from(type.toLowerCase(), dataset).toJSON(),
     checksum: sha256(JSON.stringify(dataset)),
     original: dataset
   };
