@@ -35,5 +35,6 @@ node_modules
 scripts/private
 config/production.json
 dist
+test/temp
 .env
 .serverless

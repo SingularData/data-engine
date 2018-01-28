@@ -56,7 +56,7 @@ functions:
   indexer:
     name: sdn-pipeline-indexer
     handler: dist/indexer/index.index
-    timeout: 20
+    timeout: 60
     events:
       - sns:
           arn:

@@ -1,12 +1,12 @@
 import * as _ from "lodash";
 import * as sourceHandlers from "../source-handler";
-import { deduplicate, stringPlunk } from "../util";
+import { deduplicate, chunkBySize } from "../util";
 
 export function fetchPage(job, aws) {
   return sourceHandlers[job.type.toLowerCase()]
     .fetchPage(job)
     .then(datasets => deduplicate(aws.dynamodb, datasets))
-    .then(datasets => stringPlunk(datasets, 256 * 1000))
+    .then(datasets => chunkBySize(datasets, process.env.MAX_SNS_MESSAGE_SIZE))
     .then(plunks => {
       const tasks = [];
 
@@ -15,7 +15,7 @@ export function fetchPage(job, aws) {
 
         const task = aws.sns
           .publish({
-            Message: plunk,
+            Message: JSON.stringify(plunk),
             TopicArn: process.env.SNS_INDEX_QUEUE
           })
           .promise()
