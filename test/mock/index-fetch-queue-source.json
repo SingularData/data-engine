@@ -1,6 +1,0 @@
-{
-  "name": "TestSource",
-  "messageType": "FetchSource",
-  "url": "http://catalog.data.gov",
-  "type": "CKAN"
-}

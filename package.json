@@ -4,11 +4,11 @@
   "description": "data pipeline for SingularData.io",
   "main": "index.js",
   "scripts": {
-    "test": "mocha \"test/**/*.test.ts\" --require ts-node/register",
+    "test": "nyc mocha",
     "test-ci": "NODE_ENV=ci npm run test",
     "build": "tsc --outDir dist",
-    "precommit": "lint-staged",
-    "deploy": "npm test && npm run build && SLS_DEBUG=* sls deploy -v",
+    "precommit": "npm run build && npm run test && lint-staged",
+    "deploy": "npm run build && npm test && SLS_DEBUG=* sls deploy -v",
     "deploy-ci": "bash deploy.sh"
   },
   "lint-staged": {
@@ -23,16 +23,22 @@
   "homepage": "https://github.com/SingularData/data-pipeline",
   "devDependencies": {
     "@types/chai": "^4.0.10",
+    "@types/dotenv": "^4.0.2",
     "@types/fs-extra": "^5.0.0",
     "@types/mocha": "^2.2.45",
     "@types/sleep": "0.0.7",
+    "aws-sdk-mock": "^1.7.0",
     "chai": "^4.1.2",
+    "dotenv": "^4.0.0",
+    "fs-extra": "^5.0.0",
     "husky": "^0.14.3",
     "lint-staged": "^6.0.0",
     "mocha": "^4.1.0",
+    "nyc": "^11.4.1",
     "prettier": "^1.9.2",
     "serverless": "^1.25.0",
-    "sleep": "^5.1.1",
+    "serverless-dotenv-plugin": "^1.0.2",
+    "source-map-support": "^0.5.3",
     "ts-node": "^4.1.0",
     "tslint": "^5.8.0",
     "typescript": "^2.6.2"
@@ -50,5 +56,11 @@
     "lodash": "^4.17.4",
     "node-fetch": "^1.7.3",
     "w3c-dcat": "^0.2.0"
+  },
+  "nyc": {
+    "extension": [".ts"],
+    "exclude": ["**/*.d.ts"],
+    "reporter": ["text-summary", "html"],
+    "all": true
   }
 }

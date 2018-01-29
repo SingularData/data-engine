@@ -1,6 +1,0 @@
-{
-  "name": "TestSource",
-  "messageType": "FetchPage",
-  "url": "https://data.ca.gov",
-  "type": "DKAN"
-}
