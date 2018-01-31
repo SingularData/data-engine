@@ -27,5 +27,7 @@ export function fetch(event, context, callback) {
         .then(() => console.log(`Finished fetch page task for: ${job.url}.`))
         .then(() => callback())
         .catch(err => callback(err));
+    default:
+      callback(new Error(`Unrecognized job type: ${job.messageType}`));
   }
 }

@@ -3,6 +3,10 @@ import * as sourceHandlers from "../source-handler";
 
 export function fetchSource(job, aws) {
   return sourceHandlers[job.type.toLowerCase()].getPageUrls(job).then(urls => {
+    if (urls.length) {
+      throw new Error("No url is found for " + job.url);
+    }
+
     const tasks = [];
 
     for (let url of urls) {

@@ -4,7 +4,7 @@ import {
 } from "../../../../src/fetcher/source-handler/junar";
 import { expect } from "chai";
 
-describe("fetcher/source-handler/junar.ts", function() {
+describe.only("fetcher/source-handler/junar.ts", function() {
   this.timeout(10000);
 
   it("should harvest Junar portal.", done => {
