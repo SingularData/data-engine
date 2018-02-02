@@ -2,6 +2,18 @@ import { createHash } from "crypto";
 import { Dataset } from "w3c-dcat";
 import * as _ from "lodash";
 
+export function removeNull(dataset) {
+  for (let key in dataset) {
+    if (!dataset[key]) {
+      delete dataset[key];
+    } else if (typeof dataset[key] === "object") {
+      removeNull(dataset[key]);
+    }
+  }
+
+  return dataset;
+}
+
 export function chunkBySize(datasets, size) {
   const chunks = [];
   let currentSize = 0;
@@ -64,12 +76,14 @@ export function deduplicate(dynamodb, datasets) {
 }
 
 export function wrapDataset(type, dataset) {
-  return {
+  const collection = {
     type: type.toLowerCase(),
     dcat: Dataset.from(type.toLowerCase(), dataset).toJSON(),
     checksum: sha256(JSON.stringify(dataset)),
     original: dataset
   };
+
+  return removeNull(collection);
 }
 
 /**
