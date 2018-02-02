@@ -3,7 +3,7 @@ import * as sourceHandlers from "../source-handler";
 
 export function fetchSource(job, aws) {
   return sourceHandlers[job.type.toLowerCase()].getPageUrls(job).then(urls => {
-    if (urls.length) {
+    if (urls.length === 0) {
       throw new Error("No url is found for " + job.url);
     }
 

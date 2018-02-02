@@ -35,6 +35,7 @@ describe("fetcher/index.ts", function() {
       },
       {},
       err => {
+        console.log("hh");
         expect(count).to.be.gt(0);
         done(err);
       }
@@ -69,7 +70,7 @@ describe("fetcher/index.ts", function() {
           {
             Sns: {
               Message:
-                '{"name":"Energy Data eXchange","type":"CKAN","url":"https://edx.netl.doe.gov","messageType":"FetchPage","url":"https://edx.netl.doe.gov/api/3/action/package_search?start=0&rows=100"}'
+                '{"name":"Energy Data eXchange","type":"CKAN","url":"https://edx.netl.doe.gov","messageType":"FetchPage","url":"https://edx.netl.doe.gov/api/3/action/package_search?start=0&rows=1"}'
             }
           }
         ]
