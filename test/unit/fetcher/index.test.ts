@@ -35,7 +35,6 @@ describe("fetcher/index.ts", function() {
       },
       {},
       err => {
-        console.log("hh");
         expect(count).to.be.gt(0);
         done(err);
       }

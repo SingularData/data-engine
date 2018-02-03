@@ -7,8 +7,9 @@
     "test": "nyc mocha",
     "test-ci": "NODE_ENV=ci npm run test",
     "build": "tsc --outDir dist",
-    "precommit": "npm run build && npm run test && lint-staged",
+    "precommit": "lint-staged",
     "deploy": "npm run build && npm test && SLS_DEBUG=* sls deploy -v",
+    "deploy-fast": "sls deploy -v",
     "deploy-ci": "bash deploy.sh"
   },
   "lint-staged": {
