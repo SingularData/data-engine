@@ -26,6 +26,7 @@ provider:
     SNS_FETCH_QUEUE: { "Ref": "SNSFetchQueue" }
     SNS_INDEX_QUEUE: { "Ref": "SNSIndexQueue" }
     ES_INDEX: ${env:ES_INDEX}
+    ES_DOC_TYPE: ${env:ES_DOC_TYPE}
     ES_URL: ${env:ES_URL}
     MAX_SNS_MESSAGE_SIZE: ${env:MAX_SNS_MESSAGE_SIZE}
 

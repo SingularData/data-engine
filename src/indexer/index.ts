@@ -1,7 +1,7 @@
 import AWS = require("aws-sdk");
 import es = require("elasticsearch");
 import awsES = require("http-aws-es");
-import { ensureIndex, indexDatasets, saveChecksum } from "./util";
+import { indexDatasets, saveChecksum } from "./util";
 
 AWS.config.region = "us-east-1";
 
@@ -13,8 +13,7 @@ export function index(event, context, callback) {
   });
   const dynamodb = new AWS.DynamoDB();
 
-  return ensureIndex(client, process.env.ES_INDEX)
-    .then(() => indexDatasets(client, datasets))
+  return indexDatasets(client, datasets)
     .then(() => saveChecksum(dynamodb, datasets))
     .then(() => callback())
     .catch(error => callback(error));

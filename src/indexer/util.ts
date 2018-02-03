@@ -1,11 +1,3 @@
-export function ensureIndex(es, index) {
-  return es.indices.exists({ index }).then(exists => {
-    if (!exists) {
-      return es.indices.create({ index });
-    }
-  });
-}
-
 export function indexDatasets(es, datasets) {
   const body = [];
 
@@ -13,7 +5,7 @@ export function indexDatasets(es, datasets) {
     const action = {
       index: {
         _index: process.env.ES_INDEX,
-        _type: dataset.type,
+        _type: process.env.ES_DOC_TYPE,
         _id: dataset.dcat.identifier
       }
     };
