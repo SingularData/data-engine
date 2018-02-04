@@ -1,12 +1,16 @@
+import AWS = require("aws-sdk");
 import * as _ from "lodash";
 import * as sourceHandlers from "../source-handler";
 
-export function fetchSource(job, aws) {
+AWS.config.region = "us-east-1";
+
+export function fetchSource(job) {
   return sourceHandlers[job.type.toLowerCase()].getPageUrls(job).then(urls => {
     if (urls.length === 0) {
       throw new Error("No url is found for " + job.url);
     }
 
+    const sns = new AWS.SNS();
     const tasks = [];
 
     for (let url of urls) {
@@ -17,7 +21,7 @@ export function fetchSource(job, aws) {
         url
       });
 
-      const task = aws.sns
+      const task = sns
         .publish({
           Message: JSON.stringify(sourcePage),
           TopicArn: process.env.SNS_FETCH_QUEUE

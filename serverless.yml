@@ -15,14 +15,12 @@ provider:
     - Effect: Allow
       Action:
         - sns:*
-        - dynamodb:*
         - es:*
         - s3:*
       Resource: "*"
   environment:
     S3_BUCKET: ${env:S3_BUCKET}
     S3_DATA_SOURCE: ${env:S3_DATA_SOURCE}
-    DYNAMODB_CHECKSUM: ${env:DYNAMODB_CHECKSUM}
     SNS_FETCH_QUEUE: { "Ref": "SNSFetchQueue" }
     SNS_INDEX_QUEUE: { "Ref": "SNSIndexQueue" }
     ES_INDEX: ${env:ES_INDEX}
