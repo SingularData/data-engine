@@ -49,8 +49,7 @@ export function deduplicate(dynamodb, datasets) {
       identifier: {
         S: ""
       }
-    },
-    ConsistentRead: true
+    }
   };
 
   for (let dataset of datasets) {
