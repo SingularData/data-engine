@@ -21,7 +21,7 @@ export function indexDatasets(es, datasets) {
 export function saveChecksum(dynamodb, datasets) {
   const tasks = _.chain(datasets)
     .chunk(25)
-    .map(chunk => {
+    .map((chunk: any[]) => {
       const params = {
         RequestItems: {}
       };

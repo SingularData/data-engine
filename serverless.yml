@@ -35,7 +35,7 @@ functions:
     name: sdn-pipeline-bootstrapper
     handler: dist/bootstrapper/index.bootstrap
     timeout: 20
-    # reservedConcurrency: 5
+    reservedConcurrency: 5
     events:
       - schedule: rate(7 days)
       - sns:
@@ -52,7 +52,7 @@ functions:
     name: sdn-pipeline-fetcher
     handler: dist/fetcher/index.fetch
     timeout: 60
-    # reservedConcurrency: 5
+    reservedConcurrency: 1
     events:
       - sns:
           arn:
@@ -68,6 +68,7 @@ functions:
     name: sdn-pipeline-indexer
     handler: dist/indexer/index.index
     timeout: 60
+    reservedConcurrency: 1
     events:
       - sns:
           arn:
