@@ -1,7 +1,7 @@
 import fetch from "node-fetch";
 import { wrapDataset } from "../util";
 
-const requestSize = 500;
+const requestSize = 100;
 
 export function getPageUrls(source) {
   return fetch(createUrl(source.url, 0, 0))

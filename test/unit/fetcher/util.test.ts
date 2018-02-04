@@ -57,9 +57,13 @@ describe("fetcher/util.deduplicate()", () => {
   const datasets = require("../../mock/index-queue-item");
 
   it("should filter out datasets with unchanged checksum.", done => {
-    AM.mock("DynamoDB", "getItem", (params, callback) => {
-      callback(null, {
-        Item: {
+    AM.mock("DynamoDB", "batchGetItem", (params, callback) => {
+      const res = {
+        Responses: {}
+      };
+
+      res.Responses[process.env.DYNAMODB_CHECKSUM] = [
+        {
           identifier: {
             S: "308afd50-7398-4af8-926d-14a3e312fcf5"
           },
@@ -67,7 +71,9 @@ describe("fetcher/util.deduplicate()", () => {
             S: "12"
           }
         }
-      });
+      ];
+
+      callback(null, res);
     });
 
     const dynamodb = new AWS.DynamoDB();
@@ -82,9 +88,13 @@ describe("fetcher/util.deduplicate()", () => {
   });
 
   it("should accept datasets with changed checksum.", done => {
-    AM.mock("DynamoDB", "getItem", (params, callback) => {
-      callback(null, {
-        Item: {
+    AM.mock("DynamoDB", "batchGetItem", (params, callback) => {
+      const res = {
+        Responses: {}
+      };
+
+      res.Responses[process.env.DYNAMODB_CHECKSUM] = [
+        {
           identifier: {
             S: "308afd50-7398-4af8-926d-14a3e312fcf5"
           },
@@ -92,7 +102,9 @@ describe("fetcher/util.deduplicate()", () => {
             S: "13"
           }
         }
-      });
+      ];
+
+      callback(null, res);
     });
 
     const dynamodb = new AWS.DynamoDB();
@@ -107,8 +119,14 @@ describe("fetcher/util.deduplicate()", () => {
   });
 
   it("should accept datasets with non-existing checksum.", done => {
-    AM.mock("DynamoDB", "getItem", (params, callback) => {
-      callback(null, {});
+    AM.mock("DynamoDB", "batchGetItem", (params, callback) => {
+      const res = {
+        Responses: {}
+      };
+
+      res.Responses[process.env.DYNAMODB_CHECKSUM] = [{}];
+
+      callback(null, res);
     });
 
     const dynamodb = new AWS.DynamoDB();

@@ -1,3 +1,5 @@
+import * as _ from "lodash";
+
 export function indexDatasets(es, datasets) {
   const body = [];
 
@@ -17,28 +19,35 @@ export function indexDatasets(es, datasets) {
 }
 
 export function saveChecksum(dynamodb, datasets) {
-  const params = {
-    RequestItems: {}
-  };
+  const tasks = _.chain(datasets)
+    .chunk(25)
+    .map(chunk => {
+      const params = {
+        RequestItems: {}
+      };
 
-  params.RequestItems[process.env.DYNAMODB_CHECKSUM] = [];
+      params.RequestItems[process.env.DYNAMODB_CHECKSUM] = [];
 
-  for (let dataset of datasets) {
-    const item = {
-      PutRequest: {
-        Item: {
-          identifier: {
-            S: dataset.dcat.identifier
-          },
-          checksum: {
-            S: dataset.checksum
+      for (let dataset of chunk) {
+        const item = {
+          PutRequest: {
+            Item: {
+              identifier: {
+                S: dataset.dcat.identifier
+              },
+              checksum: {
+                S: dataset.checksum
+              }
+            }
           }
-        }
+        };
+
+        params.RequestItems[process.env.DYNAMODB_CHECKSUM].push(item);
       }
-    };
 
-    params.RequestItems[process.env.DYNAMODB_CHECKSUM].push(item);
-  }
+      return dynamodb.batchWriteItem(params).promise();
+    })
+    .value();
 
-  return dynamodb.batchWriteItem(params).promise();
+  return Promise.all(tasks);
 }
