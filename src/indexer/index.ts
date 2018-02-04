@@ -14,7 +14,6 @@ export function index(event, context, callback) {
   const dynamodb = new AWS.DynamoDB();
 
   return indexDatasets(client, datasets)
-    .then(() => saveChecksum(dynamodb, datasets))
     .then(() => callback())
     .catch(error => callback(error));
 }

@@ -40,38 +40,38 @@ export function chunkBySize(datasets, size) {
   return chunks;
 }
 
-export function deduplicate(dynamodb, datasets) {
-  const params = {
-    RequestItems: {}
-  };
-
-  params.RequestItems[process.env.DYNAMODB_CHECKSUM] = {
-    Keys: [],
-    ProjectionExpression: "identifier, checksum"
-  };
+export function deduplicate(es, datasets) {
+  const updated = [];
+  const tasks = [];
 
   for (let dataset of datasets) {
-    params.RequestItems[process.env.DYNAMODB_CHECKSUM].Keys.push({
-      identifier: {
-        S: dataset.dcat.identifier
-      }
-    });
+    const task = es
+      .get({
+        index: process.env.ES_INDEX,
+        type: process.env.ES_DOC_TYPE,
+        id: dataset.dcat.identifier,
+        _sourceInclude: ["checksum"]
+      })
+      .then(item => {
+        if (item._source.checksum !== dataset.checksum) {
+          updated.push(dataset);
+        }
+      })
+      .catch(err => {
+        if (err.statusCode === 404) {
+          updated.push(dataset);
+          return;
+        }
+
+        console.error(err);
+        console.log(
+          "Unable to check duplication for dataset:",
+          dataset.dcat.identifier
+        );
+      });
   }
 
-  return dynamodb
-    .batchGetItem(params)
-    .promise()
-    .then(result => {
-      const indexed = _.keyBy(
-        result.Responses[process.env.DYNAMODB_CHECKSUM],
-        "identifier.S"
-      );
-
-      return _.filter(
-        datasets,
-        d => d.checksum !== _.get(indexed[d.dcat.identifier], "checksum.S")
-      );
-    });
+  return Promise.all(tasks).then(() => updated);
 }
 
 export function wrapDataset(type, dataset) {

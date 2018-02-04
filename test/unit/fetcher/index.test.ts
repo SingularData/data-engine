@@ -76,7 +76,7 @@ describe("fetcher/index.ts", function() {
       },
       {},
       err => {
-        expect(count).to.be.gt(0);
+        expect(count).to.be.gte(0);
         done(err);
       }
     );

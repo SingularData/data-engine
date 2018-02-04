@@ -17,37 +17,3 @@ export function indexDatasets(es, datasets) {
 
   return es.bulk({ body });
 }
-
-export function saveChecksum(dynamodb, datasets) {
-  const tasks = _.chain(datasets)
-    .chunk(25)
-    .map((chunk: any[]) => {
-      const params = {
-        RequestItems: {}
-      };
-
-      params.RequestItems[process.env.DYNAMODB_CHECKSUM] = [];
-
-      for (let dataset of chunk) {
-        const item = {
-          PutRequest: {
-            Item: {
-              identifier: {
-                S: dataset.dcat.identifier
-              },
-              checksum: {
-                S: dataset.checksum
-              }
-            }
-          }
-        };
-
-        params.RequestItems[process.env.DYNAMODB_CHECKSUM].push(item);
-      }
-
-      return dynamodb.batchWriteItem(params).promise();
-    })
-    .value();
-
-  return Promise.all(tasks);
-}
