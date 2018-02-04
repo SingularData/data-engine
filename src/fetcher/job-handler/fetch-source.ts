@@ -4,7 +4,7 @@ import * as sourceHandlers from "../source-handler";
 
 AWS.config.region = "us-east-1";
 
-export function fetchSource(job, aws) {
+export function fetchSource(job) {
   return sourceHandlers[job.type.toLowerCase()].getPageUrls(job).then(urls => {
     if (urls.length === 0) {
       throw new Error("No url is found for " + job.url);

@@ -1,7 +1,7 @@
 import AWS = require("aws-sdk");
 import es = require("elasticsearch");
 import awsES = require("http-aws-es");
-import { indexDatasets, saveChecksum } from "./util";
+import { indexDatasets } from "./util";
 
 AWS.config.region = "us-east-1";
 
