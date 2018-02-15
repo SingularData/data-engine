@@ -1,5 +1,6 @@
 import fetch from "node-fetch";
 import { wrapDataset } from "../util";
+import { map } from "lodash";
 
 const requestSize = 100;
 const regions = ["us", "eu"];
@@ -28,7 +29,7 @@ export function getPageUrls() {
 export function fetchPage(source) {
   return fetch(source.url)
     .then(res => res.json())
-    .then(res => res.results.map(d => wrapDataset("Socrata", d)));
+    .then(res => map(res.results, d => wrapDataset("Socrata", d)));
 }
 
 function createUrl(region, offset, limit) {
