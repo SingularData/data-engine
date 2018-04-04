@@ -4,7 +4,7 @@ import { expect } from "chai";
 
 env.config();
 
-describe("bootstrapper/index.ts", () => {
+describe.skip("bootstrapper/index.ts", () => {
   it("should publish fetch tasks.", done => {
     let count = 0;
 

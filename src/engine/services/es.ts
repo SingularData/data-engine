@@ -1,6 +1,12 @@
-import * as _ from "lodash";
+import es = require("elasticsearch");
+import awsES = require("http-aws-es");
 
-export function indexDatasets(es, datasets) {
+const client = new es.Client({
+  hosts: [process.env.ES_URL],
+  connectionClass: awsES
+});
+
+function index(datasets) {
   const body = [];
 
   for (let dataset of datasets) {
@@ -15,5 +21,7 @@ export function indexDatasets(es, datasets) {
     body.push(action, dataset);
   }
 
-  return es.bulk({ body });
+  return client.bulk({ body });
 }
+
+export { client, index };

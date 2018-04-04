@@ -3,11 +3,11 @@ import AWS = require("aws-sdk");
 import AM = require("aws-sdk-mock");
 import { expect } from "chai";
 import { outputJsonSync, statSync, removeSync } from "fs-extra";
-import * as util from "../../../src/fetcher/util";
+import * as util from "../../../../src/engine/utils";
 
 env.config();
 
-describe("fetcher/util.removeNull()", () => {
+describe("src/engine/utils.removeNull()", () => {
   it("should recursively remove all null values in an object.", () => {
     const dataset = {
       identifier: "123",
@@ -25,9 +25,9 @@ describe("fetcher/util.removeNull()", () => {
   });
 });
 
-describe("fetcher/util.chunkBySize()", () => {
+describe("src/engine/utils.chunkBySize()", () => {
   it("should chunk an array of json into chunks with the given size limit.", () => {
-    const dataset = require("../../mock/index-queue-item.json")[0];
+    const dataset = require("../../../mock/index-queue-item.json")[0];
     const harvested = [];
 
     for (let i = 0; i < 100; i++) {
