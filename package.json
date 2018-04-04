@@ -5,7 +5,6 @@
   "main": "index.js",
   "scripts": {
     "test": "nyc mocha",
-    "test-ci": "NODE_ENV=ci npm run test",
     "build": "tsc --outDir dist",
     "precommit": "lint-staged",
     "deploy": "bash scripts/deploy.sh"
