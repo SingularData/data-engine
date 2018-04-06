@@ -4,7 +4,7 @@ import { expect } from "chai";
 
 env.config();
 
-describe.skip("bootstrapper/index.ts", () => {
+describe("bootstrapper/index.ts", () => {
   it("should publish fetch tasks.", done => {
     let count = 0;
 
@@ -15,10 +15,11 @@ describe.skip("bootstrapper/index.ts", () => {
       });
     });
 
-    AWS.mock("SNS", "publish", (params, callback) => {
+    AWS.mock("SQS", "sendMessageBatch", (params, callback) => {
       count++;
 
-      const message = JSON.parse(params.Message);
+      const message = JSON.parse(params.Entries[0].MessageBody);
+      expect(message.messageType).to.equal("FetchSource");
       expect(message.name).to.equal("Energy Data eXchange");
 
       callback();

@@ -1,4 +1,4 @@
-service: sdn-pipeline
+service: sdn-data-engine
 
 plugins:
   - serverless-dotenv-plugin
@@ -9,87 +9,24 @@ custom:
 
 provider:
   name: aws
-  runtime: nodejs6.10
+  runtime: nodejs8.10
   region: us-east-1
   iamRoleStatements:
     - Effect: Allow
       Action:
-        - sns:*
-        - es:*
+        - sqs:*
         - s3:*
       Resource: "*"
   environment:
     S3_BUCKET: ${env:S3_BUCKET}
     S3_DATA_SOURCE: ${env:S3_DATA_SOURCE}
-    SNS_FETCH_QUEUE: { "Ref": "SNSFetchQueue" }
-    SNS_INDEX_QUEUE: { "Ref": "SNSIndexQueue" }
-    ES_INDEX: ${env:ES_INDEX}
-    ES_DOC_TYPE: ${env:ES_DOC_TYPE}
-    ES_URL: ${env:ES_URL}
-    MAX_SNS_MESSAGE_SIZE: ${env:MAX_SNS_MESSAGE_SIZE}
+    SQS_QUEUE_URL: ${env:SQS_QUEUE_URL}
 
 functions:
   bootstrapper:
-    name: sdn-pipeline-bootstrapper
+    name: sdn-engine-bootstrapper
     handler: dist/bootstrapper/index.bootstrap
     timeout: 20
     reservedConcurrency: 5
     events:
       - schedule: rate(7 days)
-      - sns:
-          arn:
-            Fn::Join:
-              - ""
-              - - "arn:aws:sns:"
-                - Ref: "AWS::Region"
-                - ":"
-                - Ref: "AWS::AccountId"
-                - ":sdn-pipeline-bootstrap-queue"
-          topicName: sdn-pipeline-bootstrap-queue
-  fetcher:
-    name: sdn-pipeline-fetcher
-    handler: dist/fetcher/index.fetch
-    timeout: 60
-    reservedConcurrency: 1
-    events:
-      - sns:
-          arn:
-            Fn::Join:
-              - ""
-              - - "arn:aws:sns:"
-                - Ref: "AWS::Region"
-                - ":"
-                - Ref: "AWS::AccountId"
-                - ":sdn-pipeline-fetch-queue"
-          topicName: sdn-pipeline-fetch-queue
-  indexer:
-    name: sdn-pipeline-indexer
-    handler: dist/indexer/index.index
-    timeout: 60
-    reservedConcurrency: 1
-    events:
-      - sns:
-          arn:
-            Fn::Join:
-              - ""
-              - - "arn:aws:sns:"
-                - Ref: "AWS::Region"
-                - ":"
-                - Ref: "AWS::AccountId"
-                - ":sdn-pipeline-index-queue"
-          topicName: sdn-pipeline-index-queue
-
-resources:
-  Resources:
-    SNSBootstrapQueue:
-      Type: AWS::SNS::Topic
-      Properties:
-        TopicName: "sdn-pipeline-bootstrap-queue"
-    SNSFetchQueue:
-      Type: AWS::SNS::Topic
-      Properties:
-        TopicName: "sdn-pipeline-fetch-queue"
-    SNSIndexQueue:
-      Type: AWS::SNS::Topic
-      Properties:
-        TopicName: "sdn-pipeline-index-queue"
