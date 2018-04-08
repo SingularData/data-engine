@@ -1,9 +1,9 @@
 import AWS = require("aws-sdk");
 import _ = require("lodash");
 import uuid = require("uuid/v1");
-import { IndexDatasetJob } from "../classes/IndexDatasetJob";
+import { UpdateIndexJob } from "../classes/UpdateIndexJob";
 import * as sources from "../utils/sources";
 
-export async function fetchSources(es, job: IndexDatasetJob) {
+export async function updateIndex(es, job: UpdateIndexJob) {
   await es.index(job.datasets);
 }
