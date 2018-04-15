@@ -34,11 +34,15 @@ export async function end() {
 async function handleJob(job, dependencies) {
   switch (job.type) {
     case "FetchSource":
-      return handlers.fetchSources(dependencies.queue, job);
+      return handlers.fetchSources(dependencies.queue.push, job);
     case "FetchDataset":
-      return handlers.fetchDatasets(dependencies.queue, job);
+      return handlers.fetchDatasets(
+        dependencies.queue.push,
+        dependencies.contentMap.exists,
+        job
+      );
     case "updateIndex":
-      return handlers.updateIndex(dependencies.es, job);
+      return handlers.updateIndex(dependencies.es.index, job);
     default:
       throw new Error(`Unrecognized job type: ${job.type}`);
   }

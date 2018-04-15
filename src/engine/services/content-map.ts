@@ -51,4 +51,4 @@ function md5(data) {
     .digest("hex");
 }
 
-export { insert, exists, close };
+export { initialize, insert, exists, close };

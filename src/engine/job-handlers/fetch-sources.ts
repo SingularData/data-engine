@@ -5,7 +5,7 @@ import { FetchSourceJob } from "../classes/FetchSourceJob";
 import { FetchDatasetJob } from "../classes/FetchDatasetJob";
 import * as sources from "../utils/sources";
 
-export async function fetchSources(queue, job: FetchSourceJob) {
+export async function fetchSources(pushToQueue, job: FetchSourceJob) {
   const sourceType = job.data.sourceType.toLowerCase();
   const urls = await sources[sourceType].getSourceUrls(job.data);
 
@@ -23,6 +23,6 @@ export async function fetchSources(queue, job: FetchSourceJob) {
       jobs.push(new FetchDatasetJob(job.data.sourceType, url as string));
     }
 
-    await queue.push(jobs);
+    await pushToQueue(jobs);
   }
 }

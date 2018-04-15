@@ -4,6 +4,7 @@ import uuid = require("uuid/v1");
 export class FetchSourceJob implements IJob {
   public type: string;
   public messageId: string;
+  public receiptHandle: string;
   public data: { sourceType: string; url: string };
 
   constructor(sourceType: string, url: string) {

@@ -7,6 +7,7 @@ const sqs = new AWS.SQS();
 export interface IJob {
   type: string;
   messageId: string;
+  receiptHandle: string;
 }
 
 export async function push(jobs: IJob[]) {
@@ -39,7 +40,11 @@ export async function pull(jobs: IJob[]) {
     .promise()
     .then(result =>
       result.Messages.map(message => {
-        return { messageId: message.MessageId, ...JSON.parse(message.Body) };
+        return {
+          messageId: message.MessageId,
+          receiptHandle: message.ReceiptHandle,
+          ...JSON.parse(message.Body)
+        };
       })
     );
 }
@@ -48,7 +53,10 @@ export async function remove(jobs: IJob[]) {
   const params = {
     QueueUrl: process.env.SQS_QUEUE_URL,
     Entries: jobs.map(job => {
-      return { Id: job.messageId };
+      return {
+        Id: job.messageId,
+        ReceiptHandle: job.receiptHandle
+      };
     })
   };
 

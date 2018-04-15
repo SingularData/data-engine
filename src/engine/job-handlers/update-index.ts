@@ -4,6 +4,6 @@ import uuid = require("uuid/v1");
 import { UpdateIndexJob } from "../classes/UpdateIndexJob";
 import * as sources from "../utils/sources";
 
-export async function updateIndex(es, job: UpdateIndexJob) {
-  await es.index(job.datasets);
+export async function updateIndex(indexDatasets, job: UpdateIndexJob) {
+  await indexDatasets(job.datasets);
 }
