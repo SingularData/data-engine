@@ -27,10 +27,14 @@ describe("bootstrapper/index.ts", () => {
 
     const handler = require("../../../src/bootstrapper");
 
-    handler.bootstrap({}, {}, err => {
-      expect(count).to.equal(1);
-      done(err);
-    });
+    try {
+      handler.bootstrap({}, {}, err => {
+        expect(count).to.equal(1);
+        done(err);
+      });
+    } catch (err) {
+      console.log(err);
+    }
   });
 
   afterEach(() => {
