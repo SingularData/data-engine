@@ -4,7 +4,7 @@ import { expect } from "chai";
 
 env.config();
 
-describe("bootstrapper/index.ts", () => {
+describe.skip("bootstrapper/index.ts", () => {
   it("should publish fetch tasks.", done => {
     let count = 0;
 
@@ -27,14 +27,10 @@ describe("bootstrapper/index.ts", () => {
 
     const handler = require("../../../src/bootstrapper");
 
-    try {
-      handler.bootstrap({}, {}, err => {
-        expect(count).to.equal(1);
-        done(err);
-      });
-    } catch (err) {
-      console.log(err);
-    }
+    handler.bootstrap({}, {}, err => {
+      expect(count).to.equal(1);
+      done(err);
+    });
   });
 
   afterEach(() => {
