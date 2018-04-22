@@ -38,7 +38,7 @@ async function handleJob(job, dependencies) {
     case "FetchDataset":
       return handlers.fetchDatasets(
         dependencies.queue.push,
-        dependencies.contentMap.exists,
+        dependencies.es.exists,
         job
       );
     case "updateIndex":

@@ -50,7 +50,6 @@
     "@types/node": "^9.6.5",
     "@types/node-fetch": "^1.6.8",
     "aws-sdk": "^2.224.1",
-    "better-sqlite3": "^4.1.0",
     "delay": "^2.0.0",
     "elasticsearch": "^14.2.2",
     "http-aws-es": "^4.0.0",
