@@ -1,8 +1,17 @@
-#!/bin/bash
+pip install --user awscli
+export PATH=$PATH:$HOME/.local/bin
 
-branch=$(git rev-parse --abbrev-ref HEAD $refname)
+add-apt-repository ppa:eugenesan/ppa
+apt-get update
+apt-get install jq -y
 
-if [ "master" == "$branch" ]; then
-  npm run build && sls deploy
-  echo "Data pipeline deployed!"
-fi
+curl https://raw.githubusercontent.com/silinternational/ecs-deploy/master/ecs-deploy | sudo tee -a /usr/bin/ecs-deploy
+sudo chmod +x /usr/bin/ecs-deploy
+
+docker login --username $DOCKER_HUB_USER --password $DOCKER_HUB_PSW
+
+docker build -t SingularData/data-engine .
+docker tag SingularData/data-engine:latest $IMAGE_REPO_URL:latest
+docker push $IMAGE_REPO_URL:latest
+
+# ecs-deploy -c $CLUSTER_NAME -n $SERVICE_NAME -i $IMAGE_REPO_URL:latest
