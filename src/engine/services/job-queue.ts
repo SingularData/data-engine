@@ -2,6 +2,8 @@
 import AWS = require("aws-sdk");
 import uuid = require("uuid/v1");
 
+AWS.config.region = "us-east-1";
+
 const sqs = new AWS.SQS();
 
 export interface IJob {
@@ -28,11 +30,11 @@ export async function push(jobs: IJob[]) {
   return sqs.sendMessageBatch(params).promise();
 }
 
-export async function pull(jobs: IJob[]) {
+export async function pull(): Promise<IJob[]> {
   const params = {
     QueueUrl: process.env.SQS_QUEUE_URL,
     MaxNumberOfMessages: 10,
-    WaitTimeSeconds: 30
+    WaitTimeSeconds: 20
   };
 
   return sqs

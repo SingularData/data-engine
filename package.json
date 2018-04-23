@@ -5,6 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "nyc mocha",
+    "test:e2e":
+      "mocha --require ts-node/register --require source-map-support/register 'test/e2e/*.spec.ts'",
     "build": "tsc --outDir dist",
     "start-engine": "npm run build && node dist/engine/index.js",
     "precommit": "lint-staged",

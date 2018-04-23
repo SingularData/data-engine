@@ -11,7 +11,7 @@ export async function start(dependencies) {
 
   while (subscribed) {
     try {
-      const jobs: IJob[] = queue.pull();
+      const jobs: IJob[] = await queue.pull();
 
       if (jobs.length > 0) {
         for (const job of jobs) {
@@ -19,11 +19,11 @@ export async function start(dependencies) {
         }
       }
     } catch (error) {
-      console.error("Unable to pull and process datasets for", error);
+      console.error("Unable to pull and process datasets:", error);
     }
 
     // wait for 10s
-    delay(60000);
+    await delay(60000);
   }
 }
 

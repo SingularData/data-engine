@@ -1,5 +1,8 @@
 import es = require("elasticsearch");
 import awsES = require("http-aws-es");
+import AWS = require("aws-sdk");
+
+AWS.config.region = "us-east-1";
 
 const client = new es.Client({
   hosts: [process.env.ES_URL],

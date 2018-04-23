@@ -1,14 +1,6 @@
 version: '3'
 
 services:
-  sqs:
-    image: graze/sqs-local
-    ports:
-      - "9324:9324"
-    volumes:
-      - ./elasticmq.conf:/elasticmq.conf
-    restart: on-failure
-
   elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:6.2.3
     ports:
@@ -20,5 +12,4 @@ services:
     build: .
     env_file: .env
     depends_on:
-      - sqs
       - elasticsearch
