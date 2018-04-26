@@ -23,7 +23,7 @@ export async function start(dependencies) {
     }
 
     // wait for 10s
-    await delay(60000);
+    await delay(10000);
   }
 }
 

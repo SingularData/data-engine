@@ -40,15 +40,19 @@ export async function pull(): Promise<IJob[]> {
   return sqs
     .receiveMessage(params)
     .promise()
-    .then(result =>
-      result.Messages.map(message => {
+    .then(result => {
+      if (!Array.isArray(result.Messages)) {
+        return [];
+      }
+
+      return result.Messages.map(message => {
         return {
           messageId: message.MessageId,
           receiptHandle: message.ReceiptHandle,
           ...JSON.parse(message.Body)
         };
-      })
-    );
+      });
+    });
 }
 
 export async function remove(jobs: IJob[]) {
