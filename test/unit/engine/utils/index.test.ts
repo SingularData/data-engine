@@ -34,7 +34,7 @@ describe("src/engine/utils.chunkBySize()", () => {
       harvested.push(dataset);
     }
 
-    const size = parseInt(process.env.MAX_SNS_MESSAGE_SIZE, 10);
+    const size = 10000;
     const chunks = util.chunkBySize(harvested, size);
 
     expect(chunks.length).to.be.gt(0);

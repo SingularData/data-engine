@@ -5,15 +5,15 @@ import { expect } from "chai";
 env.config();
 
 describe("engine/services/job-queue.ts", () => {
-  const message = {
-    type: "FetchSource",
-    data: {
-      sourceType: "test type",
-      url: "test url"
-    }
-  };
-
   it("should pull jobs.", async () => {
+    const message = {
+      type: "FetchSource",
+      data: {
+        sourceType: "test type",
+        url: "test url"
+      }
+    };
+
     AWS.mock("SQS", "receiveMessage", (params, callback) => {
       expect(params.QueueUrl).to.equal(process.env.SQS_QUEUE_URL);
       expect(params.MaxNumberOfMessages).to.least(1);

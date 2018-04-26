@@ -1,6 +1,7 @@
 import delay = require("delay");
 import { IJob } from "./services/job-queue";
 import * as handlers from "./job-handlers";
+import * as sources from "./utils/sources";
 
 let subscribed = false;
 
@@ -36,9 +37,12 @@ async function handleJob(job, dependencies) {
     case "FetchSource":
       return handlers.fetchSources(dependencies.queue.push, job);
     case "FetchDataset":
+      const sourceType = job.data.sourceType.toLowerCase();
+
       return handlers.fetchDatasets(
-        dependencies.queue.push,
+        sources[sourceType].getDatasets,
         dependencies.es.exists,
+        dependencies.queue.push,
         job
       );
     case "updateIndex":
