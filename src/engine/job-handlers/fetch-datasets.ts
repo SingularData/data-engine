@@ -5,7 +5,7 @@ import { FetchDatasetJob } from "../classes/FetchDatasetJob";
 import { UpdateIndexJob } from "../classes/UpdateIndexJob";
 import { chunkBySize } from "../utils";
 
-const MAX_SQS_MESSAGE_SIZE = 200 * 1024;
+const MAX_SQS_MESSAGE_SIZE = 10 * 1024;
 
 export async function fetchDatasets(
   getDatasets,

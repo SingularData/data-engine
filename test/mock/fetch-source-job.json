@@ -1,0 +1,8 @@
+{
+  "type": "FetchSource",
+  "messageId": "test id",
+  "data": {
+    "sourceType": "CKAN",
+    "url": "https://edx.netl.doe.gov"
+  }
+}

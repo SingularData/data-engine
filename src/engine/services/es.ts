@@ -49,9 +49,9 @@ function exists(dataset) {
       return true;
     })
     .catch(err => {
-      console.error(err);
+      // console.error(err);
       return false;
     });
 }
 
-export { client, index };
+export { client, index, exists };

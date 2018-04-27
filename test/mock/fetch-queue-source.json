@@ -1,8 +1,0 @@
-{
-  "name": "City of Sacramento Open Data",
-  "type": "Junar",
-  "url": "http://data.cityofsacramento.org",
-  "apiUrl": "http://saccounty.cloudapi.junar.com",
-  "apiKey": "47242a5ca37d49fc19a2b8440942865f6e82486b",
-  "messageType": "FetchSource"
-}

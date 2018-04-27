@@ -53,7 +53,7 @@ async function handleJob(job, dependencies) {
         dependencies.queue.push,
         job
       );
-    case "updateIndex":
+    case "UpdateIndex":
       return handlers.updateIndex(dependencies.es.index, job);
     default:
       throw new Error(`Unrecognized job type: ${job.type}`);
