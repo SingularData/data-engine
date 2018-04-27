@@ -5,9 +5,12 @@ import { FetchSourceJob } from "../classes/FetchSourceJob";
 import { FetchDatasetJob } from "../classes/FetchDatasetJob";
 import * as sources from "../utils/sources";
 
-export async function fetchSources(pushToQueue, job: FetchSourceJob) {
-  const sourceType = job.data.sourceType.toLowerCase();
-  const urls = await sources[sourceType].getSourceUrls(job.data);
+export async function fetchSources(
+  getSourceUrls,
+  pushToQueue,
+  job: FetchSourceJob
+) {
+  const urls = await getSourceUrls(job.data);
 
   if (urls.length === 0) {
     console.log("No source url is found for " + job.data.url);

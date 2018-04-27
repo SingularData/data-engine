@@ -33,11 +33,19 @@ export async function end() {
 }
 
 async function handleJob(job, dependencies) {
+  let sourceType;
+
   switch (job.type) {
     case "FetchSource":
-      return handlers.fetchSources(dependencies.queue.push, job);
+      sourceType = job.data.sourceType.toLowerCase();
+
+      return handlers.fetchSources(
+        sources[sourceType].getSourceUrls,
+        dependencies.queue.push,
+        job
+      );
     case "FetchDataset":
-      const sourceType = job.data.sourceType.toLowerCase();
+      sourceType = job.data.sourceType.toLowerCase();
 
       return handlers.fetchDatasets(
         sources[sourceType].getDatasets,

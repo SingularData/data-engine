@@ -2,6 +2,7 @@ import env = require("dotenv");
 import { expect } from "chai";
 import { fetchDatasets } from "../../../../src/engine/job-handlers/fetch-datasets";
 import { FetchDatasetJob } from "../../../../src/engine/classes/FetchDatasetJob";
+import { UpdateIndexJob } from "../../../../src/engine/classes/UpdateIndexJob";
 
 env.config();
 
@@ -17,7 +18,7 @@ describe("engine/job-handlers/fetch-datasets.ts", () => {
 
     const getDatasets = async () => [dataset];
     const datasetExists = async () => false;
-    const pushToQueue = async jobs => {
+    const pushToQueue = async (jobs: UpdateIndexJob[]) => {
       expect(jobs).to.have.lengthOf(1);
 
       const job = jobs[0];
