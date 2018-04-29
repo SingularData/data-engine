@@ -30,7 +30,7 @@
     "@types/sleep": "0.0.7",
     "aws-sdk-mock": "^1.7.0",
     "chai": "^4.1.2",
-    "dotenv": "^5.0.1",
+    "dotenv-safe": "^5.0.1",
     "fs-extra": "^5.0.0",
     "husky": "^0.14.3",
     "lint-staged": "^6.1.1",

@@ -1,5 +1,5 @@
 import AWS = require("aws-sdk-mock");
-import env = require("dotenv");
+import env = require("dotenv-safe");
 import { expect } from "chai";
 
 env.config();

@@ -1,4 +1,4 @@
-import env = require("dotenv");
+import env = require("dotenv-safe");
 import { expect } from "chai";
 import { fetchDatasets } from "../../../../src/engine/job-handlers/fetch-datasets";
 import { FetchDatasetJob } from "../../../../src/engine/classes/FetchDatasetJob";

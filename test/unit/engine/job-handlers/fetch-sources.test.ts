@@ -1,4 +1,4 @@
-import env = require("dotenv");
+import env = require("dotenv-safe");
 import { expect } from "chai";
 import { fetchSources } from "../../../../src/engine/job-handlers/fetch-sources";
 import { FetchSourceJob } from "../../../../src/engine/classes/FetchSourceJob";
