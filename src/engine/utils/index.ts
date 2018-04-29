@@ -14,7 +14,7 @@ export function removeNull(dataset) {
   return dataset;
 }
 
-export function chunkBySize(datasets, size) {
+export function chunkBy(datasets, limits) {
   const chunks = [];
   let currentSize = 0;
   let currentChunk = [];
@@ -22,7 +22,10 @@ export function chunkBySize(datasets, size) {
   for (let dataset of datasets) {
     const textSize = claculateSize(JSON.stringify(dataset));
 
-    if (textSize + currentSize < size) {
+    if (
+      textSize + currentSize < limits.size &&
+      currentChunk.length < limits.count
+    ) {
       currentChunk.push(dataset);
       currentSize += textSize;
     } else {

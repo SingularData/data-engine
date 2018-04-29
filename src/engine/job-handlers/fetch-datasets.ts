@@ -3,9 +3,9 @@ import _ = require("lodash");
 import uuid = require("uuid/v1");
 import { FetchDatasetJob } from "../classes/FetchDatasetJob";
 import { UpdateIndexJob } from "../classes/UpdateIndexJob";
-import { chunkBySize } from "../utils";
+import { chunkBy } from "../utils";
 
-const MAX_SQS_MESSAGE_SIZE = 10 * 1024;
+const MAX_SQS_MESSAGE_SIZE = 200 * 1024;
 
 export async function fetchDatasets(
   getDatasets,
@@ -27,10 +27,12 @@ export async function fetchDatasets(
     return;
   }
 
-  const chunks = chunkBySize(newDatasets, MAX_SQS_MESSAGE_SIZE);
-  const jobs = _.map(chunks, chunk => new UpdateIndexJob(chunk as any[]));
+  const chunks = chunkBy(newDatasets, {
+    size: MAX_SQS_MESSAGE_SIZE,
+    count: 10
+  });
 
-  for (const chunk of _.chunk(jobs, 10)) {
-    await pushToQueue(chunk);
+  for (const chunk of chunks) {
+    await pushToQueue([new UpdateIndexJob(chunk as any[])]);
   }
 }

@@ -35,12 +35,15 @@ describe("src/engine/utils.chunkBySize()", () => {
     }
 
     const size = 10000;
-    const chunks = util.chunkBySize(harvested, size);
+    const count = 10;
+    const chunks = util.chunkBy(harvested, { size, count });
 
     expect(chunks.length).to.be.gt(0);
 
     // check if each chunk is smaller than the limit
     for (let i = 0; i < chunks.length; i++) {
+      expect(chunks[i].length).to.be.lte(count);
+
       outputJsonSync(`./temp/dataset_chunk_${i}.json`, chunks[i]);
 
       const stats = statSync(`./temp/dataset_chunk_${i}.json`);
