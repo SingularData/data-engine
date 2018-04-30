@@ -1,17 +1,13 @@
 import { createHash } from "crypto";
+import { gzipSync, gunzipSync } from "zlib";
 import { Dataset } from "w3c-dcat";
-import * as _ from "lodash";
 
-export function removeNull(dataset) {
-  for (let key in dataset) {
-    if (!dataset[key]) {
-      delete dataset[key];
-    } else if (typeof dataset[key] === "object") {
-      removeNull(dataset[key]);
-    }
-  }
+export function compress(data: any): string {
+  return gzipSync(JSON.stringify(data)).toString();
+}
 
-  return dataset;
+export function decompress(content: string): any {
+  return JSON.stringify(gunzipSync(content));
 }
 
 export function chunkBy(datasets, limits) {
@@ -43,10 +39,6 @@ export function chunkBy(datasets, limits) {
   return chunks;
 }
 
-export function deduplicate(es, datasets) {
-  return datasets;
-}
-
 export function wrapDataset(type, dataset) {
   const collection = {
     type: type.toLowerCase(),
@@ -72,4 +64,16 @@ function sha256(data: string): string {
 
 function claculateSize(s) {
   return Buffer.from(s).length;
+}
+
+function removeNull(dataset) {
+  for (let key in dataset) {
+    if (!dataset[key]) {
+      delete dataset[key];
+    } else if (typeof dataset[key] === "object") {
+      removeNull(dataset[key]);
+    }
+  }
+
+  return dataset;
 }
