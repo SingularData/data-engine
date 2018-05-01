@@ -1,5 +1,6 @@
 import AWS = require("aws-sdk-mock");
 import env = require("dotenv-safe");
+import { gzipSync } from "zlib";
 import { expect } from "chai";
 
 env.config();
@@ -27,7 +28,7 @@ describe("engine/services/job-queue.ts", () => {
           {
             MessageId: "test id",
             ReceiptHandle: "test handler",
-            Body: JSON.stringify(message)
+            Body: gzipSync(JSON.stringify(message))
           }
         ]
       });
