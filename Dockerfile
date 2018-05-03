@@ -12,9 +12,8 @@ RUN apt-get update && apt-get install -y \
 
 RUN ln -s /usr/bin/python2.7 /usr/bin/python
 
-COPY package.json $APP_DIR
-COPY package-lock.json $APP_DIR
-RUN npm install
 COPY . $APP_DIR
 
-CMD [ "npm", "run", "start-engine" ]
+RUN npm install
+
+CMD ["npm", "run", "start-engine"]

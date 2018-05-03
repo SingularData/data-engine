@@ -1,93 +1,85 @@
 {
-  "mappings": {
-    "doc": {
-      "properties": {
-        "type": {
-          "type": "keyword"
-        },
-        "checksum": {
-          "type": "text",
-          "index": "no"
-        },
-        "dcat": {
-          "properties": {
-            "@type": {
-              "type": "keyword"
-            },
-            "title": {
-              "type": "text"
-            },
-            "description": {
-              "type": "text"
-            },
-            "issued": {
-              "type": "date"
-            },
-            "modified": {
-              "type": "text"
-            },
-            "language": {
-              "type": "keyword"
-            },
-            "publisher": {
-              "type": "text"
-            },
-            "accrualPeriodicity": {
-              "type": "text"
-            },
-            "identifier": {
-              "type": "keyword"
-            },
-            "landingPage": {
-              "type": "keyword",
-              "index": "no"
-            },
-            "keyword": {
-              "type": "keyword"
-            },
-            "theme": {
-              "type": "keyword"
-            },
-            "license": {
-              "type": "keyword"
-            },
-            "spatial": {
-              "type": "geo_shape",
-              "index": "no"
-            },
-            "distribution": {
-              "properties": {
-                "@type": {
-                  "type": "keyword"
-                },
-                "title": {
-                  "type": "text"
-                },
-                "description": {
-                  "type": "text"
-                },
-                "accessURL": {
-                  "type": "text",
-                  "index": "no"
-                },
-                "downloadURL": {
-                  "type": "text",
-                  "index": "no"
-                },
-                "mediaType": {
-                  "type": "keyword"
-                },
-                "format": {
-                  "type": "keyword"
-                }
+  "doc": {
+    "properties": {
+      "type": {
+        "type": "keyword"
+      },
+      "checksum": {
+        "type": "text"
+      },
+      "dcat": {
+        "properties": {
+          "@type": {
+            "type": "keyword"
+          },
+          "title": {
+            "type": "text"
+          },
+          "description": {
+            "type": "text"
+          },
+          "issued": {
+            "type": "date"
+          },
+          "modified": {
+            "type": "text"
+          },
+          "language": {
+            "type": "keyword"
+          },
+          "publisher": {
+            "type": "text"
+          },
+          "accrualPeriodicity": {
+            "type": "text"
+          },
+          "identifier": {
+            "type": "keyword"
+          },
+          "landingPage": {
+            "enabled": false
+          },
+          "keyword": {
+            "type": "keyword"
+          },
+          "theme": {
+            "type": "keyword"
+          },
+          "license": {
+            "type": "keyword"
+          },
+          "spatial": {
+            "enabled": false
+          },
+          "distribution": {
+            "properties": {
+              "@type": {
+                "type": "keyword"
+              },
+              "title": {
+                "type": "text"
+              },
+              "description": {
+                "type": "text"
+              },
+              "accessURL": {
+                "enabled": false
+              },
+              "downloadURL": {
+                "enabled": false
+              },
+              "mediaType": {
+                "type": "keyword"
+              },
+              "format": {
+                "type": "keyword"
               }
             }
           }
-        },
-        "original": {
-          "type": "object",
-          "index": "no"
         }
+      },
+      "original": {
+        "enabled": false
       }
     }
   }

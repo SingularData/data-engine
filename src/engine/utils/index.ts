@@ -2,8 +2,8 @@ import { createHash } from "crypto";
 import { gzipSync, gunzipSync } from "zlib";
 import { Dataset } from "w3c-dcat";
 
-export function compress(data: any): Buffer {
-  return gzipSync(JSON.stringify(data));
+export function compress(data: any): string {
+  return gzipSync(JSON.stringify(data)).toString();
 }
 
 export function decompress(content: string): any {

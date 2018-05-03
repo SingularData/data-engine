@@ -1,22 +1,19 @@
-import AWS = require("aws-sdk");
 import es = require("elasticsearch");
-import awsES = require("http-aws-es");
 import env = require("dotenv");
+import sleep = require("sleep-promise");
 
 // tslint:disable-next-line
 const mappings = require("./index-mappings.json");
 
 env.config();
 
-AWS.config.region = "us-east-1";
-
 const client = new es.Client({
-  hosts: [process.env.ES_URL],
-  connectionClass: awsES
+  // host: process.env.ES_URL
+  host: "localhost:9200"
 });
 
-client.indices
-  .exists({ index: process.env.ES_INDEX })
+sleep(50)
+  .then(() => client.indices.exists({ index: process.env.ES_INDEX }))
   .then(result => {
     if (result) {
       return;
