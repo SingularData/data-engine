@@ -1,0 +1,5 @@
+.nyc_output
+.serverless
+coverage
+dist
+test

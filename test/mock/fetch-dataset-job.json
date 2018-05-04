@@ -1,0 +1,8 @@
+{
+  "type": "FetchDataset",
+  "messageId": "test id",
+  "data": {
+    "sourceType": "DKAN",
+    "url": "https://data.ca.gov"
+  }
+}

@@ -1,12 +1,12 @@
 import AWS = require("aws-sdk");
-
-AWS.config.region = "us-east-1";
+import _ = require("lodash");
+import uuid = require("uuid/v1");
 
 export function bootstrap(event, context, callback) {
   console.log("Start publishing data request tasks.");
 
   const s3 = new AWS.S3();
-  const sns = new AWS.SNS();
+  const sqs = new AWS.SQS();
 
   const params = {
     Bucket: process.env.S3_BUCKET,
@@ -18,28 +18,34 @@ export function bootstrap(event, context, callback) {
     .promise()
     .then((data: any) => {
       const list = JSON.parse(data.Body);
-      const tasks = [];
+      const messages = [];
 
-      for (let source of list) {
+      for (const source of list) {
         console.log(`Publishing request task for data source ${source.name}.`);
 
         source.messageType = "FetchSource";
+        messages.push(source);
+      }
 
-        const task = sns
-          .publish({
-            Message: JSON.stringify(source),
-            TopicArn: process.env.SNS_FETCH_QUEUE
-          })
-          .promise()
-          .then(() =>
-            console.log(
-              `Published request task for data source ${source.name}.`
-            )
-          )
-          .catch(err => {
-            console.log(`Failed to publish task for ${source.name}.`);
-            console.error(err);
+      const chunks = _.chunk(messages, 10);
+      const tasks = [];
+
+      for (const chunk of chunks) {
+        const entries = [];
+
+        for (const source of chunk) {
+          entries.push({
+            Id: uuid(),
+            MessageBody: JSON.stringify(source)
           });
+        }
+
+        const task = sqs
+          .sendMessageBatch({
+            QueueUrl: process.env.SQS_QUEUE_URL,
+            Entries: entries
+          })
+          .promise();
 
         tasks.push(task);
       }

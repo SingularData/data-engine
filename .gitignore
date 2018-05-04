@@ -37,5 +37,6 @@ config/production.json
 dist
 test/temp
 .env
+.env.aws
 .serverless
 .nyc_output

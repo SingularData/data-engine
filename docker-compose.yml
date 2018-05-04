@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:6.2.3
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+
+  indexer:
+    build: .
+    env_file: .env
+    depends_on:
+      - elasticsearch

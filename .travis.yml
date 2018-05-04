@@ -1,8 +1,16 @@
 language: node_js
 
 node_js:
-  - "6"
+  - "8"
+
+services:
+  - docker
 
 script:
-  - npm run test-ci
-  - npm run deploy-ci
+  - npm run test:ci
+
+deploy:
+  provider: script
+  script: bash scripts/deploy.sh
+  on:
+    branch: master
