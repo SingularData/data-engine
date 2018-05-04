@@ -22,9 +22,8 @@ export async function start(dependencies) {
     } catch (error) {
       console.error("Unable to pull and process datasets:", error);
     }
-
-    // wait for 10s
-    await delay(10000);
+    // wait for 1s
+    await delay(1000);
   }
 }
 

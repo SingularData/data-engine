@@ -1,7 +1,6 @@
 // this module will provide the push and pull function for the AWS SQS
 import AWS = require("aws-sdk");
 import uuid = require("uuid/v1");
-import { compress, decompress } from "../utils";
 
 AWS.config.region = "us-east-1";
 
@@ -23,7 +22,7 @@ export async function push(jobs: IJob[]) {
     Entries: jobs.map(job => {
       return {
         Id: job.messageId,
-        MessageBody: compress(job)
+        MessageBody: JSON.stringify(job)
       };
     })
   };
@@ -50,7 +49,7 @@ export async function pull(): Promise<IJob[]> {
         return {
           messageId: message.MessageId,
           receiptHandle: message.ReceiptHandle,
-          ...decompress(message.Body)
+          ...JSON.parse(message.Body)
         };
       });
     });
