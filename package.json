@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "nyc mocha",
+    "test:ci": "NODE_ENV=ci npm test",
     "test:e2e":
       "mocha --require ts-node/register --require source-map-support/register 'test/e2e/*.spec.ts'",
     "build": "tsc --outDir dist",

@@ -4,7 +4,9 @@ import { fetchSources } from "../../../../src/engine/job-handlers/fetch-sources"
 import { FetchSourceJob } from "../../../../src/engine/classes/FetchSourceJob";
 import { FetchDatasetJob } from "../../../../src/engine/classes/FetchDatasetJob";
 
-env.config();
+if (process.env.NODE_ENV !== "ci") {
+  env.config();
+}
 
 describe("engine/job-handlers/fetch-sources.ts", () => {
   it("should handle fetch-dataset job.", async () => {

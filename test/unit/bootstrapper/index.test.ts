@@ -2,7 +2,9 @@ import AWS = require("aws-sdk-mock");
 import env = require("dotenv-safe");
 import { expect } from "chai";
 
-env.config();
+if (process.env.NODE_ENV !== "ci") {
+  env.config();
+}
 
 describe.skip("bootstrapper/index.ts", () => {
   it("should publish fetch tasks.", done => {

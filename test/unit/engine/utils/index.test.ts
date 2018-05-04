@@ -5,7 +5,9 @@ import { expect } from "chai";
 import { outputJsonSync, statSync, removeSync } from "fs-extra";
 import * as util from "../../../../src/engine/utils";
 
-env.config();
+if (process.env.NODE_ENV !== "ci") {
+  env.config();
+}
 
 describe("src/engine/utils.removeNull()", () => {
   it("should recursively remove all null values in an object.", () => {
