@@ -7,7 +7,7 @@ services:
   - docker
 
 script:
-  - npm run test
+  - npm run test:ci
 
 deploy:
   provider: script
