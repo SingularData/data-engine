@@ -1,57 +1,70 @@
-# [SingularData.net](http://singulardata.net/) Data Pipeline
+# SingularData Data Engine
 
-A data pipeline to collect, transform, and index open data metadata from various data sources.
+[![Build Status](https://travis-ci.org/SingularData/data-engine.svg?branch=master)](https://travis-ci.org/SingularData/data-engine)
 
-![platforms](images/platforms.png)
+This repository hosts the data harvesting engine for [SingularData](https://singulardata.github.io/).
 
 ## Idea
 
-Open data is a great resource to learn, study, and discover our community. But finding suitable data is never an easy job even thought more data are open and more data portals are established. Here is the problem: we are in an ocean of open data and what we are looking at is the data in a island with unknown coordinates.
+Many open data providers provide API that exposes a full list of published datasets. A program can be developed to collect metadata from these APIs and create a unified search index.
 
-Can we have a service that directly tells us where the dataset is, without checking each data provider or portal? No yet, but this is what I want to see and intent to do.
+A survey on the data provider shows that the following platforms are providing standarized APIs that allow 3rd party developrs to harvest.
 
-This is a data pipeline that collects open data metadata from various open data providers and build a universal search index.
+![platform](image/platforms.png)
 
-## System Design
+## Design
 
-The data pipeline is built on the top of AWS:
+An continuously data harvest system is built on several AWS services:
 
-* **S3** to store the [data provider list](https://github.com/SingularData/data-source/blob/master/data-sources.json)
+* **S3** to store the [data source list](https://raw.githubusercontent.com/SingularData/data-source/master/data/data-sources.json)
 
-* **Lambda** to generate, schedule, and execute jobs
+* **Lambda** function to publish data harvesting jobs weekly
 
-* **SNS** to transfer jobs between lambda functions
+* **SQS** to store data harvesting jobs for future execution
 
-* **DynamoDB** to store checksums of dataset metadata for duplication/update check
+* **ECS** to host a dockerized Node.js for continuously executing data harvesting and update the search index with harvested metadata.
 
-* **ElasticSearch** to create search index for the transformed open data metadata (I am currently using AWS ElasticSearch Service)
+* **ElasticSearch** to provide search service
 
-![image](image here)
+![system-design](./image/system-design.png)
 
-## Workflow
+A workflow of the system is
 
-### Bootstrapping
+1.  The [bootstrapper](src/bootstrapper/index.ts) lambda function reads the data source list from S3 and publish a series of `FetchSource` jobs in the SQS queue. This function is scheduled to run every week.
 
-The [bootstrapper](https://github.com/SingularData/data-pipeline/blob/master/src/bootstrapper/index.ts) lambda function is to read the open data provider list, which is currently stored in at S3, and publish a `FetchSource` job with the provider information to a AWS SNS queue _fetch-queue_.
+2.  The [data engine](scr/engine) will keep pulling jobs from the SQS queue and execute them based on their types (see next section).
 
-#### Fetching Metadata
+3.  The search index will be updated every time when a harvesting job is done.
 
-The [fetcher](https://github.com/SingularData/data-pipeline/blob/master/src/fetcher/index.ts) lambda function subscribes to the _fetch-queue_ queue.
+## Harvesting Engine
 
-**FetchSource**
+The harvesting engine is a program that continuously runs the pull-and-process for jobs from the SQS queue. A job has the following data structure:
 
-When it receives a `FetchSource` job, the fetcher function determines the type of data provider and the way to collect data metadata from the provider.
+```javascript
+{
+  // message id used by aws sdk
+  "messageId": "SQS message id",
+  // type of job
+  "type": "job type",
+  "data": {
+    // type-specific data
+  }
+}
+```
 
-Currently, the fetcher supports the metadata API from ArcGIS Open Data, CKAN, DKAN, GeoNode, Junar, OpenDataSoft, and Socrata. It generates urls to fetch metadata depending on the design of the API. For some APIs, they provider the one-call-get-all service to download all dataset metadata. For some APIs, we need to do the pagination to read all metadata and therefore a series urls are generated.
+Each job type has different handling logic:
 
-Then it publishes a `FetchPage` job with the provider information and the request url to the _fetch-queue_.
+* For the **FetchSource** job, the data engine will send a request to the given data source and retrieve all scrapable urls. A `FetchDataset` job will be published for each url for data scrapping.
 
-**FetchPage**
+* For the **FetchDataset** job, the data engine will
 
-When it receives a `FetchPage` job, the fetcher function sends a request to the data provider to download a list of dataset metadata and then transforms into the [W3C DCAT schema](https://www.w3.org/TR/vocab-dcat/). To avoid duplicated indexing and unnecessary work, the fetcher will compute the checksum of each dataset and compare it the one stored in the DynamoDB with the same identifier. If the checksum is different, it means the dataset metadata has been updated and the fetcher can pass the metadata to the next step. If no, the dataset metadata already exists in the index and the fetcher will drops it.
+1.  download all dataset metadata from the given url
+2.  filter out already existing dataset metadata
+3.  convert new dataset metadata into [W3C DCAT](https://www.w3.org/TR/vocab-dcat/) schema
+4.  publish within `IndexDataset` jobs
 
-All updated dataset metadata will be enqueued into the _index-queue_ for the indexing.
+* For the **IndexDataset** job, data engine will index all dataset metadata with bulk index request.
 
-#### Building the Index
+## License
 
-The [indexer](https://github.com/SingularData/data-pipeline/blob/master/src/indexer/index.ts) function subscribes the _index-queue_ and index the incoming dataset metadata into an ElasticSearch service.
+MIT
